@@ -1,0 +1,12 @@
+.bundle
+.DS_Store
+db/*.sqlite3
+config/*.yml
+log/
+tmp/
+bin/
+cache/
+vendor/
+.*.sw[a-z]
+*.un~
+
