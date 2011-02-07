@@ -4,9 +4,9 @@ gem 'rails',         '~> 3.0'
 gem 'unicorn',       '~> 3.4'
 gem 'capistrano',    '~> 2.5'
 gem 'ruby-debug19',  '~> 0.11'
-
-gem 'mongoid',   '~> 2.0.0.rc'
-gem 'bson_ext',  '~> 1.2'
+gem "jquery-rails",  '~> 0.2'
+gem 'mongoid',       '~> 2.0.0.rc'
+gem 'bson_ext',      '~> 1.2'
 
 group :development, :test do
   gem 'rspec-rails',  '~> 2.5'
