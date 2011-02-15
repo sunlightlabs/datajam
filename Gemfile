@@ -7,6 +7,7 @@ gem 'ruby-debug19',  '~> 0.11'
 gem "jquery-rails",  '~> 0.2'
 gem 'mongoid',       '~> 2.0.0.rc'
 gem 'bson_ext',      '~> 1.2'
+gem 'devise',        '~> 1.1'
 
 group :development, :test do
   gem 'rspec-rails',    '~> 2.5'
