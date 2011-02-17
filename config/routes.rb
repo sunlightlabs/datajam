@@ -46,6 +46,7 @@ Datajam::Application.routes.draw do
   #     resources :products
   #   end
 
+  match 'admin' => 'admin#index'
   root :to => "content#index"
 
 end

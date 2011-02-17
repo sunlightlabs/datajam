@@ -7,8 +7,35 @@
   <%= csrf_meta_tag %>
 </head>
 <body>
+  <div id="container">
 
-<%= yield %>
+    <div id="user_nav">
+      <ul id="account">
+        <% if user_signed_in? -%>
+        <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+        <% end -%>
+      </ul>
+    </div>
+
+    <div id="header">
+      <h1>Datajam</h1>
+    </div>
+
+    <% if flash[:notice] %>
+      <div id="flash_notice"><%= flash[:notice] %></div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div id="flash_alert"><%= flash[:alert] %></div>
+    <% end %>
+
+    <%= yield %>
+
+    <div id="footer">
+      <p>Built by the Sunlight Foundation.</p>
+    </div>
+
+  </div>
 
 </body>
 </html>
