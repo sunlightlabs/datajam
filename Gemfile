@@ -10,9 +10,10 @@ gem 'bson_ext',      '~> 1.2'
 gem 'devise',        '~> 1.1'
 
 group :development, :test do
-  gem 'rspec-rails',    '~> 2.5'
-  gem 'rr',             '~> 1.0'
-  gem 'capybara',       :git => 'git://github.com/jnicklas/capybara.git'
-  gem 'akephalos',      '~> 0.2'
-  gem 'mongoid-rspec',  :git => 'git://github.com/juno/mongoid-rspec.git'
+  gem 'rspec-rails',       '~> 2.5'
+  gem 'rr',                '~> 1.0'
+  gem 'capybara',          :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'akephalos',         '~> 0.2'
+  gem 'mongoid-rspec',     :git => 'git://github.com/juno/mongoid-rspec.git'
+  gem 'database_cleaner',  '~> 0.6'
 end
