@@ -16,4 +16,6 @@ group :development, :test do
   gem 'akephalos',         '~> 0.2'
   gem 'mongoid-rspec',     :git => 'git://github.com/juno/mongoid-rspec.git'
   gem 'database_cleaner',  '~> 0.6'
+  gem 'evergreen',         '~> 0.4'
+  gem 'rocco',             '~> 0.5'
 end
