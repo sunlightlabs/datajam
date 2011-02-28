@@ -2,12 +2,15 @@
 
 A real-time, data-driven platform for reporting live events on the Web.
 
+* Homepage at [Datajam.org](http://datajam.org) *(coming soon)*
+* Stories at [Pivotal Tracker](https://www.pivotaltracker.com/projects/226205)
+
 ## Product Goals
 
-1. Provide a web platform for the live reporting of events, with a focus on displaying data and information in accessible ways.
+1. A platform for reporting live events, with a focus on displaying data and information in accessible ways.
 2. Function as a live CMS. Dynamically populate content areas on an event page for the viewers.
-3. Establish events as core functionality. A public-facing page on Datajam corresponds to an event. Events are created, produced, and archived.
-4. Support the embedding of events on third-party sites.
+3. Establish events as core functionality. A public-facing page on Datajam corresponds to an event. Events are created, produced, and ultimately archived.
+4. Embed events on third-party sites.
 5. Comprehensively track metrics for events.
 
 ## Dependencies and Installation
@@ -35,8 +38,7 @@ Bundler takes care of installing all the other Ruby libraries used by Datajam, a
   * [Protovis](http://vis.stanford.edu/protovis/) to generate visualizations
 * Testing:
   * [RSpec](http://rspec.info/) for unit and functional tests
-  * [rr](https://github.com/btakita/rr) for test doubles
-  * [Steak](https://github.com/cavalle/steak) for acceptance tests
+  * [RR](https://github.com/btakita/rr) for test doubles
   * [Capybara](https://github.com/jnicklas/capybara) to simulate the browser
   * [Akephalos](https://github.com/bernerdschaefer/akephalos) for an interface with a headless browser
 * Persistence:
@@ -52,7 +54,7 @@ Datajam is intended to be reused and extended by third parties. As such, certain
 
 * Unit test coverage for all files in `/app/models` and `/lib` with RSpec.
 * Unit test coverage for all non-DOM, non-IO JavaScript with Evergreen.
-* Acceptance test coverage for all user stories with Steak. Stories are documented in [Pivotal Tracker](https://www.pivotaltracker.com/projects/226205).
+* Acceptance test coverage for all user stories with Capybara.
 * A best effort at JavaScript integration testing with Capybara and Akephalos.
 * All new source files produced (`.rb` and `.js`) follow literate programming via Rocco.
 
@@ -71,6 +73,8 @@ Datajam ships with three content plugins: Data Card, Live Chat, and Tweet Stream
 More documentation coming soon.
 
 ## Deploying on Heroku
+
+*Note: Not currently functional.*
 
 1. Fork the project on [GitHub](https://github.com/sunlightlabs/datajam)
 2. Create a `/config/settings.yml` based off of `/config/settings.yml.example`
