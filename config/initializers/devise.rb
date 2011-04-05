@@ -2,7 +2,6 @@ Devise.setup do |config|
   require 'devise/orm/mongoid'
 
   config.stretches = 10
-  config.encryptor = :bcrypt
   config.pepper = "a3e5e2aaf0b0108cdaafba00a7729a7c23d2f6e29f035468f4b3b1b1e68f45779a56a2699bf2ebb4463cb00c57ba97674776606fc962d8c3d721830fe2fb980a"
 
   config.remember_for = 100.days
