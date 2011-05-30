@@ -1,0 +1,30 @@
+<h2>Site Assets</h2>
+
+<p>There is only one required asset: the <strong>site template</strong>. It must be named <code>site.html</code>.</p>
+
+<p>All other assets, like stylesheets and images, will be available at <code>/files/assets/</code> after uploading.</p>
+
+<h3>Current Assets</h3>
+<table>
+  <tr>
+    <th>Filename</th>
+    <th>Uploaded At</th>
+    <th>Delete</th>
+  </tr>
+  <% @assets.each do |asset| -%>
+  <tr>
+    <td><%= link_to asset.asset_filename, asset.asset.url %></td>
+    <td><%= asset.created_at.to_s :db %></td>
+    <td><%= link_to 'X', admin_asset_path(asset), method: 'delete' %></td>
+  <% end -%>
+</table>
+
+<h3>New Asset</h3>
+<p>Filenames will be lowercased, and spaces will be converted to underscores.</p>
+<p>Uploading a file of the same name as a current asset will replace it.</p>
+
+<%= form_for @asset, url: admin_assets_path, html: {:multipart => true} do |f| %>
+  <%= f.file_field :asset %>
+  <%= f.submit 'Upload' %>
+<% end %>
+

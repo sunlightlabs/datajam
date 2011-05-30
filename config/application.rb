@@ -3,6 +3,7 @@ require File.expand_path('../boot', __FILE__)
 require 'action_controller/railtie'
 require 'action_mailer/railtie'
 require 'mongoid/railtie'
+require 'rack/gridfs'
 
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
@@ -11,5 +12,7 @@ module Datajam
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
     config.middleware.insert_before 'ActionDispatch::Static', 'Rack::RedisCache'
+    config.middleware.insert_after 'Rack::RedisCache', 'Rack::GridFS', :prefix => 'files',
+                                   :lookup => :path, :database => "datajam_#{Rails.env}"
   end
 end

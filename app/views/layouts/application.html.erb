@@ -19,6 +19,14 @@
 
     <div id="header">
       <h1>Datajam</h1>
+      <ul id="navigation">
+        <li><a href="/admin/events">Events</a></li>
+        <li><a href="/admin/templates">Event Templates</a></li>
+        <li><a href="/admin/plugins">Plugins</a></li>
+        <li><a href="/admin/assets">Site Assets</a></li>
+        <li><a href="/admin/users">Users</a></li>
+      </ul>
+
     </div>
 
     <% if flash[:notice] %>
@@ -32,7 +40,7 @@
     <%= yield %>
 
     <div id="footer">
-      <p>Built by the Sunlight Foundation.</p>
+      <p><a href="http://www.datajam.org">Datajam.org</a> | Built by the <a href="http://sunlightfoundation.com">Sunlight Foundation</a></p>
     </div>
 
   </div>
