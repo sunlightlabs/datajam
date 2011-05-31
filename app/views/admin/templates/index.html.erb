@@ -1,0 +1,30 @@
+<h2>Event Templates</h2>
+
+<p>Event templates live inside a containing element in the site template where <code>id="datajamEvent"</code>.</p>
+<p>Every event is assigned one (and only one) event template.</p>
+<p>Event templates must end in <code>.html</code>.</p>
+
+<h3>Current Templates</h3>
+<table>
+  <tr>
+    <th>Filename</th>
+    <th>Uploaded At</th>
+    <th>Delete</th>
+  </tr>
+  <% @templates.each do |template| -%>
+  <tr>
+    <td><%= link_to template.template_filename, template.template.url %></td>
+    <td><%= template.created_at.to_s :db %></td>
+    <td><%= link_to 'X', admin_template_path(template), method: 'delete' %></td>
+  <% end -%>
+</table>
+
+<h3>New Template</h3>
+<p>Filenames will be lowercased, and spaces will be converted to underscores.</p>
+<p>Uploading a file of the same name as a current template will replace it.</p>
+
+<%= form_for @template, url: admin_templates_path, html: {:multipart => true} do |f| %>
+  <%= f.file_field :template %>
+  <%= f.submit 'Upload' %>
+<% end %>
+
