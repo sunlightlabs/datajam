@@ -3,5 +3,19 @@ class Template
   include Mongoid::Timestamps
 
   field :name, type: String
-  mount_uploader :template, TemplateUploader
+  field :template, type: String
+  has_many :events
+
+  after_save :cache_template
+
+  protected
+
+  def cache_template
+    redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
+
+    case self.name.downcase
+    when 'site'
+      redis.set '/', self.template
+    end
+  end
 end

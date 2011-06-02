@@ -1,30 +1,33 @@
-<h2>Event Templates</h2>
-
+<h2>Templates</h2>
+<p>There are two kinds of templates: a site template and event templates. There's one site template, and it applies to all site pages. Event templates can be used across many events.</p>
+<h3>Site Template</h3>
+<p>Define the site template below. Upload related images and stylesheets in the <a href="/admin/assets">assets</a> area.</p>
 <p>Event templates live inside a containing element in the site template where <code>id="datajamEvent"</code>.</p>
-<p>Every event is assigned one (and only one) event template.</p>
-<p>Event templates must end in <code>.html</code>.</p>
 
-<h3>Current Templates</h3>
+<% form_for @site_template, url: admin_template_path(@site_template) do |f| %>
+  <%= f.text_area :template, class: 'code', rows: 20, cols: 100 %>
+  <%= f.submit 'Update' %>
+<% end %>
+
+<h3>Event Templates</h3>
 <table>
   <tr>
-    <th>Filename</th>
-    <th>Uploaded At</th>
-    <th>Delete</th>
+    <th>Name</th>
+    <th>Last Updated</th>
   </tr>
   <% @templates.each do |template| -%>
   <tr>
-    <td><%= link_to template.template_filename, template.template.url %></td>
-    <td><%= template.created_at.to_s :db %></td>
-    <td><%= link_to 'X', admin_template_path(template), method: 'delete' %></td>
+    <td><%= link_to template.name, edit_admin_template_path(template) %></td>
+    <td><%= template.updated_at.to_s :db %></td>
   <% end -%>
 </table>
 
-<h3>New Template</h3>
-<p>Filenames will be lowercased, and spaces will be converted to underscores.</p>
-<p>Uploading a file of the same name as a current template will replace it.</p>
+<h3>New Event Template</h3>
 
-<%= form_for @template, url: admin_templates_path, html: {:multipart => true} do |f| %>
-  <%= f.file_field :template %>
-  <%= f.submit 'Upload' %>
+<% form_for @template, url: admin_templates_path, method: :post do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.text_area :template, class: 'code', rows: 20, cols: 100 %>
+  <%= f.submit 'Create' %>
 <% end %>
 

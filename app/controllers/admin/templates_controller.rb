@@ -1,8 +1,9 @@
 class Admin::TemplatesController < ApplicationController
 
   def index
-    @templates = Template.all
     @template = Template.new
+    @site_template = Template.first(conditions: { name: "Site" })
+    @templates = Template.all - [@site_template]
   end
 
   def show
@@ -21,15 +22,21 @@ class Admin::TemplatesController < ApplicationController
     @template = Template.new(params[:template])
     if @template.save
       flash[:notice] = "Template saved."
-      previous = Template.where(template_filename: @template.template_filename)
-      if previous.count > 1
-        previous.first.destroy
-        flash[:notice] += " Previous version deleted."
-      end
       redirect_to admin_templates_path
     else
-      flash[:error] = "There was a problem creating saving the file."
+      flash[:error] = "There was a problem creating saving the template."
       redirect_to admin_templates_path
+    end
+  end
+
+  def update
+    @template = Template.find(params[:id])
+    if @template.update_attributes(params[:template])
+      flash[:notice] = "Template updated."
+      redirect_to :back
+    else
+      flash[:error] = "There was a problem saving the template."
+      redirect_to :back
     end
   end
 
