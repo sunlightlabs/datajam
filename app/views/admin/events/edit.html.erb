@@ -1,0 +1,11 @@
+<h3>New Event</h3>
+
+<%= form_for @event, url: admin_event_path(@event), method: :put do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :template %>
+  <%= f.collection_select :template, @templates, :id, :name %>
+  <%= f.label :scheduled_at %>
+  <%= f.text_field :scheduled_at, value: @event.scheduled_at.to_s(:humane) %>
+  <%= f.submit 'Submit' %>
+<% end %>

@@ -1,0 +1,29 @@
+<h2>Events</h2>
+
+<h3>Event List</h3>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Status</th>
+    <th>Scheduled At</th>
+  </tr>
+  <% @events.each do |event| -%>
+  <tr>
+    <td><%= link_to event.name, edit_admin_event_path(event) %></td>
+    <td><%= event.status %></td>
+    <td><%= event.scheduled_at.to_s :humane %></td>
+  <% end -%>
+</table>
+
+<h3>New Event</h3>
+
+<%= form_for @event, url: admin_events_path, method: :post do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :template %>
+  <%= f.collection_select :template, @templates, :id, :name %>
+  <%= f.label :scheduled_at %>
+  <%= f.text_field :scheduled_at %>
+  <%= f.submit 'Submit' %>
+<% end %>
+

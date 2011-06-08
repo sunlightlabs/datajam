@@ -59,6 +59,7 @@ GEM
       activesupport (~> 3.0)
     childprocess (0.1.8)
       ffi (~> 1.0.6)
+    chronic (0.4.1)
     columnize (0.3.2)
     configuration (1.2.0)
     database_cleaner (0.6.6)
@@ -204,6 +205,7 @@ DEPENDENCIES
   capistrano (~> 2.5)
   capybara!
   carrierwave (~> 0.5)
+  chronic (~> 0.4)
   database_cleaner (~> 0.6)
   devise (~> 1.1)
   evergreen (~> 0.4)

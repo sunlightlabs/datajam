@@ -8,6 +8,7 @@ class Template
 
   after_save :cache_template
 
+  scope :site_templates, where(:name.ne => 'Site')
   protected
 
   def cache_template

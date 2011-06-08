@@ -12,6 +12,7 @@ gem 'rack-gridfs',      '~> 0.4'
 gem 'devise',           '~> 1.1'
 gem 'redis',            '~> 2.2'
 gem 'redis-namespace',  '~> 0.10'
+gem 'chronic',          '~> 0.4'
 
 group :development, :test do
   gem 'rspec-rails',       '~> 2.5'
