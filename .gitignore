@@ -7,7 +7,7 @@ tmp/
 bin/
 cache/
 vendor/
-templates/
+/templates/
 .*.sw[a-z]
 *.un~
 
