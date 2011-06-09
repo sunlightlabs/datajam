@@ -3,6 +3,8 @@
 <%= form_for @event, url: admin_event_path(@event), method: :put do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
+  <%= f.label :slug %>
+  <%= f.text_field :slug %>
   <%= f.label :template %>
   <%= f.collection_select :template, @templates, :id, :name %>
   <%= f.label :scheduled_at %>
