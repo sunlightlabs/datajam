@@ -1,4 +1,4 @@
-<h3>New Event</h3>
+<h2>Edit Event</h2>
 
 <%= form_for @event, url: admin_event_path(@event), method: :put do |f| %>
   <%= f.label :name %>
@@ -6,8 +6,18 @@
   <%= f.label :slug %>
   <%= f.text_field :slug %>
   <%= f.label :template %>
-  <%= f.collection_select :template, @templates, :id, :name %>
+  <%= f.collection_select :template_id, @templates, :id, :name %>
   <%= f.label :scheduled_at %>
   <%= f.text_field :scheduled_at, value: @event.scheduled_at.to_s(:humane) %>
   <%= f.submit 'Submit' %>
+
+  <% unless @event.template_data.empty? -%>
+    <h3>Custom Template Fields</h3>
+    <% @event.template_data.each do |key, value| -%>
+      <%= f.label key %>
+      <%= f.text_field "template_data[#{key}]", value: value %>
+    <% end -%>
+    <%= f.submit 'Submit' %>
+  <% end -%>
 <% end %>
+

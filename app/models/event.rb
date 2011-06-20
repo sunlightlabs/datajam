@@ -9,14 +9,26 @@ class Event
   field :template_data,  type: Hash
   field :activities,     type: Hash
 
-  slug :name
+  slug :name, permanent: true
 
   belongs_to :template
   has_and_belongs_to_many :users
+
+  before_save :update_template_data
 
   # Mongoid::Slug changes this to `self.slug`. No thanks.
   def to_param
     self.id.to_s
   end
+
+  def update_template_data
+    return unless self.template_id_changed?
+    t = Template.find(self.template_id)
+    self.template_data = {}
+    t.custom_fields.each do |f|
+      self.template_data[f] = ''
+    end if t.custom_fields
+  end
+
 end
 
