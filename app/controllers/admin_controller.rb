@@ -6,4 +6,8 @@ class AdminController < ApplicationController
 
   end
 
+  def plugins
+
+  end
+
 end
