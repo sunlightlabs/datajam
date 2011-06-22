@@ -49,16 +49,6 @@ class Admin::EventsController < ApplicationController
 
   protected
 
-  # The Rails datetime_select helper uses a funky params format to break up the timestamps.
-  # Process it into a Mongo-friendly string and unset the values so Mongo doesn't save them.
-  def process_timestamp(e)
-    e['scheduled_at'] = "#{e['scheduled_at(1i)']}-#{e['scheduled_at(2i)']}-#{e['scheduled_at(3i)']} #{e['scheduled_at(4i)']}:#{e['scheduled_at(5i)']}"
-    (1..5).each do |n|
-      e.delete "scheduled_at(#{n}i)"
-    end
-    e
-  end
-
   def parse_time(e)
     e['scheduled_at'] = Chronic.parse e['scheduled_at']
     e
