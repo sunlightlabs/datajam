@@ -15,15 +15,6 @@ class Template
 
   protected
 
-  def cache_template
-    redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
-
-    case self.name.downcase
-    when 'site'
-      redis.set '/', self.template
-    end
-  end
-
   def set_custom_fields
     doc = Nokogiri::HTML(self.template)
     self.custom_fields = []
@@ -31,6 +22,15 @@ class Template
     doc.css('[id*=datajam]').each do |el|
       field = el["id"].gsub!('datajam','')
       self.custom_fields << field
+    end
+  end
+
+  def cache_template
+    redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
+
+    case self.name.downcase
+    when 'site'
+      redis.set '/', self.template
     end
   end
 
