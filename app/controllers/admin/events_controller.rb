@@ -25,7 +25,7 @@ class Admin::EventsController < ApplicationController
       flash[:notice] = "Event saved."
       redirect_to admin_events_path
     else
-      flash[:error] = "There was a problem creating saving the file."
+      flash[:error] = "There was a problem saving the event."
       redirect_to admin_events_path
     end
   end
@@ -36,7 +36,7 @@ class Admin::EventsController < ApplicationController
       flash[:notice] = "Event updated."
       redirect_to admin_events_path
     else
-      flash[:error] = "There was a problem saving the site settings."
+      flash[:error] = "There was a problem saving the event."
       redirect_to admin_events_path
     end
   end
