@@ -2,8 +2,8 @@ class Admin::TemplatesController < ApplicationController
 
   def index
     @template = Template.new
-    @site_template = Template.first(conditions: { name: "Site" })
-    @templates = Template.all - [@site_template]
+    @site_template = Template.site_template
+    @templates = Template.event_templates
   end
 
   def show

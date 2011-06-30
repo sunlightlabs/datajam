@@ -15,7 +15,7 @@ a {
 ul, ol {
   line-height: 20px;
 }
-label, input {
+label, input, select {
   display: block;
 }
 input, select, textarea {
@@ -57,8 +57,13 @@ tr,th,td {
 }
 
 hr {
-  height: 1px;
-  color: #999;
+  border-color: #ccc;
+  border-style: solid;
+  border-width: 1px 0 0;
+  clear: both;
+  margin: 0 0 20px;
+  height: 0;
+
 }
 
 .clear {

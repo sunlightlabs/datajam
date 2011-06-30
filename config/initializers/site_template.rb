@@ -1,5 +1,5 @@
 # Create a site template if one doesn't exist.
-if Template.first(conditions: { name: "Site" }).nil?
+if Template.first(conditions: { template_type: "site" }).nil?
   template_text = <<-EOT
   <html>
     <head>
@@ -16,5 +16,5 @@ if Template.first(conditions: { name: "Site" }).nil?
   </html>
   EOT
 
-  Template.create!(name: "Site", template: template_text )
+  Template.create!(name: "Site", template_type: "site", template: template_text )
 end

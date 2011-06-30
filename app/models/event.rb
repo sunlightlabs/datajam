@@ -21,6 +21,8 @@ class Event
     self.id.to_s
   end
 
+  protected
+
   def update_template_data
     return unless self.template_id_changed?
     t = Template.find(self.template_id)

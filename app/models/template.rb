@@ -1,17 +1,32 @@
 class Template
   include Mongoid::Document
   include Mongoid::Timestamps
+  include Mongoid::Slug
 
-  field :name, type: String
-  field :template, type: String
-  field :custom_fields, type: Array
+  field :name,           type: String
+  field :template,       type: String
+  field :template_type,  type: String, default: 'internal'
+  field :custom_fields,  type: Array
+
+  slug :name, permanent: true
 
   has_many :events
+
+  scope :event_templates, any_of({template_type: 'internal'}, {template_type: 'external'})
+  scope :internal_templates, where(template_type: 'internal')
+  scope :external_templates, where(template_type: 'external')
 
   before_save :set_custom_fields
   after_save :cache_template
 
-  scope :site_templates, where(:name.ne => 'Site')
+  # Mongoid::Slug changes this to `self.slug`. No thanks.
+  def to_param
+    self.id.to_s
+  end
+
+  def self.site_template
+    where(template_type: 'site').first
+  end
 
   protected
 
