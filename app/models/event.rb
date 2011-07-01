@@ -16,6 +16,8 @@ class Event
 
   before_save :update_template_data
 
+  scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
+
   # Mongoid::Slug changes this to `self.slug`. No thanks.
   def to_param
     self.id.to_s

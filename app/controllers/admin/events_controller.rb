@@ -1,7 +1,7 @@
 class Admin::EventsController < ApplicationController
 
   def index
-    @events = Event.all
+    @events = Event.upcoming
     @event = Event.new
     @templates = Template.event_templates
   end
