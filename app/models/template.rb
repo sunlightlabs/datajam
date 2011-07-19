@@ -43,10 +43,43 @@ class Template
   def cache_template
     redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
 
-    case self.name.downcase
+    case self.template_type.downcase
     when 'site'
-      redis.set '/', self.template
+      site_template = Nokogiri::HTML(self.template)
+      root_cached = false
+
+      # Cache all events.
+      Event.upcoming.each do |event|
+
+        # Populate the template with the event's values.
+        template = Nokogiri::HTML(event.template.template)
+        unless event.template_data.nil?
+          template.css('[id*=datajam]').each do |el|
+            field = el["id"].gsub!('datajam','')
+            el.content = event.template_data[field]
+          end
+        end
+
+        # Cache the event page.
+        site_template.at_css('#datajamEvent').inner_html = template.to_html
+        redis.set '/' + event.slug, site_template.to_html
+
+        # Cache the root event if this is the first upcoming event.
+        if !root_cached
+          redis.set '/', site_template.to_html
+          root_cached = true
+        end
+      end
+
+      # TODO: Cache all static pages.
+    when 'internal'
+      # Cache all events that use this template.
+
+    when 'external'
+      # Cache all events that use this template.
+
     end
+
   end
 
 end

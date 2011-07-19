@@ -11,6 +11,8 @@ class Event
 
   slug :name, permanent: true
 
+  validates_presence_of :name
+
   belongs_to :template
   has_and_belongs_to_many :users
 
@@ -18,7 +20,7 @@ class Event
 
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
 
-  # Mongoid::Slug changes this to `self.slug`. No thanks.
+  # Mongoid::Slug changes this to `self.slug`. Undo that.
   def to_param
     self.id.to_s
   end
