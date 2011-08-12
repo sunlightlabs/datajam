@@ -1,3 +1,8 @@
+$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+require "rvm/capistrano"
+set :rvm_ruby_string, '1.9.2'
+set :rvm_type, :user
+
 set :environment, (ENV['target'] || 'staging')
 set :user, 'datajam'
 set :application, user
@@ -31,7 +36,7 @@ end
 namespace :unicorn do
   desc "start unicorn"
   task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && bundle exec unicorn -c #{current_path}/config/unicorn.rb -E production -D"
+    run "cd #{current_path} && unicorn_rails -c #{current_path}/config/unicorn.rb -E production -D"
   end
   desc "stop unicorn"
   task :stop, :roles => :app, :except => { :no_release => true } do
@@ -48,5 +53,5 @@ namespace :unicorn do
 end
 
 after "deploy", "deploy:cleanup"
-after "deploy:update_code", "deploy.symlink_config"
+after "deploy:update_code", "deploy:symlink_config"
 after "deploy:restart", "unicorn:reload"
