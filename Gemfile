@@ -15,6 +15,7 @@ gem 'redis',            '~> 2.2'
 gem 'redis-namespace',  '~> 0.10'
 gem 'chronic',          '~> 0.4'
 gem 'escape_utils',     '~> 0.2' # http://crimpycode.brennonbortz.com/?p=42
+gem 'nokogiri',         '~> 1.5'
 
 group :development, :test do
   gem 'rspec-rails',       '~> 2.5'
