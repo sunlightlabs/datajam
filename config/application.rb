@@ -11,8 +11,8 @@ module Datajam
   class Application < Rails::Application
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
-    config.middleware.insert_before 'ActionDispatch::Static', 'Rack::RedisCache'
-    config.middleware.insert_after 'Rack::RedisCache', 'Rack::GridFS', :prefix => 'static',
+    config.middleware.insert 0, 'Rack::RedisCache'
+    config.middleware.insert 1, 'Rack::GridFS', :prefix => 'static',
                                    :lookup => :path, :database => "datajam_#{Rails.env}"
   end
 end
