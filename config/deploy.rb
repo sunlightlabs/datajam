@@ -1,8 +1,12 @@
 set :environment, (ENV['target'] || 'staging')
-
 set :user, 'datajam'
 set :application, user
 set :deploy_to, "/projects/datajam/www"
+set :repository,  "git@github.com:sunlightlabs/datajam.git"
+set :scm, 'git'
+set :use_sudo, false
+set :deploy_via, :remote_cache
+set :unicorn_pid, "#{current_path}/tmp/pids/unicorn.pid"
 
 if environment == 'production'
   set :domain, "sunlightlive.com"
@@ -10,16 +14,9 @@ else
   set :domain, "staging.sunlightlive.com"
 end
 
-set :repository,  "git@github.com:sunlightlabs/datajam.git"
-set :scm, 'git'
-set :use_sudo, false
-set :deploy_via, :remote_cache
-
 role :web, domain
 role :app, domain
 role :db,  domain, :primary => true
-
-after "deploy", "deploy:cleanup"
 
 namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
@@ -31,6 +28,25 @@ namespace :deploy do
   end
 end
 
-after 'deploy:update_code' do
-  deploy.symlink_config
+namespace :unicorn do
+  desc "start unicorn"
+  task :start, :roles => :app, :except => { :no_release => true } do
+    run "cd #{current_path} && bundle exec unicorn -c #{current_path}/config/unicorn.rb -E production -D"
+  end
+  desc "stop unicorn"
+  task :stop, :roles => :app, :except => { :no_release => true } do
+    run "kill `cat #{unicorn_pid}`"
+  end
+  desc "graceful stop unicorn"
+  task :graceful_stop, :roles => :app, :except => { :no_release => true } do
+    run "kill -s QUIT `cat #{unicorn_pid}`"
+  end
+  desc "reload unicorn"
+  task :reload, :roles => :app, :except => { :no_release => true } do
+    run "kill -s USR2 `cat #{unicorn_pid}`"
+  end
 end
+
+after "deploy", "deploy:cleanup"
+after "deploy:update_code", "deploy.symlink_config"
+after "deploy:restart", "unicorn:reload"
