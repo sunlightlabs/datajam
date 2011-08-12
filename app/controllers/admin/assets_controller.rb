@@ -1,4 +1,4 @@
-class Admin::AssetsController < ApplicationController
+class Admin::AssetsController < AdminController
 
   def index
     @assets = Asset.all

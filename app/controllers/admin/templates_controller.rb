@@ -1,4 +1,4 @@
-class Admin::TemplatesController < ApplicationController
+class Admin::TemplatesController < AdminController
 
   def index
     @template = Template.new
