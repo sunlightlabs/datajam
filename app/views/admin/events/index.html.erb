@@ -20,8 +20,8 @@
 <%= form_for @event, url: admin_events_path, method: :post do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  <%= f.label :template %>
-  <%= f.collection_select :template, @templates, :id, :name %>
+  <%= f.label :event_template %>
+  <%= f.collection_select :event_template, @event_templates, :id, :name %>
   <%= f.label :scheduled_at %>
   <%= f.text_field :scheduled_at %>
   <%= f.submit 'Submit' %>

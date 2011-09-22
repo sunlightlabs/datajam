@@ -1,0 +1,9 @@
+<h2>Site Template</h2>
+<p>Define the site template below. Upload related images and stylesheets in the <a href="/admin/assets">assets</a> area.</p>
+<p>Event templates live inside a containing element in the site template where <code>id="datajamEvent"</code>.</p>
+
+<% form_for @site_template, url: admin_templates_site_path do |f| %>
+  <%= f.text_area :template, class: 'code', rows: 20, cols: 100 %>
+  <%= f.submit 'Update' %>
+<% end %>
+

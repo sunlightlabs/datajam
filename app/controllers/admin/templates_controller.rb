@@ -2,8 +2,9 @@ class Admin::TemplatesController < AdminController
 
   def index
     @template = Template.new
-    @site_template = Template.site_template
-    @templates = Template.event_templates
+    @site_template = SiteTemplate.first
+    @event_templates = EventTemplate.all
+    @embed_templates = EmbedTemplate.all
   end
 
   def show
@@ -31,7 +32,7 @@ class Admin::TemplatesController < AdminController
 
   def update
     @template = Template.find(params[:id])
-    if @template.update_attributes(params[:template])
+    if @template.update_attributes(params)
       flash[:notice] = "Template updated."
       redirect_to :back
     else

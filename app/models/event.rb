@@ -13,7 +13,8 @@ class Event
 
   validates_presence_of :name
 
-  belongs_to :template
+  belongs_to :event_template
+  has_and_belongs_to_many :embed_templates
   has_and_belongs_to_many :users
 
   before_save :update_template_data
@@ -25,14 +26,18 @@ class Event
     self.id.to_s
   end
 
+  def after_save
+    Rails.logger.debug "Inside Event#after_save"
+    Cacher.cache_events([self])
+  end
+
   protected
 
   def update_template_data
-    return unless self.template_id_changed?
-    t = Template.find(self.template_id)
-    self.template_data = {}
+    self.template_data = {} if self.event_template_id_changed? || self.template_data.nil?
+    t = Template.find(self.event_template_id)
     t.custom_fields.each do |f|
-      self.template_data[f] = ''
+      self.template_data[f] ||= ''
     end if t.custom_fields
   end
 

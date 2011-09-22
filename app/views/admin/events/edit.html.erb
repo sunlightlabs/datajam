@@ -5,13 +5,13 @@
   <%= f.text_field :name %>
   <%= f.label :slug %>
   <%= f.text_field :slug %>
-  <%= f.label :template %>
-  <%= f.collection_select :template_id, @templates, :id, :name %>
+  <%= f.label :event_template %>
+  <%= f.collection_select :event_template_id, @event_templates, :id, :name %>
   <%= f.label :scheduled_at %>
   <%= f.text_field :scheduled_at, value: @event.scheduled_at.to_s(:humane) %>
   <%= f.submit 'Submit' %>
 
-  <% unless @event.template_data.empty? -%>
+  <% unless @event.template_data.nil? || @event.template_data.empty? -%>
     <h3>Custom Template Fields</h3>
     <% @event.template_data.each do |key, value| -%>
       <%= f.label key %>

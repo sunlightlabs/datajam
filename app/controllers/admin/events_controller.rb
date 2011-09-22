@@ -3,7 +3,8 @@ class Admin::EventsController < AdminController
   def index
     @events = Event.upcoming
     @event = Event.new
-    @templates = Template.event_templates
+    @event_templates = EventTemplate.all
+    @embed_templates = EmbedTemplate.all
   end
 
   def show
@@ -16,7 +17,8 @@ class Admin::EventsController < AdminController
 
   def edit
     @event = Event.find(params[:id])
-    @templates = Template.event_templates
+    @event_templates = EventTemplate.all
+    @embed_templates = EmbedTemplate.all
   end
 
   def create

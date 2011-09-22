@@ -13,13 +13,11 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Type</th>
     <th>Last Updated</th>
   </tr>
-  <% @templates.each do |template| -%>
+  <% @event_templates.each do |template| -%>
   <tr>
     <td><%= link_to template.name, edit_admin_template_path(template) %></td>
-    <td><%= template.template_type.titlecase %></td>
     <td><%= template.updated_at.to_s :db %></td>
   <% end -%>
 </table>
@@ -29,8 +27,7 @@
 <% form_for @template, url: admin_templates_path, method: :post do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  <%= f.label "Type" %>
-  <%= f.select :template_type, options_for_select([ "internal", "external" ]) %>
+  <%= f.label :template %>
   <%= f.text_area :template, class: 'code', rows: 20, cols: 100 %>
   <%= f.submit 'Create' %>
 <% end %>

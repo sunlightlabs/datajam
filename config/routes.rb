@@ -8,7 +8,11 @@ Datajam::Application.routes.draw do
     resources :assets
     resources :users
     resources :events
-    resources :templates
+    namespace :templates do
+      resource :site, :controller => 'site'
+      resources :events
+      resources :embeds
+    end
   end
   root :to => "content#index"
 

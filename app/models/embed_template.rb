@@ -1,0 +1,4 @@
+class EmbedTemplate < Template
+
+
+end

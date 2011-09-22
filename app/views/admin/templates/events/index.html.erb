@@ -1,0 +1,22 @@
+<h2>Event Templates</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Last Updated</th>
+  </tr>
+  <% @event_templates.each do |template| -%>
+  <tr>
+    <td><%= link_to template.name, edit_admin_templates_event_path(template) %></td>
+    <td><%= template.updated_at.to_s :humane %></td>
+  <% end -%>
+</table>
+<hr />
+
+<h3>New Event Template</h3>
+<% form_for @event_template, url: admin_templates_events_path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :template %>
+  <%= f.text_area :template, class: 'code', rows: 20, cols: 100 %>
+  <%= f.submit 'Create' %>
+<% end %>

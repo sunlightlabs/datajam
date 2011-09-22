@@ -1,6 +1,6 @@
 # Create a site template if one doesn't exist.
-if Template.first(conditions: { template_type: "site" }).nil?
-  template_text = <<-EOT
+unless SiteTemplate.first
+  template_text = <<-EOT.strip_heredoc
   <html>
     <head>
       <title>Your Datajam Site</title>
@@ -15,6 +15,5 @@ if Template.first(conditions: { template_type: "site" }).nil?
 
   </html>
   EOT
-
-  Template.create!(name: "Site", template_type: "site", template: template_text )
+  SiteTemplate.create!(name: 'Site', template: template_text)
 end

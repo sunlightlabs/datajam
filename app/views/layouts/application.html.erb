@@ -12,8 +12,9 @@
     <div id="user_nav">
       <ul id="account">
         <% if user_signed_in? -%>
-        <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+        <li><%= link_to "Sign Out", destroy_user_session_path %> | </li>
         <% end -%>
+        <li><a href="/">Live Site &raquo;</a></li>
       </ul>
     </div>
 
@@ -21,7 +22,9 @@
       <h1>Datajam</h1>
       <ul id="navigation">
         <li><a href="/admin/events">Events</a></li>
-        <li><a href="/admin/templates">Templates</a></li>
+        <li><a href="/admin/templates/events">Event Templates</a></li>
+        <li><a href="/admin/templates/embeds">Embed Templates</a></li>
+        <li><a href="/admin/templates/site">Site Template</a></li>
         <li><a href="/admin/plugins">Plugins</a></li>
         <li><a href="/admin/assets">Assets</a></li>
         <li><a href="/admin/users">Users</a></li>
