@@ -2,10 +2,8 @@ class EventTemplate < Template
 
   has_many :events
 
-  def after_update
+  after_save do
     self.events.each { |e| e.save }
-    Cacher.cache_events(self.events)
-    logger.debug "Called Cacher from EventTemplate"
   end
 
   protected

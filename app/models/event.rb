@@ -19,16 +19,15 @@ class Event
 
   before_save :update_template_data
 
+  after_save do
+    Cacher.cache_events([self])
+  end
+
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
 
   # Mongoid::Slug changes this to `self.slug`. Undo that.
   def to_param
     self.id.to_s
-  end
-
-  def after_save
-    Rails.logger.debug "Inside Event#after_save"
-    Cacher.cache_events([self])
   end
 
   protected

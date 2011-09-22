@@ -26,8 +26,6 @@ class Cacher
       redis.set '/', site_template.to_html if event == next_event
     end
 
-    Rails.logger.info "In Cacher"
-
     # No upcoming events? Be sure to still cache the update.
     if next_event.nil?
       redis.set '/', site_template.to_html
