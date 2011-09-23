@@ -4,7 +4,7 @@
 <p>Define the site template below. Upload related images and stylesheets in the <a href="/admin/assets">assets</a> area.</p>
 <p>Event templates live inside a containing element in the site template where <code>id="datajamEvent"</code>.</p>
 
-<% form_for @site_template, url: admin_template_path(@site_template) do |f| %>
+<%= form_for @site_template, url: admin_template_path(@site_template) do |f| %>
   <%= f.text_area :template, class: 'code', rows: 20, cols: 100 %>
   <%= f.submit 'Update' %>
 <% end %>
@@ -24,7 +24,7 @@
 <hr />
 <h3>New Event Template</h3>
 
-<% form_for @template, url: admin_templates_path, method: :post do |f| %>
+<%= form_for @template, url: admin_templates_path, method: :post do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.label :template %>

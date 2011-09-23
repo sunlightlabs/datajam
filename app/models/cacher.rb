@@ -1,5 +1,6 @@
 class Cacher
 
+  # Takes in an array of events. Only have one event to cache? Pass in an array with that one event.
   def self.cache_events(events)
 
     redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
@@ -26,11 +27,10 @@ class Cacher
       redis.set '/', site_template.to_html if event == next_event
     end
 
-    # No upcoming events? Be sure to still cache the update.
+    # No upcoming events? Be sure to still cache the root.
     if next_event.nil?
       redis.set '/', site_template.to_html
     end
   end
-
 
 end

@@ -13,7 +13,6 @@ class Admin::Templates::SiteController < AdminController
       flash[:error] = "There was a problem saving the template."
       redirect_to :back
     end
-
   end
 
 end

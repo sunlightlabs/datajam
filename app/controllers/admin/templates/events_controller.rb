@@ -9,6 +9,17 @@ class Admin::Templates::EventsController < AdminController
     @event_template = EventTemplate.find(params[:id])
   end
 
+  def create
+    @template = EventTemplate.new(params[:event_template])
+    if @template.save
+      flash[:notice] = "Template saved."
+      redirect_to edit_admin_templates_events_path(@template)
+    else
+      flash[:error] = "There was a problem creating the template."
+      redirect_to :back
+    end
+  end
+
   def update
     @template = EventTemplate.find(params[:id])
     if @template.update_attributes(params[:event_template])
@@ -24,17 +35,6 @@ class Admin::Templates::EventsController < AdminController
     @template = EventTemplate.find(params[:id])
     @template.destroy
     redirect_to admin_event_templates_path
-  end
-
-  def create
-    @template = EventTemplate.new(params[:event_template])
-    if @template.save
-      flash[:notice] = "Template saved."
-      redirect_to edit_admin_templates_events_path(@template)
-    else
-      flash[:error] = "There was a problem creating the template."
-      redirect_to :back
-    end
   end
 
 end
