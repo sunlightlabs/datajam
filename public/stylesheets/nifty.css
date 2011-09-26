@@ -100,7 +100,8 @@ hr {
   display: inline;
 }
 
-.code {
+.datajamTemplate {
+  display: none;
   font-family: "Droid Sans Mono", "Monaco", "Courier New", monospace;
 }
 
@@ -218,6 +219,15 @@ div#content {
 
 .highlight a {
   color: red;
+}
+
+#ace-editor {
+  position: relative;
+  width: 800px;
+  height: 400px;
+  border: 1px solid #999;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
 }
 
 div#sidebar {

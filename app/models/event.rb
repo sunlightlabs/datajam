@@ -41,4 +41,3 @@ class Event
   end
 
 end
-

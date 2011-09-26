@@ -3,7 +3,8 @@
 <%= form_for @event_template, url: admin_templates_event_path(@event_template), method: :put do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  <%= f.text_area :template, class: 'code', rows: 20, cols: 100 %>
+  <%= f.text_area :template, class: 'datajamTemplate', rows: 20, cols: 100 %>
+  <div id="ace-editor"></div>
   <%= f.submit 'Update' %>
 <% end %>
 
