@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails',            '~> 3.1'
+gem 'rails',            '~> 3.0.9'
 gem 'unicorn',          '~> 3.4'
 gem 'capistrano',       '~> 2.5'
 gem 'ruby-debug19',     '~> 0.11'
