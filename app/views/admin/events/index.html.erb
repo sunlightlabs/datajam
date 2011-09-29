@@ -23,7 +23,7 @@
   <%= f.label :event_template, 'Templates' %>
   <%= f.collection_select :event_template_id, @event_templates, :id, :name %>
   <% @embed_templates.each do |t| %>
-    <%= check_box_tag 'event[embed_templates][]', t.id, false, id: t.id, class: 'inline' %>
+    <%= check_box_tag 'event[embed_template_ids][]', t.id, false, id: t.id, class: 'inline' %>
     <%= label_tag t.id, t.name, class: 'inline' %><br />
   <% end %>
   <%= f.label :scheduled_at %>
