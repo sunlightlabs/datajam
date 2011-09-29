@@ -33,11 +33,22 @@ class Event
   protected
 
   def update_template_data
-    self.template_data = {} if self.event_template_id_changed? || self.template_data.nil?
-    t = Template.find(self.event_template_id)
-    t.custom_fields.each do |f|
-      self.template_data[f] ||= ''
-    end if t.custom_fields
+    self.template_data ||= {}
+    fresh_fields = []
+
+    # Find all custom fields from all templates.
+    templates = [self.event_template] + self.embed_templates
+    templates.each do |t|
+      t.custom_fields.each do |f|
+        # Add to hash if needed.
+        self.template_data[f] ||= ''
+        # Cache the field name for the deletion step below.
+        fresh_fields << f
+      end if t.custom_fields
+    end
+
+     # Remove custom fields that are no longer relevant.
+    self.template_data.delete_if { |k,v| !fresh_fields.include?(k) }
   end
 
 end

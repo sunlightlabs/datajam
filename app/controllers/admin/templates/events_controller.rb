@@ -13,7 +13,7 @@ class Admin::Templates::EventsController < AdminController
     @template = EventTemplate.new(params[:event_template])
     if @template.save
       flash[:notice] = "Template saved."
-      redirect_to edit_admin_templates_events_path(@template)
+      redirect_to edit_admin_templates_event_path(@template)
     else
       flash[:error] = "There was a problem creating the template."
       redirect_to :back

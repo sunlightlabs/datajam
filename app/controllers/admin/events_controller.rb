@@ -36,10 +36,10 @@ class Admin::EventsController < AdminController
     @event = Event.find(params[:id])
     if @event.update_attributes(parse_time(params[:event]))
       flash[:notice] = "Event updated."
-      redirect_to admin_events_path
+      redirect_to edit_admin_event_path(@event)
     else
       flash[:error] = "There was a problem saving the event."
-      redirect_to admin_events_path
+      redirect_to edit_admin_event_path(@event)
     end
   end
 

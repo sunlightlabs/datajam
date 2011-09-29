@@ -1,0 +1,23 @@
+<h2>Embed Templates</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Last Updated</th>
+  </tr>
+  <% @embed_templates.each do |template| -%>
+  <tr>
+    <td><%= link_to template.name, edit_admin_templates_embed_path(template) %></td>
+    <td><%= template.updated_at.to_s :humane %></td>
+  <% end -%>
+</table>
+<hr />
+
+<h3>New Embed Template</h3>
+<%= form_for @embed_template, url: admin_templates_embeds_path do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <%= f.label :template %>
+  <%= f.text_area :template, class: 'datajamTemplate', rows: 20, cols: 100 %>
+  <div id="ace-editor"></div>
+  <%= f.submit 'Create' %>
+<% end %>
