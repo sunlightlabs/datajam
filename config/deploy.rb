@@ -1,5 +1,6 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "rvm/capistrano"
+require "bundler/capistrano"
 set :rvm_ruby_string, '1.9.2'
 set :rvm_type, :user
 
@@ -50,8 +51,13 @@ namespace :unicorn do
   task :reload, :roles => :app, :except => { :no_release => true } do
     run "kill -s USR2 `cat #{unicorn_pid}`"
   end
+
+  task :restart, :roles => :app, :except => { :no_release => true } do
+    stop
+    start
+  end
 end
 
 after "deploy", "deploy:cleanup"
-after "deploy:update_code", "deploy:symlink_config"
-after "deploy:restart", "unicorn:reload"
+#after "deploy:update_code", "deploy:symlink_config"
+after "deploy:restart", "unicorn:restart"
