@@ -13,7 +13,9 @@ class Cacher
       event_template = process_template(event.event_template.template, event.template_data)
 
       # Cache the event page.
-      site_template.at_css('#datajamEvent').inner_html = event_template.to_html
+      if site_template.at_css('#datajamEvent')
+        site_template.at_css('#datajamEvent').inner_html = event_template.to_html
+      end
       redis.set '/' + event.slug, site_template.to_html
 
       # Cache the root event if this is the next event.
