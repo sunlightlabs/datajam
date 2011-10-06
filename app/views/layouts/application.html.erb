@@ -7,6 +7,9 @@
   <script src="/javascripts/mode-html.js" type="text/javascript" charset="utf-8"></script>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
+
+  <%= yield :head %>
+
 </head>
 <body>
   <div id="container">
