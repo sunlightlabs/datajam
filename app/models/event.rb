@@ -15,9 +15,10 @@ class Event
 
   belongs_to :event_template
   has_and_belongs_to_many :embed_templates
+  has_many :content_areas
   has_and_belongs_to_many :users
 
-  before_save :update_template_data
+  before_save :update_template_data, :check_for_content_areas
 
   after_save do
     Cacher.cache_events([self])
@@ -37,7 +38,7 @@ class Event
     fresh_fields = []
 
     # Find all custom fields from all templates.
-    templates = [self.event_template] + self.embed_templates
+    templates = ([self.event_template] + self.embed_templates).compact
     templates.each do |t|
       t.custom_fields.each do |f|
         # Add to hash if needed.
@@ -49,6 +50,13 @@ class Event
 
      # Remove custom fields that are no longer relevant.
     self.template_data.delete_if { |k,v| !fresh_fields.include?(k) }
+  end
+
+  def check_for_content_areas
+    event_template = Nokogiri::HTML(self.event_template.template)
+    event_template.css('[data-content-area]').each do |ca|
+      self.content_areas << ContentArea.create(name: ca['data-content-area'])
+    end
   end
 
 end
