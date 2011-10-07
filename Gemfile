@@ -26,4 +26,6 @@ group :development, :test do
   gem 'database_cleaner',  '~> 0.6'
   gem 'rocco',             '~> 0.5'
   gem 'pygmentize',        '~> 0.0.2'
+  gem 'rb-fsevent',        :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'guard-rspec'
 end
