@@ -2,7 +2,7 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  devise :database_authenticatable, :registerable, :lockable,
+  devise :database_authenticatable, :lockable,
          :recoverable, :rememberable, :trackable, :validatable
 
   field :name,        type: String
