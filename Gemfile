@@ -8,7 +8,7 @@ gem "jquery-rails",     '~> 0.2'
 gem 'mongoid',          '~> 2.0'
 gem 'bson_ext',         '~> 1.2'
 gem 'carrierwave',      '~> 0.5'
-gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'carrierwave-mongoid',        require: 'carrierwave/mongoid'
 gem 'mongoid_slug',     '~> 0.7', require: 'mongoid/slug'
 gem 'rack-gridfs',      '~> 0.4'
 gem 'devise',           '~> 1.1'
@@ -17,6 +17,7 @@ gem 'redis-namespace',  '~> 0.10'
 gem 'chronic',          '~> 0.4'
 gem 'escape_utils',     '~> 0.2' # http://crimpycode.brennonbortz.com/?p=42
 gem 'nokogiri',         '~> 1.5'
+gem 'hbs',              '~> 0.1', require: 'handlebars'
 
 group :development, :test do
   gem 'rspec-rails',       '~> 2.5'
@@ -26,8 +27,9 @@ group :development, :test do
   gem 'database_cleaner',  '~> 0.6'
   gem 'rocco',             '~> 0.5'
   gem 'pygmentize',        '~> 0.0.2'
+  gem 'guard-rspec',       '~> 0.5'
   group :darwin do
     gem 'rb-fsevent',        :require => false
+    gem 'growl_notify',      :require => false
   end
-  gem 'guard-rspec'
 end
