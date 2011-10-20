@@ -7,10 +7,8 @@ unless SiteTemplate.first
     </head>
 
     <body>
-      <h1>Your Datajam Site Title</h1>
-      <div id="datajamEvent">
-        <p>Nothing here yet!</p>
-      </div>
+      <h1>Site Header</h1>
+      {{{ content }}}
     </body>
 
   </html>

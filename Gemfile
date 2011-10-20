@@ -20,9 +20,9 @@ gem 'nokogiri',         '~> 1.5'
 gem 'hbs',              '~> 0.1', require: 'handlebars'
 
 group :development, :test do
-  gem 'rspec-rails',       '~> 2.5'
+  gem 'rspec-rails',       '~> 2.7'
   gem 'rr',                '~> 1.0'
-  gem 'capybara',          '~> 1.0'
+  gem 'capybara',          '~> 1.1'
   gem 'mongoid-rspec',     '~> 1.4'
   gem 'database_cleaner',  '~> 0.6'
   gem 'rocco',             '~> 0.5'
