@@ -9,13 +9,15 @@ class Template
 
   slug :name, permanent: true
 
-  has_many :events
-
   before_save :set_custom_fields
 
   # `Mongoid::Slug` changes this to `self.slug`. No thanks.
   def to_param
     self.id.to_s
+  end
+
+  def render_with(data)
+    Handlebars.compile(self.template).call(data)
   end
 
   protected

@@ -31,6 +31,19 @@ class Event
     self.id.to_s
   end
 
+  def render
+    rendered_content = self.event_template.render_with(self.template_data)
+    SiteTemplate.first.render_with({ content: rendered_content })
+  end
+
+  def rendered_embeds
+    embeds = {}
+    self.embed_templates.each do |embed_template|
+      embeds[embed_template.slug] = embed_template.render_with(self.template_data)
+    end
+    embeds
+  end
+
   protected
 
   def update_template_data
