@@ -28,6 +28,7 @@ group :development, :test do
   gem 'rocco',             '~> 0.5'
   gem 'pygmentize',        '~> 0.0.2'
   gem 'guard-rspec',       '~> 0.5'
+  gem 'cover_me',          '~> 1.2'
   group :darwin do
     gem 'rb-fsevent',        :require => false
     gem 'growl_notify',      :require => false

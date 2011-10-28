@@ -6,6 +6,8 @@ tmp/
 bin/
 cache/
 vendor/
+coverage/
+coverage.data
 /templates/
 .*.sw[a-z]
 *.un~

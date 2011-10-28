@@ -1,4 +1,5 @@
 ENV["RAILS_ENV"] ||= 'test'
+require 'cover_me'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'database_cleaner'
