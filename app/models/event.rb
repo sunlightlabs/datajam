@@ -18,7 +18,7 @@ class Event
   has_many :content_areas
   has_and_belongs_to_many :users
 
-  before_save :update_template_data, :check_for_content_areas
+  before_save :update_template_data, :generate_content_areas
 
   after_save do
     Cacher.cache_events([self])
@@ -31,17 +31,27 @@ class Event
     self.id.to_s
   end
 
+  # Render the HTML for an event page
   def render
-    rendered_content = self.event_template.render_with(self.template_data)
+    rendered_content = preprocess_template(self.event_template).render_with(self.template_data)
     SiteTemplate.first.render_with({ content: rendered_content })
   end
 
+  # Render the HTML for an embed
   def rendered_embeds
     embeds = {}
     self.embed_templates.each do |embed_template|
-      embeds[embed_template.slug] = embed_template.render_with(self.template_data)
+      embeds[embed_template.slug] = preprocess_template(embed_template).render_with(self.template_data)
     end
     embeds
+  end
+
+  # Convert content areas from Handlebars to HTML
+  def preprocess_template(template)
+    self.content_areas.each do |content_area|
+      template.template.gsub!(/\{\{([\w ]*):([\w ]*) \}\}/, content_area.render)
+    end
+    template
   end
 
   protected
@@ -65,10 +75,13 @@ class Event
     self.template_data.delete_if { |k,v| !fresh_fields.include?(k) }
   end
 
-  def check_for_content_areas
-    event_template = Nokogiri::HTML(self.event_template.template)
-    event_template.css('[data-content-area]').each do |ca|
-      self.content_areas << ContentArea.create(name: ca['data-content-area'])
+  def generate_content_areas
+    ([event_template] + embed_templates).each do |template|
+      template.custom_areas.each do |name, area_type|
+        unless ContentArea.exists?(conditions: { event_id: self.id, name: name, area_type: area_type })
+          self.content_areas << ContentArea.create(name: name, type: area_type)
+        end
+      end
     end
   end
 

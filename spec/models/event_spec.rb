@@ -19,9 +19,9 @@ describe Event do
   it "creates content areas based on its event template" do
 
     body = <<-ENDBODY.strip_heredoc
-      <h1 id="datajamHeader"></h1>
-      <h3 id="datajamSubheader"></h3>
-      <div data-content-area="Test Content Area"></div>
+      <h1>{{ header }}</h1>
+      <h3>{{ subheader }}</h3>
+      {{ content_area: Test Content Area }}
     ENDBODY
     template = EventTemplate.create(name: 'Event Template', template: body)
     event = Event.create(name: 'Test Event', event_template: template)
