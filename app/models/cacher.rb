@@ -28,4 +28,15 @@ class Cacher
     end
   end
 
+  # Convenience wrapper to write content to Redis.
+  def self.cache(path, content)
+    redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
+
+    # Add a leading slash if it's not there.
+    path = '/' + path if path[0] != '/'
+
+    # Write to Redis.
+    redis.set path, content
+  end
+
 end

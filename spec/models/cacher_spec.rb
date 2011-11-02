@@ -55,8 +55,21 @@ describe Cacher do
   it "renders a message at the root path when no events are upcoming" do
 
     Cacher.cache_events([])
-
     @redis.get('/').should match('<h2>No upcoming events</h2>')
+
+  end
+
+  it "renders content to a path" do
+
+    Cacher.cache('/foobar','Some content')
+    @redis.get('/foobar').should match('Some content')
+
+  end
+
+  it "renders content to a path and adds a leading slash if needed" do
+
+    Cacher.cache('barfoo','Other content')
+    @redis.get('/barfoo').should match('Other content')
 
   end
 
