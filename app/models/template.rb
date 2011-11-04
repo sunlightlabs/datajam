@@ -5,8 +5,8 @@ class Template
 
   field :name,           type: String
   field :template,       type: String
-  field :custom_fields,  type: Array
-  field :custom_areas,   type: Hash
+  field :custom_fields,  type: Array,  default: []
+  field :custom_areas,   type: Hash,   default: {}
 
   slug :name, permanent: true
 
@@ -27,8 +27,10 @@ class Template
   # Find fields enclosed in `{{handlebars}}`
   def set_custom_fields
     found_fields = self.template.scan(/\{\{([\w ]*)\}\}/).flatten
-    found_fields.delete("content")
     found_fields.each { |f| f.strip! }
+    %w{ content head_assets body_assets }.each do |reserved_word|
+      found_fields.delete(reserved_word)
+    end
     self.custom_fields = found_fields
   end
 

@@ -11,6 +11,7 @@ describe Template do
           {{ content_area: Video Embed }}
           {{ chat: Live Blog }}
           {{{content}}}
+          {{{ body_assets }}}
         </body>
       </html>
     ENDBODY

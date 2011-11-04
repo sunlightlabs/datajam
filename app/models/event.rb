@@ -6,8 +6,8 @@ class Event
   field :name,           type: String
   field :scheduled_at,   type: Time
   field :status,         type: String,  default: 'Upcoming'
-  field :template_data,  type: Hash
-  field :activities,     type: Hash
+  field :template_data,  type: Hash,    default: {}
+  field :activities,     type: Hash,    default: {}
 
   slug :name, permanent: true
 
@@ -34,14 +34,17 @@ class Event
   # Render the HTML for an event page
   def render
     rendered_content = preprocess_template(self.event_template).render_with(self.template_data)
-    SiteTemplate.first.render_with({ content: rendered_content })
+    SiteTemplate.first.render_with({ content: rendered_content,
+                                     head_assets: HEAD_ASSETS,
+                                     body_assets: BODY_ASSETS})
   end
 
   # Render the HTML for an embed
   def rendered_embeds
     embeds = {}
     self.embed_templates.each do |embed_template|
-      embeds[embed_template.slug] = preprocess_template(embed_template).render_with(self.template_data)
+      data = self.template_data.merge({head_assets: HEAD_ASSETS, body_assets: BODY_ASSETS})
+      embeds[embed_template.slug] = preprocess_template(embed_template).render_with(data)
     end
     embeds
   end
