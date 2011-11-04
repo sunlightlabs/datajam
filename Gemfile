@@ -19,6 +19,17 @@ gem 'escape_utils',     '~> 0.2' # http://crimpycode.brennonbortz.com/?p=42
 gem 'nokogiri',         '~> 1.5'
 gem 'hbs',              '~> 0.1', require: 'handlebars'
 
+group :development do
+  gem 'map_by_method'
+  gem 'what_methods'
+  gem 'awesome_print'
+  gem 'net-http-spy'
+  gem 'hirb'
+  gem 'looksee'
+  gem 'wirble'
+  gem 'sketches'
+end
+
 group :development, :test do
   gem 'rspec-rails',       '~> 2.7'
   gem 'rr',                '~> 1.0'
