@@ -1,0 +1,14 @@
+<h2><%= @plugin.name.titleize %> Settings</h2>
+<%= markdown @plugin.description %>
+<% if @settings.any? %>
+<form action="" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <% @settings.each do |setting| %>
+    <label for="setting_<%= setting.id %>"><%= setting.name.titleize %></label>
+    <input type="text" id="setting_<%= setting.id %>" name="settings[<%= setting.id %>][value]" value="<%= setting.value %>" />
+  <% end %>
+  <button>Save settings</button>
+</form>
+<% else %>
+<p>This plugin has no settings.</p>
+<% end %>

@@ -4,7 +4,7 @@
   <ul>
     <% @plugins.each do |plugin| %>
     <li>
-      <h4><a href="<%= plugin_settings_path_for(plugin.name) %>"><%= plugin.name.titleize %></a></h4>
+      <h4><a href="<%= plugin_settings_path plugin.name %>"><%= plugin.name.titleize %></a></h4>
       <p class="meta">
         <span class="version"><%= plugin.version %></span>,
         <span class="author"><%= plugin.authors.join(', ') %></span>
