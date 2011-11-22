@@ -10,7 +10,7 @@ class User
   field :url,         type: String
 
   def as_json(options={})
-    super(:only => [
+    super(options.merge :only => [
       :_id,
       :affiliation,
       :created_at,
