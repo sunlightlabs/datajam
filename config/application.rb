@@ -33,4 +33,10 @@ module Datajam
     config.middleware.insert 1, 'Rack::GridFS', :prefix => 'static',
                                    :lookup => :path, :database => "datajam_#{Rails.env}"
   end
+  def self.setup
+    yield self if block_given?
+  end
+  def self.plugins
+    @@plugins ||= []
+  end
 end

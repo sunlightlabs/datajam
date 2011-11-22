@@ -1,5 +1,21 @@
 <h2>Plugins</h2>
 
-<% if content_for(:plugins).blank? %>
-<p>No plugins installed. Visit <a href="http://datajam.org">Datajam.org</a> for installation instructions.</p>
-<% else yield :plugins; end %>
+<% if @plugins.any? %>
+  <ul>
+    <% @plugins.each do |plugin| %>
+    <li>
+      <h4><a href="<%= plugin_settings_path_for(plugin.name) %>"><%= plugin.name.titleize %></a></h4>
+      <p class="meta">
+        <span class="version"><%= plugin.version %></span>,
+        <span class="author"><%= plugin.authors.join(', ') %></span>
+        <span class="homepage">
+          <a href="<%= plugin.homepage %>">homepage</a>
+        </span>
+      </p>
+      <p><%= plugin.summary %></p>
+    </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No plugins installed. Visit <a href="http://datajam.org">Datajam.org</a> for installation instructions.</p>
+<% end %>

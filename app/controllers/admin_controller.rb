@@ -7,7 +7,7 @@ class AdminController < ApplicationController
   end
 
   def plugins
-
+    @plugins = Datajam.plugins.sort {|x,y| x.name <=> y.name }
   end
 
 end
