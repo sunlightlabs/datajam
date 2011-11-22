@@ -1,3 +1,5 @@
 <h2>Plugins</h2>
 
+<% if content_for(:plugins).blank? %>
 <p>No plugins installed. Visit <a href="http://datajam.org">Datajam.org</a> for installation instructions.</p>
+<% else yield :plugins; end %>
