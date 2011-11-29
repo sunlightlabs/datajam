@@ -33,7 +33,11 @@ module Datajam
     end
 
     def self.flush(namespace)
-      @@settings[namespace.to_sym] = {}
+      begin
+        @@settings[namespace.to_sym] = {}
+      rescue
+        return false
+      end
       true
     end
   end

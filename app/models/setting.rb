@@ -15,7 +15,7 @@ class Setting
   validates_presence_of :value, :if => :required, :on => :update
 
   after_save do
-    Datajam::Settings.flush(self.namespace.to_sym)
+    Datajam::Settings.flush(self.namespace)
   end
 
   def self.bulk_update(settings)
