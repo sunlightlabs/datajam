@@ -36,7 +36,4 @@ module Datajam
   def self.setup
     yield self if block_given?
   end
-  def self.plugins
-    @@plugins ||= []
-  end
 end
