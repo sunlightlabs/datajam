@@ -10,6 +10,9 @@ class Cacher
     next_event = Event.upcoming.first
     events.each do |event|
 
+      # Cache the event JSON.
+      redis.set '/event/' + event.id.to_s + '.json', event.to_json
+
       # Cache the event page.
       redis.set '/' + event.slug, event.render
 

@@ -3,11 +3,12 @@ class Event
   include Mongoid::Timestamps
   include Mongoid::Slug
 
-  field :name,           type: String
-  field :scheduled_at,   type: Time
-  field :status,         type: String,  default: 'Upcoming'
-  field :template_data,  type: Hash,    default: {}
-  field :activities,     type: Hash,    default: {}
+  field :name,            type: String
+  field :scheduled_at,    type: Time
+  field :status,          type: String,  default: 'Upcoming'
+  field :template_data,   type: Hash,    default: {}
+  field :activities,      type: Hash,    default: {}
+  field :content_updates, type: Array,   default: []
 
   slug :name, permanent: true
 
@@ -31,19 +32,23 @@ class Event
     self.id.to_s
   end
 
+  def script_id
+    '<script type="text/javascript">var Datajam = Datajam || {}; Datajam.eventId = "' + self.id.to_s + '";</script>'
+  end
+
   # Render the HTML for an event page
   def render
     rendered_content = preprocess_template(self.event_template).render_with(self.template_data)
     SiteTemplate.first.render_with({ content: rendered_content,
                                      head_assets: HEAD_ASSETS,
-                                     body_assets: BODY_ASSETS})
+                                     body_assets: BODY_ASSETS + self.script_id})
   end
 
   # Render the HTML for an embed
   def rendered_embeds
     embeds = {}
     self.embed_templates.each do |embed_template|
-      data = self.template_data.merge({head_assets: HEAD_ASSETS, body_assets: BODY_ASSETS})
+      data = self.template_data.merge({"head_assets" => HEAD_ASSETS, "body_assets" => BODY_ASSETS + self.script_id})
       embeds[embed_template.slug] = preprocess_template(embed_template).render_with(data)
     end
     embeds
@@ -52,7 +57,7 @@ class Event
   # Convert content areas from Handlebars to HTML
   def preprocess_template(template)
     self.content_areas.each do |content_area|
-      template.template.gsub!(/\{\{([\w ]*):([\w ]*) \}\}/, content_area.render)
+      template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
     end
     template
   end
@@ -74,16 +79,14 @@ class Event
       end if t.custom_fields
     end
 
-     # Remove custom fields that are no longer relevant.
+    # Remove custom fields that are no longer relevant.
     self.template_data.delete_if { |k,v| !fresh_fields.include?(k) }
   end
 
   def generate_content_areas
     ([event_template] + embed_templates).each do |template|
       template.custom_areas.each do |name, area_type|
-        unless ContentArea.exists?(conditions: { event_id: self.id, name: name, area_type: area_type })
-          self.content_areas << ContentArea.create(name: name, type: area_type)
-        end
+        self.content_areas.find_or_create_by(name: name, area_type: area_type)
       end
     end
   end

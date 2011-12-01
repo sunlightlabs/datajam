@@ -18,6 +18,12 @@ describe Template do
     @template = Template.create(name: 'Test Template', template: @body)
   end
 
+  it "uses id as to_param" do
+    @template.to_param.should eql(@template.id.to_s)
+  end
+
+
+
   it "sets custom_fields based on handlebar syntax" do
 
     @template.custom_fields.should eql(['header','subheader'])
