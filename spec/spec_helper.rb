@@ -13,6 +13,8 @@ RSpec.configure do |config|
 
   config.before(:each) do
     DatabaseCleaner.start
+    @redis_db = Redis.new
+    @redis = Redis::Namespace.new(Rails.env.to_s, :redis => @redis_db)
 
     # Create a site template if one doesn't exist.
     unless SiteTemplate.first
@@ -32,11 +34,13 @@ RSpec.configure do |config|
       </html>
       EOT
       SiteTemplate.create!(name: 'Site', template: template_text)
+
     end
   end
 
   config.after(:each) do
     DatabaseCleaner.clean
+    @redis_db.flushdb
   end
 
 end

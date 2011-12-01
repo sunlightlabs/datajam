@@ -20,7 +20,7 @@ class Cacher
       redis.set '/', event.render if event == next_event
 
       # Cache the embeds.
-      event.rendered_embeds do |slug, embed|
+      event.rendered_embeds.each do |slug, embed|
         redis.set '/' + event.slug + '/' + slug, embed
       end
     end # events.each

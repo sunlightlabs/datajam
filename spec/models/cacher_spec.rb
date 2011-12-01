@@ -2,8 +2,7 @@ require 'spec_helper'
 
 describe Cacher do
 
-  before(:all) do
-    @redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
+  before(:each) do
 
     body = <<-ENDBODY.strip_heredoc
       <h2>{{ header }}</h2>
@@ -14,7 +13,7 @@ describe Cacher do
     embed_body = <<-ENDBODY.strip_heredoc
       <html>
       <body>
-        <h1>{{ embedded_header }}</h1>
+        <h1>{{ embed_header }}</h1>
       </body>
       </html>
     ENDBODY
@@ -42,12 +41,11 @@ describe Cacher do
 
   it "renders an embed to the correct path" do
 
-    data = { "embedded_header" => "Hello Embedded World" }
-    event = Event.create(name: 'Test Event',
-                         event_template: @event_template,
-                         template_data: data,
+    data = { "header" => "Hello World", "embed_header" => "Hello Embedded World" }
+    event = Event.create(name: 'Test Event', event_template: @event_template,
                          embed_templates: [@embed_template])
 
+    event.update_attributes(template_data: data)
     @redis.get('/test-event/large-embed').should match('<h1>Hello Embedded World</h1>')
 
   end
