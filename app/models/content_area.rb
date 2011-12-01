@@ -8,7 +8,7 @@ class ContentArea
   field :template,  type: String
   field :data,      type: Hash
 
-  belongs_to :event
+  embedded_in :event
 
   after_save :set_area_type
 
@@ -23,4 +23,5 @@ class ContentArea
   def set_area_type
     self.area_type = self.class.to_s.underscore
   end
+
 end
