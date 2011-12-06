@@ -11,10 +11,13 @@ RSpec.configure do |config|
   config.include Mongoid::Matchers
   config.mock_with :rr
 
-  config.before(:each) do
-    DatabaseCleaner.start
+  config.before(:all) do
     @redis_db = Redis.new
     @redis = Redis::Namespace.new(Rails.env.to_s, :redis => @redis_db)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
 
     # Create a site template if one doesn't exist.
     unless SiteTemplate.first
@@ -40,7 +43,7 @@ RSpec.configure do |config|
 
   config.after(:each) do
     DatabaseCleaner.clean
-    @redis_db.flushdb
+    @redis_db.keys("#{Rails.env.to_s}*").each {|key| @redis_db.del(key)}
   end
 
 end
