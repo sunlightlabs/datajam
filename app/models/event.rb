@@ -87,7 +87,10 @@ class Event
   def generate_content_areas
     ([event_template] + embed_templates).each do |template|
       template.custom_areas.each do |name, area_type|
-        self.content_areas.find_or_create_by(name: name, area_type: area_type)
+        unless self.content_areas.where(name: name, area_type: area_type).any?
+          klass = area_type.titleize.gsub(' ','').constantize
+          self.content_areas << klass.new(name: name, area_type: area_type)
+        end
       end
     end
   end
