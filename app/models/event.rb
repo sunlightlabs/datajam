@@ -3,6 +3,8 @@ class Event
   include Mongoid::Timestamps
   include Mongoid::Slug
 
+  attr_accessor :head_assets, :body_assets
+
   field :name,            type: String
   field :scheduled_at,    type: Time
   field :status,          type: String,  default: 'Upcoming'
@@ -39,6 +41,8 @@ class Event
 
   # Render the HTML for an event page
   def render
+    self.head_assets = HEAD_ASSETS
+    self.body_assets = BODY_ASSETS
     rendered_content = preprocess_template(self.event_template).render_with(self.template_data)
     SiteTemplate.first.render_with({ content: rendered_content,
                                      head_assets: HEAD_ASSETS,
@@ -58,6 +62,9 @@ class Event
   # Convert content areas from Handlebars to HTML
   def preprocess_template(template)
     self.content_areas.each do |content_area|
+      # only render head assets once for each type
+      self.head_assets += content_area.render_head unless self.head_assets.match(content_area.render_head)
+      self.body_assets += content_area.render_body
       template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
     end
     template
@@ -87,9 +94,14 @@ class Event
   def generate_content_areas
     ([event_template] + embed_templates).each do |template|
       template.custom_areas.each do |name, area_type|
-        unless self.content_areas.where(name: name, area_type: area_type).any?
+        existing = self.content_areas.where(name: name, area_type: area_type)
+        unless existing.any?
           klass = area_type.titleize.gsub(' ','').constantize
           self.content_areas << klass.new(name: name, area_type: area_type)
+        else
+          existing.each do |area|
+            area.update_attributes(name: name, area_type: area_type)
+          end
         end
       end
     end

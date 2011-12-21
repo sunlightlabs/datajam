@@ -12,6 +12,14 @@ class ContentArea
 
   after_save :set_area_type
 
+  def render_head
+    ""
+  end
+
+  def render_body
+    ""
+  end
+
   # Renders the HTML of the content area. Override this when subclassing.
   def render
     "<div id=\"#{self.area_type}_#{self.id}\">#{self.html}</div>"
