@@ -4,13 +4,23 @@
   <title>Datajam</title>
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag :defaults %>
+  <script type="text/javascript">
+    window.curl || (curl = {
+      baseUrl: '/javascripts',
+      pluginPath: '/javascripts/curl/plugin',
+      paths: {
+        json: 'http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js',
+        jquery: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js',
+        jqueryui: 'http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js',
+        underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.1/underscore-min.js',
+        backbone: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js',
+        handlebars: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js'
+      }
+    })
+  </script>
   <%= csrf_meta_tag %>
 
   <%= yield :head %>
-
-  <%# Cloud 9's require.js implementation doesn't play nice with others, put this last. %>
-  <script src="/javascripts/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/mode-html.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
 <body>
@@ -54,6 +64,12 @@
     </div>
 
   </div>
+
+  <%= yield :body %>
+
+  <%# Cloud 9's require.js implementation doesn't play nice with others, put this last. %>
+  <script src="/javascripts/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/mode-html.js" type="text/javascript" charset="utf-8"></script>
 
 </body>
 </html>

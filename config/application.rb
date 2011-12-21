@@ -32,6 +32,15 @@ module Datajam
     config.middleware.insert 0, 'Rack::RedisCache'
     config.middleware.insert 1, 'Rack::GridFS', :prefix => 'static',
                                    :lookup => :path, :database => "datajam_#{Rails.env}"
+    config.action_view.javascript_expansions[:defaults] = %w(
+      http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js
+      http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js
+      http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js
+      http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.1/underscore-min.js
+      http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js
+      http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js
+      rails.js
+    )
   end
   def self.setup
     yield self if block_given?
