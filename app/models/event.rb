@@ -45,8 +45,8 @@ class Event
     self.body_assets = BODY_ASSETS
     rendered_content = preprocess_template(self.event_template).render_with(self.template_data)
     SiteTemplate.first.render_with({ content: rendered_content,
-                                     head_assets: HEAD_ASSETS,
-                                     body_assets: BODY_ASSETS + self.script_id})
+                                     head_assets: head_assets,
+                                     body_assets: body_assets + self.script_id})
   end
 
   # Render the HTML for an embed
@@ -62,9 +62,13 @@ class Event
   # Convert content areas from Handlebars to HTML
   def preprocess_template(template)
     self.content_areas.each do |content_area|
-      # only render head assets once for each type
-      self.head_assets += content_area.render_head unless self.head_assets.match(content_area.render_head)
-      self.body_assets += content_area.render_body
+      # only render assets once for each type
+      unless head_assets.include?(content_area.render_head)
+        self.head_assets += content_area.render_head
+      end
+      unless body_assets.include?(content_area.render_body)
+        self.body_assets += content_area.render_body
+      end
       template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
     end
     template

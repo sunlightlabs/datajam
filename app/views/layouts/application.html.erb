@@ -8,14 +8,7 @@
     window.curl || (curl = {
       baseUrl: '/javascripts',
       pluginPath: '/javascripts/curl/plugin',
-      paths: {
-        json: 'http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js',
-        jquery: 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js',
-        jqueryui: 'http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js',
-        underscore: 'http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.1/underscore-min.js',
-        backbone: 'http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js',
-        handlebars: 'http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js'
-      }
+      paths: {}
     })
   </script>
   <%= csrf_meta_tag %>
@@ -65,9 +58,20 @@
 
   </div>
 
+  <script type="text/javascript">
+    // don't allow curl.js to pollute the global namespace; ACE has its own require...
+    window._define = window.define;
+  </script>
+  <script src="/javascripts/curl/curl.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    window.define = window._define;
+  </script>
+
   <%= yield :body %>
 
-  <%# Cloud 9's require.js implementation doesn't play nice with others, put this last. %>
+  <%# Cloud 9's require.js implementation doesn't play nice with others,
+      put this last, just in case somebody needs the global require/define
+      (though they should be using curl's instead). %>
   <script src="/javascripts/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/mode-html.js" type="text/javascript" charset="utf-8"></script>
 

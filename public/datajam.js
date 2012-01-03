@@ -2,7 +2,6 @@ $(function () {
 
   Datajam.pollForUpdates = function() {
     $.getJSON('/event/' + Datajam.eventId + '.json', function(event) {
-      console.log('polled');
 
       // Update the DOM if there are new updates.
       if (Datajam.updates.length < event['content_updates'].length) {
@@ -10,10 +9,7 @@ $(function () {
         var lastUpdate = Datajam.updates[Datajam.updates.length - 1];
         if (lastUpdate) {
           _.each(event['content_updates'], function(contentUpdate) {
-            console.log('ContentUpdate ' + contentUpdate['updated_at']);
-            console.log('LastUpdate ' + lastUpdate['updated_at']);
             if (contentUpdate['updated_at'] > lastUpdate['updated_at']) {
-              console.log('updating ' + contentUpdate['html']);
               $('#content_area_' + contentUpdate['id']).html(contentUpdate['html']);
               Datajam.updates.push(contentUpdate);
             }
@@ -32,16 +28,21 @@ $(function () {
       if (check['signedIn']) {
 
         // Build the ON AIR toolbar.
-        var topbarTemplate = Handlebars.compile($("script#topbarTemplate").html());
+        var topbarTemplate = Handlebars.compile($("script#topbar_template").html());
         $('body').prepend(topbarTemplate(event));
         $('body').addClass('topbarred');
 
+        var contentAreaModals = {}
+        // Compile supplide modal templates for all content areas
+        $("script.modalTemplate").each(function(){
+          contentAreaModals[$(this).attr('id')] = Handlebars.compile($(this).html());
+        })
         // Build the modals for each content area.
-        var contentAreaModal = Handlebars.compile($("script#contentAreaModalTemplate").html());
         $.each(event['content_areas'], function(i, contentArea) {
-          var contentAreaId = contentArea['_id'];
+          var contentAreaId = contentArea['_id'],
+              contentAreaType = contentArea['area_type'];
           // Add to the body.
-          $('body').append(contentAreaModal(contentArea));
+          $('body').append(contentAreaModals[contentAreaType + '_modal_template'](contentArea));
 
           // Define a click handler.
           $('#button-' + contentAreaId).click(function () {
