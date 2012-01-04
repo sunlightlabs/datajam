@@ -25,6 +25,10 @@ $(function () {
     // Display the toolbar if signed in.
     $.getJSON('/onair/signed_in', function(check) {
 
+      if (check['csrfToken']) {
+        $('meta[name=csrf-token]').attr('content', check['csrfToken']);
+      }
+
       if (check['signedIn']) {
 
         // Build the ON AIR toolbar.
