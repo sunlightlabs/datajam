@@ -27,6 +27,7 @@ $(function () {
 
       if (check['csrfToken']) {
         $('meta[name=csrf-token]').attr('content', check['csrfToken']);
+        $(document).trigger('csrfloaded');
       }
 
       if (check['signedIn']) {
