@@ -19,7 +19,7 @@ class RedisCache
     # If so, log the hit and serve the key's value immediately.
     if cached_content = @redis.get(request.path)
       Rails.logger.info "RedisCache hit for #{request.path} at #{Time.now}"
-      handle_cached_response request, cached_content
+      handle_cached_response(request, cached_content)
       # Otherwise, continue down the Rails middleware stack.
     else
       @app.call(env)

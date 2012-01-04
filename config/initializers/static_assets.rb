@@ -16,6 +16,7 @@ BODY_ASSETS = <<-BODY.strip_heredoc
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.1/underscore-min.js" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js" type="text/javascript"></script>
+<script src="/javascripts/rails.js" type="text/javascript"></script>
 <script src="/datajam.js" type="text/javascript"></script>
 <script src="/bootstrap-modal.js" type="text/javascript"></script>
 <script type="text/javascript">
