@@ -49,7 +49,7 @@ class Event
     rendered_content = preprocess_template(self.event_template).render_with(self.template_data)
     SiteTemplate.first.render_with({ content: rendered_content,
                                      head_assets: head_assets,
-                                     body_assets: body_assets + self.script_id})
+                                     body_assets: self.script_id + body_assets})
   end
 
   # Render the HTML for an embed
