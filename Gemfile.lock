@@ -252,7 +252,7 @@ DEPENDENCIES
   jquery-rails (~> 0.2)
   looksee
   map_by_method
-  mongoid (~> 2.0)
+  mongoid (~> 2.3)
   mongoid-rspec (~> 1.4)
   mongoid_slug (~> 0.7)
   net-http-spy
