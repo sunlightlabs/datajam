@@ -20,12 +20,15 @@ class Event
   has_and_belongs_to_many :embed_templates
   embeds_many :content_areas
   has_and_belongs_to_many :users
-  has_one :current_window, class_name: 'UpdateWindow'
+  has_one :current_window, class_name: 'UpdateWindow', validate: false
 
   before_save :update_template_data, :generate_content_areas
 
   after_save do
     Cacher.cache_events([self])
+    if self.current_window.nil?
+      UpdateWindow.create(event: self)
+    end
   end
 
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
@@ -36,7 +39,7 @@ class Event
   end
 
   def script_id
-    '<script type="text/javascript">var Datajam = Datajam || {}; Datajam.eventId = "' + self.id.to_s + '";</script>'
+    '<script type="text/javascript">window.Datajam = window.Datajam || {}; Datajam.eventId = "' + self.id.to_s + '";</script>'
   end
 
   # Render the HTML for an event page
@@ -73,6 +76,27 @@ class Event
     end
     template
   end
+
+  def add_content_update(params)
+
+
+    if self.current_window.content_updates.length >= 20
+
+      # Create a new update window and set it as the next window.
+      new_window = UpdateWindow.new(previous_window: self.current_window)
+
+      self.current_window.next_window = new_window
+      self.current_window.save
+
+      # The new window is now the current window.
+      self.current_window = new_window
+    end
+
+    self.current_window.content_updates.create(params)
+    Cacher.cache('/event/' + self.id.to_s + '/updates.json', self.current_window.to_json)
+    self.save
+  end
+
 
   protected
 

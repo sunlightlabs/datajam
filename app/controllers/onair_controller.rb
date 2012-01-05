@@ -10,10 +10,13 @@ class OnairController < ApplicationController
   end
 
   def update
-    if ContentUpdate.create(params)
+    event = Event.find(params[:event_id])
+    event.add_content_update(params)
+
+    if event.current_window.save
       render json: { msg: 'Success updating' }
     else
-      render json: { msg: 'Problem creating content upate' }
+      render json: { msg: 'Problem creating content update' }
     end
   end
 

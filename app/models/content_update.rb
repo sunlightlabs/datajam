@@ -8,4 +8,12 @@ class ContentUpdate
 
   embedded_in :update_window
 
+  after_create :update_content_area
+
+  def update_content_area
+    content_area = self.update_window.event.content_areas.find(self.content_area_id)
+    content_area.update_attributes(html: self.html)
+    content_area.save
+  end
+
 end

@@ -1,75 +1,137 @@
-$(function () {
+Datajam.Event = Backbone.Model.extend({
+  id: Datajam.eventId,
+  url: '/event/' + Datajam.eventId + '.json'
+});
 
-  Datajam.pollForUpdates = function() {
-    $.getJSON('/event/' + Datajam.eventId + '.json', function(event) {
+Datajam.Check = Backbone.Model.extend({
+  url: '/onair/signed_in'
+});
+
+Datajam.ContentArea = Backbone.Model.extend({
+
+});
+
+Datajam.ContentUpdate = Backbone.Model.extend({
+  save: function() {
+    var contentArea = this.get('contentArea');
+    var payload = { event_id: Datajam.event.get('_id'),
+                    content_area_id: contentArea.get('_id'),
+                    html: $('#textarea-' + contentArea.get('_id')).val() };
+    $.post('/onair/update', payload, function(response) {
+      $('#modal-' + contentArea.get('_id')).modal('hide');
+    }, 'json');
+  }
+});
+
+
+Datajam.OnairToolbar = Backbone.View.extend({
+  render: function() {
+    var topbarTemplate = Handlebars.compile($("script#topbarTemplate").html());
+    $('body').prepend(topbarTemplate(this.model.toJSON()));
+    $('body').addClass('topbarred');
+    return this;
+  }
+});
+
+Datajam.ContentAreaView = Backbone.View.extend({
+  render: function() {
+    $('#content_area_' + this.model.get('_id')).html(this.model.get('html'));
+  }
+});
+
+
+Datajam.ContentUpdateModal = Backbone.View.extend({
+  events: {
+    'click .modal-update': 'save'
+  },
+  render: function() {
+    // Generate the template.
+    var tmpl = Handlebars.compile($("script#contentUpdateModalTemplate").html());
+
+    // Assign to this.el and add to body.
+    this.el = $(tmpl(this.model.get('contentArea').toJSON()));
+    $('body').append(this.el);
+
+    // Rebind events since this.el was assigned.
+    this.delegateEvents();
+
+    return this;
+  },
+  save: function() {
+    this.model.save();
+  }
+});
+
+
+Datajam.pollForUpdates = function() {
+  $.getJSON('/event/' + Datajam.eventId + '/updates.json', function(updates) {
+
+    if (updates['content_updates'].length > 0) {
+
+      if (Datajam.updates.length == 0) {
+        Datajam.updates = updates['content_updates'];
+      }
 
       // Update the DOM if there are new updates.
-      if (Datajam.updates.length < event['content_updates'].length) {
-
+      if (Datajam.updates.length < updates['content_updates'].length) {
         var lastUpdate = Datajam.updates[Datajam.updates.length - 1];
         if (lastUpdate) {
-          _.each(event['content_updates'], function(contentUpdate) {
+          _.each(updates['content_updates'], function(contentUpdate) {
             if (contentUpdate['updated_at'] > lastUpdate['updated_at']) {
-              $('#content_area_' + contentUpdate['id']).html(contentUpdate['html']);
+              $('#content_area_' + contentUpdate['content_area_id']).html(contentUpdate['html']);
               Datajam.updates.push(contentUpdate);
             }
           });
         }
       }
-      setTimeout(function() { Datajam.pollForUpdates() }, 3000);
-    });
-  };
+    }
+    setTimeout(function() { Datajam.pollForUpdates() }, 3000);
+  });
+};
 
-  $.getJSON('/event/' + Datajam.eventId + '.json', function(event) {
 
-    // Display the toolbar if signed in.
-    $.getJSON('/onair/signed_in', function(check) {
+$(function() {
 
-      if (check['csrfToken']) {
-        $('meta[name=csrf-token]').attr('content', check['csrfToken']);
-        $(document).trigger('csrfloaded');
-      }
+  var event = new Datajam.Event();
+  Datajam.event = event;
+  event.fetch({
+    success: function(model, response) {
 
-      if (check['signedIn']) {
+      // Check that the viewer signed in.
+      var check = new Datajam.Check();
+      check.fetch({
+        success: function(model,response) {
 
-        // Build the ON AIR toolbar.
-        var topbarTemplate = Handlebars.compile($("script#topbar_template").html());
-        $('body').prepend(topbarTemplate(event));
-        $('body').addClass('topbarred');
+          if (check.get('csrfToken')) {
+            $('meta[name=csrf-token]').attr('content', check.get('csrfToken'));
+            $(document).trigger('csrfloaded');
+          }
 
-        var contentAreaModals = {}
-        // Compile supplide modal templates for all content areas
-        $("script.modalTemplate").each(function(){
-          contentAreaModals[$(this).attr('id')] = Handlebars.compile($(this).html());
-        })
-        // Build the modals for each content area.
-        $.each(event['content_areas'], function(i, contentArea) {
-          var contentAreaId = contentArea['_id'],
-              contentAreaType = contentArea['area_type'];
-          // Add to the body.
-          $('body').append(contentAreaModals[contentAreaType + '_modal_template'](contentArea));
+          if (check.get('signedIn')) {
 
-          // Define a click handler.
-          $('#button-' + contentAreaId).click(function () {
-            var payload = { event_id: event['_id'],
-                            content_area_id: contentAreaId,
-                            html: $('#textarea-' + contentAreaId).val() };
-            $.post('/onair/update', payload, function(response) {
-              $('#modal-' + contentAreaId).modal('hide');
-            }, 'json');
-          });
-        });
-      }
+            // Build the ON AIR toolbar.
+            var toolbarView = new Datajam.OnairToolbar({ model: event });
+            toolbarView.render();
 
-    });
+            // Build the modals for each content area.
+            $.each(event.get('content_areas'), function(i, contentAreaJSON) {
+              var contentArea = new Datajam.ContentArea(contentAreaJSON);
+              var contentAreaView = new Datajam.ContentAreaView({ model: contentArea });
+              contentAreaView.render();
 
-    // Populate each Content Area.
-    $.each(event.content_areas, function(i, content_area) {
-      $('#content_area_' + content_area['_id']).html(content_area['html']);
-    });
+              var contentUpdate = new Datajam.ContentUpdate({contentArea: contentArea});
+              var modal = new Datajam.ContentUpdateModal({ model: contentUpdate,
+                                                           id: contentArea.get('_id') });
+              modal.render();
+            });
 
-    Datajam.updates = event['content_updates'];
-    Datajam.pollForUpdates();
+          }
+        }
+      });
+
+      Datajam.updates = [];
+      Datajam.pollForUpdates();
+    }
   });
 
 });
