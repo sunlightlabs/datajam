@@ -17,7 +17,7 @@ class RedisCache
 
     # Is the path saved in Redis as a key? Have we seen this user before?
     # If so, log the hit and serve the key's value immediately.
-    if cached_content = @redis.get(request.path)
+    if request.get? && cached_content = @redis.get(request.path)
       Rails.logger.info "RedisCache hit for #{request.path} at #{Time.now}"
       handle_cached_response(request, cached_content)
       # Otherwise, continue down the Rails middleware stack.
