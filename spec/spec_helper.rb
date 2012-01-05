@@ -12,7 +12,7 @@ RSpec.configure do |config|
   config.mock_with :rr
 
   config.before(:all) do
-    @redis_db = Redis.new
+    @redis_db = REDIS
     @redis = Redis::Namespace.new(Rails.env.to_s, :redis => @redis_db)
   end
 

@@ -3,7 +3,7 @@ class Cacher
   # Takes in an array of events. Only have one event to cache? Pass in an array with that one event.
   def self.cache_events(events)
 
-    redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
+    redis = Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)
     site_template = SiteTemplate.first
 
     # Cache all events.
@@ -33,7 +33,7 @@ class Cacher
 
   # Convenience wrapper to write content to Redis.
   def self.cache(path, content)
-    redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
+    redis = Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)
 
     # Add a leading slash if it's not there.
     path = '/' + path if path[0] != '/'

@@ -8,7 +8,7 @@ class RedisCache
   # Instantiate a Rack `@app` and `@redis` client.
   def initialize(app, options={})
     @app = app
-    @redis = Redis::Namespace.new(Rails.env.to_s, :redis => Redis.new)
+    @redis = Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)
   end
 
   def call(env)
