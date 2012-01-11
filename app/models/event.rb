@@ -39,7 +39,7 @@ class Event
   end
 
   def script_id
-    '<script type="text/javascript">window.Datajam = window.Datajam || {}; Datajam.eventId = "' + self.id.to_s + '";</script>'
+    '<script type="text/javascript">window.Datajam || (Datajam = {}); Datajam.eventId = "' + self.id.to_s + '";</script>'
   end
 
   # Render the HTML for an event page
