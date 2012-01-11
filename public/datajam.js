@@ -45,8 +45,7 @@ Datajam.ContentUpdateModal = Backbone.View.extend({
     'click .modal-update': 'save'
   },
   render: function() {
-    // Generate the template.
-    var tmpl = Handlebars.compile($("script#contentUpdateModalTemplate").html());
+    var tmpl = Datajam.ModalTemplates[this.model.get('contentArea').get('area_type')];
 
     // Assign to this.el and add to body.
     this.el = $(tmpl(this.model.get('contentArea').toJSON()));
@@ -91,6 +90,15 @@ Datajam.pollForUpdates = function() {
 
 
 $(function() {
+
+  // Compile the modal template(s).
+  var tmpls = {}
+  $("script.modalTemplate").each(function(){
+    var tmpl = $(this)
+      , areaType = tmpl.attr('id').replace('_modal_template', '');
+    tmpls[areaType] = Handlebars.compile(tmpl.html());
+  });
+  Datajam.ModalTemplates = tmpls;
 
   var event = new Datajam.Event();
   Datajam.event = event;
