@@ -26,7 +26,7 @@ Datajam.ContentUpdate = Backbone.Model.extend({
 
 Datajam.OnairToolbar = Backbone.View.extend({
   render: function() {
-    var topbarTemplate = Handlebars.compile($("script#topbarTemplate").html());
+    var topbarTemplate = Handlebars.compile($("script#topbar_template").html());
     $('body').prepend(topbarTemplate(this.model.toJSON()));
     $('body').addClass('topbarred');
     return this;

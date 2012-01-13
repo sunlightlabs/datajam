@@ -28,7 +28,7 @@ BODY_ASSETS = <<-BODY.strip_heredoc
   window.define = window._define;
 </script>
 
-<script id="topbarTemplate" type="text/x-handlebars-template">
+<script id="topbar_template" type="text/x-handlebars-template">
 <div class="topbar">
   <div class="topbar-inner">
     <div class="container">
