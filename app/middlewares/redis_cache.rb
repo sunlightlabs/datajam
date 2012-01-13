@@ -43,8 +43,8 @@ class RedisCache
     end
 
     [200, {'Content-Type'   => mimetype,
-           'Content-Length' => cached_content.length.to_s
-           'Cache-Control' => 'no-cache'
+           'Content-Length' => cached_content.length.to_s,
+           'Cache-Control' => 'no-cache',
           }, [cached_content]]
   end
 
