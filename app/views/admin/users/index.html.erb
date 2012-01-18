@@ -17,24 +17,4 @@
 
 <h3>New User</h3>
 
-<%= form_for @user, url: admin_users_path, method: :post do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.label :affiliation%>
-  <%= f.text_field :affiliation %>
-
-  <%= f.label :url, "URL" %>
-  <%= f.text_field :url %>
-
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :password, 'Password (at least 6 characters)' %>
-  <%= f.password_field :password, autocomplete: :off %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, autocomplete: :off %>
-
-  <%= f.submit 'Submit' %>
-<% end %>
+<%= render "form" %>

@@ -9,6 +9,8 @@ class User
   field :affiliation, type: String
   field :url,         type: String
 
+  mount_uploader :avatar, AvatarUploader
+
   def as_json(options={})
     super(options.merge :only => [
       :_id,

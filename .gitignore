@@ -6,6 +6,9 @@ tmp/
 bin/
 cache/
 vendor/
+public/uploads
+public/avatar
+public/user
 coverage/
 coverage.data
 /templates/
