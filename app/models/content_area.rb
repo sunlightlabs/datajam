@@ -6,7 +6,7 @@ class ContentArea
   field :area_type, type: String
   field :html,      type: String
   field :template,  type: String
-  field :data,      type: Hash
+  field :data,      type: Hash,   default: {}
 
   embedded_in :event
 

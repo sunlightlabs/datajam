@@ -18,7 +18,7 @@ class DataCardArea < ContentArea
   end
 
   def set_current_card
-    unless self.data['current_card_id'].nil?
+    unless self.data.nil? || self.data['current_card_id'].nil?
       self.current_card_id = self.data['current_card_id']
       self.html = self.render
     end
