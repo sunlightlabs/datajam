@@ -18,10 +18,8 @@ describe User do
     end
 
     it "should update the avatar" do
-      subject.update_attributes(
-        avatar: File.open("spec/fixtures/avatar.gif")
-      )
-
+      avatar_path = Rails.root.join("spec/fixtures/avatar.gif")
+      subject.update_attributes(avatar: File.open(avatar_path))
       subject.avatar.should be_present
     end
   end
