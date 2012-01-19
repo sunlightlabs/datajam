@@ -57,5 +57,26 @@ BODY_ASSETS = <<-BODY.strip_heredoc
   </div>
 </div>
 </script>
+
+<script id="dataCardModalTemplate" type="text/x-handlebars-template">
+<div id="modal-{{ _id }}" class="modal hide fade" style="display: none;">
+  <div class="modal-header">
+    <a href="#" class="close">&times;</a>
+    <h3>{{ name }}</h3>
+  </div>
+  <div class="modal-body">
+    <select id="select-{{ _id }}">
+      {{#each data_cards}}
+      <option value="{{ this.id }}">{{ this.title }}</option>
+      {{/each}}
+   </select>
+  </div>
+  <div class="modal-footer">
+    <a href="#" id="button-{{ _id }}" class="btn modal-update">Update</a>
+  </div>
+</div>
+</script>
+
+
 BODY
 

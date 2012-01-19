@@ -79,7 +79,6 @@ class Event
 
   def add_content_update(params)
 
-
     if self.current_window.content_updates.length >= 20
 
       # Create a new update window and set it as the next window.
@@ -91,7 +90,6 @@ class Event
       # The new window is now the current window.
       self.current_window = new_window
     end
-
     self.current_window.content_updates.create(params)
     Cacher.cache('/event/' + self.id.to_s + '/updates.json', self.current_window.to_json)
     self.save

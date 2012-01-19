@@ -1,0 +1,30 @@
+<h2>Data Cards</h2>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Last Updated</th>
+  </tr>
+  <% @cards.each do |card| -%>
+  <tr>
+    <td><%= link_to card.title, edit_admin_card_path(card) %></td>
+    <td><%= card.updated_at.to_s :humane %></td>
+  <% end -%>
+</table>
+
+<h3>New Card</h3>
+
+<%= form_for @card, url: admin_cards_path, method: :post do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :csv, 'Data' %>
+  <%= f.text_area :csv, class: 'datajamTemplate', id: 'datajamTemplate', rows: 10, cols: 100 %>
+  <div id="ace-editor"></div>
+
+  <%= f.label :source, 'Source Attribution (can use HTML)' %>
+  <%= f.text_area :source, rows: 5, cols: 80 %>
+
+  <%= f.submit 'Submit' %>
+<% end %>
+

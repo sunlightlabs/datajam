@@ -12,8 +12,11 @@ class ContentUpdate
 
   def update_content_area
     content_area = self.update_window.event.content_areas.find(self.content_area_id)
-    content_area.update_attributes(html: self.html)
+    content_area.update_attributes(html: self.html, data: self.data)
     content_area.save
+
+    self.html = content_area.render
+    self.save
   end
 
 end

@@ -23,6 +23,18 @@ Datajam.ContentUpdate = Backbone.Model.extend({
   }
 });
 
+Datajam.DataCardUpdate = Backbone.Model.extend({
+  save: function() {
+    var contentArea = this.get('contentArea');
+    var payload = { event_id: Datajam.event.get('_id'),
+                    content_area_id: contentArea.get('_id'),
+                    data: { current_card_id: $('#select-' + contentArea.get('_id') + ' option:selected').val() } };
+    console.log(payload);
+    $.post('/onair/update', payload, function(response) {
+      $('#modal-' + contentArea.get('_id')).modal('hide');
+    }, 'json');
+  }
+});
 
 Datajam.OnairToolbar = Backbone.View.extend({
   render: function() {
@@ -38,7 +50,6 @@ Datajam.ContentAreaView = Backbone.View.extend({
     $('#content_area_' + this.model.get('_id')).html(this.model.get('html'));
   }
 });
-
 
 Datajam.ContentUpdateModal = Backbone.View.extend({
   events: {
@@ -61,6 +72,27 @@ Datajam.ContentUpdateModal = Backbone.View.extend({
   }
 });
 
+Datajam.DataCardModal = Backbone.View.extend({
+  events: {
+    'click .modal-update': 'save'
+  },
+  render: function() {
+    // Generate the template.
+    var tmpl = Handlebars.compile($("script#dataCardModalTemplate").html());
+
+    // Assign to this.el and add to body.
+    this.el = $(tmpl(this.model.get('contentArea').toJSON()));
+    $('body').append(this.el);
+
+    // Rebind events since this.el was assigned.
+    this.delegateEvents();
+
+    return this;
+  },
+  save: function() {
+    this.model.save();
+  }
+});
 
 Datajam.pollForUpdates = function() {
   $.getJSON('/event/' + Datajam.eventId + '/updates.json', function(updates) {
@@ -84,10 +116,9 @@ Datajam.pollForUpdates = function() {
         }
       }
     }
-    setTimeout(function() { Datajam.pollForUpdates() }, 3000);
+    setTimeout(function() { Datajam.pollForUpdates(); }, 3000);
   });
 };
-
 
 $(function() {
 
@@ -127,10 +158,17 @@ $(function() {
               var contentAreaView = new Datajam.ContentAreaView({ model: contentArea });
               contentAreaView.render();
 
-              var contentUpdate = new Datajam.ContentUpdate({contentArea: contentArea});
-              var modal = new Datajam.ContentUpdateModal({ model: contentUpdate,
+              if (contentArea.get('area_type') === 'content_area') {
+                var contentUpdate = new Datajam.ContentUpdate({contentArea: contentArea});
+                var modal = new Datajam.ContentUpdateModal({ model: contentUpdate,
+                                                             id: contentArea.get('_id') });
+                modal.render();
+              } else if (contentArea.get('area_type') === 'data_card_area') {
+                var dataCardUpdate = new Datajam.DataCardUpdate({contentArea: contentArea});
+                var modal = new Datajam.DataCardModal({ model: dataCardUpdate,
                                                            id: contentArea.get('_id') });
-              modal.render();
+                modal.render();
+              }
             });
 
           }
