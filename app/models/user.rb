@@ -12,15 +12,25 @@ class User
   mount_uploader :avatar, AvatarUploader
 
   def as_json(options={})
-    super(options.merge :only => [
-      :_id,
-      :affiliation,
-      :created_at,
-      :email,
-      :name,
-      :updated_at,
-      :url
-    ])
+    super(
+      options.merge(
+        :only => [
+          :_id,
+          :affiliation,
+          :created_at,
+          :email,
+          :name,
+          :updated_at,
+          :url
+        ],
+        :methods => [
+          :small_avatar_url
+        ]
+      )
+    )
   end
 
+  def small_avatar_url
+    avatar_url(:small)
+  end
 end
