@@ -158,15 +158,15 @@ $(function() {
               var contentAreaView = new Datajam.ContentAreaView({ model: contentArea });
               contentAreaView.render();
 
-              if (contentArea.get('area_type') === 'content_area') {
-                var contentUpdate = new Datajam.ContentUpdate({contentArea: contentArea});
-                var modal = new Datajam.ContentUpdateModal({ model: contentUpdate,
-                                                             id: contentArea.get('_id') });
-                modal.render();
-              } else if (contentArea.get('area_type') === 'data_card_area') {
+              if (contentArea.get('area_type') === 'data_card_area') {
                 var dataCardUpdate = new Datajam.DataCardUpdate({contentArea: contentArea});
                 var modal = new Datajam.DataCardModal({ model: dataCardUpdate,
                                                            id: contentArea.get('_id') });
+                modal.render();
+              } else {
+                var contentUpdate = new Datajam.ContentUpdate({contentArea: contentArea});
+                var modal = new Datajam.ContentUpdateModal({ model: contentUpdate,
+                                                             id: contentArea.get('_id') });
                 modal.render();
               }
             });
