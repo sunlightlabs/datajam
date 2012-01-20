@@ -3,7 +3,7 @@
 <%= form_for @event, url: admin_event_path(@event), method: :put do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-  <%= f.label :slug %>
+  <label for="event_slug">Slug (<a href="/<%= @event.slug %>">view page</a>)</label>
   <%= f.text_field :slug %>
   <%= f.label :event_template, 'Templates' %>
   <%= f.collection_select :event_template_id, @event_templates, :id, :name %>
