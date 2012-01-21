@@ -39,7 +39,16 @@ class Event
   end
 
   def script_id
-    "<script type=\"text/javascript\">window.Datajam || (Datajam = {}); Datajam.eventId = \"#{self.id.to_s}\"; Datajam.DEBUG = #{(Rails.env.to_s == 'production' && 'false') || 'true'}</script>"
+    <<-EOT.strip_heredoc
+    <script type="text/javascript">
+    window.Datajam || (Datajam = {});
+    Datajam.eventId = "#{self.id.to_s}";
+    Datajam.DEBUG = #{(Rails.env.to_s == 'production' && 'false') || 'true'};
+    Datajam.debug = function(msg){
+      Datajam.DEBUG && window.console && console.log(msg);
+    }
+    </script>
+    EOT
   end
 
   # Render the HTML for an event page
