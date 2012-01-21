@@ -9,7 +9,6 @@ body.topbarred {
   zoom: 1;
 }
 
-
 .topbar {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -171,6 +170,7 @@ body.topbarred {
 .topbar div > ul > li, .nav > li {
   display: block;
   float: left;
+  position:relative;
 }
 .topbar div > ul a, .nav a {
   display: block;
