@@ -21,6 +21,8 @@ Datajam::Application.routes.draw do
   match 'onair/signed_in' => 'onair#signed_in'
   match 'onair/update' => 'onair#update', :via => [:post]
 
+  mount Rack::GridFS::Endpoint.new(:db => Mongoid.database, :lookup => :path), :at => "static"
+
   root :to => 'content#index'
 
 end
