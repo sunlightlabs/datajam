@@ -44,7 +44,7 @@ class RedisCache
 
     [200, {'Content-Type'   => mimetype,
            'Content-Length' => cached_content.length.to_s,
-           'Cache-Control' => 'no-cache',
+           'Cache-Control' => 'no-cache, max-age=0',
           }, [cached_content]]
   end
 
