@@ -19,6 +19,8 @@ class Admin::CardsController < AdminController
 
   def create
     @card = DataCard.new(params[:data_card])
+    @card.csv = File.open(params[:data_card][:csv_file].tempfile.path).read
+
     if @card.save
       flash[:notice] = "Card saved."
       redirect_to admin_cards_path

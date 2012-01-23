@@ -10,6 +10,10 @@ class DataCard
   field :source,      type: String
 
   before_save :parse_csv
+  after_save :save_events
+  after_destroy :save_events
+
+  mount_uploader :csv_file, CsvUploader
 
   # Mongoid::Slug changes this to `self.slug`. Undo that.
   def to_param
@@ -48,7 +52,9 @@ class DataCard
     </table>
 
     <br/>
+    {{#if source}}
     <div class="source">Source: {{{source}}}</div>
+    {{/if}}
     </div>
     TMPL
   end
@@ -59,5 +65,11 @@ class DataCard
     parsed = CSV.parse(self.csv)
     self.table_head = parsed.first
     self.table_body = parsed.slice(1, parsed.length)
+  end
+
+  def save_events
+    Event.all.each do |e|
+      e.save
+    end
   end
 end

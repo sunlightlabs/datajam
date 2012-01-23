@@ -4,11 +4,13 @@
   <tr>
     <th>Title</th>
     <th>Last Updated</th>
+    <th>Delete</th>
   </tr>
   <% @cards.each do |card| -%>
   <tr>
     <td><%= link_to card.title, edit_admin_card_path(card) %></td>
     <td><%= card.updated_at.to_s :humane %></td>
+    <td><%= link_to 'X', admin_card_path(card), method: :delete %></td>
   <% end -%>
 </table>
 
@@ -18,9 +20,8 @@
   <%= f.label :title %>
   <%= f.text_field :title %>
 
-  <%= f.label :csv, 'Data' %>
-  <%= f.text_area :csv, class: 'datajamTemplate', id: 'datajamTemplate', rows: 10, cols: 100 %>
-  <div id="ace-editor"></div>
+  <%= f.label :csv_file, 'CSV File' %>
+  <%= f.file_field :csv_file %>
 
   <%= f.label :source, 'Source Attribution (can use HTML)' %>
   <%= f.text_area :source, rows: 5, cols: 80 %>
