@@ -97,23 +97,21 @@ Datajam.DataCardModal = Backbone.View.extend({
 Datajam.pollForUpdates = function() {
   $.getJSON('/event/' + Datajam.eventId + '/updates.json', function(updates) {
 
-    if (updates['content_updates'].length > 0) {
+    if (updates['content_updates'] && updates['content_updates'].length > 0) {
 
       if (Datajam.updates.length == 0) {
         Datajam.updates = updates['content_updates'];
       }
 
       // Update the DOM if there are new updates.
-      if (Datajam.updates.length < updates['content_updates'].length) {
-        var lastUpdate = Datajam.updates[Datajam.updates.length - 1];
-        if (lastUpdate) {
-          _.each(updates['content_updates'], function(contentUpdate) {
-            if (contentUpdate['updated_at'] > lastUpdate['updated_at']) {
-              $('#content_area_' + contentUpdate['content_area_id']).html(contentUpdate['html']);
-              Datajam.updates.push(contentUpdate);
-            }
-          });
-        }
+      var lastUpdate = Datajam.updates[Datajam.updates.length - 1];
+      if (lastUpdate) {
+        _.each(updates['content_updates'], function(contentUpdate) {
+          if (contentUpdate['updated_at'] > lastUpdate['updated_at']) {
+            $('#content_area_' + contentUpdate['content_area_id']).html(contentUpdate['html']);
+            Datajam.updates.push(contentUpdate);
+          }
+        });
       }
     }
     setTimeout(function() { Datajam.pollForUpdates(); }, 3000);
