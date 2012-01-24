@@ -65,7 +65,7 @@ class Event
   def rendered_embeds
     embeds = {}
     self.embed_templates.each do |embed_template|
-      data = self.template_data.merge({"head_assets" => HEAD_ASSETS, "body_assets" => BODY_ASSETS + self.script_id})
+      data = self.template_data.merge({"head_assets" => HEAD_ASSETS, "body_assets" => self.script_id + BODY_ASSETS})
       embeds[embed_template.slug] = preprocess_template(embed_template).render_with(data)
     end
     embeds
