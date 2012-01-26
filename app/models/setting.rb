@@ -6,7 +6,6 @@ class Setting
   field :name, type: String
   field :value, type: String
   field :required, type: Boolean, default: false
-  field :callbacks, type: Array, default: []
 
   index [[:namespace, Mongo::ASCENDING], [:name, Mongo::ASCENDING]], unique: true
 
@@ -17,11 +16,9 @@ class Setting
 
   after_save do
     Datajam::Settings.flush(self.namespace)
-    if callbacks.any?
-      callbacks.each do |callback|
-        func = "#{namespace}_#{callback}".to_sym
-        self.send func
-      end
+    callback = "#{namespace}_#{name}_callback".to_sym
+    if self.respond_to? callback
+      self.send callback
     end
   end
 
