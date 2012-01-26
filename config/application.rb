@@ -30,7 +30,8 @@ module Datajam
   class Application < Rails::Application
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
-    config.middleware.insert 0, 'Rack::RedisCache'
+    config.middleware.insert 0, 'Rack::Deflater'
+    config.middleware.insert 1, 'Rack::RedisCache'
     config.action_view.javascript_expansions[:defaults] = %w(
       http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js
       http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js
