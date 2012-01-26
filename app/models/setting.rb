@@ -6,7 +6,7 @@ class Setting
   field :name, type: String
   field :value, type: String
   field :required, type: Boolean, default: false
-  field :callbacks, type: Array
+  field :callbacks, type: Array, default: []
 
   index [[:namespace, Mongo::ASCENDING], [:name, Mongo::ASCENDING]], unique: true
 
