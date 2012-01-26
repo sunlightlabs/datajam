@@ -91,7 +91,7 @@ class Event
     if self.current_window.content_updates.length > 19
 
       # Create a new update window and set it as the next window.
-      new_window = UpdateWindow.new(previous_window: self.current_window)
+      new_window = UpdateWindow.create(previous_window: self.current_window)
 
       self.current_window.next_window = new_window
       self.current_window.save
@@ -101,7 +101,7 @@ class Event
     end
     self.current_window.content_updates.create(params)
     self.save
-    self.reload
+    self.current_window.reload
 
     Cacher.cache('/event/' + self.id.to_s + '/updates.json', self.current_window.to_json)
   end

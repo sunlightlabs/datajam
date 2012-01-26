@@ -33,7 +33,6 @@ describe UpdateWindow do
     current_updates = @event.current_window.content_updates
     current_updates.length.should eql(5)
     current_updates.last.html.should match(/Update 24/)
-    @event.content_areas.first.html.should match(/Update 24/)
 
     prev_updates = @event.current_window.previous_window.content_updates
     prev_updates.length.should eql(20)
