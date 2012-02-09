@@ -3,11 +3,17 @@ class DataCard
   include Mongoid::Timestamps
   include Mongoid::Slug
 
+  # Used for auto-routing
+  def self.model_name
+    ActiveModel::Name.new(self, nil, "Card")
+  end
+
   field :title,       type: String
   field :table_head,  type: Array,     default: []
   field :table_body,  type: Array,     default: []
   field :csv,         type: String
   field :source,      type: String
+  field :body,        type: String
 
   before_save :parse_csv
   after_save :save_events
@@ -24,8 +30,9 @@ class DataCard
     Handlebars.compile(template).call(self)
   end
 
-
   def template
+    return body if body.present?
+
     return <<-TMPL.strip_heredoc
     <div id="liveCard">
     <h2>{{ title }}</h2>
@@ -62,14 +69,14 @@ class DataCard
   protected
 
   def parse_csv
+    return if csv.blank?
+
     parsed = CSV.parse(self.csv)
     self.table_head = parsed.first
     self.table_body = parsed.slice(1, parsed.length)
   end
 
   def save_events
-    Event.all.each do |e|
-      e.save
-    end
+    Event.all.each(&:save)
   end
 end

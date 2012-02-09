@@ -1,0 +1,23 @@
+<%= form_for [:admin, @card] do |f| %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <fieldset>
+    <legend>Use the default template</legend>
+
+    <%= f.label :csv_file, 'CSV File' %>
+    <%= f.file_field :csv_file %>
+
+    <%= f.label :source, 'Source Attribution (can use HTML)' %>
+    <%= f.text_area :source, rows: 5, cols: 80 %>
+  </fieldset>
+
+  <fieldset>
+    <legend>Or use your own HTML</legend>
+
+    <%= f.label :body, 'HTML for the data card' %>
+    <%= f.text_area :body, rows: 10, cols: 80 %>
+  </fieldset>
+
+  <%= f.submit 'Submit' %>
+<% end %>

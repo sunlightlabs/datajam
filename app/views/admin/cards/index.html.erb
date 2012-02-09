@@ -15,17 +15,4 @@
 </table>
 
 <h3>New Card</h3>
-
-<%= form_for @card, url: admin_cards_path, method: :post do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-
-  <%= f.label :csv_file, 'CSV File' %>
-  <%= f.file_field :csv_file %>
-
-  <%= f.label :source, 'Source Attribution (can use HTML)' %>
-  <%= f.text_area :source, rows: 5, cols: 80 %>
-
-  <%= f.submit 'Submit' %>
-<% end %>
-
+<%= render "form" %>
