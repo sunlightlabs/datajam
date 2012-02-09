@@ -5,8 +5,14 @@
   <fieldset>
     <legend>Use the default template</legend>
 
-    <%= f.label :csv_file, 'CSV File' %>
-    <%= f.file_field :csv_file %>
+    <% if f.object.new_record? %>
+      <%= f.label :csv_file, 'CSV File' %>
+      <%= f.file_field :csv_file %>
+    <% else %>
+      <%= f.label :csv, 'Data' %>
+      <%= f.text_area :csv, class: 'datajamTemplate', "data-editor" => "ace-editor-csv", rows: 10, cols: 100 %>
+      <div class="ace-editor" id="ace-editor-csv"></div>
+    <% end %>
 
     <%= f.label :source, 'Source Attribution (can use HTML)' %>
     <%= f.text_area :source, rows: 5, cols: 80 %>
@@ -16,7 +22,8 @@
     <legend>Or use your own HTML</legend>
 
     <%= f.label :body, 'HTML for the data card' %>
-    <%= f.text_area :body, rows: 10, cols: 80 %>
+    <%= f.text_area :body, class: 'datajamTemplate', "data-editor" => "ace-editor-body", rows: 10, cols: 100 %>
+    <div class="ace-editor" id="ace-editor-body"></div>
   </fieldset>
 
   <%= f.submit 'Submit' %>
