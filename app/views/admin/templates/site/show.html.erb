@@ -4,7 +4,7 @@
 <p>Insert <code>{{{head_assets}}}</code> and <code>{{{body_assets}}}</code> before the closing <code>&lt;/head&gt;</code> and <code>&lt;/body&gt;</code> tags respectively.</p>
 <%= form_for @site_template, url: admin_templates_site_path do |f| %>
   <%= f.text_area :template, class: 'datajamTemplate', rows: 20, cols: 100 %>
-  <div id="ace-editor"></div>
+  <div class="ace-editor" id="ace-editor"></div>
   <%= f.submit 'Update' %>
 <% end %>
 

@@ -1,16 +1,17 @@
 window.onload = function() {
-  if ($('textarea.datajamTemplate').length) {
-    var editor = ace.edit("ace-editor");
-    var HtmlMode = require("ace/mode/html").Mode;
-    var editorSession = editor.getSession();
+  $("textarea.datajamTemplate").each(function() {
+    var $el = $(this),
+        editor = ace.edit($el.data("editor") || "ace-editor"),
+        HtmlMode = require("ace/mode/html").Mode,
+        editorSession = editor.getSession();
+
     editorSession.setMode(new HtmlMode());
-    editorSession.setValue($('textarea.datajamTemplate').val());
+    editorSession.setValue($el.val());
     editorSession.setTabSize(2);
     editorSession.setUseSoftTabs(true);
     editorSession.on('change', function() {
-      $('textarea.datajamTemplate').val(editorSession.getValue());
+      $el.val(editorSession.getValue());
     });
     editor.setShowPrintMargin(false);
-    editor.setShowGutter(false);
-  }
+  });
 };
