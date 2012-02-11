@@ -133,7 +133,7 @@ class Event
       template.custom_areas.each do |name, area_type|
         existing = self.content_areas.where(name: name, area_type: area_type)
         unless existing.any?
-          klass = area_type.titleize.gsub(' ','').constantize
+          klass = area_type.classify.constantize
           self.content_areas << klass.new(name: name, area_type: area_type)
         else
           existing.each do |area|

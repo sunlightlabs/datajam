@@ -20,10 +20,16 @@ class AdminController < ApplicationController
       end
     end
 
+    klass = params[:name].classify.constantize
+
     @plugin = Datajam.plugins.find {|plugin| plugin.name == params[:name] }
     raise ActionController::RoutingError.new('Not Found') unless @plugin
 
     @settings = Setting.where(:namespace => params[:name]).order_by([:name, :asc])
+
+    @actions = klass::PluginController.action_methods rescue []
+    @actions.reject {|method| @settings.any? && method == 'install'}
+    @actions.reject {|method| @settings.empty? && method == 'uninstall'}
 
     render 'admin/plugin_settings'
   end

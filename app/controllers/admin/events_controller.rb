@@ -34,11 +34,16 @@ class Admin::EventsController < AdminController
 
   def update
     @event = Event.find(params[:id])
-    if @event.update_attributes(parse_time(params[:event]))
-      flash[:notice] = "Event updated."
-      redirect_to edit_admin_event_path(@event)
-    else
-      flash[:error] = "There was a problem saving the event."
+    begin
+      if @event.update_attributes(parse_time(params[:event]))
+        flash[:notice] = "Event updated."
+        redirect_to edit_admin_event_path(@event)
+      else
+        flash[:error] = "There was a problem saving the event."
+        redirect_to edit_admin_event_path(@event)
+      end
+    rescue NameError
+      flash[:error] = "Unable to save. Make sure to use plugins' uninstall scripts before removing them from your Gemfile."
       redirect_to edit_admin_event_path(@event)
     end
   end

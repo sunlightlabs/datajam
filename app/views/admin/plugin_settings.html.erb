@@ -1,4 +1,13 @@
-<h2><%= @plugin.name.titleize %> Settings</h2>
+<h2><%= @plugin.name.titleize %></h2>
+<% if @actions.any? %>
+<ul>
+  <% @actions.each do |action| %>
+  <li>
+    <a href="<%= "#{action.to_s}_path".constantize %>"><%= action.to_s %></a>
+  </li>
+  <% end %>
+</ul>
+<% end %>
 <%= markdown @plugin.description %>
 <% if @settings.any? %>
 <form action="" method="post">

@@ -4,8 +4,8 @@ Datajam::Application.routes.draw do
 
   match 'admin' => 'admin#index'
   match 'admin/check' => 'admin#check'
-  match 'admin/plugins' => 'admin#plugins'
   match 'admin/plugins/:name' => 'admin#plugin_settings', :as => 'plugin_settings'
+  match 'admin/plugins' => 'admin#plugins'
   namespace :admin do
     resources :assets
     resources :users
