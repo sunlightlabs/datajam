@@ -28,8 +28,8 @@ class AdminController < ApplicationController
     @settings = Setting.where(:namespace => params[:name]).order_by([:name, :asc])
 
     @actions = klass::PluginController.action_methods rescue []
-    @actions.reject {|method| @settings.any? && method == 'install'}
-    @actions.reject {|method| @settings.empty? && method == 'uninstall'}
+    @actions.reject! {|method| @settings.any? && method == 'install'}
+    @actions.reject! {|method| @settings.empty? && method == 'uninstall'}
 
     render 'admin/plugin_settings'
   end
