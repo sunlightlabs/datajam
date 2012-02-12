@@ -28,8 +28,13 @@ class AdminController < ApplicationController
     @settings = Setting.where(:namespace => params[:name]).order_by([:name, :asc])
 
     @actions = klass::PluginController.action_methods rescue []
-    @actions.reject! {|method| @settings.any? && method == 'install'}
-    @actions.reject! {|method| @settings.empty? && method == 'uninstall'}
+    # controller methods starting with '_' are not linked in settings page
+    @actions.reject! {|method| method.to_s =~ /^_/ }
+    # toggle install/uninstall links depending on current installed status
+    @actions.reject! {|method| @settings.any? && method == 'install' }
+    @actions.reject! {|method| @settings.empty? && method == 'uninstall' }
+    # remove 'installed' setting after checking for installation; it's only used to determine status
+    @settings.reject! {|setting| setting.name == 'installed' }
 
     render 'admin/plugin_settings'
   end
