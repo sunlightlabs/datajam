@@ -30,9 +30,10 @@ class AdminController < ApplicationController
     @actions = klass::PluginController.action_methods rescue []
     # controller methods starting with '_' are not linked in settings page
     @actions.reject! {|method| method.to_s =~ /^_/ }
-    # toggle install/uninstall links depending on current installed status
+    # don't show install link if plugin is installed
     @actions.reject! {|method| @settings.any? && method == 'install' }
-    @actions.reject! {|method| @settings.empty? && method == 'uninstall' }
+    # only show install link if plugin isn't installed, and installation is required
+    @actions.reject! {|method| @settings.empty? && klass.install_required? && method != 'install' }
     # remove 'installed' setting after checking for installation; it's only used to determine status
     @settings.reject! {|setting| setting.name == 'installed' }
 
