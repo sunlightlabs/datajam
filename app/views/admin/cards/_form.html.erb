@@ -10,8 +10,7 @@
       <%= f.file_field :csv_file %>
     <% else %>
       <%= f.label :csv, 'Data' %>
-      <%= f.text_area :csv, class: 'datajamTemplate', "data-editor" => "ace-editor-csv", rows: 10, cols: 100 %>
-      <div class="ace-editor" id="ace-editor-csv"></div>
+      <%= f.text_area :csv, rows: 6, cols: 100 %>
     <% end %>
 
     <%= f.label :source, 'Source Attribution (can use HTML)' %>
