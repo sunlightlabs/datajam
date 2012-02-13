@@ -149,7 +149,7 @@ div#header {
   border-bottom: 1px solid #333;
 }
 
-ul#navigation, ul#account {
+ul.navigation, ul#account {
   margin-bottom: 10px;
   padding: 0;
   display:block;
@@ -159,16 +159,16 @@ ul#account {
   float: right;
 }
 
-ul#navigation li, ul#account li {
+ul.navigation li, ul#account li {
   display: inline;
 }
 
-ul#navigation li {
+ul.navigation li {
   padding: 0px 10px 0px 12px;
   border-left: 1px solid #000;
 }
 
-ul#navigation li:first-child {
+ul.navigation li:first-child {
   padding: 0px 10px 0px 0px;
   border: none;
 }
