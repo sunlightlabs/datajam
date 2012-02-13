@@ -10,7 +10,7 @@
       <%= f.file_field :csv_file %>
     <% else %>
       <%= f.label :csv, 'Data' %>
-      <%= f.text_area :csv, rows: 6, cols: 100 %>
+      <%= f.text_area :csv, class: 'rawData', rows: 10, cols: 100 %>
     <% end %>
 
     <%= f.label :source, 'Source Attribution (can use HTML)' %>
