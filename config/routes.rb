@@ -10,6 +10,7 @@ Datajam::Application.routes.draw do
     resources :assets
     resources :users
     resources :events
+    resources :pages
     resources :cards
     namespace :templates do
       resource :site, :controller => 'site'

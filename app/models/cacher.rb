@@ -42,4 +42,10 @@ class Cacher
     redis.set path, content
   end
 
+  # Cleans a cached content
+  def self.clean(path)
+    redis = Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)
+    path = '/' + path if path[0] != '/'
+    redis.del path
+  end
 end

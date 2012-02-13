@@ -30,6 +30,7 @@ module Datajam
   class Application < Rails::Application
     config.encoding = "utf-8"
     config.filter_parameters += [:password]
+    config.autoload_paths += %W(#{Rails.root}/lib)
     config.middleware.insert 0, 'Rack::Deflater'
     config.middleware.insert 1, 'Rack::RedisCache'
     config.action_view.javascript_expansions[:defaults] = %w(

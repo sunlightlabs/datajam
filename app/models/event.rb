@@ -5,7 +5,7 @@ class Event
 
   attr_accessor :head_assets, :body_assets
 
-  field :name,            type: String
+  field :name,            type: String,  unique_slug: true
   field :scheduled_at,    type: Time
   field :status,          type: String,  default: 'Upcoming'
   field :template_data,   type: Hash,    default: {}

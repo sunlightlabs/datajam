@@ -1,0 +1,19 @@
+<h2>Pages</h2>
+
+<h3>Pages List</h3>
+<table>
+  <tr>
+    <th>Slug</th>
+    <th>Remove</th>
+  </tr>
+<% @pages.each do |page| %>
+  <tr>
+    <td><%= link_to page.slug, admin_page_path(page) %></td>
+    <td><%= link_to 'x', admin_page_path(page), method: :delete, confirm: 'Are you sure?' %></td>
+  </tr>
+<% end %>
+</table>
+
+<h3>New Page</h3>
+
+<%= render "form" %>
