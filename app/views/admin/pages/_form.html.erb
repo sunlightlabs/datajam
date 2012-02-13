@@ -2,7 +2,8 @@
   <%= f.label :slug %>
   <%= f.text_field :slug %>
   <%= f.label :content %>
-  <%= f.text_area :content %>
+  <%= f.text_area :content, class: 'datajamTemplate' %>
+  <div class="ace-editor" id="ace-editor"></div>
 
   <%= f.submit 'Submit' %>
 <% end %>
