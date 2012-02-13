@@ -1,3 +1,5 @@
+Datajam = (typeof Datajam == "undefined") ? {} : Datajam;
+
 Datajam.Event = Backbone.Model.extend({
   id: Datajam.eventId,
   url: '/event/' + Datajam.eventId + '.json'
@@ -129,54 +131,56 @@ $(function() {
   });
   Datajam.ModalTemplates = tmpls;
 
-  var event = new Datajam.Event();
-  Datajam.event = event;
-  event.fetch({
-    success: function(model, response) {
+  if (Datajam.eventId) {
+    var event = new Datajam.Event();
+    Datajam.event = event;
+    event.fetch({
+      success: function(model, response) {
 
-      // Check that the viewer signed in.
-      var check = new Datajam.Check();
-      check.fetch({
-        success: function(model,response) {
+        // Check that the viewer signed in.
+        var check = new Datajam.Check();
+        check.fetch({
+          success: function(model,response) {
 
-          if (check.get('csrfToken')) {
-            $('meta[name=csrf-token]').attr('content', check.get('csrfToken'));
-            $(document).trigger('csrfloaded');
-          }
+            if (check.get('csrfToken')) {
+              $('meta[name=csrf-token]').attr('content', check.get('csrfToken'));
+              $(document).trigger('csrfloaded');
+            }
 
-          if (check.get('signedIn')) {
+            if (check.get('signedIn')) {
 
-            // Build the ON AIR toolbar.
-            var toolbarView = new Datajam.OnairToolbar({ model: event });
-            toolbarView.render();
+              // Build the ON AIR toolbar.
+              var toolbarView = new Datajam.OnairToolbar({ model: event });
+              toolbarView.render();
 
-            // Build the modals for each content area.
-            $.each(event.get('content_areas'), function(i, contentAreaJSON) {
-              var contentArea = new Datajam.ContentArea(contentAreaJSON);
-              var contentAreaView = new Datajam.ContentAreaView({ model: contentArea });
-              contentAreaView.render();
+              // Build the modals for each content area.
+              $.each(event.get('content_areas'), function(i, contentAreaJSON) {
+                var contentArea = new Datajam.ContentArea(contentAreaJSON);
+                var contentAreaView = new Datajam.ContentAreaView({ model: contentArea });
+                contentAreaView.render();
 
-              if (contentArea.get('area_type') === 'data_card_area') {
-                var dataCardUpdate = new Datajam.DataCardUpdate({contentArea: contentArea});
-                var modal = new Datajam.DataCardModal({ model: dataCardUpdate,
-                                                           id: contentArea.get('_id') });
-                modal.render();
-              } else {
-                var contentUpdate = new Datajam.ContentUpdate({contentArea: contentArea});
-                var modal = new Datajam.ContentUpdateModal({ model: contentUpdate,
+                if (contentArea.get('area_type') === 'data_card_area') {
+                  var dataCardUpdate = new Datajam.DataCardUpdate({contentArea: contentArea});
+                  var modal = new Datajam.DataCardModal({ model: dataCardUpdate,
                                                              id: contentArea.get('_id') });
-                modal.render();
-              }
-            });
+                  modal.render();
+                } else {
+                  var contentUpdate = new Datajam.ContentUpdate({contentArea: contentArea});
+                  var modal = new Datajam.ContentUpdateModal({ model: contentUpdate,
+                                                               id: contentArea.get('_id') });
+                  modal.render();
+                }
+              });
 
+            }
           }
-        }
-      });
+        });
 
-      Datajam.updates = [];
-      Datajam.pollForUpdates();
-    }
-  });
+        Datajam.updates = [];
+        Datajam.pollForUpdates();
+      }
+    });
+  }
 
 });
 
