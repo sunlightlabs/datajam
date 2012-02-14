@@ -132,6 +132,8 @@ class Event
     ([event_template] + embed_templates).each do |template|
       template.custom_areas.each do |name, area_type|
         existing = self.content_areas.where(name: name, area_type: area_type)
+        remove = self.content_areas.not_in name: existing.map(&:name)
+        remove.destroy_all
         unless existing.any?
           klass = area_type.classify.constantize
           self.content_areas << klass.new(name: name, area_type: area_type)

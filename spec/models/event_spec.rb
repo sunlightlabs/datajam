@@ -38,6 +38,24 @@ describe Event do
 
   end
 
+  it "removes unused content areas" do
+    body = <<-ENDBODY.strip_heredoc
+      <h1>{{ header }}</h1>
+      <h3>{{ subheader }}</h3>
+      {{ content_area: Test Content Area }}
+    ENDBODY
+
+    updated_body = <<-BODY
+      {{ content_area: Updated Test Content Area }}
+    BODY
+
+    template = EventTemplate.create(name: 'Event Template', template: body)
+    event = Event.create(name: 'Test Event', event_template: template)
+
+    template.update_attributes(template: updated_body)
+    event.content_areas.all.to_a.map(&:name).should == ["Updated Test Content Area"]
+  end
+
   it "#render adds asset tags" do
 
     event = Event.create(name: 'Test Event', event_template: @event_template,
