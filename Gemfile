@@ -38,7 +38,7 @@ group :development, :test do
   gem 'capybara',          '~> 1.1'
   gem 'mongoid-rspec',     '~> 1.4'
   gem 'database_cleaner',  '~> 0.6'
-  gem 'rocco',             '~> 0.5'
+  gem 'rocco',             git: 'https://github.com/rtomayko/rocco.git'
   gem 'pygmentize',        '~> 0.0.2'
   gem 'guard-rspec',       '~> 0.5'
   gem 'cover_me',          '~> 1.2'
