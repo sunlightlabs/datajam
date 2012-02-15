@@ -40,9 +40,22 @@ Datajam.DataCardUpdate = Backbone.Model.extend({
 
 Datajam.OnairToolbar = Backbone.View.extend({
   render: function() {
-    var topbarTemplate = Handlebars.compile($("script#topbar_template").html());
+    var topbarTemplate = Handlebars.compile($("script#onair_topbar_template").html());
     $('body').prepend(topbarTemplate(this.model.toJSON()));
     $('body').addClass('topbarred');
+    return this;
+  }
+});
+
+Datajam.Toolbar = Backbone.View.extend({
+  template: function() {
+      console.log($("script#topbar_template").html())
+    return Handlebars.compile($("script#topbar_template").html());
+  },
+
+  render: function() {
+    $("body").prepend(this.template());
+    $("body").addClass("topbarred");
     return this;
   }
 });
@@ -180,6 +193,8 @@ $(function() {
         Datajam.pollForUpdates();
       }
     });
+  } else {
+    new Datajam.Toolbar().render();
   }
 
 });

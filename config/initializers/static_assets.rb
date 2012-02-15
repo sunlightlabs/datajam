@@ -29,7 +29,24 @@ BODY_ASSETS = <<-BODY.strip_heredoc
 </script>
 
 <script id="topbar_template" type="text/x-handlebars-template">
-<div class="topbar">
+<div class="topbar offair">
+  <div class="topbar-inner">
+    <div class="container">
+      <ul class="nav">
+        <li><a href="/archives">Archives</a></li>
+      </ul>
+      <ul class="nav secondary-nav">
+        <li>
+          <a href="/admin">Admin &raquo;</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+</script>
+
+<script id="onair_topbar_template" type="text/x-handlebars-template">
+<div class="topbar onair">
   <div class="topbar-inner">
     <div class="container">
       <span class="brand">ON AIR</span>
@@ -39,6 +56,7 @@ BODY_ASSETS = <<-BODY.strip_heredoc
           <a data-controls-modal="modal-{{ _id }}" data-keyboard="true" href="#">{{ name }}</a>
         </li>
         {{/each}}
+        <li><a href="/archives">Archives</a></li>
       </ul>
       <ul class="nav secondary-nav">
         <li>

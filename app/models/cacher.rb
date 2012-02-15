@@ -27,7 +27,11 @@ class Cacher
 
     # No upcoming events? Be sure to still cache the root.
     if next_event.nil?
-      redis.set '/', site_template.render_with({ content: '<h2>No upcoming events</h2>' })
+      redis.set '/', site_template.render_with(
+        content: '<h2>No upcoming events</h2>',
+        head_assets: HEAD_ASSETS,
+        body_assets: BODY_ASSETS
+      )
     end
   end
 
