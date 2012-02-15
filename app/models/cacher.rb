@@ -1,4 +1,8 @@
 class Cacher
+  def self.reset!
+    cache_events(Event.all)
+    cache_archives
+  end
 
   # Takes in an array of events. Only have one event to cache? Pass in an array with that one event.
   def self.cache_events(events)
