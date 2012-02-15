@@ -8,4 +8,11 @@ feature "Event content" do
     visit '/'
     page.should have_content('Welcome to Datajam')
   end
+
+  scenario 'Creating an event should add the event reminder' do
+    event_template = EventTemplate.create(name: 'Embed Template', template: '{{{event_reminder}}}')
+    Event.create(slug: 'test', name: 'test', event_template: event_template)
+    visit '/test'
+    page.should have_content('Notify me')
+  end
 end

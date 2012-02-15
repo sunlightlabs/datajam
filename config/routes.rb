@@ -13,6 +13,7 @@ Datajam::Application.routes.draw do
       member do
         put :finalize
       end
+      resources :reminders, :only => :destroy
     end
     resources :pages
     resources :cards
@@ -22,6 +23,8 @@ Datajam::Application.routes.draw do
       resources :embeds
     end
   end
+
+  resources :reminders, :only => [:create]
 
   match 'onair/signed_in' => 'onair#signed_in'
   match 'onair/update' => 'onair#update', :via => [:post]

@@ -5,7 +5,9 @@ class Event
 
   attr_accessor :head_assets, :body_assets
 
-  field :name,            type: String,  unique_slug: true
+  has_many :reminders
+
+  field :name,            type: String
   field :scheduled_at,    type: Time
   field :status,          type: String,  default: 'Upcoming'
   field :template_data,   type: Hash,    default: {}
@@ -14,7 +16,7 @@ class Event
 
   slug :name, permanent: true
 
-  validates_presence_of :name
+  validates :name, presence: true, unique_slug: true
 
   belongs_to :event_template
   has_and_belongs_to_many :embed_templates
@@ -56,7 +58,10 @@ class Event
   def render
     self.head_assets = HEAD_ASSETS
     self.body_assets = BODY_ASSETS
-    rendered_content = preprocess_template(self.event_template).render_with(self.template_data)
+
+    rendered_content = preprocess_template(self.event_template).render_with(self.template_data.merge({
+      event_reminder: add_reminder_form
+    }))
     SiteTemplate.first.render_with({ content: rendered_content,
                                      head_assets: head_assets,
                                      body_assets: self.script_id + body_assets})
@@ -66,7 +71,10 @@ class Event
   def rendered_embeds
     embeds = {}
     self.embed_templates.each do |embed_template|
-      data = self.template_data.merge({"head_assets" => HEAD_ASSETS, "body_assets" => self.script_id + BODY_ASSETS})
+      data = self.template_data.merge({
+        "head_assets" => HEAD_ASSETS,
+        "body_assets" => self.script_id + BODY_ASSETS
+      })
       embeds[embed_template.slug] = preprocess_template(embed_template).render_with(data)
     end
     embeds
@@ -85,6 +93,10 @@ class Event
       template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
     end
     template
+  end
+
+  def add_reminder_form
+    Handlebars.compile(REMINDER_ASSETS).call(event_id: self.id.to_s)
   end
 
   def add_content_update(params)
@@ -110,6 +122,10 @@ class Event
   def finalize!
     self.status = "Finished"
     save!.tap { Cacher.cache_archives }
+  end
+
+  def as_json(options = {})
+    super.merge(unix_scheduled_at: scheduled_at.to_i)
   end
 
   protected

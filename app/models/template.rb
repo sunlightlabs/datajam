@@ -28,7 +28,7 @@ class Template
   def set_custom_fields
     found_fields = self.template.scan(/\{\{([\w ]*)\}\}/).flatten
     found_fields.each { |f| f.strip! }
-    %w{ content head_assets body_assets }.each do |reserved_word|
+    %w{ content head_assets body_assets event_reminder }.each do |reserved_word|
       found_fields.delete(reserved_word)
     end
     self.custom_fields = found_fields

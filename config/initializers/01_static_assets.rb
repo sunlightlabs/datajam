@@ -101,7 +101,16 @@ BODY_ASSETS = <<-BODY.strip_heredoc
   </div>
 </div>
 </script>
-
-
 BODY
 
+REMINDER_ASSETS = <<-REMINDER
+<div id="event_reminder">
+  <h3>Notify me:</h3>
+  <div id="notification_response"></div>
+  <form action="/reminders" id="remind_event" class="reminder_form" method="post" data-remote=true>
+    <input type="hidden" name="event_id" value="{{event_id}}" />
+    <label> Email: <input name="email" type="" /> </label>
+    <input type="submit" />
+  </form>
+</div>
+REMINDER

@@ -123,4 +123,10 @@ describe Event do
     RR.verify
   end
 
+  it "should be able to create notifications" do
+    event = Event.create(name: 'Test Event', event_template: @event_template)
+    event.reminders.create(email: 'test@test.com')
+    event.reminders.length.should be(1)
+  end
+
 end

@@ -109,7 +109,19 @@ Datajam.DataCardModal = Backbone.View.extend({
   }
 });
 
+Datajam.notificationBox = function() {
+  var eventReminder = $("#event_reminder");
+  var scheduledTime = Datajam.event.get("unix_scheduled_at");
+  var currentTime = new Date().getTime()/1000;
+  var hideNotificationBox = (scheduledTime - currentTime) <= 0;
+
+  if(hideNotificationBox && eventReminder.is(":visible")) {
+    eventReminder.hide();
+  }
+};
+
 Datajam.pollForUpdates = function() {
+  Datajam.notificationBox();
   $.getJSON('/event/' + Datajam.eventId + '/updates.json', function(updates) {
 
     if (updates['content_updates'] && updates['content_updates'].length > 0) {
@@ -142,6 +154,12 @@ $(function() {
       , areaType = tmpl.attr('id').replace('_modal_template', '');
     tmpls[areaType] = Handlebars.compile(tmpl.html());
   });
+
+  $("#remind_event").bind('ajax:success', function(event, data, status, xhr) {
+    $("#notification_response").text(data.message).attr({ class: data.type });
+    $(this).find("input[name=email]").val('');
+  });
+
   Datajam.ModalTemplates = tmpls;
 
   if (Datajam.eventId) {
