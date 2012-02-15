@@ -31,6 +31,11 @@ class Cacher
     end
   end
 
+  # Stores the archives in the cache
+  def self.cache_archives
+    cache("/archives", Archives.render)
+  end
+
   # Convenience wrapper to write content to Redis.
   def self.cache(path, content)
     redis = Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)

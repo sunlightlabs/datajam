@@ -109,7 +109,7 @@ class Event
 
   def finalize!
     self.status = "Finished"
-    save!
+    save!.tap { Cacher.cache_archives }
   end
 
   protected

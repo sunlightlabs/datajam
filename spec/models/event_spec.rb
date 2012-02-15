@@ -116,4 +116,11 @@ describe Event do
     Event.finished.should include(event)
   end
 
+  it "#finalize! regenerates the archives page" do
+    mock(Cacher).cache_archives
+    event = Event.create(name: 'Test Event', event_template: @event_template)
+    event.finalize!
+    RR.verify
+  end
+
 end
