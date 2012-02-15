@@ -32,6 +32,7 @@ class Event
   end
 
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
+  scope :finished, where(status: 'Finished').order_by([[:scheduled_at, :desc]])
 
   # Mongoid::Slug changes this to `self.slug`. Undo that.
   def to_param
@@ -106,6 +107,10 @@ class Event
     Cacher.cache('/event/' + self.id.to_s + '/updates.json', self.current_window.to_json)
   end
 
+  def finalize!
+    self.status = "Finished"
+    save!
+  end
 
   protected
 
@@ -145,5 +150,4 @@ class Event
       end
     end
   end
-
 end

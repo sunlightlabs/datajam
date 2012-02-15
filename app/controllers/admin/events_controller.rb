@@ -48,6 +48,12 @@ class Admin::EventsController < AdminController
     end
   end
 
+  def finalize
+    @event = Event.find(params[:id])
+    @event.finalize!
+    redirect_to :back
+  end
+
   def destroy
     @event = Event.find(params[:id])
     @event.destroy

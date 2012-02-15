@@ -109,4 +109,11 @@ describe Event do
 
   end
 
+  it "#finalize! marks the event as finished" do
+    event = Event.create(name: 'Test Event', event_template: @event_template)
+    event.finalize!
+    event.status.should == "Finished"
+    Event.finished.should include(event)
+  end
+
 end

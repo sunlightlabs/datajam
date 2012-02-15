@@ -9,7 +9,11 @@ Datajam::Application.routes.draw do
   namespace :admin do
     resources :assets
     resources :users
-    resources :events
+    resources :events do
+      member do
+        put :finalize
+      end
+    end
     resources :pages
     resources :cards
     namespace :templates do
