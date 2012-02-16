@@ -11,7 +11,7 @@ class AdminController < ApplicationController
   end
 
   def plugin_settings
-    if request.post? or request.put?
+    if request.post? || request.put?
       batch = Setting.bulk_update(params[:settings])
       if batch[:updated]
         flash[:notice] = 'Settings updated.'
