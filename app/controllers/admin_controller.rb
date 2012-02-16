@@ -25,7 +25,7 @@ class AdminController < ApplicationController
     @plugin = Datajam.plugins.find {|plugin| plugin.name == params[:name] }
     raise ActionController::RoutingError.new('Not Found') unless @plugin
 
-    @settings = Setting.where(:namespace => params[:name]).order_by([:name, :asc])
+    @settings = Setting.where(:namespace => params[:name]).order_by([:name, :asc]).entries
 
     @actions = klass::PluginController.action_methods rescue []
     # controller methods starting with '_' are not linked in settings page
