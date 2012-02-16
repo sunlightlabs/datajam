@@ -16,6 +16,7 @@ describe Setting do
   end
 
   it "flushes when saved" do
+    test_settings = Datajam::Settings[:test]
     @setting.update_attributes!(:value => 'foo')
     Datajam::Settings[:test][:setting].should == 'foo'
   end
