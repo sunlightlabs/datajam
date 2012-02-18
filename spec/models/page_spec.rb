@@ -19,6 +19,11 @@ describe Page do
     page.valid?.should be_true
   end
 
+  it "should be unique among app routes" do
+    page = Page.create(slug: 'users/sign_in', content: @html)
+    page.valid?.should be_false
+  end
+
   it "should be unique even with events" do
     event_template = EventTemplate.create(name: 'Event Template', template: @html)
 
