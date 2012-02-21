@@ -22,5 +22,11 @@ describe User do
       subject.update_attributes(avatar: File.open(avatar_path))
       subject.avatar.should be_present
     end
+
+    it "defines a small_avatar_url" do
+      avatar_path = Rails.root.join("spec/fixtures/avatar.gif")
+      subject.update_attributes(avatar: File.open(avatar_path))
+      subject.small_avatar_url.should be_present
+    end
   end
 end
