@@ -39,7 +39,7 @@ group :development, :test do
   gem 'mongoid-rspec',     '~> 1.4'
   gem 'database_cleaner',  '~> 0.6'
   gem 'rocco',             git: 'https://github.com/rtomayko/rocco.git'
-  gem 'evergreen',         git: 'https://github.com/dandrinkard/evergreen.git', submodules: true, require: 'evergreen/rails'
+  gem 'jasmine'
   gem 'pygmentize',        '~> 0.0.2'
   gem 'guard-rspec',       '~> 0.5'
   gem 'cover_me',          '~> 1.2'
