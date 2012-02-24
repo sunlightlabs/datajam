@@ -34,7 +34,7 @@ Bundler takes care of installing all the other Ruby libraries used by Datajam, a
   * [jQuery](http://jquery.com/) for DOM manipulation and XHR
   * [Underscore.js](http://documentcloud.github.com/underscore/) for its helper utilities
   * [Backbone.js](http://documentcloud.github.com/backbone/) for client-side MVC
-  * [Evergreen](https://github.com/jnicklas/evergreen) for client-side unit testing
+  * [Jasmine](https://github.com/pivotal/jasmine) for client-side unit testing
   * [Protovis](http://vis.stanford.edu/protovis/) to generate visualizations
 * Testing:
   * [RSpec](http://rspec.info/) for unit and functional tests
