@@ -3,7 +3,7 @@
 <ul>
   <% @actions.each do |action| %>
   <li>
-    <a href="<%= url_for :action => action, :controller => "/#{@plugin.name}/plugin" %>"><%= action.to_s %></a>
+    <a href="<%= url_for :action => action, :controller => "/#{@plugin.name}/plugin" %>"><%= action.to_s.titleize %></a>
   </li>
   <% end %>
 </ul>
