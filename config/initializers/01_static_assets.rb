@@ -33,7 +33,6 @@ BODY_ASSETS = <<-BODY.strip_heredoc
   <div class="topbar-inner">
     <div class="container">
       <ul class="nav">
-        <li><a href="/archives">Archives</a></li>
       </ul>
       <ul class="nav secondary-nav">
         <li>
@@ -56,7 +55,6 @@ BODY_ASSETS = <<-BODY.strip_heredoc
           <a data-controls-modal="modal-{{ _id }}" data-keyboard="true" href="#">{{ name }}</a>
         </li>
         {{/each}}
-        <li><a href="/archives">Archives</a></li>
       </ul>
       <ul class="nav secondary-nav">
         <li>
