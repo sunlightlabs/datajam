@@ -25,17 +25,23 @@ describe Event do
   end
 
   it "creates content areas based on its event template" do
-
     body = <<-ENDBODY.strip_heredoc
       <h1>{{ header }}</h1>
       <h3>{{ subheader }}</h3>
-      {{ content_area: Test Content Area }}
+      <div>{{ content_area: Test Content Area }}</div>
     ENDBODY
     template = EventTemplate.create(name: 'Event Template', template: body)
     event = Event.create(name: 'Test Event', event_template: template)
 
     event.content_areas.first.name.should eql("Test Content Area")
 
+    body = <<-ENDBODY.strip_heredoc
+      <h1>{{ header }}</h1>
+      <h3>{{ subheader }}</h3>
+      <div>{{ content_area: Test Content Area }}</div>
+      <div>{{ content_area: Another Content Area }}</div>
+    ENDBODY
+    template.update_attributes(template: body)
   end
 
   it "removes unused content areas" do
