@@ -53,7 +53,7 @@ Bundler takes care of installing all the other Ruby libraries used by Datajam, a
 Datajam is intended to be reused and extended by third parties. As such, certain development guidelines are strictly enforced:
 
 * Unit test coverage for all files in `/app/models` and `/lib` with RSpec.
-* Unit test coverage for all non-DOM, non-IO JavaScript with Evergreen.
+* Unit test coverage for all non-DOM, non-IO JavaScript with Jasmine.
 * Acceptance test coverage for all user stories with Capybara.
 * A best effort at JavaScript integration testing with Capybara and Akephalos.
 * All new source files produced (`.rb` and `.js`) follow literate programming via Rocco.

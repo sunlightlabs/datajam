@@ -5,7 +5,7 @@ class UniqueSlugValidator < ActiveModel::EachValidator
         # TODO: dirty dirty hack to workaround the stupid things mogoid-slug does
         value = object.slug || object.send(:find_unique_slug) if object.is_a?(Event)
         if route_already_taken?(value) || !object.is_a?(model) && !!model.find_by_slug(value)
-          object.errors[attribute] << (options[:message] || "it's already taken")
+          object.errors[attribute] << (options[:message] || "is already taken")
         end
       end
     end
