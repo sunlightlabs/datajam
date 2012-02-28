@@ -14,7 +14,7 @@ class User
   index :url
 
   before_validation do |user|
-    if user.username == 'admin'
+    if user.name == 'admin'
       if user.email_changed?
         errors.add(:email, "Email can't be changed for this user")
         return false
@@ -27,7 +27,7 @@ class User
   end
 
   before_destroy do |user|
-    if user.username == 'admin'
+    if user.name == 'Admin'
       errors.add(:username, "This user can't be deleted")
       return false
     end

@@ -1,8 +1,8 @@
-User.where(email: 'changeme@example.com').destroy_all
-user = User.find_or_create_by(
-  email: 'changeme@example.com',
+User.where(name: 'admin').destroy_all
+user = User.create!(
+  email: 'demo@datajam.org',
   name: 'Admin',
-  password: 'changeme',
+  password: 'datajam',
 )
 site_template = SiteTemplate.find_or_create_by(
   name: 'Site',
