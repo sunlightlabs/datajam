@@ -46,6 +46,7 @@ class Event
     <script type="text/javascript">
     window.Datajam || (Datajam = {});
     Datajam.eventId = "#{self.id.to_s}";
+    Datajam.eventSlug = "#{self.slug.to_s}"
     Datajam.DEBUG = #{(Rails.env.to_s == 'production' && 'false') || 'true'};
     Datajam.debug = function(msg){
       Datajam.DEBUG && window.console && console.log(msg);
