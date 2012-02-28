@@ -13,6 +13,15 @@ class User
   index :affiliation
   index :url
 
+  before_validation do |user|
+    if user.email_changed?
+      errors.add(:email, 'Email can\'t be changed for this user')
+    end
+    if user.password_changed?
+      errors.add(:password, 'Password can\'t be changed for this user')
+    end
+  end
+
   mount_uploader :avatar, AvatarUploader
 
   default_scope order_by([:name, :asc])
