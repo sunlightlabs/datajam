@@ -1,10 +1,13 @@
 <h2>Sign in</h2>
 
+<p>This demo will refresh with new content every hour.</p>
+<p><strong>Email:</strong> demo@datajam.org<br/>
+<strong>Password:</strong> datajam</p>
+<p><strong>Please note:</strong> Sendgrid is not configured on this instance, no emails will be sent.</p>
+
 <%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { class: "form-horizontal" } ) do |f| %>
-  <%= f.input :email %>
-
-  <%= f.input:password, type: :password %>
-
+  <%= f.input :email, value: 'demo@datajam.org' %>
+  <%= f.input:password, type: :password, value: 'datajam' %>
   <% if devise_mapping.rememberable? %>
     <%= f.input :remember_me, input_html: { type: 'checkbox' }, label: "Remember me?" %>
   <% end %>
@@ -13,4 +16,5 @@
     <p><%= f.button :submit, "Sign in", class: "btn-primary" %></p>
     <%= render :partial => "devise/shared/links" %>
   </div>
+
 <% end %>
