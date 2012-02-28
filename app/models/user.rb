@@ -14,11 +14,19 @@ class User
   index :url
 
   before_validation do |user|
-    if user.email_changed?
-      errors.add(:email, 'Email can\'t be changed for this user')
+    if user.username == 'admin'
+      if user.email_changed?
+        errors.add(:email, 'Email can\'t be changed for this user')
+      end
+      if user.password_changed?
+        errors.add(:password, 'Password can\'t be changed for this user')
+      end
     end
-    if user.password_changed?
-      errors.add(:password, 'Password can\'t be changed for this user')
+  end
+
+  before_destroy do |user|
+    if user.username == 'admin'
+      errors.add(:username, 'This user can\'t be deleted')
     end
   end
 
