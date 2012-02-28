@@ -15,5 +15,8 @@ module ApplicationHelper
       type = 'success'  if type == :notice
       return content_tag :div, msg, class: "alert alert-#{type}"
     end
+
+  def next_reset
+    User.first.created_at + 1.hour
   end
 end
