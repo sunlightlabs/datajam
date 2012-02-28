@@ -18,7 +18,7 @@ class User
       if user.email_changed?
         errors.add(:email, 'Email can\'t be changed for this user')
       end
-      if user.password_changed?
+      if user.encrypted_password_changed?
         errors.add(:password, 'Password can\'t be changed for this user')
       end
     end
