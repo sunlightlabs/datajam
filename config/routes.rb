@@ -1,6 +1,6 @@
 Datajam::Application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :skip => [:unlock, :passwords]
 
   match 'admin' => 'admin#index', :as => 'admin_root'
   match 'admin/check' => 'admin#check'
