@@ -16,17 +16,20 @@ class User
   before_validation do |user|
     if user.username == 'admin'
       if user.email_changed?
-        errors.add(:email, 'Email can\'t be changed for this user')
+        errors.add(:email, "Email can't be changed for this user")
+        return false
       end
       if user.encrypted_password_changed?
-        errors.add(:password, 'Password can\'t be changed for this user')
+        errors.add(:password, "Password can't be changed for this user")
+        return false
       end
     end
   end
 
   before_destroy do |user|
     if user.username == 'admin'
-      errors.add(:username, 'This user can\'t be deleted')
+      errors.add(:username, "This user can't be deleted")
+      return false
     end
   end
 
