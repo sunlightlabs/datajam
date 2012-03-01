@@ -27,7 +27,7 @@ class Admin::EventsController < AdminController
       flash[:notice] = "Event saved."
       redirect_to admin_events_path
     else
-      flash[:error] = "There was a problem saving the event."
+      flash[:error] = "There were some problems saving the event: #{@event.errors.full_messages.to_sentence}"
       redirect_to admin_events_path
     end
   end
