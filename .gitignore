@@ -14,4 +14,4 @@ coverage.data
 /templates/
 .*.sw[a-z]
 *.un~
-
+_site
