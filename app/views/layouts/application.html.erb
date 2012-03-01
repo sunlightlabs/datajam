@@ -51,12 +51,8 @@
 
     </div>
 
-    <% if flash[:notice] %>
-      <div id="flash_notice"><%= flash[:notice] %></div>
-    <% end %>
-
-    <% if flash[:error] %>
-      <div id="flash_error"><%= flash[:error] %></div>
+    <% flash.each do |type, msg| %>
+      <div id="flash_<%= type.to_s %>"><%= msg %></div>
     <% end %>
 
     <%= yield %>
