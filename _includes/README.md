@@ -98,7 +98,7 @@ can be updated in real time by event producers. There are 4 types of templates
 which you'll need to create to run an event: A **Site Template**, **Event Templates**, **Embed Templates** and **Content Areas**.
 
 ### A Quick Primer on Template Tags
-{% raw %}
+{% literal %}
 
 Datajam uses Handlebars.js to render all user-editable templates. Our syntax
 is really just a small subset, as there are no model-bound variables available 
@@ -173,7 +173,7 @@ to you when rendering. So, the only tags you'll need to use are:
     a moderation panel for approving, rejecting and editing messages from
     users.
     
-{% endraw %}
+{% endliteral %}
 
 
 ---
