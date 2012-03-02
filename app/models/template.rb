@@ -12,6 +12,20 @@ class Template
 
   before_save :set_custom_fields, :set_custom_areas
 
+  before_destroy do
+    if self.events(true).any?
+      event = self.events.first
+      event_count = self.events.count
+
+      error_message =  "Template could not be deleted. '#{event.name}' "
+      error_message << "and #{event_count - 1} other events " if event_count > 1
+      error_message << "depend on it."
+
+      errors.add(:base, error_message)
+    end
+    errors.blank?
+  end
+
   # `Mongoid::Slug` changes this to `self.slug`. No thanks.
   def to_param
     self.id.to_s

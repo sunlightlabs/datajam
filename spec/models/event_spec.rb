@@ -127,5 +127,4 @@ describe Event do
     event.reminders.create(email: 'test@test.com')
     event.reminders.length.should be(1)
   end
-
 end

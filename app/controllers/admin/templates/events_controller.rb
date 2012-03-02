@@ -33,8 +33,8 @@ class Admin::Templates::EventsController < AdminController
 
   def destroy
     @template = EventTemplate.find(params[:id])
-    @template.destroy
-    redirect_to admin_event_templates_path
+    flash[:error] = @template.errors.full_messages.to_sentence unless @template.destroy
+    redirect_to admin_templates_events_path
   end
 
 end

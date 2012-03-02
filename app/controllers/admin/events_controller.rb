@@ -56,7 +56,7 @@ class Admin::EventsController < AdminController
 
   def destroy
     @event = Event.find(params[:id])
-    @event.destroy
+    flash[:error] = @event.errors.full_messages.to_sentence unless @event.destroy
     redirect_to admin_events_path
   end
 

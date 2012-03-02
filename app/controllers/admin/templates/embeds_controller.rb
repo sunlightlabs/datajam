@@ -34,7 +34,8 @@ class Admin::Templates::EmbedsController < AdminController
   def destroy
     @template = EmbedTemplate.find(params[:id])
     @template.destroy
-    redirect_to admin_embed_templates_path
+    flash[:error] = @template.errors.full_messages.to_sentence unless @template.destroy
+    redirect_to admin_templates_embeds_path
   end
 
 end

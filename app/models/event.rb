@@ -16,11 +16,12 @@ class Event
 
   slug :name, permanent: true
 
+  embeds_many :content_areas
+
   validates :name, presence: true, unique_slug: { message: "generates a slug that has already been taken" }
 
   belongs_to :event_template
   has_and_belongs_to_many :embed_templates
-  embeds_many :content_areas
   has_and_belongs_to_many :users
   has_one :current_window, class_name: 'UpdateWindow', validate: false
 

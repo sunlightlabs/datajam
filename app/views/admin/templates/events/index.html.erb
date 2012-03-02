@@ -3,11 +3,13 @@
   <tr>
     <th>Name</th>
     <th>Last Updated</th>
+    <th></th>
   </tr>
   <% @event_templates.each do |template| -%>
   <tr>
     <td><%= link_to template.name, edit_admin_templates_event_path(template) %></td>
     <td><%= template.updated_at.to_s :humane %></td>
+    <td><%= button_to "Delete", admin_templates_event_path(template), method: :delete %></td>
   <% end -%>
 </table>
 <hr />

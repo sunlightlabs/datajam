@@ -7,6 +7,7 @@
     <th>Status</th>
     <th>Scheduled At</th>
     <th></th>
+    <th></th>
   </tr>
   <% @events.each do |event| -%>
   <tr>
@@ -14,6 +15,7 @@
     <td><%= event.status %></td>
     <td><%= event.scheduled_at.to_s :humane %></td>
     <td><%= button_to "End Event", finalize_admin_event_path(event), method: :put, title: "This will put the event in the archives" %></td>
+    <td><%= button_to "Delete Event", admin_event_path(event), method: :delete, title: "This will put the event in the archives" %></td>
   <% end -%>
 </table>
 
