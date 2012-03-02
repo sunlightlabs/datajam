@@ -32,9 +32,9 @@ BODY_ASSETS = <<-BODY.strip_heredoc
 <div class="topbar offair">
   <div class="topbar-inner">
     <div class="container">
-      <ul class="nav">
+      <ul class="topbar-nav">
       </ul>
-      <ul class="nav secondary-nav">
+      <ul class="topbar-nav secondary-nav">
         <li>
           <a href="/admin">Admin &raquo;</a>
         </li>
@@ -49,14 +49,14 @@ BODY_ASSETS = <<-BODY.strip_heredoc
   <div class="topbar-inner">
     <div class="container">
       <span class="brand">ON AIR</span>
-      <ul class="nav">
+      <ul class="topbar-nav">
         {{#each content_areas}}
         <li>
           <a data-controls-modal="modal-{{ _id }}" data-keyboard="true" href="#">{{ name }}</a>
         </li>
         {{/each}}
       </ul>
-      <ul class="nav secondary-nav">
+      <ul class="topbar-nav secondary-nav">
         <li>
           <a href="/admin">Admin &raquo;</a>
         </li>
