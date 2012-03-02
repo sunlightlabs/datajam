@@ -3,7 +3,7 @@ require 'spec_helper'
 describe EventTemplate do
   before(:each) do
     @event_template = EventTemplate.create(name: 'Event Template', template: '')
-    @event = Event.create(name: 'Test Event', event_template: @event_template)
+    @event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now)
   end
 
   it "should not be destroyed if the template it's in use" do

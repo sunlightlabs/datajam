@@ -5,9 +5,9 @@ describe Archives do
     @event_template = EventTemplate.create(name: 'Event Template', template: <<-ENDBODY.strip_heredoc)
       <div>The Template</div>
     ENDBODY
-    Event.create(name: "Finished 1", status: "Finished", event_template: @event_template)
-    Event.create(name: "Upcoming", status: "Upcoming", event_template: @event_template)
-    Event.create(name: "Finished 2", status: "Finished", event_template: @event_template)
+    Event.create(name: "Finished 1", status: "Finished", event_template: @event_template, scheduled_at: Time.now)
+    Event.create(name: "Upcoming", status: "Upcoming", event_template: @event_template, scheduled_at: Time.now + 1.hours)
+    Event.create(name: "Finished 2", status: "Finished", event_template: @event_template, scheduled_at: Time.now - 30.minutes)
   end
 
   subject do

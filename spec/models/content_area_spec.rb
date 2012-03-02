@@ -9,7 +9,7 @@ describe ContentArea do
     ENDBODY
     event_template = EventTemplate.create(name: 'Event Template', template: body)
     data =  { "header" => "Hello World", "description" => "This is the description." }
-    @event = Event.create(name: 'Test Event', event_template: event_template, template_data: data)
+    @event = Event.create(name: 'Test Event', event_template: event_template, template_data: data, scheduled_at: Time.now)
   end
 
   it "sets area type based on the class name" do

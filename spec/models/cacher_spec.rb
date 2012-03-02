@@ -24,7 +24,7 @@ describe Cacher do
   it "renders an event to the correct path" do
 
     data = { "header" => "Hello World", "description" => "This is the description." }
-    event = Event.create(name: 'Test Event', event_template: @event_template, template_data: data)
+    event = Event.create(name: 'Test Event', event_template: @event_template, template_data: data, scheduled_at: Time.now)
 
     @redis.get('/test-event').should match('<h2>Hello World</h2>')
 
@@ -33,7 +33,7 @@ describe Cacher do
   it "renders an event to the root path if it's the next event" do
 
     data = { "header" => "Hello World", "description" => "This is the description." }
-    event = Event.create(name: 'Test Event', event_template: @event_template, template_data: data)
+    event = Event.create(name: 'Test Event', event_template: @event_template, template_data: data, scheduled_at: Time.now)
 
     @redis.get('/').should match('<h2>Hello World</h2>')
 
@@ -43,7 +43,7 @@ describe Cacher do
 
     data = { "header" => "Hello World", "embed_header" => "Hello Embedded World" }
     event = Event.create(name: 'Test Event', event_template: @event_template,
-                         embed_templates: [@embed_template])
+                         embed_templates: [@embed_template], scheduled_at: Time.now)
 
     event.update_attributes(template_data: data)
     @redis.get('/test-event/large-embed').should match('<h1>Hello Embedded World</h1>')

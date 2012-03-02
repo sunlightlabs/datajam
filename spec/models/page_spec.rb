@@ -27,7 +27,7 @@ describe Page do
   it "should be unique even with events" do
     event_template = EventTemplate.create(name: 'Event Template', template: @html)
 
-    event = Event.create(name: 'test', event_template: event_template)
+    event = Event.create(name: 'test', event_template: event_template, scheduled_at: Time.now)
     page = Page.create(slug: 'test', content: @html)
     page2 = Page.create(slug: 'test', content: 'other')
 

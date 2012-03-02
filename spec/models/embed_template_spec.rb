@@ -4,7 +4,7 @@ describe EmbedTemplate do
   before(:each) do
     event_template = EventTemplate.create(name: 'Event Template', template: '')
     @embed_template = EmbedTemplate.create(name: 'Embed Template', template: '')
-    @event = Event.create(name: 'Test Event', event_template: event_template, embed_templates: [@embed_template])
+    @event = Event.create(name: 'Test Event', event_template: event_template, embed_templates: [@embed_template], scheduled_at: Time.now)
   end
 
   it "should not be destroyed if the template it's in use" do

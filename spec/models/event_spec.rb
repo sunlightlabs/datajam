@@ -11,14 +11,14 @@ describe Event do
   end
 
   it "uses id as to_param" do
-    event = Event.create(name: 'Test Event', event_template: @event_template)
+    event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now)
     event.to_param.should eql(event.id.to_s)
   end
 
   it "saves template data" do
 
     data =  { "header" => "Hello World", "description" => "This is the description." }
-    event = Event.create(name: 'Test Event', event_template: @event_template, template_data: data)
+    event = Event.create(name: 'Test Event', event_template: @event_template, template_data: data, scheduled_at: Time.now)
 
     event.template_data.should eql({ "header" => "Hello World", "description" => "This is the description." })
 
@@ -31,7 +31,7 @@ describe Event do
       <div>{{ content_area: Test Content Area }}</div>
     ENDBODY
     template = EventTemplate.create(name: 'Event Template', template: body)
-    event = Event.create(name: 'Test Event', event_template: template)
+    event = Event.create(name: 'Test Event', event_template: template, scheduled_at: Time.now)
 
     event.content_areas.first.name.should eql("Test Content Area")
 
@@ -56,7 +56,7 @@ describe Event do
     BODY
 
     template = EventTemplate.create(name: 'Event Template', template: body)
-    event = Event.create(name: 'Test Event', event_template: template)
+    event = Event.create(name: 'Test Event', event_template: template, scheduled_at: Time.now)
 
     template.update_attributes(template: updated_body)
     event.content_areas.all.to_a.map(&:name).should == ["Updated Test Content Area"]
@@ -65,7 +65,7 @@ describe Event do
   it "#render adds asset tags" do
 
     event = Event.create(name: 'Test Event', event_template: @event_template,
-                         template_data: {"header" => "Hello World"})
+                         template_data: {"header" => "Hello World"}, scheduled_at: Time.now)
 
     event.render.should match(/datajam\.js/)
 
@@ -86,7 +86,7 @@ describe Event do
       </html>
     ENDBODY
     embed_template = EmbedTemplate.create(name: 'Embed Template', template: body)
-    event = Event.create(name: 'Test Event', event_template: @event_template, embed_templates: [embed_template])
+    event = Event.create(name: 'Test Event', event_template: @event_template, embed_templates: [embed_template], scheduled_at: Time.now)
     event.update_attributes template_data: {"embed_header" => "Hello Embed", "description" => "The Description"}
 
     event.template_data.should eql({ "header" => "", "description" => "The Description", "embed_header" => "Hello Embed" })
@@ -107,7 +107,7 @@ describe Event do
       </html>
     ENDBODY
     embed_template = EmbedTemplate.create(name: 'Embed Template', template: body)
-    event = Event.create(name: 'Test Event', event_template: @event_template, embed_templates: [embed_template])
+    event = Event.create(name: 'Test Event', event_template: @event_template, embed_templates: [embed_template], scheduled_at: Time.now)
     event.update_attributes template_data: {"embed_header" => "Hello World"}
 
     event.rendered_embeds['embed-template'].should match('<h1>Hello World</h1>')
@@ -116,14 +116,14 @@ describe Event do
   end
 
   it "#finalize! marks the event as finished" do
-    event = Event.create(name: 'Test Event', event_template: @event_template)
+    event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now)
     event.finalize!
     event.status.should == "Finished"
     Event.finished.should include(event)
   end
 
   it "should be able to create notifications" do
-    event = Event.create(name: 'Test Event', event_template: @event_template)
+    event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now)
     event.reminders.create(email: 'test@test.com')
     event.reminders.length.should be(1)
   end

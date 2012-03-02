@@ -19,6 +19,7 @@ class Event
   embeds_many :content_areas
 
   validates :name, presence: true, unique_slug: { message: "generates a slug that has already been taken" }
+  validates_datetime :scheduled_at, { message: 'must be a valid date/time' }
 
   belongs_to :event_template
   has_and_belongs_to_many :embed_templates
