@@ -27,11 +27,11 @@ class Event
   before_save :update_template_data, :generate_content_areas
 
   after_save do
-    Cacher.cache_events([self])
-    Cacher.cache_archives # regenerate the archives
     if self.current_window.nil?
       UpdateWindow.create(event: self)
     end
+    Cacher.cache_events([self])
+    Cacher.cache_archives # regenerate the archives
   end
 
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
