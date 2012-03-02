@@ -28,6 +28,7 @@ class Event
 
   after_save do
     Cacher.cache_events([self])
+    Cacher.cache_archives # regenerate the archives
     if self.current_window.nil?
       UpdateWindow.create(event: self)
     end
@@ -122,7 +123,7 @@ class Event
 
   def finalize!
     self.status = "Finished"
-    save!.tap { Cacher.cache_archives }
+    save!
   end
 
   def as_json(options = {})

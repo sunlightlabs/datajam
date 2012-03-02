@@ -24,7 +24,6 @@ After those external dependencies are installed, the app can be installed with:
     $ git clone https://github.com/sunlightlabs/datajam.git
     $ cd datajam/
     $ bundle install --binstubs
-    $ bin/rake cache:prime
     $ bin/rails start
 
 ## Third-Party Libraries
