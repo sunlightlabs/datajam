@@ -38,7 +38,7 @@ class Archives
       {{/each}}
       </ol>
     {{else}}
-      <p>No past events to show here</p>
+      <p>No past events to show</p>
     {{/if}}
     EOT
   end
