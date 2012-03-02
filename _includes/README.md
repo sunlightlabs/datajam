@@ -98,15 +98,14 @@ can be updated in real time by event producers. There are 4 types of templates
 which you'll need to create to run an event: A **Site Template**, **Event Templates**, **Embed Templates** and **Content Areas**.
 
 ### A Quick Primer on Template Tags
-{% literal %}
 
 Datajam uses Handlebars.js to render all user-editable templates. Our syntax
 is really just a small subset, as there are no model-bound variables available 
 to you when rendering. So, the only tags you'll need to use are:
 
-* **Asset Tags**: `{{{ head_assets }}}`
-* **Custom Fields**: `{{ my_custom_field }}`
-* **Content Areas**: `{{ content_area: My Content Area }}`
+* **Asset Tags**: `{{'{{'}}{ head_assets }}}`
+* **Custom Fields**: `{{'{'}}{ my_custom_field }}`
+* **Content Areas**: `{{'{'}}{ content_area: My Content Area }}`
 
 ### Template Types
 
@@ -119,9 +118,9 @@ to you when rendering. So, the only tags you'll need to use are:
     static HTML pages is fine, with the only caveat being that it must include
     3 tags in order for things to work properly: 
         
-        * `{{{ head_assets }}}` - Stylesheets needed by Datajam & plugins
-        * `{{{ content }}}` - Your page content
-        * `{{{ body_assets }}}` - Scripts needed by Datajam & plugins
+    * `{{'{{'}}{ head_assets }}}` - Stylesheets needed by Datajam & plugins
+    * `{{'{{'}}{ content }}}` - Your page content
+    * `{{'{{'}}{ body_assets }}}` - Scripts needed by Datajam & plugins
     
     Note that these tags are surrounded by 3 curly braces. This is important
     because it ensures the text won't be HTML-escaped.
@@ -139,22 +138,22 @@ to you when rendering. So, the only tags you'll need to use are:
     Event templates implement the remaining two handlebars tags that we
     saw earlier. Custom fields are holes in your template into which you
     can put unique text for each event. You may have a custom field 
-    `{{ heading }}` which displays the title of the event at the top of the
-    page, or even a custom field `{{ google_analytics_id }}` which you might 
-    fill out with a different account number from one event to the next.
-    Custom fields can use either two or three curly braces, depending on 
+    `{{'{'}}{ heading }}` which displays the title of the event at the top of 
+    the page, or even a custom field `{{'{'}}{ google_analytics_id }}` which 
+    you might fill out with a different account number from one event to the 
+    next. Custom fields can use either two or three curly braces, depending on 
     whether or not you need html escaping.
 
 3. **Embed Templates**
     
     Embed Templates are 'whole-page' templates which wrap iframe content, such
-    as data cards. These templates can include the `{{{ head_assets }}}` and 
-    `{{{ body_assets }}}` tags, content areas, and also custom fields. If you
-    define an embed template, it will be available in the drop-down list when
-    you create your data cards.
+    as data cards. These templates can include the `{{'{{'}}{ head_assets }}}` 
+    and `{{'{{'}}{ body_assets }}}` tags, content areas, and also custom 
+    fields. If you define an embed template, it will be available in the 
+    drop-down list when you create your data cards.
     
     Embed templates designed for data cards should include a `data_card_area`
-    tag.
+    tag. 
 
 4. **Content Areas**
     
@@ -172,8 +171,6 @@ to you when rendering. So, the only tags you'll need to use are:
     can select a pre-prepared card to display, and a chat area provides
     a moderation panel for approving, rejecting and editing messages from
     users.
-    
-{% endliteral %}
 
 
 ---
