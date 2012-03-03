@@ -5,7 +5,7 @@ user = User.find_or_create_by(
   name: 'Admin',
   password: 'changeme',
 )
-site_templage = SiteTemplate.find_or_create_by(
+site_template = SiteTemplate.find_or_create_by(
   name: 'Site',
   template: DEFAULT_SITE_TEMPLATE
 )
@@ -51,4 +51,3 @@ about_page = Page.find_or_create_by(
   slug: 'about',
   content: "<h2>This is Your About Page.</h2>\r\n<p>Edit it in the admin site, under 'pages.'</p>"
 )
-Cacher.reset!
