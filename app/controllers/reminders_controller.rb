@@ -9,7 +9,7 @@ class RemindersController < ApplicationController
         { message: reminder.errors.full_messages.to_sentence, type: 'error' }
       end
     else
-      result = { message: 'The event does not exists', type: 'error' }
+      result = { message: 'This event does not exist', type: 'error' }
     end
     render json: result
   end
