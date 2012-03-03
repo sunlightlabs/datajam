@@ -21,7 +21,7 @@ DEFAULT_SITE_TEMPLATE = <<-EOT.strip_heredoc
     body{padding-top:40px;}
     header.navbar{width:940px;margin:0 auto 20px;}
     #main{min-height:400px;}
-    .footer{padding:2em 0;border-top:1px solid #f4f4f4;}
+    .footer{margin-top:2em;padding:2em 0;border-top:1px solid #f4f4f4;}
   </style>
 
   <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.5.3/modernizr.min.js"></script>
