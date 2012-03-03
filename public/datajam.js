@@ -47,19 +47,6 @@ Datajam.OnairToolbar = Backbone.View.extend({
   }
 });
 
-Datajam.Toolbar = Backbone.View.extend({
-  template: function() {
-      console.log($("script#topbar_template").html())
-    return Handlebars.compile($("script#topbar_template").html());
-  },
-
-  render: function() {
-    $("body").prepend(this.template());
-    $("body").addClass("topbarred");
-    return this;
-  }
-});
-
 Datajam.ContentAreaView = Backbone.View.extend({
   render: function() {
     $('#content_area_' + this.model.get('_id')).html(this.model.get('html'));
@@ -211,8 +198,6 @@ $(function() {
         Datajam.pollForUpdates();
       }
     });
-  } else {
-    new Datajam.Toolbar().render();
   }
 
 });
