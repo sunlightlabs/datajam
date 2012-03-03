@@ -54,7 +54,7 @@ DEFAULT_SITE_TEMPLATE = <<-EOT.strip_heredoc
         <p>
           Congratulations! Your Datajam instance is up and running. You're now ready to start creating and producing events.
           To edit this template, go to the site template in the <a href="/admin">Admin area</a>. By default, the
-          login email address is changeme@example.com, and the password is changeme. You'll probably want to do just that.
+          login email address is demo@datajam.org, and the password is datajam.
         </p>
         <p>
           You can read more about getting started with datajam at <a href="http://www.datajam.org">datajam.org</a>.
