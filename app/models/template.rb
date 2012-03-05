@@ -2,6 +2,7 @@ class Template
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include ActionView::Helpers::TextHelper
 
   field :name,           type: String
   field :template,       type: String
@@ -18,12 +19,16 @@ class Template
       event_count = self.events.count
 
       error_message =  "Template could not be deleted. '#{event.name}' "
-      error_message << "and #{event_count - 1} other events " if event_count > 1
-      error_message << "depend on it."
+      error_message << "and #{event_count - 1} other #{pluralize(event_count, 'event')} " if event_count > 1
+      error_message << "#{pluralize(event_count, 'depends', 'depend')} on it."
 
       errors.add(:base, error_message)
     end
     errors.blank?
+  end
+
+  def can_be_deleted?
+    return !self.events(true).any?
   end
 
   # `Mongoid::Slug` changes this to `self.slug`. No thanks.
