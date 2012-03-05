@@ -42,6 +42,9 @@ DEFAULT_SITE_TEMPLATE = <<-EOT.strip_heredoc
           <li>
             <a href="/archives">Event Archives</a>
           </li>
+          <li class="last">
+            <a href="/admin">Log In &raquo;</a>
+          </li>
         </ul>
       </div>
     </div>
