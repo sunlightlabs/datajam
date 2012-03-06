@@ -127,4 +127,10 @@ describe Event do
     event.reminders.create(email: 'test@test.com')
     event.reminders.length.should be(1)
   end
+
+  it "should not create an event if the template it's failing" do
+    event_template = EventTemplate.create(name: 'wrong', template: '{{do not work: this template}}')
+    event = Event.create(name: 'Test Event', event_template: event_template, scheduled_at: Time.now)
+    event.persisted?.should be_false
+  end
 end

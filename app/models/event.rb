@@ -3,7 +3,7 @@ class Event
   include Mongoid::Timestamps
   include Mongoid::Slug
 
-  attr_accessor :head_assets, :body_assets
+  attr_accessor :head_assets, :body_assets, :cached_render
 
   has_many :reminders
 
@@ -26,18 +26,23 @@ class Event
   has_and_belongs_to_many :users
   has_one :current_window, class_name: 'UpdateWindow', validate: false
 
-  before_save :update_template_data, :generate_content_areas
+  before_save :update_template_data, :generate_content_areas, :cache_render
 
   after_save do
-    if self.current_window.nil?
-      UpdateWindow.create(event: self)
-    end
+    UpdateWindow.create(event: self) if self.current_window.nil?
     Cacher.cache_events([self])
     Cacher.cache_archives # regenerate the archives
   end
 
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
   scope :finished, where(status: 'Finished').order_by([[:scheduled_at, :desc]])
+
+  def cache_render
+    self.cached_render = render
+  rescue V8::JSError
+    errors.add(:base, "template #{self.event_template.name} contains errors" )
+    errors.blank?
+  end
 
   # Mongoid::Slug changes this to `self.slug`. Undo that.
   def to_param
