@@ -78,7 +78,7 @@ msg = ChatMessage.find_or_create_by(
   text: "Welcome to our live chat! Messages are moderated, and can be approved or rejected via the 'Live Chat' tab in the On Air toolbar for admins."
 )
 chat = event.content_areas[1].chat
-chat << msg
+chat.messages << msg
 chat.save!
 
 # Prime the cache
