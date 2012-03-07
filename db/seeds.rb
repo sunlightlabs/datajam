@@ -1,5 +1,18 @@
-Datajam::Settings[:datajam_chat][:page_size] = 100
+# Some initial settings
+
+Setting.find_or_create_by(
+  namespace: 'datajam_chat',
+  name: 'page_size',
+  value: 100
+)
+Setting.find_or_create_by(
+  namespace: 'datajam_chat',
+  name: 'default_avatar_url',
+  value: 'http://a0.twimg.com/profile_images/55418705/100x100_sunlight_reasonably_small.png'
+)
+
 # Bootstrap a user
+
 User.where(name: 'Admin').destroy_all
 user = User.create!(
   email: 'demo@datajam.org',
