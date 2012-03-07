@@ -27,7 +27,7 @@ event_template = EventTemplate.find_or_create_by(
     <div class="span8">
       <div class="video">{{ content_area: Video Embed }}</div>
       <div class="row">
-        <div class="span6 offset1">{{ chat_area: Live Chat }}</div>
+        <div class="span6">{{ chat_area: Live Chat }}</div>
       </div>
     </div>
   </div>
