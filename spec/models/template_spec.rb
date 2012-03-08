@@ -43,4 +43,11 @@ describe Template do
     template.render_with({"header" => "Hello World"}).should eql("<h1>Hello World</h1>")
   end
 
+  it "should fail when a poorly written template is made" do
+    body = "<h1>{{ will fail horribly </h1>"
+    template = Template.create(name: 'Test Template', template: body)
+
+    template.persisted?.should be_false
+  end
+
 end

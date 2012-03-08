@@ -25,7 +25,7 @@ class Admin::TemplatesController < AdminController
       flash[:notice] = "Template saved."
       redirect_to admin_templates_path
     else
-      flash[:error] = "There was a problem creating saving the template."
+      flash[:error] = @template.errors.full_messages.to_sentence
       redirect_to admin_templates_path
     end
   end
@@ -36,7 +36,7 @@ class Admin::TemplatesController < AdminController
       flash[:notice] = "Template updated."
       redirect_to :back
     else
-      flash[:error] = "There was a problem saving the template."
+      flash[:error] = @template.errors.full_messages.to_sentence
       redirect_to :back
     end
   end

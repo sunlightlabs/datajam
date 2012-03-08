@@ -15,7 +15,7 @@ class Admin::Templates::EventsController < AdminController
       flash[:notice] = "Template saved."
       redirect_to edit_admin_templates_event_path(@template)
     else
-      flash[:error] = "There was a problem creating the template."
+      flash[:error] = @template.errors.full_messages.to_sentence
       redirect_to :back
     end
   end
@@ -26,7 +26,7 @@ class Admin::Templates::EventsController < AdminController
       flash[:notice] = "Template updated."
       redirect_to :back
     else
-      flash[:error] = "There was a problem saving the template."
+      flash[:error] = @template.errors.full_messages.to_sentence
       redirect_to :back
     end
   end
