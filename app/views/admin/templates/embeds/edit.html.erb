@@ -1,6 +1,6 @@
 <h2>Edit Template</h2>
 
-<%= form_for @embed_template, url: admin_templates_embed_path(@embed_template), method: :put do |f| %>
+<%= form_for @template, url: admin_templates_embed_path(@template), method: :put do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
   <%= f.text_area :template, class: 'datajamTemplate', rows: 20, cols: 100 %>
@@ -10,7 +10,7 @@
 
 <h3>Detected Template Fields</h3>
 <ul>
-  <% @embed_template.custom_fields.each do |f| -%>
+  <% @template.custom_fields.each do |f| -%>
   <li><%= f %></li>
   <% end -%>
 </ul>

@@ -1,12 +1,16 @@
 class Admin::Templates::EmbedsController < AdminController
+  before_filter :load_templates, only: [:index, :create]
 
-  def index
-    @embed_template = EmbedTemplate.new
+  def load_templates
     @embed_templates = EmbedTemplate.all
   end
 
+  def index
+    @template = EmbedTemplate.new
+  end
+
   def edit
-    @embed_template = EmbedTemplate.find(params[:id])
+    @template = EmbedTemplate.find(params[:id])
   end
 
   def create
@@ -16,7 +20,7 @@ class Admin::Templates::EmbedsController < AdminController
       redirect_to edit_admin_templates_embed_path(@template)
     else
       flash[:error] = @template.errors.full_messages.to_sentence
-      redirect_to :back
+      render :index
     end
   end
 
@@ -27,7 +31,7 @@ class Admin::Templates::EmbedsController < AdminController
       redirect_to :back
     else
       flash[:error] = @template.errors.full_messages.to_sentence
-      redirect_to :back
+      render :edit
     end
   end
 

@@ -1,12 +1,20 @@
 class Admin::Templates::EventsController < AdminController
+  before_filter :load_templates, only: [:index, :create]
 
-  def index
-    @event_template = EventTemplate.new
+  def load_templates
     @event_templates = EventTemplate.all
   end
 
+  def index
+    @template = EventTemplate.new
+  end
+
   def edit
-    @event_template = EventTemplate.find(params[:id])
+    @template = EventTemplate.find(params[:id])
+  end
+
+  def show
+    redirect_to admin_templates_events_path
   end
 
   def create
@@ -16,7 +24,7 @@ class Admin::Templates::EventsController < AdminController
       redirect_to edit_admin_templates_event_path(@template)
     else
       flash[:error] = @template.errors.full_messages.to_sentence
-      redirect_to :back
+      render :index
     end
   end
 
@@ -27,7 +35,7 @@ class Admin::Templates::EventsController < AdminController
       redirect_to :back
     else
       flash[:error] = @template.errors.full_messages.to_sentence
-      redirect_to :back
+      render :edit
     end
   end
 
