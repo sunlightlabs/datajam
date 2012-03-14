@@ -1,0 +1,14 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <% headers.each do |h| %>
+        <th><%= h %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% collection.each do |element| %>
+      <%= capture(element, &generator) %>
+    <% end %>
+  </tbody>
+</table>

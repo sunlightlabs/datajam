@@ -1,18 +1,12 @@
 <h2>Data Cards</h2>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Last Updated</th>
-    <th>Delete</th>
-  </tr>
-  <% @cards.each do |card| -%>
+<%= table_for @cards, ["Title", "Last Updated", ""] do |card| %>
   <tr>
     <td><%= link_to card.title, edit_admin_card_path(card) %></td>
     <td><%= card.updated_at.to_s :humane %></td>
     <td><%= link_to 'X', admin_card_path(card), method: :delete %></td>
-  <% end -%>
-</table>
+  </tr>
+<% end %>
 
 <h3>New Card</h3>
 <%= render "form" %>

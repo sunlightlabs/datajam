@@ -1,17 +1,13 @@
 <h2>Event Templates</h2>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Last Updated</th>
-    <th></th>
-  </tr>
-  <% @event_templates.each do |template| -%>
-  <tr>
+
+<%= table_for @event_templates, ["Name", "Last Updated", ""] do |template| %>
+  <%= content_tag_for :tr, template do %>
     <td><%= link_to template.name, edit_admin_templates_event_path(template) %></td>
     <td><%= template.updated_at.to_s :humane %></td>
     <td><%= button_to("Delete", admin_templates_event_path(template), method: :delete, confirm: "Are you sure? This will completely destroy the template.") if template.can_be_deleted? %></td>
-  <% end -%>
-</table>
+  <% end %>
+<% end %>
+
 <hr />
 
 <h3>New Event Template</h3>

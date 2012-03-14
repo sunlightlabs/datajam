@@ -1,23 +1,16 @@
 <h2>Events</h2>
 
 <h3>Event List</h3>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Status</th>
-    <th>Scheduled At</th>
-    <th></th>
-    <th></th>
-  </tr>
-  <% @events.each do |event| -%>
+
+<%= table_for @events, ["Name", "Status", "Scheduled At", "", ""] do |event| %>
   <tr>
     <td><%= link_to event.name, edit_admin_event_path(event) %></td>
     <td><%= event.status %></td>
     <td><%= event.scheduled_at.to_s :humane %></td>
     <td><%= button_to "End Event", finalize_admin_event_path(event), method: :put, title: "This will put the event in the archives" %></td>
     <td><%= button_to "Delete Event", admin_event_path(event), method: :delete, title: "This will completely destroy the event", confirm: "Are you sure? This will completely destroy the event." %></td>
-  <% end -%>
-</table>
+  </tr>
+<% end -%>
 
 <h3>New Event</h3>
 
