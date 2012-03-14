@@ -1,9 +1,9 @@
-<%= form_for [:admin, @page] do |f| %>
-  <%= f.label :slug %>
-  <%= f.text_field :slug %>
-  <%= f.label :content %>
-  <%= f.text_area :content, class: 'datajamTemplate' %>
+<%= simple_form_for [:admin, @page], html: { class: "form-horizontal" } do |f| %>
+  <%= f.input :slug %>
+  <%= f.input :content, as: :text, input_html: { class: 'datajamTemplate', rows: 10, cols: 100 } %>
   <div class="ace-editor" id="ace-editor"></div>
 
-  <%= f.submit 'Submit' %>
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
 <% end %>

@@ -1,25 +1,17 @@
-<%= form_for [:admin, @user] do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<%= simple_form_for [:admin, @user], html: { class: "form-horizontal" } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :affiliation%>
+  <%= f.input :url, label: "URL" %>
+  <%= f.input :avatar, as: :file do %>
+    <%= f.input_field :avatar %>
+    <br>
+    <%= image_tag(@user.avatar_url(:small)) if @user.avatar? %>
+  <% end %>
+  <%= f.input :email %>
+  <%= f.input :password, hint: 'At least 6 characters' %>
+  <%= f.input :password_confirmation %>
 
-  <%= f.label :affiliation%>
-  <%= f.text_field :affiliation %>
-
-  <%= f.label :url, "URL" %>
-  <%= f.text_field :url %>
-
-  <%= f.label :avatar %>
-  <%= image_tag(@user.avatar_url(:small)) if @user.avatar? %>
-  <%= f.file_field :avatar %>
-
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-
-  <%= f.label :password, 'Password (at least 6 characters)' %>
-  <%= f.password_field :password, autocomplete: "off" %>
-
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, autocomplete: "off" %>
-
-  <%= f.submit 'Submit' %>
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
 <% end %>

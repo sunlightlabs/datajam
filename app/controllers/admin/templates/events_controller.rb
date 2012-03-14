@@ -18,7 +18,7 @@ class Admin::Templates::EventsController < AdminController
   end
 
   def create
-    @template = EventTemplate.new(params[:event_template])
+    @template = EventTemplate.new(params[:templates_event])
     if @template.save
       flash[:notice] = "Template saved."
       redirect_to edit_admin_templates_event_path(@template)
@@ -30,7 +30,7 @@ class Admin::Templates::EventsController < AdminController
 
   def update
     @template = EventTemplate.find(params[:id])
-    if @template.update_attributes(params[:event_template])
+    if @template.update_attributes(params[:templates_event])
       flash[:notice] = "Template updated."
       redirect_to :back
     else

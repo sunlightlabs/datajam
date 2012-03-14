@@ -1,29 +1,26 @@
-<%= form_for [:admin, @card] do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
+<%= simple_form_for [:admin, @card], html: { class: "form-horizontal" } do |f| %>
+  <%= f.input :title %>
 
   <fieldset>
     <legend>Use the default template</legend>
 
     <% if f.object.new_record? %>
-      <%= f.label :csv_file, 'CSV File' %>
-      <%= f.file_field :csv_file %>
+      <%= f.input :csv_file, as: :file, label: "CSV File" %>
     <% else %>
-      <%= f.label :csv, 'Data' %>
-      <%= f.text_area :csv, class: 'rawData', rows: 10, cols: 100 %>
+      <%= f.input :csv, as: :text, label: "Data", input_html: { class: "rawData", rows: 10, cols: 100 } %>
     <% end %>
 
-    <%= f.label :source, 'Source Attribution (can use HTML)' %>
-    <%= f.text_area :source, rows: 5, cols: 80 %>
+    <%= f.input :source, as: :text, label: 'Source Attribution', input_html: { rows: 5, cols: 80 }, hint: "Can use HTML" %>
   </fieldset>
 
   <fieldset>
     <legend>Or use your own HTML</legend>
 
-    <%= f.label :body, 'HTML for the data card' %>
-    <%= f.text_area :body, class: 'datajamTemplate', "data-editor" => "ace-editor-body", rows: 10, cols: 100 %>
+    <%= f.input :body, as: :text, label: "HTML for the data card", input_html: { class: "datajamTemplate", "data-editor" => "ace-editor-body", rows: 10, cols: 100 } %>
     <div class="ace-editor" id="ace-editor-body"></div>
   </fieldset>
 
-  <%= f.submit 'Submit' %>
+  <div class="form-actions">
+    <%= f.button :submit, class: "btn-primary" %>
+  </div>
 <% end %>

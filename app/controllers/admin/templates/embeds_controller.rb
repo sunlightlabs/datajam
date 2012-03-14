@@ -14,7 +14,7 @@ class Admin::Templates::EmbedsController < AdminController
   end
 
   def create
-    @template = EmbedTemplate.new(params[:embed_template])
+    @template = EmbedTemplate.new(params[:templates_embed])
     if @template.save
       flash[:notice] = "Template saved."
       redirect_to edit_admin_templates_embed_path(@template)
@@ -26,7 +26,7 @@ class Admin::Templates::EmbedsController < AdminController
 
   def update
     @template = EmbedTemplate.find(params[:id])
-    if @template.update_attributes(params[:embed_template])
+    if @template.update_attributes(params[:templates_embed])
       flash[:notice] = "Template updated."
       redirect_to :back
     else

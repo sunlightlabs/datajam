@@ -14,10 +14,10 @@
 <% end -%>
 
 <h3>New Asset</h3>
-<p>Filenames will be lowercased, and spaces will be converted to underscores.</p>
-<p>Uploading a file of the same name as a current asset will replace it.</p>
 
-<%= form_for @asset, url: admin_assets_path, html: {:multipart => true} do |f| %>
-  <%= f.file_field :asset %>
-  <%= f.submit 'Upload' %>
+<%= simple_form_for [:admin, @asset], html: { class: "form-horizontal" } do |f| %>
+  <%= f.input :asset, as: :file, hint: "Filenames will be lowercased, and spaces will be converted to underscores. Uploading a file of the same name as a current asset will replace it." %>
+  <div class="form-actions">
+    <%= f.button :submit, label: "Upload", class: "btn-primary" %>
+  </div>
 <% end %>

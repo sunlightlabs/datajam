@@ -49,7 +49,9 @@ class Template
   def check_integrity
     template = self.template.gsub(CONTENT_AREAS_REGEXP, '')
     Handlebars.compile(template)
-  rescue
+  rescue => e
+    puts e.message
+    puts e.backtrace.join("\n")
     errors.add(:base, "There are errors in your template")
     errors.blank?
   end

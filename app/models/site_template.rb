@@ -1,4 +1,8 @@
 class SiteTemplate < Template
+  def self.model_name
+    # Play nice with the admin's URLs
+    ActiveModel::Name.new(self, nil, "Templates::Site")
+  end
 
   before_validation :only_one, :on => :create
 

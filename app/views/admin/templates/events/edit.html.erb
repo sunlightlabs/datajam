@@ -1,16 +1,2 @@
 <h2>Edit Template</h2>
-
-<%= form_for @template, url: admin_templates_event_path(@event_template), method: :put do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.text_area :template, class: 'datajamTemplate', rows: 20, cols: 100 %>
-  <div class="ace-editor" id="ace-editor"></div>
-  <%= f.submit 'Update' %>
-<% end %>
-
-<h3>Detected Template Fields</h3>
-<ul>
-  <% @template.custom_fields.each do |f| -%>
-  <li><%= f %></li>
-  <% end -%>
-</ul>
+<%= render 'admin/templates/form' %>

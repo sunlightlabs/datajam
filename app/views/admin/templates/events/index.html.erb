@@ -11,11 +11,4 @@
 <hr />
 
 <h3>New Event Template</h3>
-<%= form_for @template, url: admin_templates_events_path do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :template %>
-  <%= f.text_area :template, class: 'datajamTemplate', rows: 20, cols: 100 %>
-  <div class="ace-editor" id="ace-editor"></div>
-  <%= f.submit 'Create' %>
-<% end %>
+<%= render 'admin/templates/form' %>

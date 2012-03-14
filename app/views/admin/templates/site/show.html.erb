@@ -2,9 +2,12 @@
 <p>Define the site template below. Upload related images and stylesheets in the <a href="/admin/assets">assets</a> area or your own CDN.</p>
 <p>Insert <code>{{{content}}}</code> somewhere into the template. The proper event or page content will be rendered inside.</p>
 <p>Insert <code>{{{head_assets}}}</code> and <code>{{{body_assets}}}</code> before the closing <code>&lt;/head&gt;</code> and <code>&lt;/body&gt;</code> tags respectively.</p>
-<%= form_for @site_template, url: admin_templates_site_path do |f| %>
-  <%= f.text_area :template, class: 'datajamTemplate', rows: 20, cols: 100 %>
+
+<%= simple_form_for [:admin, @site_template], html: { class: "form-horizontal" } do |f| %>
+  <%= f.input :template, as: :text, input_html: { class: 'datajamTemplate', rows: 20, cols: 100 } %>
   <div class="ace-editor" id="ace-editor"></div>
-  <%= f.submit 'Update' %>
+  <div class="form-actions">
+    <%= f.button :submit, label: "Update", class: "btn-primary" %>
+  </div>
 <% end %>
 
