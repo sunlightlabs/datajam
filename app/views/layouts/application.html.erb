@@ -25,6 +25,7 @@
   <style>
     body { padding-top: 60px; }
     .nav-list i { color: #333; }
+    footer { border-top: 1px solid #ccc; margin-top: 20px; padding-top: 20px; }
   </style>
 </head>
 <body>
@@ -72,19 +73,20 @@
 
         <%= yield %>
 
-        <div id="footer">
-          <p><a href="http://www.datajam.org">Datajam.org</a> | Built by the <a href="http://sunlightfoundation.com">Sunlight Foundation</a></p>
-        </div>
-
         <%= yield :body %>
       </div>
-    </div>
 
-    <%# Cloud 9's require.js implementation doesn't play nice with others,
-        put this last, just in case somebody needs the global require/define
-        (though they should be using curl's instead). %>
-    <script src="/javascripts/ace.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/javascripts/mode-html.js" type="text/javascript" charset="utf-8"></script>
+      <footer class="span10">
+        <a href="http://www.datajam.org">Datajam.org</a> |
+        Built by the <a href="http://sunlightfoundation.com">Sunlight Foundation</a>
+      </footer>
+    </div>
   </div>
+
+  <%# Cloud 9's require.js implementation doesn't play nice with others,
+      put this last, just in case somebody needs the global require/define
+      (though they should be using curl's instead). %>
+  <script src="/javascripts/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/mode-html.js" type="text/javascript" charset="utf-8"></script>
 </body>
 </html>
