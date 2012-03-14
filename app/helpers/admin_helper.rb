@@ -1,6 +1,10 @@
 module AdminHelper
   def table_for(collection, headers, &row)
-    render "shared/table", headers: Array(headers), collection: Array(collection), generator: row
+    if collection.empty?
+      content_tag(:p, "Nothing to show yet, why don't you go ahead and create something?")
+    else
+      render "shared/table", headers: Array(headers), collection: Array(collection), generator: row
+    end
   end
 
   def delete_button(path, options={})
