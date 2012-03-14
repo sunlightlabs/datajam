@@ -4,7 +4,7 @@
   <tr>
     <td><%= link_to card.title, edit_admin_card_path(card) %></td>
     <td><%= card.updated_at.to_s :humane %></td>
-    <td><%= link_to 'X', admin_card_path(card), method: :delete %></td>
+    <td><%= delete_button admin_card_path(card) %></td>
   </tr>
 <% end %>
 

@@ -4,7 +4,7 @@
   <tr>
     <td><%= link_to user.name, edit_admin_user_path(user) %></td>
     <td><%= user.affiliation %></td>
-    <td><%= link_to 'X', admin_user_path(user), method: :delete %></td>
+    <td><%= delete_button admin_user_path(user) %></td>
   </tr>
 <% end %>
 

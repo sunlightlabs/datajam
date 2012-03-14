@@ -9,7 +9,7 @@
   <tr>
     <td><%= link_to asset.asset_filename, asset.asset.url %></td>
     <td><%= asset.created_at.to_s :db %></td>
-    <td><%= link_to 'X', admin_asset_path(asset), method: 'delete' %></td>
+    <td><%= delete_button admin_asset_path(asset) %></td>
   </tr>
 <% end -%>
 

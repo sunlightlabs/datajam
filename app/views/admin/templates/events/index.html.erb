@@ -4,7 +4,7 @@
   <%= content_tag_for :tr, template do %>
     <td><%= link_to template.name, edit_admin_templates_event_path(template) %></td>
     <td><%= template.updated_at.to_s :humane %></td>
-    <td><%= button_to("Delete", admin_templates_event_path(template), method: :delete, confirm: "Are you sure? This will completely destroy the template.") if template.can_be_deleted? %></td>
+    <td><%= delete_button(admin_templates_event_path(template), confirm: "Are you sure? This will completely destroy the template.") if template.can_be_deleted? %></td>
   <% end %>
 <% end %>
 
