@@ -20,6 +20,7 @@ gem 'nokogiri',             '~> 1.5'
 gem 'hbs',                  '~> 0.1', require: 'handlebars'
 gem 'formatize',            '~> 1.0'
 gem 'mini_magick',          '~> 3.4'
+gem 'simple_form',          '~> 2.0'
 
 group :development do
   gem 'ruby-debug19',     '~> 0.11'

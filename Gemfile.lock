@@ -214,6 +214,9 @@ GEM
       ffi (~> 1.0.9)
       json_pure
       rubyzip
+    simple_form (2.0.1)
+      actionpack (~> 3.0)
+      activemodel (~> 3.0)
     sketches (0.1.1)
     sprockets (2.0.3)
       hike (~> 1.2)
@@ -281,6 +284,7 @@ DEPENDENCIES
   rr (~> 1.0)
   rspec-rails (~> 2.7)
   ruby-debug19 (~> 0.11)
+  simple_form (~> 2.0)
   sketches
   unicorn (~> 3.4)
   validates_timeliness (~> 3.0.2)
