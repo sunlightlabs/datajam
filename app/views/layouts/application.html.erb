@@ -11,58 +11,6 @@
       paths: {}
     })
   </script>
-  <%= csrf_meta_tag %>
-
-  <%= yield :head %>
-
-</head>
-<body>
-  <div id="container">
-
-    <div id="user_nav">
-      <ul id="account">
-        <% if user_signed_in? -%>
-        <li><%= link_to "Sign Out", destroy_user_session_path %> | </li>
-        <% end -%>
-        <li><a href="/">Live Site &raquo;</a></li>
-      </ul>
-    </div>
-
-    <div id="header">
-      <h1>Datajam</h1>
-      <ul class="navigation">
-        <li><strong>Content:</strong></li>
-        <li><a href="/admin/events">Events</a></li>
-        <li><a href="/admin/assets">Assets</a></li>
-        <li><a href="/admin/cards">Data Cards</a></li>
-        <li><a href="/admin/pages">Pages</a></li>
-      </ul>
-      <ul class="navigation">
-        <li><strong>Templates:</strong></li>
-        <li><a href="/admin/templates/events">Event Templates</a></li>
-        <li><a href="/admin/templates/embeds">Embed Templates</a></li>
-        <li><a href="/admin/templates/site">Site Template</a></li>
-      </ul>
-      <ul class="navigation">
-        <li><strong>Administration:</strong></li>
-        <li><a href="/admin/plugins">Plugins</a></li>
-        <li><a href="/admin/users">Users</a></li>
-      </ul>
-
-    </div>
-
-    <% flash.each do |type, msg| %>
-      <div id="flash_<%= type.to_s %>"><%= msg %></div>
-    <% end %>
-
-    <%= yield %>
-
-    <div id="footer">
-      <p><a href="http://www.datajam.org">Datajam.org</a> | Built by the <a href="http://sunlightfoundation.com">Sunlight Foundation</a></p>
-    </div>
-
-  </div>
-
   <script type="text/javascript">
     // don't allow curl.js to pollute the global namespace; ACE has its own require...
     window._define = window.define;
@@ -71,14 +19,71 @@
   <script type="text/javascript">
     window.define = window._define;
   </script>
+  <%= csrf_meta_tag %>
 
-  <%= yield :body %>
+  <%= yield :head %>
+  <style>
+    body { padding-top: 60px; }
+  </style>
+</head>
+<body>
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-fluid">
+        <%= link_to "Datajam", admin_root_path, class: "brand" %>
 
-  <%# Cloud 9's require.js implementation doesn't play nice with others,
-      put this last, just in case somebody needs the global require/define
-      (though they should be using curl's instead). %>
-  <script src="/javascripts/ace.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/mode-html.js" type="text/javascript" charset="utf-8"></script>
+        <ul class="nav">
+          <li><a href="/">Live Site &raquo;</a></li>
+        </ul>
 
+        <% if user_signed_in? %>
+        <ul class="nav pull-right">
+          <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+        </ul>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+        <ul class="nav nav-list well">
+          <li class="nav-header">Content</li>
+          <li><a href="/admin/events">Events</a></li>
+          <li><a href="/admin/assets">Assets</a></li>
+          <li><a href="/admin/cards">Data Cards</a></li>
+          <li><a href="/admin/pages">Pages</a></li>
+          <li class="nav-header">Templates</li>
+          <li><a href="/admin/templates/events">Event Templates</a></li>
+          <li><a href="/admin/templates/embeds">Embed Templates</a></li>
+          <li><a href="/admin/templates/site">Site Template</a></li>
+          <li class="nav-header">Administration</li>
+          <li><a href="/admin/plugins">Plugins</a></li>
+          <li><a href="/admin/users">Users</a></li>
+        </ul>
+      </div>
+
+      <div class="span10">
+        <% flash.each do |type, msg| %>
+          <div id="flash_<%= type.to_s %>"><%= msg %></div>
+        <% end %>
+
+        <%= yield %>
+
+        <div id="footer">
+          <p><a href="http://www.datajam.org">Datajam.org</a> | Built by the <a href="http://sunlightfoundation.com">Sunlight Foundation</a></p>
+        </div>
+
+        <%= yield :body %>
+      </div>
+    </div>
+
+    <%# Cloud 9's require.js implementation doesn't play nice with others,
+        put this last, just in case somebody needs the global require/define
+        (though they should be using curl's instead). %>
+    <script src="/javascripts/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/mode-html.js" type="text/javascript" charset="utf-8"></script>
+  </div>
 </body>
 </html>
