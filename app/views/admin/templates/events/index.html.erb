@@ -1,11 +1,7 @@
 <h2>Event Templates</h2>
 
 <%= table_for @event_templates, ["Name", "Last Updated", ""] do |template| %>
-  <%= content_tag_for :tr, template do %>
-    <td><%= link_to template.name, edit_admin_templates_event_path(template) %></td>
-    <td><%= template.updated_at.to_s :humane %></td>
-    <td><%= delete_button(admin_templates_event_path(template), confirm: "Are you sure? This will completely destroy the template.") if template.can_be_deleted? %></td>
-  <% end %>
+  <%= render "admin/templates/template", template: template %>
 <% end %>
 
 <hr />
