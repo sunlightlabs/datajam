@@ -44,7 +44,7 @@
 
   <div class="container-fluid">
     <div class="row-fluid">
-      <div class="span2">
+      <div class="span3">
         <ul class="nav nav-list well">
           <li class="nav-header">Content</li>
           <li><a href="/admin/events"><i class="icon-calendar"></i>Events</a></li>
@@ -61,7 +61,7 @@
         </ul>
       </div>
 
-      <div class="span10">
+      <div class="span9">
         <% flash.each do |type, msg| %>
           <div id="flash_<%= type.to_s %>"><%= msg %></div>
         <% end %>
