@@ -24,7 +24,7 @@ class Admin::EventsController < AdminController
   def create
     @event = Event.new(parse_time(params[:event]))
     if @event.save
-      flash[:notice] = "Event saved."
+      flash[:success] = "Event saved."
       redirect_to admin_events_path
     else
       flash[:error] = "There were some problems saving the event: #{@event.errors.full_messages.to_sentence}"
@@ -36,7 +36,7 @@ class Admin::EventsController < AdminController
     @event = Event.find(params[:id])
     begin
       if @event.update_attributes(parse_time(params[:event]))
-        flash[:notice] = "Event updated."
+        flash[:success] = "Event updated."
         redirect_to edit_admin_event_path(@event)
       else
         flash[:error] = "There was a problem saving the event."

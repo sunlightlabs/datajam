@@ -31,7 +31,7 @@ class Admin::PagesController < AdminController
     if page.errors.any?
       flash[:error] = page.errors.full_messages.to_sentence
     else
-      flash[:notice] = "Page #{message}."
+      flash[:success] = "Page #{message}."
     end
     redirect_to admin_pages_path
   end

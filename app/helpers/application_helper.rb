@@ -8,4 +8,11 @@ module ApplicationHelper
     admin_path
   end
 
+  def flash_messages
+    return if !flash.any?
+    flash.each do |type, msg|
+      return content_tag :div, msg, class: "alert alert-#{type}"
+    end
+  end
+
 end

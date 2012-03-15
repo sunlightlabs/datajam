@@ -25,7 +25,7 @@ class Admin::CardsController < AdminController
     end
 
     if @card.save
-      flash[:notice] = "Card saved."
+      flash[:success] = "Card saved."
       redirect_to admin_cards_path
     else
       flash[:error] = "There was a problem saving the card."
@@ -36,7 +36,7 @@ class Admin::CardsController < AdminController
   def update
     @card = DataCard.find(params[:id])
     if @card.update_attributes(params[:card])
-      flash[:notice] = "Card updated."
+      flash[:success] = "Card updated."
       redirect_to edit_admin_card_path(@card)
     else
       flash[:error] = "There was a problem saving the card."

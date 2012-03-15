@@ -22,7 +22,7 @@ class Admin::TemplatesController < AdminController
   def create
     @template = Template.new(params[:template])
     if @template.save
-      flash[:notice] = "Template saved."
+      flash[:success] = "Template saved."
       redirect_to admin_templates_path
     else
       flash[:error] = @template.errors.full_messages.to_sentence
@@ -33,7 +33,7 @@ class Admin::TemplatesController < AdminController
   def update
     @template = Template.find(params[:id])
     if @template.update_attributes(params)
-      flash[:notice] = "Template updated."
+      flash[:success] = "Template updated."
       redirect_to :back
     else
       flash[:error] = @template.errors.full_messages.to_sentence

@@ -20,11 +20,11 @@ class Admin::AssetsController < AdminController
   def create
     @asset = Asset.new(params[:asset])
     if @asset.save
-      flash[:notice] = "Asset saved."
+      flash[:success] = "Asset saved."
       previous = Asset.where(asset_filename: @asset.asset_filename)
       if previous.count > 1
         previous.first.destroy
-        flash[:notice] += " Previous version deleted."
+        flash[:success] += " Previous version deleted."
       end
       redirect_to admin_assets_path
     else
@@ -36,7 +36,7 @@ class Admin::AssetsController < AdminController
   def update
     @asset = Asset.find(params[:id])
     if @asset.update_attributes(params[:asset])
-      flash[:notice] = "Asset updated."
+      flash[:success] = "Asset updated."
       redirect_to admin_assets_path
     else
       flash[:error] = "There was a problem saving the site settings."

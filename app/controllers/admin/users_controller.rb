@@ -20,7 +20,7 @@ class Admin::UsersController < AdminController
   def create
     @user = User.new(params[:user])
     if @user.save
-      flash[:notice] = "User saved."
+      flash[:success] = "User saved."
       redirect_to admin_users_path
     else
       flash[:error] = "There was a problem saving the user."
@@ -34,7 +34,7 @@ class Admin::UsersController < AdminController
     params[:user].delete(:password_confirmation) if params[:user][:password_confirmation].blank?
 
     if @user.update_attributes(params[:user])
-      flash[:notice] = "User updated."
+      flash[:success] = "User updated."
       redirect_to admin_users_path
     else
       flash[:error] = "There was a problem saving the user."

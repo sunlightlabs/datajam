@@ -14,7 +14,7 @@ class AdminController < ApplicationController
     if request.post? || request.put?
       batch = Setting.bulk_update(params[:settings])
       if batch[:updated]
-        flash[:notice] = 'Settings updated.'
+        flash[:success] = 'Settings updated.'
       else
         flash[:error] = 'There was an error updating one or more settings.'
       end

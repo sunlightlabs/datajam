@@ -62,10 +62,7 @@
       </div>
 
       <div class="span9">
-        <% flash.each do |type, msg| %>
-          <div id="flash_<%= type.to_s %>"><%= msg %></div>
-        <% end %>
-
+        <%= flash_messages %>
         <%= yield %>
 
         <%= yield :body %>

@@ -7,7 +7,7 @@ class Admin::Templates::SiteController < AdminController
   def update
     @site_template = SiteTemplate.first
     if @site_template.update_attributes(params[:templates_site])
-      flash[:notice] = "Template updated."
+      flash[:success] = "Template updated."
       redirect_to :back
     else
       flash[:error] = "There was a problem saving the template."
