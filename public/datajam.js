@@ -143,7 +143,7 @@ $(function() {
   });
 
   $("#remind_event").bind('ajax:success', function(event, data, status, xhr) {
-    $("#notification_response").text(data.message).attr({ class: data.type });
+    $("#notification_response").text(data.message).attr({ class: 'alert alert-' + data.type });
     $(this).find("input[name=email]").val('');
   });
 

@@ -1,5 +1,7 @@
 HEAD_ASSETS = <<-HEAD.strip_heredoc
 <link rel="stylesheet" href="/datajam.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/stylesheets/01-bootstrap.min.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/stylesheets/bootstrap-responsive.min.css" type="text/css" media="screen, projection">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -86,13 +88,25 @@ BODY_ASSETS = <<-BODY.strip_heredoc
 BODY
 
 REMINDER_ASSETS = <<-REMINDER
-<div id="event_reminder">
-  <h3>Notify me:</h3>
-  <div id="notification_response"></div>
-  <form action="/reminders" id="remind_event" class="reminder_form" method="post" data-remote=true>
-    <input type="hidden" name="event_id" value="{{event_id}}" />
-    <label> Email: <input name="email" type="" /> </label>
-    <input type="submit" />
-  </form>
+<div class="container-fluid">
+  <div id="event_reminder">
+    <form action="/reminders" id="remind_event" class="form-horizontal reminder_form" method="post" data-remote=true>
+      <fieldset>
+        <legend>Remind Me</legend>
+          <div id="notification_response"></div>
+          <div class="control-group">
+            <label class="control-label" for="email">Your Email:</label>
+            <div class="controls">
+              <input type="hidden" name="event_id" value="{{event_id}}" />
+              <input type="text" name="email" class="reminder-input" id="email" />
+              <p class="help-block">You will be notified before the event</p>
+            </div>
+            <div class="form-actions">
+              <input type="submit" class="btn btn-primary"/>
+            </div>
+          </div>
+       </fieldset>
+    </form>
+  </div>
 </div>
 REMINDER

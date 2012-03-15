@@ -492,3 +492,6 @@ body.topbarred {
   padding: 7px 9px 7px;
   font-size: 11px;
 }
+.reminder-input {
+  height: 2em;
+}
