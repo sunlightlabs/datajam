@@ -12,4 +12,8 @@ module AdminHelper
     class_name = "btn btn-danger btn-small #{options.delete(:class)}".strip
     button_to text, path, options.reverse_merge(method: :delete, class: class_name)
   end
+
+  def text_for_submit(record)
+    (record.new? ? "Create" : "Update") + " " + record.class.to_s.underscore.humanize
+  end
 end
