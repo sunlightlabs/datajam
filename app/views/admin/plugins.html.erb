@@ -7,7 +7,7 @@
         <td><%= plugin.summary %></td>
         <td><%= plugin.version %></td>
         <td><%= plugin.authors.join(', ') %></td>
-        <td><%= link_to plugin.homepage %></td>
+        <td><%= link_to plugin.homepage, plugin.homepage %></td>
       </tr>
     <% end -%>
 <% else %>
