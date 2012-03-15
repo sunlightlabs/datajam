@@ -13,6 +13,6 @@ feature "Event content" do
     event_template = EventTemplate.create(name: 'Embed Template', template: '{{{event_reminder}}}')
     Event.create(slug: 'test', name: 'test', event_template: event_template, scheduled_at: Time.now + 30.minutes)
     visit '/test'
-    page.should have_content('Notify me')
+    page.should have_content('Remind Me')
   end
 end
