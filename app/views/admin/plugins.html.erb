@@ -1,21 +1,15 @@
 <h2>Plugins</h2>
 
 <% if @plugins.any? %>
-  <ul>
-    <% @plugins.each do |plugin| %>
-    <li>
-      <h4><a href="<%= plugin_settings_path plugin.name %>"><%= plugin.name.titleize %></a></h4>
-      <p class="meta">
-        <span class="version"><%= plugin.version %></span>,
-        <span class="author"><%= plugin.authors.join(', ') %></span>
-        <span class="homepage">
-          <a href="<%= plugin.homepage %>">homepage</a>
-        </span>
-      </p>
-      <p><%= plugin.summary %></p>
-    </li>
-    <% end %>
-  </ul>
+    <%= table_for @plugins, ["Name", "Description" "Version", "Authors", "Homepage"] do |plugin| %>
+      <tr>
+        <td><%= link_to plugin.name.titleize, plugin_settings_path(plugin.name) %></td>
+        <td><%= plugin.summary %></td>
+        <td><%= plugin.version %></td>
+        <td><%= plugin.authors.join(', ') %></td>
+        <td><%= link_to plugin.homepage %></td>
+      </tr>
+    <% end -%>
 <% else %>
   <p>No plugins installed. Visit <a href="http://datajam.org">Datajam.org</a> for installation instructions.</p>
 <% end %>
