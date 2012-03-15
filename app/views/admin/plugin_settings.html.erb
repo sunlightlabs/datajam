@@ -1,7 +1,7 @@
 <h2><%= @plugin.name.titleize %></h2>
 
 <% @actions.each do |action| %>
-  <a href="<%= url_for :action => action, :controller => "/#{@plugin.name}/plugin" %>" class="btn btn-mini"><%= action.to_s.titleize %></a>
+  <a href="<%= url_for :action => action, :controller => "/#{@plugin.name}/plugin" %>" class="btn btn-mini btn-small"><%= action.to_s.titleize %></a>
 <% end %>
 
 <%= markdown @plugin.description %>
