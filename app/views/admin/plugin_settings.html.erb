@@ -1,8 +1,12 @@
-<h2><%= @plugin.name.titleize %></h2>
+<div class="row-fluid">
+  <div class="span9">
+    <h2><%= @plugin.name.titleize %></h2>
 
-<% @actions.each do |action| %>
-  <a href="<%= url_for :action => action, :controller => "/#{@plugin.name}/plugin" %>" class="btn btn-mini"><%= action.to_s.titleize %></a>
-<% end %>
+    <% @actions.each do |action| %>
+      <a href="<%= url_for :action => action, :controller => "/#{@plugin.name}/plugin" %>" class="btn btn-mini"><%= action.to_s.titleize %></a>
+    <% end %>
+  </div>
+</div>
 
 <div class="well">
   <%= markdown @plugin.description %>
@@ -13,7 +17,7 @@
   <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
   <% @settings.each do |setting| %>
     <div class="control-group">
-      <label for="setting_<%= setting.id %>"><%= setting.name.titleize %></label>
+      <label class="control-label" for="setting_<%= setting.id %>"><%= setting.name.titleize %></label>
       <div class="controls">
         <input type="text" id="setting_<%= setting.id %>" name="settings[<%= setting.id %>][value]" value="<%= setting.value %>" />
       </div>
