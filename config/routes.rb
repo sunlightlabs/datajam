@@ -2,12 +2,11 @@ Datajam::Application.routes.draw do
 
   devise_for :users
 
+  match 'admin' => 'admin#index', :as => 'admin_root'
   match 'admin/check' => 'admin#check'
   match 'admin/plugins/:name' => 'admin#plugin_settings', :as => 'plugin_settings'
   match 'admin/plugins' => 'admin#plugins'
   namespace :admin do
-    root to: 'admin#index'
-
     resources :assets
     resources :users
     resources :events do
