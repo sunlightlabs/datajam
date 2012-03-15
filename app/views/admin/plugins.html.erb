@@ -1,7 +1,7 @@
 <h2>Plugins</h2>
 
 <% if @plugins.any? %>
-    <%= table_for @plugins, ["Name", "Description" "Version", "Authors", "Homepage"] do |plugin| %>
+    <%= table_for @plugins, ["Name", "Description", "Version", "Authors", "Homepage"] do |plugin| %>
       <tr>
         <td><%= link_to plugin.name.titleize, plugin_settings_path(plugin.name) %></td>
         <td><%= plugin.summary %></td>
