@@ -1,12 +1,12 @@
 <h2>Resend unlock instructions</h2>
 
-<%= form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post }) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: "form-horizontal" }) do |f| %>
   <%= devise_error_messages! %>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
+  <%= f.input :email %></p>
 
-  <p><%= f.submit "Resend unlock instructions" %></p>
+  <div class="form-actions">
+    <p><%= f.button :submit, "Resend unlock instructions", class: "btn-primary" %></p>
+    <%= render :partial => "devise/shared/links" %>
+  </div>
 <% end %>
-
-<%= render :partial => "devise/shared/links" %>

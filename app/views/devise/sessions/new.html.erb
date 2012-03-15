@@ -1,18 +1,16 @@
 <h2>Sign in</h2>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+<%= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), html: { class: "form-horizontal" } ) do |f| %>
+  <%= f.input :email %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+  <%= f.input:password, type: :password %>
 
-  <% if devise_mapping.rememberable? -%>
-  <%= f.label :remember_me, "Remember me?", :class => "inline"  %>
-  <%= f.check_box :remember_me, :class => "inline" %>
-  <% end -%>
+  <% if devise_mapping.rememberable? %>
+    <%= f.input :remember_me, input_html: { type: 'checkbox' }, label: "Remember me?" %>
+  <% end %>
 
-  <%= f.submit "Sign in" %>
+  <div class="form-actions">
+    <p><%= f.button :submit, "Login", class: "btn-primary",  %></p>
+    <%= render :partial => "devise/shared/links" %>
+  </div>
 <% end %>
-
-<%= render :partial => "devise/shared/links" %>
