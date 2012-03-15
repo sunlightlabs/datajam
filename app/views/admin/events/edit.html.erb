@@ -1,28 +1,3 @@
 <h2>Edit Event</h2>
-
-<%= form_for @event, url: admin_event_path(@event), method: :put do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <label for="event_slug">Slug (<a href="/<%= @event.slug %>">view page</a>)</label>
-  <%= f.text_field :slug %>
-  <%= f.label :event_template, 'Templates' %>
-  <%= f.collection_select :event_template_id, @event_templates, :id, :name %>
-  <% @embed_templates.each do |t| %>
-    <%= check_box_tag 'event[embed_template_ids][]', t.id, @event.embed_templates.include?(t), id: t.id, class: 'inline' %>
-    <%= label_tag t.id, t.name, class: 'inline' %><br />
-  <% end %>
-  <%= f.label :scheduled_at %>
-  <%= f.text_field :scheduled_at, value: @event.scheduled_at.to_s(:humane) %>
-  <%= f.submit 'Submit' %>
-
-  <% unless @event.template_data.nil? || @event.template_data.empty? -%>
-    <h3>Custom Template Fields</h3>
-    <% @event.template_data.each do |key, value| -%>
-      <%= f.label key %>
-      <%= f.text_field "template_data[#{key}]", value: value %>
-    <% end -%>
-    <%= f.submit 'Submit' %>
-  <% end -%>
-<% end %>
-
+<%= render :partial => 'form' %>
 <%= render 'notify' %>

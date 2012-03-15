@@ -13,14 +13,4 @@
 <% end -%>
 
 <h3>New Event</h3>
-
-<%= simple_form_for [:admin, @event], html: { class: "form-horizontal" } do |f| %>
-  <%= f.input :name %>
-  <%= f.input :event_template_id, collection: @event_templates %>
-  <%= f.input :embed_template_ids, collection: @embed_templates, as: :check_boxes, label: "Embed templates" %>
-  <%= f.input :scheduled_at %>
-
-  <div class="form-actions">
-    <%= f.button :submit, class: "btn-primary" %>
-  </div>
-<% end %>
+<%= render :partial => 'form' %>
