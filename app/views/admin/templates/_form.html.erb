@@ -1,16 +1,15 @@
 <%= simple_form_for [:admin, @template], html: { class: "form-horizontal" } do |f| %>
   <%= f.input :name %>
   <%= f.input :template, as: :text, input_html: { class: "datajamTemplate", rows: 20, cols: 100 } %>
-  <div class="ace-editor" id="ace-editor"></div>
 
-<% if @template.custom_fields.any? %>
-  <h3>Detected Template Fields</h3>
-  <ul>
-    <% @template.custom_fields.each do |f| %>
-    <li><%= f %></li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @template.custom_fields.any? %>
+    <h3>Detected Template Fields</h3>
+    <ul>
+      <% @template.custom_fields.each do |f| %>
+      <li><%= f %></li>
+      <% end %>
+    </ul>
+  <% end %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>

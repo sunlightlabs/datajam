@@ -10,6 +10,16 @@
     body { padding-top: 60px; }
     .nav-list i { color: #333; }
     footer { border-top: 1px solid #ccc; margin-top: 20px; padding-top: 20px; }
+    .ace-editor {
+      position: relative !important;
+      background: #fff;
+      min-width: 400px;
+      max-width: 80%;
+      height: 400px;
+      border: 1px solid #999;
+      -moz-border-radius: 4px;
+      -webkit-border-radius: 4px;
+    }
   </style>
 </head>
 <body>
@@ -60,7 +70,7 @@
         <%= yield :body %>
       </div>
 
-      <footer class="span10">
+      <footer class="span10 offset2">
         <a href="http://www.datajam.org">Datajam.org</a> |
         Built by the <a href="http://sunlightfoundation.com">Sunlight Foundation</a>
       </footer>

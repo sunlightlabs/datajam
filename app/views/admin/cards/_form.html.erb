@@ -7,7 +7,7 @@
     <% if f.object.new_record? %>
       <%= f.input :csv_file, as: :file, label: "CSV File" %>
     <% else %>
-      <%= f.input :csv, as: :text, label: "Data", input_html: { class: "rawData", rows: 10, cols: 100 } %>
+      <%= f.input :csv, as: :text, label: "Data", input_html: { class: "datajamTemplate rawData", rows: 10, cols: 100 } %>
     <% end %>
 
     <%= f.input :source, as: :text, label: 'Source Attribution', input_html: { rows: 5, cols: 80 }, hint: "Can use HTML" %>
@@ -16,8 +16,7 @@
   <fieldset>
     <legend>Or use your own HTML</legend>
 
-    <%= f.input :body, as: :text, label: "HTML for the data card", input_html: { class: "datajamTemplate", "data-editor" => "ace-editor-body", rows: 10, cols: 100 } %>
-    <div class="ace-editor" id="ace-editor-body"></div>
+    <%= f.input :body, as: :text, label: "HTML for the data card", input_html: { class: "datajamTemplate", rows: 10, cols: 100 } %>
   </fieldset>
 
   <div class="form-actions">

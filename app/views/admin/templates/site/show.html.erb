@@ -5,7 +5,6 @@
 
 <%= simple_form_for [:admin, @site_template], html: { class: "form-horizontal" } do |f| %>
   <%= f.input :template, as: :text, input_html: { class: 'datajamTemplate', rows: 20, cols: 100 } %>
-  <div class="ace-editor" id="ace-editor"></div>
   <div class="form-actions">
     <%= f.button :submit, label: "Update", class: "btn-primary" %>
   </div>
