@@ -14,7 +14,7 @@ window.onload = function() {
         HtmlMode = require("ace/mode/html").Mode,
         editorSession = editor.getSession();
 
-    $el.css({ display: "none" });
+    $el.hide();
 
     editorSession.setMode(new HtmlMode());
     editorSession.setValue($el.val());
