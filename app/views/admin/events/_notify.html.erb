@@ -4,7 +4,7 @@
   <%= table_for @event.reminders, ["Email", ""] do |reminder| %>
     <tr>
       <td><%= reminder.email %></td>
-      <td><%= link_to 'X', admin_event_reminder_path(@event, reminder), method: :delete %></td>
+      <td><%= delete_button admin_event_reminder_path(@event, reminder) %></td>
     </tr>
   <% end %>
 <% else %>
