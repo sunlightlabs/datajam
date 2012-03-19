@@ -11,7 +11,8 @@ module ApplicationHelper
   def flash_messages
     return if !flash.any?
     flash.each do |type, msg|
-      type = 'error' if type == :alert
+      type = 'error'    if type == :alert
+      type = 'success'  if type == :notice
       return content_tag :div, msg, class: "alert alert-#{type}"
     end
   end
