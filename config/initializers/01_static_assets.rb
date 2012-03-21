@@ -88,25 +88,13 @@ BODY_ASSETS = <<-BODY.strip_heredoc
 BODY
 
 REMINDER_ASSETS = <<-REMINDER
-<div class="container-fluid">
-  <div id="event_reminder">
-    <form action="/reminders" id="remind_event" class="form-horizontal reminder_form" method="post" data-remote=true>
-      <fieldset>
-        <legend>Remind Me</legend>
-          <div id="notification_response"></div>
-          <div class="control-group">
-            <label class="control-label" for="email">Your Email:</label>
-            <div class="controls">
-              <input type="hidden" name="event_id" value="{{event_id}}" />
-              <input type="text" name="email" class="reminder-input" id="email" />
-              <p class="help-block">You will be notified before the event</p>
-            </div>
-            <div class="form-actions">
-              <input type="submit" class="btn btn-primary"/>
-            </div>
-          </div>
-       </fieldset>
-    </form>
-  </div>
+<div id="event_reminder">
+  <form action="/reminders" id="remind_event" class="well form-inline reminder_form" method="post" data-remote=true>
+    <div id="notification_response"></div>
+      <input type="hidden" name="event_id" value="{{event_id}}" />
+      <input type="text" name="email" class="reminder-input" id="email" placeholder="Your Email" />
+      <input type="submit" class="btn btn-primary"/>
+    </div>
+  </form>
 </div>
 REMINDER
