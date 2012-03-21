@@ -27,7 +27,7 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <%= link_to "Datajam", admin_root_path, class: "brand" %>
+        <%= link_to("Datajam", admin_root_path, class: "brand") %>
 
         <ul class="nav">
           <li><a href="/">Live Site &raquo;</a></li>
@@ -35,8 +35,8 @@
 
         <% if user_signed_in? %>
         <ul class="nav pull-right">
-          <li><%= link_to("Your Account", edit_admin_user_path(current_user)) %></li>
-          <li><%= link_to "Sign Out", destroy_user_session_path %></li>
+          <li>Logged in as <%= link_to("#{current_user.name}", edit_admin_user_path(current_user)) %></li>
+          <li><%= link_to("Sign Out", destroy_user_session_path) %></li>
         </ul>
         <% end %>
       </div>
