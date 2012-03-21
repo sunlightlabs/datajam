@@ -35,7 +35,8 @@
 
         <% if user_signed_in? %>
         <ul class="nav pull-right">
-          <li>Logged in as <%= link_to("#{current_user.name}", edit_admin_user_path(current_user)) %></li>
+          <li><%= link_to("#{current_user.name}", edit_admin_user_path(current_user)) %></li>
+          <li class="divider-vertical"></li>
           <li><%= link_to("Sign Out", destroy_user_session_path) %></li>
         </ul>
         <% end %>
