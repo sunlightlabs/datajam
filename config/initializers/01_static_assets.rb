@@ -67,7 +67,7 @@ BODY_ASSETS = <<-BODY.strip_heredoc
 </div>
 </script>
 
-<script id="dataCardModalTemplate" type="text/x-handlebars-template">
+<script id="data_card_modal_template" type="text/x-handlebars-template">
 <div id="modal-{{ _id }}" class="modal hide fade" style="display: none;">
   <div class="modal-header">
     <a href="#" class="close">&times;</a>

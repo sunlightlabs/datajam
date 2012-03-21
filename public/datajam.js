@@ -80,7 +80,7 @@ Datajam.DataCardModal = Backbone.View.extend({
   },
   render: function() {
     // Generate the template.
-    var tmpl = Handlebars.compile($("script#dataCardModalTemplate").html());
+    var tmpl = Handlebars.compile($("script#data_card_modal_template").html());
 
     // Assign to this.el and add to body.
     this.el = $(tmpl(this.model.get('contentArea').toJSON()));
