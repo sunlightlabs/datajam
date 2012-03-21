@@ -6,7 +6,7 @@
       <a href="<%= url_for :action => action, :controller => "/#{@plugin.name}/plugin" %>" class="btn btn-mini"><%= action.to_s.titleize %></a>
     <% end %>
   </div>
-</div>
+</div><br/>
 
 <div class="well">
   <%= markdown @plugin.description %>
