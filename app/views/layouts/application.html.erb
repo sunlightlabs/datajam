@@ -35,6 +35,7 @@
 
         <% if user_signed_in? %>
         <ul class="nav pull-right">
+          <li><%= link_to("Your Account", edit_admin_user_path(current_user)) %></li>
           <li><%= link_to "Sign Out", destroy_user_session_path %></li>
         </ul>
         <% end %>
