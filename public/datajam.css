@@ -171,6 +171,7 @@ body.topbarred {
   display: block;
   float: left;
   position:relative;
+  margin-bottom:0;
 }
 .topbar div > ul a, .topbar-nav a {
   display: block;
