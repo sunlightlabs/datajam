@@ -31,7 +31,7 @@ body.topbarred {
   text-decoration: none;
 }
 
-.topbar .badge{
+/*.topbar .badge{
   position: absolute;
   right: -4px;
   background: red;
@@ -44,7 +44,7 @@ body.topbarred {
   font-size: 10px;
   border-radius: 7px;
   top: 2px;
-}
+}*/
 
 .topbar h3, .modal h3 {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
