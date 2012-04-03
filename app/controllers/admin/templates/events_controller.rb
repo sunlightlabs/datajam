@@ -7,6 +7,7 @@ class Admin::Templates::EventsController < AdminController
 
   def index
     @template = EventTemplate.new
+    render_if_pjax 'admin/templates/event/_table'
   end
 
   def edit

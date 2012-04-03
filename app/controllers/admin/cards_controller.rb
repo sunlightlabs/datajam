@@ -3,6 +3,7 @@ class Admin::CardsController < AdminController
   def index
     @cards = DataCard.all
     @card = DataCard.new
+    render_if_pjax 'admin/cards/_table'
   end
 
   def show

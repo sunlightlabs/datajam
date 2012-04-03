@@ -3,6 +3,7 @@ class Admin::UsersController < AdminController
   def index
     @users = User.all
     @user = User.new
+    render_if_pjax 'admin/users/_table'
   end
 
   def show

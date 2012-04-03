@@ -1,9 +1,5 @@
 <h2>Embed Templates</h2>
-
-<%= table_for @embed_templates, ["Name", "Last Updated", ""] do |template| %>
-  <%= render "admin/templates/template", template: template %>
-<% end %>
-
+<%= render 'admin/templates/embeds/table' %>
 <hr />
 
 <h3>New Embed Template</h3>

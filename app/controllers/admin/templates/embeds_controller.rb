@@ -7,6 +7,7 @@ class Admin::Templates::EmbedsController < AdminController
 
   def index
     @template = EmbedTemplate.new
+    render 'admin/templates/embeds/_table' if pjax_request?
   end
 
   def edit

@@ -5,13 +5,7 @@
 
 <h3>Current Assets</h3>
 
-<%= table_for @assets, ["Filename", "Uploaded", ""] do |asset| %>
-  <tr>
-    <td><%= link_to asset.asset_filename, asset.asset.url %></td>
-    <td><%= asset.created_at.to_s :db %></td>
-    <td><%= delete_button admin_asset_path(asset) %></td>
-  </tr>
-<% end -%>
+<%= render :partial => 'admin/assets/table' %>
 
 <h3>New Asset</h3>
 

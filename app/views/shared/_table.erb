@@ -1,14 +1,17 @@
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <% headers.each do |h| %>
-        <th><%= h %></th>
+<div id="table-main">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <% headers.each do |h| %>
+          <th><%= h %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% collection.each do |element| %>
+        <%= capture(element, &generator) %>
       <% end %>
-    </tr>
-  </thead>
-  <tbody>
-    <% collection.each do |element| %>
-      <%= capture(element, &generator) %>
-    <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+  <%= pagination_buttons %>
+</div>
