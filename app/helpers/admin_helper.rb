@@ -1,5 +1,5 @@
 module AdminHelper
-  RECORDS_PER_PAGE = 5
+  RECORDS_PER_PAGE = 15
 
   def table_for(collection, headers, &row)
     buttons = pagination_buttons(collection)
