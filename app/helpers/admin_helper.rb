@@ -21,7 +21,7 @@ module AdminHelper
   end
 
   def get_for_page(collection, records = RECORDS_PER_PAGE)
-    collection.skip(page_number * records).take(records)
+    collection.take(records * (page_number + 1))
   end
 
   def delete_button(path, options={})
@@ -48,7 +48,7 @@ module AdminHelper
   end
 
   def pagination_buttons(collection)
-    amount = page_number + 1 * RECORDS_PER_PAGE
+    amount = (page_number + 1) * RECORDS_PER_PAGE
     show_more = amount < collection.size
 
     pagination  =  ''

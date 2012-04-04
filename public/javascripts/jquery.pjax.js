@@ -235,7 +235,8 @@ var pjax = $.pjax = function( options ) {
       var html = $('<html>').html(data)
       var $fragment = html.find(options.fragment)
       if ( $fragment.length ) {
-        this.html($fragment.contents())
+
+        options.append ? this.append($fragment.contents()) : this.html($fragment.contents())
 
         // If there's a <title> tag in the response, use it as
         // the page's title. Otherwise, look for data-title and title attributes.
@@ -249,7 +250,7 @@ var pjax = $.pjax = function( options ) {
       if ( !$.trim(data) || /<html/i.test(data) )
         return window.location = url
 
-      this.html(data)
+      options.append ? this.append(data) : this.html(data)
 
       // If there's a <title> tag in the response, use it as
       // the page's title.
