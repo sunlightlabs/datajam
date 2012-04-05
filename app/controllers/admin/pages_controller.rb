@@ -1,6 +1,6 @@
 class Admin::PagesController < AdminController
   def index
-    @pages = Page.all
+    @pages = filter_and_sort Page.all
     @page = Page.new
     render_if_pjax 'admin/pages/_table'
   end

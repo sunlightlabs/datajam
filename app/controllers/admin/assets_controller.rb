@@ -1,7 +1,8 @@
 class Admin::AssetsController < AdminController
 
   def index
-    @assets = Asset.all
+    @assets = filter_and_sort Asset.all
+
     @asset = Asset.new
     render_if_pjax 'admin/assets/_table'
   end

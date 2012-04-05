@@ -1,4 +1,4 @@
-<%= table_for @assets, ["Filename", "Uploaded", ""] do |asset| %>
+<%= table_for @assets, [:filename, :uploaded_at, ""] do |asset| %>
   <tr>
     <td><%= link_to asset.asset_filename, asset.asset.url %></td>
     <td><%= asset.created_at.to_s :db %></td>

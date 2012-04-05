@@ -1,7 +1,7 @@
 class Admin::CardsController < AdminController
 
   def index
-    @cards = DataCard.all
+    @cards = filter_and_sort DataCard.all
     @card = DataCard.new
     render_if_pjax 'admin/cards/_table'
   end

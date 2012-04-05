@@ -1,4 +1,4 @@
-<%= table_for @pages, ["Slug", ""] do |page| %>
+<%= table_for @pages, [:slug, ""] do |page| %>
   <tr>
     <td><%= link_to page.slug, admin_page_path(page) %></td>
     <td><%= delete_button admin_page_path(page), confirm: 'Are you sure?' %></td>

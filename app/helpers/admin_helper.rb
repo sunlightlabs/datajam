@@ -24,6 +24,14 @@ module AdminHelper
     collection.take(records * (page_number + 1))
   end
 
+  def link_to_if_sym_to_sort(str)
+    return str if !str.is_a?(Symbol)
+    order = params[:sort] == "#{str}:desc" ? "asc" : "desc"
+    header = str.to_s.gsub('_', ' ').capitalize
+
+    link_to(header, params.merge({:sort => "#{str}:#{order}"}), data: { pjax: "#table-main" })
+  end
+
   def delete_button(path, options={})
     text = options.fetch(:label, "Delete")
     class_name = "btn btn-danger btn-small #{options.delete(:class)}".strip
@@ -40,11 +48,11 @@ module AdminHelper
 
   def show_pagination(action = "more")
     page = action == "more" ? page_number + 1 : page_number - 1
-    page_link = "#{request.path}?page=#{page}"
-    content_tag(:a, "Show #{action}",
-                class: "btn #{action}",
-                data: { pjax: "#table-main" },
-                href: page_link)
+
+    link_to( "Show #{action}", params.merge({ page: page }),
+      class: "btn #{action}",
+      data: { pjax: "#table-main" }
+    )
   end
 
   def pagination_buttons(collection)

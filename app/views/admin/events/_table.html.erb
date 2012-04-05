@@ -1,4 +1,4 @@
-<%= table_for @events, ["Name", "Status", "Scheduled At", "", ""] do |event| %>
+<%= table_for @events, [:name, "Status", :scheduled_at, "", ""] do |event| %>
   <tr>
     <td><%= link_to event.name, edit_admin_event_path(event) %></td>
     <td><%= event.status %></td>

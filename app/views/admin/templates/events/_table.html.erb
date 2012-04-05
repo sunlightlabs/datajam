@@ -1,3 +1,3 @@
-<%= table_for @event_templates, ["Name", "Last Updated", ""] do |template| %>
+<%= table_for @event_templates, [:name, :updated_at, ""] do |template| %>
   <%= render "admin/templates/template", template: template %>
 <% end %>

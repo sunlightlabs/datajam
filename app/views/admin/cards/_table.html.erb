@@ -1,4 +1,4 @@
-<%= table_for @cards, ["Title", "Last Updated", ""] do |card| %>
+<%= table_for @cards, [:title, :updated_at, ""] do |card| %>
   <tr>
     <td><%= link_to card.title, edit_admin_card_path(card) %></td>
     <td><%= card.updated_at.to_s :humane %></td>

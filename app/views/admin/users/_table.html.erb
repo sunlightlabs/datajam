@@ -1,4 +1,4 @@
-<%= table_for @users, ["Name", "Affiliation", ""] do |user| %>
+<%= table_for @users, [:name, :affiliation, ""] do |user| %>
   <tr>
     <td><%= link_to user.name, edit_admin_user_path(user) %></td>
     <td><%= user.affiliation %></td>

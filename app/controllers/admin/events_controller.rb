@@ -1,7 +1,8 @@
 class Admin::EventsController < AdminController
 
   def index
-    @events = Event.upcoming
+    @events = filter_and_sort Event.upcoming
+
     @event = Event.new
     @event_templates = EventTemplate.all
     @embed_templates = EmbedTemplate.all
