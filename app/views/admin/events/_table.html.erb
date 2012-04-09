@@ -1,3 +1,4 @@
+<%= search_box(:name) %>
 <%= table_for @events, [:name, "Status", :scheduled_at, "", ""] do |event| %>
   <tr>
     <td><%= link_to event.name, edit_admin_event_path(event) %></td>

@@ -1,3 +1,4 @@
+<%= search_box(:name) %>
 <%= table_for @embed_templates, [:name, :updated_at, ""] do |template| %>
   <%= render "admin/templates/template", template: template %>
 <% end %>

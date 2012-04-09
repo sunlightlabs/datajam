@@ -1,3 +1,4 @@
+<%= search_box(:asset_filename) %>
 <%= table_for @assets, [:filename, :uploaded_at, ""] do |asset| %>
   <tr>
     <td><%= link_to asset.asset_filename, asset.asset.url %></td>

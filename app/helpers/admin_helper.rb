@@ -20,6 +20,10 @@ module AdminHelper
     end
   end
 
+  def search_box(input_name)
+    render 'shared/form', search_name: input_name
+  end
+
   def get_for_page(collection, records = RECORDS_PER_PAGE)
     collection.take(records * (page_number + 1))
   end

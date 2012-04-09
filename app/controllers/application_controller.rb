@@ -5,12 +5,12 @@ class ApplicationController < ActionController::Base
   private
 
   def filter_and_sort(collection)
-    collection = filter_if_present(collection, params[:name])
+    collection = filter_if_present(collection, params[:q], params[:field])
     sort_if_present(collection, params[:sort])
   end
 
-  def filter_if_present(collection, filter_by = false)
-    filter_by ? collection.where(name: /#{filter_by}/i) : collection
+  def filter_if_present(collection, query, field)
+    query && field ? collection.where(field.to_sym => /#{query}/i) : collection
   end
 
   def sort_if_present(collection, sort_by = false)

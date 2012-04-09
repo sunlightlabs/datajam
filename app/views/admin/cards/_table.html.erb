@@ -1,3 +1,4 @@
+<%= search_box(:title) %>
 <%= table_for @cards, [:title, :updated_at, ""] do |card| %>
   <tr>
     <td><%= link_to card.title, edit_admin_card_path(card) %></td>
