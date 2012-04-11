@@ -16,7 +16,7 @@ module AdminHelper
         headers: Array(headers),
         collection: Array(collection),
         generator: row,
-        pagination_buttons: buttons
+        pagination_buttons: buttons,
     end
   end
 
@@ -25,7 +25,8 @@ module AdminHelper
   end
 
   def get_for_page(collection, records = RECORDS_PER_PAGE)
-    collection.take(records * (page_number + 1))
+    collection.skip(page_number * records).take(records)
+    # collection.take(records * (page_number + 1))
   end
 
   def link_to_if_sym_to_sort(str)
