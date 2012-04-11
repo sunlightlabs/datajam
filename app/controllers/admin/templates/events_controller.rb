@@ -42,8 +42,12 @@ class Admin::Templates::EventsController < AdminController
 
   def destroy
     @template = EventTemplate.find(params[:id])
-    flash[:error] = @template.errors.full_messages.to_sentence unless @template.destroy
-    redirect_to admin_templates_events_path
+    if @template.destroy
+      flash[:success] = "Template deleted."
+    else
+      flash[:error] = @template.errors.full_messages.to_sentence
+    end
+    redirect_to admin_templates_events_path  
   end
 
 end

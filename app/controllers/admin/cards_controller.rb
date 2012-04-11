@@ -47,7 +47,11 @@ class Admin::CardsController < AdminController
 
   def destroy
     @card = DataCard.find(params[:id])
-    @card.destroy
+    if @card.destroy
+      flash[:success] = "Card deleted."
+    else
+      flash[:error] = @card.errors.full_messages.to_sentence
+    end
     redirect_to admin_cards_path
   end
 

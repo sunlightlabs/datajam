@@ -38,8 +38,11 @@ class Admin::Templates::EmbedsController < AdminController
 
   def destroy
     @template = EmbedTemplate.find(params[:id])
-    @template.destroy
-    flash[:error] = @template.errors.full_messages.to_sentence unless @template.destroy
+    if @template.destroy
+      flash[:success] = "Template deleted."
+    else
+      flash[:error] = @template.errors.full_messages.to_sentence
+    end
     redirect_to admin_templates_embeds_path
   end
 

@@ -30,7 +30,7 @@ class Admin::AssetsController < AdminController
       end
       redirect_to admin_assets_path
     else
-      flash[:error] = "There was a problem creating saving the file."
+      flash[:error] = "There was a problem saving the asset."
       redirect_to admin_assets_path
     end
   end
@@ -41,14 +41,18 @@ class Admin::AssetsController < AdminController
       flash[:success] = "Asset updated."
       redirect_to admin_assets_path
     else
-      flash[:error] = "There was a problem saving the site settings."
+      flash[:error] = "There was a problem updating the asset."
       redirect_to admin_assets_path
     end
   end
 
   def destroy
     @asset = Asset.find(params[:id])
-    @asset.destroy
+    if @asset.destroy
+      flash[:success] = "Asset deleted."
+    else
+      flash[:error] = "There was a problem deleting the asset."
+    end
     redirect_to admin_assets_path
   end
 

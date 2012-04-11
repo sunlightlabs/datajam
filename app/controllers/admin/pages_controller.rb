@@ -23,7 +23,7 @@ class Admin::PagesController < AdminController
   def destroy
     page = Page.find_by_slug(params[:id])
     page.destroy
-    redirect_to admin_pages_path
+    check_for_errors_and_redirect(page, "deleted")
   end
 
   private

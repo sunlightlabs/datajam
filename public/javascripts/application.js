@@ -23,8 +23,18 @@
 
     $("textarea.datajamTemplate").each(function() {
       var $el = $(this),
-          container = createEditorContainer($el),
-          editor = ace.edit(container.attr("id")),
+          container = createEditorContainer($el);
+
+      // init hidden editors off-screen so they work
+      if(container.is(':hidden')){
+        container.wrap('<div id="' + container.attr('id') + '_wrap" class="ace-editor-replaceme"></div>');
+        $('body').append(container.css({
+          'position': 'absolute',
+          'left': '-9999px'
+        }).remove());
+      };
+
+      var editor = ace.edit(container.attr("id")),
           HtmlMode = require("ace/mode/html").Mode,
           editorSession = editor.getSession();
 
@@ -37,6 +47,15 @@
         $el.val(editorSession.getValue());
       });
       editor.setShowPrintMargin(false);
+    });
+    // reset off-screen editors
+    $('.ace-editor-replaceme').each(function(){
+      var $el = $('#' + $(this).attr('id').replace('_wrap', ''));
+      $(this).append($el.css({
+        'position': 'static',
+        'left': 0
+      }).remove());
+      $el.unwrap();
     });
   });
 })(jQuery);
