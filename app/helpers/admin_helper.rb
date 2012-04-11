@@ -1,5 +1,5 @@
 module AdminHelper
-  RECORDS_PER_PAGE = 15
+  RECORDS_PER_PAGE = 10
 
   def table_for(collection, headers, &row)
     buttons = pagination_buttons(collection)
@@ -9,7 +9,7 @@ module AdminHelper
       if !page_number.zero?
         show_pagination("less")
       else
-        content_tag(:p, "Nothing to show yet, why don't you go ahead and create something?")
+        content_tag(:p, "Nothing to show yet, why don't you go ahead and create something?", class: "empty")
       end
     else
       render "shared/table",

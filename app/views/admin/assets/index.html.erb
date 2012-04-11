@@ -1,17 +1,25 @@
 <h2>Static Assets</h2>
+<div class="well">
+    <p>Use this space to upload images, stylesheets and other files.<br/>
+       They will be available at <code><%= request.domain %>/static/assets/</code> after uploading. 
+    </p>
+</div>
 
-<p>Use this space to upload images, stylesheets and other files.</p>
-<p>They will be available at <code><%= request.domain %>/static/assets/</code> after uploading.</p>
-
-<h3>Current Assets</h3>
-
-<%= render :partial => 'admin/assets/table' %>
-
-<h3>New Asset</h3>
-
-<%= simple_form_for [:admin, @asset], html: { class: "form-horizontal" } do |f| %>
-  <%= f.input :asset, as: :file, hint: "Filenames will be lowercased, and spaces will be converted to underscores. Uploading a file of the same name as a current asset will replace it." %>
-  <div class="form-actions">
-    <%= f.button :submit, label: "Upload", class: "btn-primary" %>
-  </div>
-<% end %>
+<ul class="nav nav-pills">
+    <li class="active"><a href="#index" data-toggle="pill">List</a></li>
+    <li><a href="#new" data-toggle="pill">Create New</a></li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="index">
+        <%= render :partial => 'admin/assets/table' %>
+    </div>
+    
+    <div class="tab-pane" id="new">
+        <%= simple_form_for [:admin, @asset], html: { class: "form-horizontal" } do |f| %>
+        <%= f.input :asset, as: :file, hint: "Filenames will be lowercased, and spaces will be converted to underscores. Uploading a file of the same name as a current asset will replace it." %>
+        <div class="form-actions">
+            <%= f.button :submit, label: "Upload", class: "btn-primary" %>
+        </div>
+        <% end %>
+    </div>
+</div>

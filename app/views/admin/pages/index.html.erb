@@ -1,6 +1,15 @@
 <h2>Pages</h2>
 
-<%= render :partial => 'admin/pages/table' %>
-
-<h3>New Page</h3>
-<%= render "form" %>
+<ul class="nav nav-pills">
+    <li class="active"><a href="#index" data-toggle="pill">PList</a></li>
+    <li><a href="#new" data-toggle="pill">Create New</a></li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane active" id="index">
+        <%= render :partial => 'admin/pages/table' %>
+    </div>
+    
+    <div class="tab-pane" id="new">
+        <%= render "form" %>
+    </div>
+</div>

@@ -39,7 +39,9 @@ module Datajam
       http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js
       http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.1/underscore-min.js
       http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js
+      http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.2/bootstrap.min.js
       http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js
+      jquery.pjax.js
       rails.js
     )
   end
