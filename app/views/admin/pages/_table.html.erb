@@ -2,6 +2,6 @@
 <%= table_for @pages, [:slug, ""] do |page| %>
   <tr>
     <td><%= link_to page.slug, admin_page_path(page) %></td>
-    <td><%= delete_button admin_page_path(page), confirm: 'Are you sure?' %></td>
+    <td><%= delete_button admin_page_path(page), title: 'This will completely destroy the page' confirm: 'Are you sure? This will completely destroy the page.' %></td>
   </tr>
 <% end %>

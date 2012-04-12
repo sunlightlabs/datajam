@@ -3,6 +3,6 @@
   <tr>
     <td><%= link_to asset.asset_filename, asset.asset.url %></td>
     <td><%= asset.created_at.to_s :db %></td>
-    <td><%= delete_button admin_asset_path(asset) %></td>
+    <td><%= delete_button admin_asset_path(asset,title: "This will completely destroy the asset", confirm: "Are you sure? This will completely destroy the asset.") %></td>
   </tr>
 <% end -%>

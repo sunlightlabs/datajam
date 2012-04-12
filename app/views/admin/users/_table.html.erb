@@ -3,6 +3,6 @@
   <tr>
     <td><%= link_to user.name, edit_admin_user_path(user) %></td>
     <td><%= user.affiliation %></td>
-    <td><%= delete_button admin_user_path(user) %></td>
+    <td><%= delete_button admin_user_path(user, title: "This will completely destroy the user", confirm: "Are you sure? This will completely destroy the user.") %></td>
   </tr>
 <% end %>

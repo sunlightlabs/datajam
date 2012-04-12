@@ -3,6 +3,6 @@
   <tr>
     <td><%= link_to card.title, edit_admin_card_path(card) %></td>
     <td><%= card.updated_at.to_s :humane %></td>
-    <td><%= delete_button admin_card_path(card) %></td>
+    <td><%= delete_button admin_card_path(card, title: "This will completely destroy the card", confirm: "Are you sure? This will completely destroy the card.") %></td>
   </tr>
 <% end %>
