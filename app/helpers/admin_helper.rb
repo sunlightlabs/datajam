@@ -29,12 +29,17 @@ module AdminHelper
     # collection.take(records * (page_number + 1))
   end
 
+  def sort_icon(order)
+    direction = order == "desc" ? "down" : "up"
+    content_tag(:i, ' ', class: "icon-chevron-#{direction}")
+  end
+
   def link_to_if_sym_to_sort(str)
     return str if !str.is_a?(Symbol)
     order = params[:sort] == "#{str}:desc" ? "asc" : "desc"
     header = str.to_s.gsub('_', ' ').capitalize
 
-    link_to(header, params.merge({:sort => "#{str}:#{order}"}), data: { pjax: "#table-main" })
+     sort_icon(order) + link_to(header, params.merge({:sort => "#{str}:#{order}"}), data: { pjax: "#table-main" })
   end
 
   def delete_button(path, options={})
