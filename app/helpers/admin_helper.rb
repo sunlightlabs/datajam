@@ -38,8 +38,9 @@ module AdminHelper
     return str if !str.is_a?(Symbol)
     order = params[:sort] == "#{str}:desc" ? "asc" : "desc"
     header = str.to_s.gsub('_', ' ').capitalize
+    link = "#{header} #{sort_icon(order)}".html_safe
 
-     sort_icon(order) + link_to(header, params.merge({:sort => "#{str}:#{order}"}), data: { pjax: "#table-main" })
+    link_to(link, params.merge({:sort => "#{str}:#{order}"}), data: { pjax: "#table-main" })
   end
 
   def delete_button(path, options={})
