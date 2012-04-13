@@ -3,6 +3,8 @@ class DataCard
   include Mongoid::Timestamps
   include Mongoid::Slug
 
+  include Tag::Taggable
+
   # Used for auto-routing
   def self.model_name
     ActiveModel::Name.new(self, nil, "Card")

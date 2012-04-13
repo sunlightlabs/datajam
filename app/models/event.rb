@@ -3,6 +3,8 @@ class Event
   include Mongoid::Timestamps
   include Mongoid::Slug
 
+  include Tag::Taggable
+
   attr_accessor :head_assets, :body_assets, :cached_render
 
   has_many :reminders
