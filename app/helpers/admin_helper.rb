@@ -16,7 +16,7 @@ module AdminHelper
         headers: Array(headers),
         collection: Array(collection),
         generator: row,
-        pagination_buttons: buttons,
+        pagination_buttons: buttons
     end
   end
 
