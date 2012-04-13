@@ -35,10 +35,14 @@ module AdminHelper
   end
 
   def link_to_if_sym_to_sort(str)
+    # TODO: Refactor this
     return str if !str.is_a?(Symbol)
     order = params[:sort] == "#{str}:desc" ? "asc" : "desc"
     header = str.to_s.gsub('_', ' ').capitalize
-    link = "#{header} #{sort_icon(order)}".html_safe
+    link  = "#{header} ".html_safe
+    if (params[:sort] =~ /^#{str.to_s}/) == 0
+      link << sort_icon(order).html_safe
+    end
 
     link_to(link, params.merge({:sort => "#{str}:#{order}"}), data: { pjax: "#table-main" })
   end
