@@ -1,5 +1,5 @@
 module AdminHelper
-  RECORDS_PER_PAGE = 1
+  RECORDS_PER_PAGE = 10
 
   def table_for(collection, headers, &row)
     collection = get_for_page(collection)
@@ -19,7 +19,7 @@ module AdminHelper
   end
 
   def get_for_page(collection, records = RECORDS_PER_PAGE)
-    collection.skip(page_number - 1 * records).take(records)
+    collection.skip((page_number - 1) * records).take(records)
   end
 
   def sort_icon(order)
@@ -37,7 +37,7 @@ module AdminHelper
       link << sort_icon(order).html_safe
     end
 
-    link_to(link, params.merge({:sort => "#{str}:#{order}"}), data: { pjax: "#table-main" })
+    link_to(link, "?sort=#{str}:#{order}")
   end
 
   def delete_button(path, options={})
