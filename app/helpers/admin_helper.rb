@@ -1,22 +1,16 @@
 module AdminHelper
-  RECORDS_PER_PAGE = 10
+  RECORDS_PER_PAGE = 1
 
   def table_for(collection, headers, &row)
-    buttons = pagination_buttons(collection)
     collection = get_for_page(collection)
 
     if collection.empty?
-      if !page_number.zero?
-        show_pagination("less")
-      else
-        content_tag(:p, "Nothing to show yet, why don't you go ahead and create something?", class: "empty")
-      end
+      content_tag(:p, "Nothing to show yet, why don't you go ahead and create something?", class: "empty")
     else
       render "shared/table",
         headers: Array(headers),
         collection: Array(collection),
-        generator: row,
-        pagination_buttons: buttons
+        generator: row
     end
   end
 
@@ -25,8 +19,7 @@ module AdminHelper
   end
 
   def get_for_page(collection, records = RECORDS_PER_PAGE)
-    collection.skip(page_number * records).take(records)
-    # collection.take(records * (page_number + 1))
+    collection.skip(page_number - 1 * records).take(records)
   end
 
   def sort_icon(order)
@@ -58,25 +51,6 @@ module AdminHelper
   end
 
   def page_number
-    params.fetch(:page, 0).to_i
-  end
-
-  def show_pagination(action = "more")
-    page = action == "more" ? page_number + 1 : page_number - 1
-
-    link_to( "Show #{action}", params.merge({ page: page }),
-      class: "btn #{action}",
-      data: { pjax: "#table-main" }
-    )
-  end
-
-  def pagination_buttons(collection)
-    amount = (page_number + 1) * RECORDS_PER_PAGE
-    show_more = amount < collection.size
-
-    pagination  =  ''
-    pagination << show_pagination("less") unless page_number < 1
-    pagination << show_pagination("more") if show_more
-    pagination.html_safe
+    params.fetch(:page, 1).to_i
   end
 end

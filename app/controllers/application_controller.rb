@@ -28,15 +28,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  def pjax_request?
-    !!request.headers['X-PJAX']
-  end
-
   def set_layout
-    pjax_request? ? false : "application"
+    request.xhr? ? false : "application"
   end
 
-  def render_if_pjax(*args)
-    render *args if pjax_request?
+  def render_if_ajax(*args)
+    render *args if request.xhr?
   end
 end

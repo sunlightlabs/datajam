@@ -4,7 +4,7 @@ class Admin::AssetsController < AdminController
     @assets = filter_and_sort Asset.all
 
     @asset = Asset.new
-    render_if_pjax 'admin/assets/_table'
+    render_if_ajax 'admin/assets/_table'
   end
 
   def show

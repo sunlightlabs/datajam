@@ -1,9 +1,5 @@
 (function($){
   $(function(){
-
-    // init pjax
-    $('a[data-pjax]').pjax();
-
     // toggle 'new' form if list is empty
     $('.tab-pane.active .empty').each(function(){
       var href = $(this).parents('.tab-pane').attr('id');

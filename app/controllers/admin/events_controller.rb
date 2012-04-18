@@ -6,7 +6,7 @@ class Admin::EventsController < AdminController
     @event = Event.new
     @event_templates = EventTemplate.all
     @embed_templates = EmbedTemplate.all
-    render_if_pjax 'admin/events/_table'
+    render_if_ajax 'admin/events/_table'
   end
 
   def show
