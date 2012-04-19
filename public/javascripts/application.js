@@ -7,56 +7,65 @@
     });
 
     // Infinite Scrolling for tables
-    $('#table-main .ajax-table', function() {
-      window.loadingPageNumber = 1;
-      window.infiniteScroller = setInterval(function() {
-        var nextPage = function() {
-          var basePath = location.origin + location.pathname;
-          var currentPage = location.getParameter("page")
-          var queryString = location.search.replace(/(page=)([0-9])/, function(string, query, page) {
-            return query + (parseInt(currentPage) + 1);
+    var InfiniteScrolling = function() {
+      this.pageNumber = 1;
+      this.table = $('#table-main.ajax-table');
+
+      this.nextPage = function() {
+        var basePath = location.origin + location.pathname;
+
+        var searchPage = location.search.match(/page=([0-9])/);
+        var currentPage = searchPage ? searchPage[1] : false;
+
+        var queryString = location.search.replace(/(page=)([0-9])/, function(string, query, page) {
+          return query + (parseInt(currentPage) + 1);
+        });
+
+        if(!currentPage) {
+          currentPage = this.pageNumber;
+          var pageString = (location.search.length ? "&" : "?") + "page=" + (currentPage + 1);
+
+          queryString = location.search + pageString;
+          this.pageNumber = currentPage + 1;
+        }
+
+        return basePath + queryString;
+      };
+
+      this.currentViewportAt = function() {
+        return $(window).scrollTop() + $(window).height();
+      };
+
+      this.tableEndsAt = function() {
+        return this.table.position().top + this.table.height();
+      };
+
+    };
+
+    InfiniteScrolling.prototype = {
+
+      checkAndLoadMore: function() {
+        if(this.table.size() < 1) return;
+        if(this.currentViewportAt() - this.tableEndsAt() >= 50) {
+          $.ajax({
+            url: this.nextPage(),
+            success: function(data, xhr) {
+              var newContent = $(data).find('tbody tr');
+              var table = $('#table-main.ajax-table table tbody');
+
+              if(newContent.size()) table.append(newContent);
+            }
           });
+        }
+      }
 
-          if(!currentPage) {
-            currentPage = window.loadingPageNumber;
-            var pageString = (location.search.length ? "&" : "?") + "page=" + (currentPage + 1);
+    };
 
-            queryString = location.search + pageString;
-            window.loadingPageNumber = currentPage + 1;
-          }
+    var scroller = new InfiniteScrolling;
+    scroller.checkAndLoadMore();
 
-          return basePath + queryString;
-        };
-
-        var checkAndLoadMore = function() {
-          var currentViewportAt = function() {
-            return $(window).scrollTop() + $(window).height();
-          };
-
-          var table = $('#table-main.ajax-table');
-          var tableEndsAt = $(table).position().top + $(table).height();
-
-          if(currentViewportAt() - tableEndsAt >= 50) {
-            $.ajax({
-              url: nextPage(),
-              success: function(data, xhr) {
-                var newContent = $(data).find('tbody tr');
-                var table = $('#table-main.ajax-table table tbody');
-
-                if(newContent.size()) {
-                  table.append(newContent);
-                } else {
-                  clearInterval(window.infiniteScroller);
-                }
-              }
-            });
-          }
-
-        };
-
-        checkAndLoadMore();
-      }, 1000);
-
+    $(window).scroll(function() {
+      scroller.checkAndLoadMore();
     }); //End Infinite Scrolling
 
   });
