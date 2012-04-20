@@ -42,6 +42,7 @@ module Datajam
       http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.2/bootstrap.min.js
       http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js
       rails.js
+      jquery.pjax.js
     )
   end
   def self.setup

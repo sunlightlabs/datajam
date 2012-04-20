@@ -1,5 +1,6 @@
 (function($){
   $(function(){
+
     // toggle 'new' form if list is empty
     $('.tab-pane.active .empty').each(function(){
       var href = $(this).parents('.tab-pane').attr('id');
@@ -44,6 +45,10 @@
 
     InfiniteScrolling.prototype = {
 
+      resetCounter: function() {
+        this.pageNumber = 1;
+      },
+
       checkAndLoadMore: function() {
         if(this.table.size() < 1) return;
         if(this.currentViewportAt() - this.tableEndsAt() >= 50) {
@@ -67,6 +72,15 @@
     $(window).scroll(function() {
       scroller.checkAndLoadMore();
     }); //End Infinite Scrolling
+
+    // PJAX requests
+    $('a[data-pjax]').pjax({
+      fragment: '.ajax-table',
+      success: function() {
+        scroller.resetCounter();
+        scroller.checkAndLoadMore();
+      }
+    });
 
   });
 

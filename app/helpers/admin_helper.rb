@@ -37,7 +37,7 @@ module AdminHelper
       link << sort_icon(order).html_safe
     end
 
-    link_to(link, "?sort=#{str}:#{order}")
+    link_to(link, "?sort=#{str}:#{order}", data: { pjax: '.ajax-table'} )
   end
 
   def delete_button(path, options={})
