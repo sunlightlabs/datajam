@@ -1,15 +1,36 @@
 (function($){
   $(function(){
 
+    $("#search-box").on("submit", function(event) {
+      var queryElement = $(this).find("#query");
+      var query = queryElement.val();
+      var field = $(this).find("#field").val();
+      var container = ".ajax-table";
+
+      $.pjax({
+        container: container,
+        url: "?q=" + query + "&field=" + field,
+        fragment: container
+      });
+
+      queryElement.val("");
+      return false;
+    })
+
     // toggle 'new' form if list is empty
-    $('.tab-pane.active .empty').each(function(){
-      var href = $(this).parents('.tab-pane').attr('id');
-      $('a[href=#' + href + ']').parents('li').next('li').find('a').tab('show');
-    });
+    if(!location.search.match(/q=/)) {
+      $('.tab-pane.active .empty').each(function(){
+        var href = $(this).parents('.tab-pane').attr('id');
+        $('a[href=#' + href + ']').parents('li').next('li').find('a').tab('show');
+      });
+    }
 
     // Infinite Scrolling for tables
     var InfiniteScrolling = function() {
       this.pageNumber = 1;
+      this.loading = false;
+      this.finished = false;
+
       this.table = $('#table-main.ajax-table');
 
       this.nextPage = function() {
@@ -52,15 +73,25 @@
       checkAndLoadMore: function() {
         if(this.table.size() < 1) return;
         if(this.currentViewportAt() - this.tableEndsAt() >= 50) {
-          $.ajax({
-            url: this.nextPage(),
-            success: function(data, xhr) {
-              var newContent = $(data).find('tbody tr');
-              var table = $('#table-main.ajax-table table tbody');
+          var self = this;
 
-              if(newContent.size()) table.append(newContent);
-            }
-          });
+          if(!this.finished && !this.loading) {
+            this.loading = true;
+            $.ajax({
+              url: this.nextPage(),
+              success: function(data, xhr) {
+                var newContent = $(data).find('tbody tr');
+                var table = $('#table-main.ajax-table table tbody');
+
+                if(newContent.size()) {
+                  table.append(newContent);
+                  self.loading = false;
+                } else {
+                  self.finished = true;
+                }
+              }
+            });
+          }
         }
       }
 

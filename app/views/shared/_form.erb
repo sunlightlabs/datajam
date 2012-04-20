@@ -1,12 +1,12 @@
 <div class="filter-box pull-right">
-  <form method="GET" action="" class="form-horizontal">
+  <form method="GET" action="" class="form-horizontal" id="search-box" data-pjax=".ajax-table">
     <fieldset>
       <div class="input-prepend">
         <span id="filter_box" class="add-on">
           <i class="icon-search"></i>
         </span>
-        <input name="q" type="text" size="16" class="span2"/>
-        <input type="hidden" name="field" value="<%= search_name %>"/>
+        <input id="query" name="q" type="text" size="16" class="span2"/>
+        <input id="field" type="hidden" name="field" value="<%= search_name %>"/>
       </div>
     </fieldset>
   </form>
