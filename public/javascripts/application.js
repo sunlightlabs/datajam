@@ -66,8 +66,9 @@
 
     InfiniteScrolling.prototype = {
 
-      resetCounter: function() {
+      reset: function() {
         this.pageNumber = 1;
+        this.finished = false;
       },
 
       checkAndLoadMore: function() {
@@ -83,9 +84,10 @@
                 var newContent = $(data).find('tbody tr');
                 var table = $('#table-main.ajax-table table tbody');
 
+                self.loading = false;
+
                 if(newContent.size()) {
                   table.append(newContent);
-                  self.loading = false;
                 } else {
                   self.finished = true;
                 }
@@ -108,7 +110,7 @@
     $('a[data-pjax]').pjax({
       fragment: '.ajax-table',
       success: function() {
-        scroller.resetCounter();
+        scroller.reset();
         scroller.checkAndLoadMore();
       }
     });
