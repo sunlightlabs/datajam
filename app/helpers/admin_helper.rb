@@ -2,6 +2,7 @@ module AdminHelper
   RECORDS_PER_PAGE = 10
 
   def table_for(collection, headers, &row)
+    sorted_by = collection.options[:sort].first
     collection = get_for_page(collection)
 
     if collection.empty?
@@ -10,6 +11,7 @@ module AdminHelper
       render "shared/table",
         headers: Array(headers),
         collection: Array(collection),
+        sorted_by: sorted_by,
         generator: row
     end
   end
@@ -23,21 +25,21 @@ module AdminHelper
   end
 
   def sort_icon(order)
-    direction = order == "desc" ? "down" : "up"
+    direction = order == :asc ? "down" : "up"
     content_tag(:i, ' ', class: "icon-chevron-#{direction}")
   end
 
-  def link_to_if_sym_to_sort(str)
+  def link_to_if_sym_to_sort(str, sorted_by)
     # TODO: Refactor this
     return str if !str.is_a?(Symbol)
-    order = params[:sort] == "#{str}:desc" ? "asc" : "desc"
+
+    field, order = sorted_by
     header = str.to_s.gsub('_', ' ').capitalize
     link  = "#{header} ".html_safe
-    if (params[:sort] =~ /^#{str.to_s}/) == 0
-      link << sort_icon(order).html_safe
-    end
+    link << sort_icon(order).html_safe if field == str
+    new_order = order == :desc ? :asc : :desc
 
-    link_to(link, "?sort=#{str}:#{order}", data: { pjax: '.ajax-table'} )
+    link_to(link, "?sort=#{str}:#{new_order}", data: { pjax: '.ajax-table'} )
   end
 
   def delete_button(path, options={})

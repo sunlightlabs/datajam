@@ -2,7 +2,7 @@ class Admin::Templates::EventsController < AdminController
   before_filter :load_templates, only: [:index, :create]
 
   def load_templates
-    @event_templates = filter_and_sort EventTemplate.all
+    @event_templates = filter_and_sort EventTemplate.all.order(:updated_at => :desc)
   end
 
   def index

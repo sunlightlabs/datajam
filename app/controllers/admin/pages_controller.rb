@@ -1,6 +1,6 @@
 class Admin::PagesController < AdminController
   def index
-    @pages = filter_and_sort Page.all
+    @pages = filter_and_sort Page.all.order(:slug => :desc)
     @page = Page.new
     render_if_ajax 'admin/pages/_table'
   end

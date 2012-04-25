@@ -2,7 +2,7 @@ class Admin::Templates::EmbedsController < AdminController
   before_filter :load_templates, only: [:index, :create]
 
   def load_templates
-    @embed_templates = filter_and_sort EmbedTemplate.all
+    @embed_templates = filter_and_sort EmbedTemplate.all.order(:updated_at => :desc)
   end
 
   def index

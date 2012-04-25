@@ -1,7 +1,7 @@
 class Admin::CardsController < AdminController
 
   def index
-    @cards = filter_and_sort DataCard.all
+    @cards = filter_and_sort DataCard.all.order(:updated_at => :desc)
     @card = DataCard.new
     render_if_ajax 'admin/cards/_table'
   end

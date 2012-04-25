@@ -1,7 +1,7 @@
 class Admin::UsersController < AdminController
 
   def index
-    @users = filter_and_sort User.all
+    @users = filter_and_sort User.all.order(:name => :desc)
     @user = User.new
     render_if_ajax 'admin/users/_table'
   end

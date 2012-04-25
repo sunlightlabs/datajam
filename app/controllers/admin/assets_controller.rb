@@ -1,7 +1,7 @@
 class Admin::AssetsController < AdminController
 
   def index
-    @assets = filter_and_sort Asset.all
+    @assets = filter_and_sort Asset.all.order(:created_at => :asc)
 
     @asset = Asset.new
     render_if_ajax 'admin/assets/_table'

@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <% headers.each do |h| %>
-          <th><%= link_to_if_sym_to_sort(h) %></th>
+          <th><%= link_to_if_sym_to_sort(h, sorted_by) %></th>
         <% end %>
       </tr>
     </thead>
