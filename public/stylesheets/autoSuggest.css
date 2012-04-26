@@ -6,7 +6,7 @@ ul.as-selections {
 	border-radius: 3px;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
-	border:none;
+	/*border:none;*/
 	padding: 4px 0 4px 4px;
 	margin: 0;
 	overflow: auto;
