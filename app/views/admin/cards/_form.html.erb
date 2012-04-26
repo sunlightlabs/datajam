@@ -1,5 +1,6 @@
 <%= simple_form_for [:admin, @card], html: { class: "form-horizontal" } do |f| %>
   <%= f.input :title %>
+  <%= f.input :tag_string, input_html: { class: "taggable" } %>
 
   <fieldset>
     <legend>Use the default template</legend>
