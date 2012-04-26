@@ -139,12 +139,16 @@ class Event
     super.merge(unix_scheduled_at: scheduled_at.to_i)
   end
 
-  # Public: Returns the list of taggables that share tags with this event.
+  # Public: Returns the list of taggables that share tags with this event. If
+  # this event has no tags, then it returns the full passed-in collection, as
+  # is.
   #
   # collection - a Collection of Taggable objects.
   #
   # Returns a filtered collection.
   def filter_by_tags(collection)
+    return collection if tag_list.empty?
+
     # FIXME: Do this in mongo instead of loading everything in memory.
     collection.select do |taggable|
       (taggable.tag_list & tag_list).any?

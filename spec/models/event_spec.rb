@@ -143,5 +143,14 @@ describe Event do
 
       event.filter_by_tags(DataCard.all).should =~ [foo_card, bar_card]
     end
+
+    it "returns all taggables when this event has no tags" do
+      event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now, tag_string: "")
+      foo_card = DataCard.create(name: "Foo", tag_string: "foo, baz")
+      bar_card = DataCard.create(name: "Bar", tag_string: "bar, qux")
+      baz_card = DataCard.create(name: "Baz", tag_string: "baz, qux")
+
+      event.filter_by_tags(DataCard.all).should have(3).elements
+    end
   end
 end
