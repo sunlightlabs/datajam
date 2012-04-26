@@ -32,6 +32,10 @@ class Tag
     destroy if taggable_references.empty?
   end
 
+  def objects_tagged
+    taggable_references.count
+  end
+
   def to_s
     name
   end

@@ -2,7 +2,7 @@ module AdminHelper
   RECORDS_PER_PAGE = 10
 
   def table_for(collection, headers, &row)
-    sorted_by = collection.options[:sort].first
+    sorted_by = collection.options.fetch(:sort, []).first
     collection = get_for_page(collection)
 
     if collection.empty?
