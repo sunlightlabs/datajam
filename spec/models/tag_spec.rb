@@ -12,7 +12,7 @@ describe Tag::Taggable do
 
   context "tagging objects" do
     it "tags from a comma separated list" do
-      model = TestModel.create!(tag_list: "foo, bar")
+      model = TestModel.create!(tag_string: "foo, bar")
       model.tag_list.should == ["foo", "bar"]
     end
 
@@ -35,18 +35,18 @@ describe Tag::Taggable do
     end
 
     it "adds new tags" do
-      model.update_attributes(tag_list: "foo, bar, baz")
+      model.update_attributes(tag_string: "foo, bar, baz")
       model.tag_list.should == ["foo", "bar", "baz"]
     end
 
     it "removes references to tags when a taggable is no longer tagged" do
-      model.update_attributes(tag_list: "foo")
+      model.update_attributes(tag_string: "foo")
       model.reload.tag_list.should_not include("bar")
     end
 
     it "removes unused tags that aren't used anymore" do
-      other_model = TestModel.create!(tag_list: "foo")
-      model.update_attributes(tag_list: "")
+      other_model = TestModel.create!(tag_string: "foo")
+      model.update_attributes(tag_string: "")
 
       Tag.where(name: "bar").to_a.should be_empty
     end
