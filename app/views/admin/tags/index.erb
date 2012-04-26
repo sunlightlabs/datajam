@@ -2,8 +2,17 @@
 
 <%= table_for @tags, [:name, "Objects Tagged", ""] do |tag| %>
   <tr>
-    <td><%= tag.name %></td>
+    <td class="inline-form" style="width: 350px;">
+      <%= form_for [:admin, tag], remote: true, html: { class: "inline-form" } do |form| %>
+        <%= form.label :name, tag.name %>
+        <%= form.text_field :name, required: "required" %>
+        <button type="submit" class="btn btn-small btn-primary">Rename</button>
+        <button type="button" class="btn btn-small cancel">Cancel</button>
+      <% end %>
+    </td>
     <td><%= pluralize tag.objects_tagged, "object" %> tagged</td>
-    <td><%= delete_button admin_tag_path(tag), title: "This will remove the tag, and in the process remove it from all associated objects. These objects won't be removed.", confirm: "Are you sure? This will remove the tag, and in the process remove it from all associated objects. These objects won't be removed." %></td>
+    <td>
+      <%= delete_button admin_tag_path(tag), title: "This will remove the tag, and in the process remove it from all associated objects. These objects won't be removed.", confirm: "Are you sure? This will remove the tag, and in the process remove it from all associated objects. These objects won't be removed." %>
+    </td>
   </tr>
 <% end %>

@@ -8,6 +8,16 @@ class Admin::TagsController < AdminController
     end
   end
 
+  def update
+    tag = Tag.find(params[:id])
+    tag.update_attributes(params[:tag])
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js   { render text: tag.name, status: :ok }
+    end
+  end
+
   def destroy
     tag = Tag.find(params[:id])
     tag.destroy

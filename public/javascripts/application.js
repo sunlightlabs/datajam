@@ -5,6 +5,33 @@
       minChars: 2
     });
 
+    $(document).on("click", ".inline-form label", function(event) {
+      $("label", this.form).hide();
+      $("input, button", this.form).show();
+      return false;
+    });
+
+    $(document).on("submit", ".inline-form form", function() {
+      var label = $("label", this),
+          input = $("input:visible", this);
+
+      label.show();
+      label.html(input.val());
+
+      $("input, button", this).hide();
+      return true;
+    });
+
+    $(document).on("ajax:success", ".inline-form form", function(data) {
+      $("label", this).text(data);
+    });
+
+    $(document).on("click", ".inline-form .cancel", function() {
+      $("label", this.form).show();
+      $("input, button", this.form).hide();
+      return false;
+    });
+
     $("#search-box").on("submit", function(event) {
       var queryElement = $(this).find("#query");
       var query = queryElement.val();
