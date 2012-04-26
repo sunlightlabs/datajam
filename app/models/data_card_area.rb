@@ -10,11 +10,9 @@ class DataCardArea < ContentArea
   end
 
   def set_cards
-    arr = []
-    DataCard.all.each do |card|
-      arr << { id: card.id, title: card.title }
+    self.data_cards = event.filter_by_tags(DataCard.all).map do |card|
+      { id: card.id, title: card.title }
     end
-    self.data_cards = arr
   end
 
   def set_current_card

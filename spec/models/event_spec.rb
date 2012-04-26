@@ -133,4 +133,15 @@ describe Event do
     event = Event.create(name: 'Test Event', event_template: event_template, scheduled_at: Time.now)
     event.persisted?.should be_false
   end
+
+  describe "#filter_by_tags" do
+    it "only returns taggables that intersect this event's tags" do
+      event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now, tag_string: "foo, bar")
+      foo_card = DataCard.create(name: "Foo", tag_string: "foo, baz")
+      bar_card = DataCard.create(name: "Bar", tag_string: "bar, qux")
+      baz_card = DataCard.create(name: "Baz", tag_string: "baz, qux") # no matches
+
+      event.filter_by_tags(DataCard.all).should =~ [foo_card, bar_card]
+    end
+  end
 end

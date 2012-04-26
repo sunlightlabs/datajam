@@ -139,6 +139,18 @@ class Event
     super.merge(unix_scheduled_at: scheduled_at.to_i)
   end
 
+  # Public: Returns the list of taggables that share tags with this event.
+  #
+  # collection - a Collection of Taggable objects.
+  #
+  # Returns a filtered collection.
+  def filter_by_tags(collection)
+    # FIXME: Do this in mongo instead of loading everything in memory.
+    collection.select do |taggable|
+      (taggable.tag_list & tag_list).any?
+    end
+  end
+
   protected
 
   def update_template_data
