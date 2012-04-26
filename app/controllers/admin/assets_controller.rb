@@ -30,7 +30,7 @@ class Admin::AssetsController < AdminController
       end
       redirect_to admin_assets_path
     else
-      flash[:error] = "There was a problem saving the asset."
+      flash[:error] = @asset.errors.full_messages.to_sentence
       redirect_to admin_assets_path
     end
   end
@@ -51,7 +51,7 @@ class Admin::AssetsController < AdminController
     if @asset.destroy
       flash[:success] = "Asset deleted."
     else
-      flash[:error] = "There was a problem deleting the asset."
+      flash[:error] = @asset.errors.full_messages.to_sentence
     end
     redirect_to admin_assets_path
   end
