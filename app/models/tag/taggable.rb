@@ -17,6 +17,35 @@ module Tag::Taggable
     )
   end
 
+  # Public: set a new list of tags from a string of tag names separated by
+  # `tag_delimiter`.
+  #
+  # string - A string of tags.
+  #
+  # Example:
+  #
+  #     # with tag_delimiter == ","
+  #     taggable.tag_string = "foo, bar, baz"
+  #     taggable.tag_list #=> ["foo", "bar", "baz"]
+  #
+  # Returns the string.
+  def tag_string=(string)
+    self.tag_list = String(string).split(tag_delimiter).map(&:strip)
+  end
+
+  # Public: Generates a string of tags joined by `tag_delimiter`.
+  #
+  # Example:
+  #
+  #     # with tag_delimiter == ","
+  #     taggable.tag_list = %w(foo bar baz)
+  #     taggable.tag_string #=> "foo,bar,baz"
+  #
+  # Returns a string with all the tags separated by `tag_delimiter`.
+  def tag_string
+    tag_list.join(tag_delimiter)
+  end
+
   # Public: Get the list of tags as strings.
   #
   # Returns a list of Strings.
@@ -27,12 +56,10 @@ module Tag::Taggable
   # Public: set the new list of tags. Pass either a list of strings, a list of
   # Tag objects, or a string that can be separated by #tag_delimiter.
   #
-  # list - either a String of tags separated by #tag_delimiter, an array of Tag
-  #        objects, or an array of strings (tag names).
+  # list - either an array of Tag objects, or an array of strings (tag names).
   #
   # Returns the list passed.
   def tag_list=(list)
-    list = list.split(tag_delimiter) if list.respond_to?(:to_str)
     list = Array.wrap(list).map(&:to_s)
 
     # cache to avoid hitting mongo multiple times

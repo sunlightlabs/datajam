@@ -9,6 +9,7 @@ Datajam::Application.routes.draw do
   namespace :admin do
     resources :assets
     resources :users
+    resources :tags, only: :index, format: true
     resources :events do
       member do
         put :finalize

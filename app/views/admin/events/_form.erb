@@ -1,5 +1,6 @@
 <%= simple_form_for [:admin, @event], html: { class: "form-horizontal" } do |f| %>
   <%= f.input :name %>
+  <%= f.input :tag_string, input_html: { class: "taggable" } %>
   <%= f.input :event_template_id, collection: @event_templates %>
   <%= f.input :embed_template_ids, collection: @embed_templates, as: :check_boxes, label: "Embed templates" %>
   <%= f.input :scheduled_at %>

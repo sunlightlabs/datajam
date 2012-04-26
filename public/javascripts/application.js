@@ -1,5 +1,9 @@
 (function($){
   $(function(){
+    var taggables = $(":input.taggable");
+    taggables.autoSuggest("/admin/tags.json", {
+      minChars: 2
+    });
 
     $("#search-box").on("submit", function(event) {
       var queryElement = $(this).find("#query");
