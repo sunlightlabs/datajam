@@ -21,12 +21,13 @@ gem 'hbs',                  '~> 0.1', require: 'handlebars'
 gem 'formatize',            '~> 1.0'
 gem 'mini_magick',          '~> 3.4'
 gem 'simple_form',          '~> 2.0'
+gem 'bigdecimal'
 
 # Datajam Plugins
 gem 'datajam_chat',         git: 'https://github.com/sunlightlabs/datajam-chat.git'
 
 group :development do
-  gem 'ruby-debug19',     '~> 0.11'
+  gem 'thin'    
   gem 'map_by_method'
   gem 'what_methods'
   gem 'awesome_print'
