@@ -27,7 +27,8 @@ gem 'bigdecimal'
 gem 'datajam_chat',         git: 'https://github.com/sunlightlabs/datajam-chat.git'
 
 group :development do
-  gem 'thin'    
+  gem 'thin'
+  gem 'minitest'
   gem 'map_by_method'
   gem 'what_methods'
   gem 'awesome_print'
