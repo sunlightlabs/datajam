@@ -15,3 +15,5 @@ coverage.data
 .*.sw[a-z]
 *.un~
 _site
+\#*
+.\#*
