@@ -4,6 +4,5 @@ class Asset
 
   field :name, type: String
   mount_uploader :asset, AssetUploader, mount_on: :asset_filename
-  validates :asset,
-    :presence => true
+  validates :asset, presence: true
 end
