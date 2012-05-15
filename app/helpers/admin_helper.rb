@@ -22,7 +22,7 @@ module AdminHelper
     else
       render "shared/table",
       headers: Array(headers),
-      collection: Array(colection),
+      collection: Array(collection),
       generator: row
     end
   end
