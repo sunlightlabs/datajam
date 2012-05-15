@@ -2,7 +2,7 @@ module AdminHelper
   RECORDS_PER_PAGE = 10
 
   def table_for(collection, headers, &row)
-    sorted_by = collection.options.fetch(:sort, []).first
+    sorted_by = collection.options.fetch(:sort, []).first rescue nil
     collection = get_for_page(collection)
 
     if collection.empty?
@@ -33,7 +33,7 @@ module AdminHelper
     # TODO: Refactor this
     return str if !str.is_a?(Symbol)
 
-    field, order = sorted_by
+    field, order = sorted_by rescue nil
     header = str.to_s.gsub('_', ' ').capitalize
     link  = "#{header} ".html_safe
     link << sort_icon(order).html_safe if field == str
