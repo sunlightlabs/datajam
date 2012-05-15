@@ -2,7 +2,7 @@ module AdminHelper
   RECORDS_PER_PAGE = 10
 
   def table_for(collection, headers, &row)
-    sorted_by = collection.options.fetch(:sort, []).first rescue nil
+    sorted_by = collection.options.fetch(:sort, []).first
     collection = get_for_page(collection)
 
     if collection.empty?
@@ -13,6 +13,17 @@ module AdminHelper
         collection: Array(collection),
         sorted_by: sorted_by,
         generator: row
+    end
+  end
+
+  def simple_table_for(collection, headers, &row)
+    if collection.empty?
+      content_tag(:p, "Nothing to show yet, why don't you go ahead and create something?", class: "empty")
+    else
+      render "shared/table",
+      headers: Array(headers),
+      collection: Array(colection),
+      generator: row
     end
   end
 
@@ -33,7 +44,7 @@ module AdminHelper
     # TODO: Refactor this
     return str if !str.is_a?(Symbol)
 
-    field, order = sorted_by rescue nil
+    field, order = sorted_by
     header = str.to_s.gsub('_', ' ').capitalize
     link  = "#{header} ".html_safe
     link << sort_icon(order).html_safe if field == str
