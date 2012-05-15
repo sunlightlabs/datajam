@@ -20,7 +20,7 @@ module AdminHelper
     if collection.empty?
       content_tag(:p, "Nothing to show yet, why don't you go ahead and create something?", class: "empty")
     else
-      render "shared/table",
+      render "shared/simple_table",
       headers: Array(headers),
       collection: Array(collection),
       generator: row
