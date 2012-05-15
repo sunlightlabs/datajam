@@ -4,8 +4,8 @@ class Template
   include Mongoid::Slug
   include ActionView::Helpers::TextHelper
 
-  CONTENT_AREAS_REGEXP = /\{\{([\w ]*):([\w ]*) \}\}/
-  HANDLERBARS_REGEXP = /\{\{([\w ]*)\}\}/
+  CONTENT_AREAS_REGEXP = /\{\{([\w ]+):([\w ]+) \}\}/
+  HANDLEBARS_REGEXP = /\{\{([\w ]+)\}\}/
 
   field :name,           type: String
   field :template,       type: String
@@ -58,7 +58,7 @@ class Template
 
   # Find fields enclosed in `{{handlebars}}`
   def set_custom_fields
-    found_fields = self.template.scan(HANDLERBARS_REGEXP).flatten
+    found_fields = self.template.scan(HANDLEBARS_REGEXP).flatten
     found_fields.each { |f| f.strip! }
     %w{ content head_assets body_assets event_reminder }.each do |reserved_word|
       found_fields.delete(reserved_word)
