@@ -3,7 +3,7 @@
   <%= f.input :tag_string, input_html: { class: "taggable" } %>
   <%= f.input :event_template_id, collection: @event_templates %>
   <%= f.input :embed_template_ids, collection: @embed_templates, as: :check_boxes, label: "Embed templates" %>
-  <%= f.input :scheduled_at %>
+  <%= f.input :scheduled_at, hint: "eg., 'this Tuesday at noon', 'May 25, 2013 at 4:00PM'" %>
 
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
