@@ -1,5 +1,7 @@
 defaults: &defaults
   host: localhost
+  use_utc: false
+  use_activesupport_time_zone: true
   # slaves:
   #   - host: slave1.local
   #     port: 27018
