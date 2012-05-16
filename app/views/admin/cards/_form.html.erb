@@ -1,16 +1,13 @@
 <%= simple_form_for [:admin, @card], html: { class: "form-horizontal" } do |f| %>
+
   <%= f.input :title %>
   <%= f.input :tag_string, input_html: { class: "taggable" } %>
 
   <fieldset>
     <legend>Use the default template</legend>
 
-    <% if f.object.new_record? %>
-      <%= f.input :csv_file, as: :file, label: "CSV File" %>
-    <% else %>
-      <%= f.input :csv, as: :text, label: "Data", input_html: { class: "datajamTemplate rawData", rows: 10, cols: 100 } %>
-    <% end %>
-
+    <%= f.input :csv_file, as: :file, label: "Upload CSV File", hint: "File extension must be .csv" %>
+    <%= f.input :csv, as: :text, label: "Or Enter Data", input_html: { class: "datajamTemplate rawData", rows: 10, cols: 100 } %>
     <%= f.input :source, as: :text, label: 'Source Attribution', input_html: { rows: 5, cols: 80 }, hint: "Can use HTML" %>
   </fieldset>
 

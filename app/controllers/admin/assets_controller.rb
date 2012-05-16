@@ -41,7 +41,7 @@ class Admin::AssetsController < AdminController
       flash[:success] = "Asset updated."
       redirect_to admin_assets_path
     else
-      flash[:error] = "There was a problem updating the asset."
+      flash[:error] = @asset.errors.full_messages.to_sentence
       redirect_to admin_assets_path
     end
   end

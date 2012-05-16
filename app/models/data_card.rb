@@ -17,6 +17,8 @@ class DataCard
   field :source,      type: String
   field :body,        type: String
 
+  validates_presence_of :title
+
   before_save :parse_csv
   after_save :save_events
   after_destroy :save_events

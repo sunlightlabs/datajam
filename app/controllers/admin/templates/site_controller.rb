@@ -10,7 +10,7 @@ class Admin::Templates::SiteController < AdminController
       flash[:success] = "Template updated."
       redirect_to :back
     else
-      flash[:error] = "There was a problem saving the template."
+      flash[:error] = @site_template.errors.full_messages.to_sentence
       redirect_to :back
     end
   end

@@ -137,18 +137,18 @@ describe Event do
   describe "#filter_by_tags" do
     it "only returns taggables that intersect this event's tags" do
       event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now, tag_string: "foo, bar")
-      foo_card = DataCard.create(name: "Foo", tag_string: "foo, baz")
-      bar_card = DataCard.create(name: "Bar", tag_string: "bar, qux")
-      baz_card = DataCard.create(name: "Baz", tag_string: "baz, qux") # no matches
+      foo_card = DataCard.create(title: "Foo", tag_string: "foo, baz")
+      bar_card = DataCard.create(title: "Bar", tag_string: "bar, qux")
+      baz_card = DataCard.create(title: "Baz", tag_string: "baz, qux") # no matches
 
       event.filter_by_tags(DataCard.all).should =~ [foo_card, bar_card]
     end
 
     it "returns all taggables when this event has no tags" do
       event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now, tag_string: "")
-      foo_card = DataCard.create(name: "Foo", tag_string: "foo, baz")
-      bar_card = DataCard.create(name: "Bar", tag_string: "bar, qux")
-      baz_card = DataCard.create(name: "Baz", tag_string: "baz, qux")
+      foo_card = DataCard.create(title: "Foo", tag_string: "foo, baz")
+      bar_card = DataCard.create(title: "Bar", tag_string: "bar, qux")
+      baz_card = DataCard.create(title: "Baz", tag_string: "baz, qux")
 
       event.filter_by_tags(DataCard.all).should have(3).elements
     end

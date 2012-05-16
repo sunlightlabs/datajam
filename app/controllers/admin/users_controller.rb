@@ -24,7 +24,7 @@ class Admin::UsersController < AdminController
       flash[:success] = "User saved."
       redirect_to admin_users_path
     else
-      flash[:error] = "There was a problem saving the user."
+      flash[:error] = @user.errors.full_messages.to_sentence
       redirect_to admin_users_path
     end
   end
@@ -38,7 +38,7 @@ class Admin::UsersController < AdminController
       flash[:success] = "User updated."
       redirect_to admin_users_path
     else
-      flash[:error] = "There was a problem saving the user."
+      flash[:error] = @user.errors.full_messages.to_sentence
       redirect_to admin_users_path
     end
   end

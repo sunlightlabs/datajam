@@ -29,18 +29,23 @@ class Admin::CardsController < AdminController
       flash[:success] = "Card saved."
       redirect_to admin_cards_path
     else
-      flash[:error] = "There was a problem saving the card."
+      flash[:error] = @card.errors.full_messages.to_sentence
       redirect_to admin_cards_path
     end
   end
 
   def update
     @card = DataCard.find(params[:id])
+    
+    if params[:card][:csv_file].present?
+      params[:card].merge!({:csv => File.open(params[:card][:csv_file].tempfile.path).read})
+    end
+
     if @card.update_attributes(params[:card])
       flash[:success] = "Card updated."
       redirect_to edit_admin_card_path(@card)
     else
-      flash[:error] = "There was a problem saving the card."
+      flash[:error] = @card.errors.full_messages.to_sentence
       redirect_to edit_admin_card_path(@card)
     end
   end

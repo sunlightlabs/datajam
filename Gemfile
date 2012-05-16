@@ -22,6 +22,9 @@ gem 'formatize',            '~> 1.0'
 gem 'mini_magick',          '~> 3.4'
 gem 'simple_form',          '~> 2.0'
 
+# Datajam Plugins
+gem 'datajam_chat',         git: 'https://github.com/sunlightlabs/datajam-chat.git'
+
 group :development do
   gem 'ruby-debug19',     '~> 0.11'
   gem 'map_by_method'
