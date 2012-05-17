@@ -5,6 +5,18 @@
   <%= f.input :embed_template_ids, collection: @embed_templates, as: :check_boxes, label: "Embed templates" %>
   <%= f.input :scheduled_at, hint: "eg., 'this Tuesday at noon', 'May 25, 2013 at 4:00PM'" %>
 
+  <% unless @event.template_data.nil? || @event.template_data.empty? -%>
+    <h3>Custom Template Fields</h3><br/>
+    <% @event.template_data.each do |key, value| -%>
+      <div class="control-group string optional">
+        <%= f.label key, class: 'string optional control-label' %>
+        <div class="controls">
+          <%= f.text_field "template_data[#{key}]", value: value, class: 'string optional' %>
+        </div>
+      </div>
+    <% end -%>    
+  <% end -%>
+
   <div class="form-actions">
     <%= f.button :submit, class: "btn-primary" %>
   </div>
