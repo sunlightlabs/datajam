@@ -1,5 +1,6 @@
 class OnairController < ApplicationController
   protect_from_forgery :except => [:update]
+  before_filter :set_cache_buster, :only => [:signed_in]
 
   before_filter :authenticate_user!, :except => [:signed_in]
 
@@ -18,6 +19,14 @@ class OnairController < ApplicationController
     else
       render json: { msg: 'Problem creating content update' }
     end
+  end
+
+  protected
+
+  def set_cache_buster
+    response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   end
 
 end
