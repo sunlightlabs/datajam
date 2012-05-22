@@ -135,6 +135,11 @@ class Event
     save!
   end
 
+  def reopen!
+    self.status = "Upcoming"
+    save!
+  end
+
   def as_json(options = {})
     super.merge(unix_scheduled_at: scheduled_at.to_i)
   end
