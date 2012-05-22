@@ -53,6 +53,8 @@ class Admin::EventsController < AdminController
   def finalize
     @event = Event.find(params[:id])
     @event.finalize!
+    @next_event = Event.upcoming.first
+    @next_event.save! if @next_event
     redirect_to :back
   end
 
