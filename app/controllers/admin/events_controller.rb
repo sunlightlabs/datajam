@@ -56,6 +56,12 @@ class Admin::EventsController < AdminController
     redirect_to :back
   end
 
+  def reopen
+    @event = Event.find(params[:id])
+    @event.reopen!
+    redirect_to :back
+  end
+
   def destroy
     @event = Event.find(params[:id])
     if @event.destroy

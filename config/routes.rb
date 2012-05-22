@@ -12,7 +12,7 @@ Datajam::Application.routes.draw do
     resources :tags, only: [:index, :update, :destroy, :create]
     resources :events do
       member do
-        put :finalize
+        put :finalize, :reopen
       end
       resources :reminders, :only => :destroy
     end
