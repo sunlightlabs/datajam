@@ -20,7 +20,8 @@ class AdminController < ApplicationController
       end
     end
 
-    klass = params[:name].classify.constantize
+    klass_path = params[:name].split('-').map { |part| part.classify }
+    klass = klass_path.join('::').constantize
 
     @plugin = Datajam.plugins.find {|plugin| plugin.name == params[:name] }
     raise ActionController::RoutingError.new('Not Found') unless @plugin
