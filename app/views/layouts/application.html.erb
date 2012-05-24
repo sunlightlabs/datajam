@@ -60,19 +60,17 @@
     <div class="row-fluid">
       <div class="span3">
         <ul class="nav nav-list well">
-          <li class="nav-header">Content</li>
-          <li><a href="/admin/events"><i class="icon-calendar"></i>Events</a></li>
-          <li><a href="/admin/assets"><i class="icon-picture"></i>Assets</a></li>
-          <li><a href="/admin/cards"><i class="icon-list"></i>Data Cards</a></li>
-          <li><a href="/admin/pages"><i class="icon-book"></i>Pages</a></li>
-          <li><a href="/admin/tags"><i class="icon-pushpin"></i>Tags</a></li>
-          <li class="nav-header">Templates</li>
-          <li><a href="/admin/templates/events"><i class="icon-edit"></i>Event Templates</a></li>
-          <li><a href="/admin/templates/embeds"><i class="icon-edit"></i>Embed Templates</a></li>
-          <li><a href="/admin/templates/site"><i class="icon-edit"></i>Site Template</a></li>
-          <li class="nav-header">Administration</li>
-          <li><a href="/admin/plugins"><i class="icon-cogs"></i>Plugins</a></li>
-          <li><a href="/admin/users"><i class="icon-user"></i>Users</a></li>
+        <% Datajam.navigation.each do |section| %>
+          <li class="nav-header"><%= section[:title] %></li>
+          <% section[:items].each do |item| %>
+          <li>
+            <a href="<%= item[:url] %>">
+              <i class="icon-<%= item[:icon] %>"></i>
+              <%= item[:title] %>
+            </a>
+          </li>
+          <% end %>
+        <% end %>
         </ul>
       </div>
 
