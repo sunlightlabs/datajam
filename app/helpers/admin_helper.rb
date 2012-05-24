@@ -32,7 +32,9 @@ module AdminHelper
   end
 
   def get_for_page(collection, records = RECORDS_PER_PAGE)
-    collection.skip((page_number - 1) * records).take(records)
+    from = (page_number - 1) * records
+    to = from + records
+    collection[from..to]
   end
 
   def sort_icon(order)
