@@ -3,7 +3,6 @@ Datajam.navigation << {
   items: [
     { title: 'Events', url: '/admin/events', icon: 'calendar' },
     { title: 'Assets', url: '/admin/assets', icon: 'picture' },
-    { title: 'Data Cards', url: '/admin/cards', icon: 'list' },
     { title: 'Pages', url: '/admin/pages', icon: 'book' },
     { title: 'Tags', url: '/admin/tags', icon: 'pushpin' },
   ]

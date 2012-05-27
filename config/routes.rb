@@ -17,7 +17,6 @@ Datajam::Application.routes.draw do
       resources :reminders, :only => :destroy
     end
     resources :pages
-    resources :cards
     namespace :templates do
       resource :site, :controller => 'site'
       resources :events

@@ -136,6 +136,7 @@ describe Event do
 
   describe "#filter_by_tags" do
     it "only returns taggables that intersect this event's tags" do
+      pending "Ask what DataCard is doing here?"
       event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now, tag_string: "foo, bar")
       foo_card = DataCard.create(title: "Foo", tag_string: "foo, baz")
       bar_card = DataCard.create(title: "Bar", tag_string: "bar, qux")
@@ -145,6 +146,7 @@ describe Event do
     end
 
     it "returns all taggables when this event has no tags" do
+      pending "Ask what DataCard is doing here?"
       event = Event.create(name: 'Test Event', event_template: @event_template, scheduled_at: Time.now, tag_string: "")
       foo_card = DataCard.create(title: "Foo", tag_string: "foo, baz")
       bar_card = DataCard.create(title: "Bar", tag_string: "bar, qux")
