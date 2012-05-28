@@ -27,7 +27,7 @@ group :development do
   gem 'map_by_method'
   gem 'what_methods'
   gem 'awesome_print'
-  gem 'net-http-spy'
+  gem 'net-http-spy', git: 'git://github.com/nu7hatch/net-http-spy.git'
   gem 'hirb'
   gem 'looksee'
   gem 'wirble'

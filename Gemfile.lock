@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/nu7hatch/net-http-spy.git
+  revision: 58dc111094a61884c1ab699a09aa1ccc77cf7472
+  specs:
+    net-http-spy (0.2.1)
+
+GIT
   remote: https://github.com/rtomayko/rocco.git
   revision: 727c510d635ba3b6fcf18caf3b0f89e16ef7e8f3
   specs:
@@ -172,7 +178,6 @@ GEM
     multi_xml (0.5.1)
     multipart-post (1.1.5)
     mustache (0.99.4)
-    net-http-spy (0.2.1)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-sftp (2.0.5)
@@ -309,7 +314,7 @@ DEPENDENCIES
   mongoid (~> 2.3)
   mongoid-rspec (~> 1.4)
   mongoid_slug (~> 0.7)
-  net-http-spy
+  net-http-spy!
   nokogiri (~> 1.5)
   pygmentize (~> 0.0.2)
   rack-gridfs (~> 0.4)
