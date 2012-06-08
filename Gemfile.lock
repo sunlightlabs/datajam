@@ -31,7 +31,7 @@ GIT
 
 GIT
   remote: https://github.com/sunlightlabs/datajam-datacard.git
-  revision: bb4a71b97521f4022335423b5c53883d4036e0f2
+  revision: c6375373d4c638cf4f154794d21583ddb9f84aad
   specs:
     datajam-datacard (0.0.1)
       faraday
@@ -120,7 +120,7 @@ GEM
     escape_utils (0.2.4)
     eventmachine (0.12.10)
     facets (2.9.3)
-    faraday (0.8.0)
+    faraday (0.8.1)
       multipart-post (~> 1.1)
     ffi (1.0.11)
     formatize (1.1.0)

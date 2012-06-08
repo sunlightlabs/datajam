@@ -6,9 +6,9 @@ require 'mongoid/railtie'
 require 'rack/gridfs'
 require 'csv'
 
-Bundler.require(:default, Rails.env) if defined?(Bundler)
-
 require File.expand_path('../../lib/plugins_loader', __FILE__)
+
+Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Datajam
   class Application < Rails::Application
