@@ -17,11 +17,12 @@ Datajam::Application.routes.draw do
       resources :reminders, :only => :destroy
     end
     resources :pages
-    namespace :templates do
-      resource :site, :controller => 'site'
-      resources :events
-      resources :embeds
-    end
+    resources :cards
+    resources :templates
+
+    resources :site_templates, :controller => 'templates/site', :type => SiteTemplate, :as => 'templates_site'
+    resources :events_templates, :controller => 'templates', :type => EventTemplate, :as => 'templates_events'
+    resources :embeds_templates, :controller => 'templates', :type => EmbedTemplate, :as => 'templates_embeds'
   end
 
   resources :reminders, :only => [:create]

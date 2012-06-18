@@ -11,9 +11,9 @@ Datajam.navigation << {
 Datajam.navigation << {
   title: 'Templates',
   items: [
-    { title: 'Event templates', url: '/admin/templates/events', icon: 'edit' },
-    { title: 'Embed templates', url: '/admin/templates/embeds', icon: 'edit' },
-    { title: 'Site template', url: '/admin/templates/site', icon: 'edit' },
+    { title: 'Event templates', url: '/admin/events_templates', icon: 'edit' },
+    { title: 'Embed templates', url: '/admin/embeds_templates', icon: 'edit' },
+    { title: 'Site template', url: '/admin/site_templates', icon: 'edit' },
   ]
 }
 

@@ -1,0 +1,4 @@
+<%= search_box(:name) %>
+<%= table_for @templates, [:name, :updated_at, ""] do |template| %>
+  <%= render :partial => "template", locals: { template: template } %>
+<% end %>

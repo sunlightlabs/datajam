@@ -1,18 +1,27 @@
 require File.expand_path(File.dirname(__FILE__) + '/acceptance_helper')
 
 feature 'Admin area' do
-
-  background do
-    User.create!(:email => 'test@test.com', :password => 'password')
-  end
+  background {
+    create_admin
+  }
 
   scenario 'Sign in' do
-    visit '/admin'
-    page.should have_content('Sign in')
-    fill_in 'Email',    :with => 'test@test.com'
-    fill_in 'Password', :with => 'password'
-    click_button 'Sign in'
-    page.should have_content('Signed in successfully')
+    login_as_admin
   end
 
+  scenario 'Viewing event templates' do
+    login_as_admin
+
+    visit 'admin/events_templates'
+    page.has_link? "#new"
+    page.has_link? "#index"
+  end
+
+  scenario 'Viewing embeds templates' do
+    login_as_admin
+
+    visit 'admin/embeds_templates'
+    page.has_link? "#new"
+    page.has_link? "#index"
+  end
 end

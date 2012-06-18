@@ -1,9 +1,10 @@
 <%= content_tag_for :tr, template do %>
-  <td><%= link_to template.name, [:edit, :admin, template] %></td>
+  <td><%= link_to template.name, edit_admin_template_path(template) %></td>
+
   <td><%= template.updated_at.to_s :humane %></td>
   <td>
     <% if template.can_be_deleted? %>
-      <%= delete_button admin_templates_embed_path(template), confirm: "Are you sure? This will completely destroy the template." %>
+      <%= delete_button admin_template_path(template), confirm: "Are you sure? This will completely destroy the template." %>
     <% else %>
       <button class="btn disabled btn-danger btn-small">Delete</button>
     <% end %>

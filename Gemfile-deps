@@ -32,6 +32,7 @@ group :development do
   gem 'looksee'
   gem 'wirble'
   gem 'sketches'
+  gem 'debugger'
 end
 
 group :development, :test do

@@ -1,0 +1,9 @@
+<h2>Site Template</h2>
+<div class="well">
+  <p>Define the site template below. Upload related images and stylesheets in the <a href="/admin/assets">assets</a> area or your own CDN.</p>
+  <ul>
+    <li>Insert <code>{{{content}}}</code> somewhere into the template. The proper event or page content will be rendered inside.</li>
+    <li>Insert <code>{{{head_assets}}}</code> and <code>{{{body_assets}}}</code> before the closing <code>&lt;/head&gt;</code> and <code>&lt;/body&gt;</code> tags respectively.</li>
+  </ul>
+</div>
+<%= render :partial => 'admin/templates/form' %>

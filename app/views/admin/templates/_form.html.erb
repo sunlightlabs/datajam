@@ -1,5 +1,7 @@
-<%= simple_form_for [:admin, @template], html: { class: "form-horizontal" } do |f| %>
+<% url = @template.persisted? ? admin_template_path(@template) : admin_templates_path %>
+<%= simple_form_for @template, url: url, html: { class: "form-horizontal" } do |f| %>
   <%= f.input :name %>
+  <%= f.input :type, as: :hidden, input_html: { value: @template._type } %>
   <%= f.input :template, as: :text, input_html: { class: "datajamTemplate", rows: 20, cols: 100 } %>
 
   <% if @template.custom_fields.any? %>
