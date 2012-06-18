@@ -58,6 +58,7 @@
 
   <div class="container-fluid">
     <div class="row-fluid">
+      <% if user_signed_in? %>
       <div class="span3">
         <ul class="nav nav-list well">
         <% Datajam.navigation.each do |section| %>
@@ -73,8 +74,9 @@
         <% end %>
         </ul>
       </div>
+      <% end %>
 
-      <div class="span9" id="content">
+      <div <% if user_signed_in? %>class="span9"<% end %> id="content">
         <%= flash_messages %>
         <%= yield %>
 
