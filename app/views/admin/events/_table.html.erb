@@ -5,7 +5,7 @@
     <td><%= event.status %></td>
     <td><%= event.scheduled_at.to_s :humane %></td>
     <% if event.status == 'Upcoming' %>
-    <td><%= button_to "End Event", finalize_admin_event_path(event), method: :put, title: "This will put the event in the archives.", class: "btn btn-warning btn-small" %></td>
+    <td><%= button_to "Archive", finalize_admin_event_path(event), method: :put, title: "This will put the event in the archives.", class: "btn btn-warning btn-small" %></td>
     <% else %>
     <td><%= button_to "Reopen Event", reopen_admin_event_path(event), method: :put, title: "This will remove the event from the archives and publish it to the homepage.", class: "btn btn-small" %></td>
     <% end %>
