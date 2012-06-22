@@ -36,7 +36,7 @@ describe Tag::Taggable do
 
     it "adds new tags" do
       model.update_attributes(tag_string: "foo, bar, baz")
-      model.tag_list.should == ["foo", "bar", "baz"]
+      model.tag_list.should include("foo", "bar", "baz")
     end
 
     it "removes references to tags when a taggable is no longer tagged" do
