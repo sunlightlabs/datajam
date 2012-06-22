@@ -1,7 +1,7 @@
 <h2>Static Assets</h2>
 <div class="well">
     <p>Use this space to upload images, stylesheets and other files.<br/>
-       They will be available at <code><%= request.domain %>/static/assets/</code> after uploading. 
+       They will be available at <code><%= request.domain %>/static/assets/</code> after uploading.
     </p>
 </div>
 
@@ -13,13 +13,13 @@
     <div class="tab-pane active" id="index">
         <%= render :partial => 'admin/assets/table' %>
     </div>
-    
+
     <div class="tab-pane" id="new">
-        <%= simple_form_for [:admin, @asset], html: { class: "form-horizontal" } do |f| %>
+      <%= simple_form_for [:admin, @asset], html: { class: "form-horizontal" } do |f| %>
         <%= f.input :asset, as: :file, hint: "Filenames will be lowercased, and spaces will be converted to underscores. Uploading a file of the same name as a current asset will replace it." %>
         <div class="form-actions">
-            <%= f.button :submit, label: "Upload", class: "btn-primary" %>
+          <%= f.button :submit, label: "Upload", class: "btn-primary" %>
         </div>
-        <% end %>
+      <% end %>
     </div>
 </div>
