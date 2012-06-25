@@ -297,7 +297,8 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   bigdecimal
-  bson_ext (~> 1.2)
+  bson (= 1.6.2)
+  bson_ext (= 1.6.2)
   capistrano (~> 2.5)
   capybara (~> 1.1)
   carrierwave (~> 0.5)

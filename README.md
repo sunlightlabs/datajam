@@ -21,7 +21,7 @@ Datajam is a Rails 3.0 app. It depends on [Ruby](http://ruby-lang.org), [RVM](ht
 
 After those external dependencies are installed, the app can be installed with:
 
-    $ rvm use 1.9.2
+    $ rvm use 1.9.3
     $ gem install bundler
     $ git clone https://github.com/sunlightlabs/datajam.git
     $ cd datajam/
