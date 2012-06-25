@@ -1,0 +1,5 @@
+language: ruby
+rvm:
+  - 1.9.3
+before_script:
+  - mongo datajam_test --eval 'db.addUser("travis", "test");'
