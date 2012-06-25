@@ -175,7 +175,10 @@ GEM
     minitest (3.0.0)
     mongo (1.6.2)
       bson (~> 1.6.2)
-    mongoid (2.4.10)
+    mongoid (2.4.11)
+      activemodel (~> 3.1)
+      mongo (<= 1.6.2)
+      tzinfo (~> 0.3.22)
     mongoid-rspec (1.4.4)
       mongoid (~> 2.0)
       rspec (~> 2)
@@ -321,7 +324,7 @@ DEPENDENCIES
   map_by_method
   mini_magick (~> 3.4)
   minitest
-  mongoid (~> 2.3)
+  mongoid (~> 2.4)
   mongoid-rspec (~> 1.4)
   mongoid_slug (~> 0.7)
   net-http-spy!
