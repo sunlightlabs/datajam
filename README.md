@@ -1,5 +1,7 @@
 # Datajam
 
+[![Build Status](https://secure.travis-ci.org/sunlightlabs/datajam.png)](http://travis-ci.org/sunlightlabs/datajam)
+
 A real-time, data-driven platform for reporting live events on the Web.
 
 * Homepage at [Datajam.org](http://datajam.org) *(coming soon)*
@@ -35,7 +37,7 @@ Bundler takes care of installing all the other Ruby libraries used by Datajam, a
   * [Underscore.js](http://documentcloud.github.com/underscore/) for its helper utilities
   * [Backbone.js](http://documentcloud.github.com/backbone/) for client-side MVC
   * [Jasmine](https://github.com/pivotal/jasmine) for client-side unit testing
-  * [Protovis](http://vis.stanford.edu/protovis/) to generate visualizations
+  * [D3](http://d3js.org/) to generate visualizations
 * Testing:
   * [RSpec](http://rspec.info/) for unit and functional tests
   * [RR](https://github.com/btakita/rr) for test doubles
@@ -74,13 +76,12 @@ More documentation coming soon.
 
 ## Deploying on Heroku
 
-*Note: Not currently functional.*
-
 1. Fork the project on [GitHub](https://github.com/sunlightlabs/datajam)
 2. Create a `/config/settings.yml` based off of `/config/settings.yml.example`
 3. Sign up on [Heroku](http://heroku.com)
 4. Follow steps 1-4 of Heroku's [quickstart instructions](http://docs.heroku.com/quickstart)
-5. Set up the [MongoHQ](http://docs.heroku.com/mongohq) add-on
+5. Set up the [MongoLab](http://docs.heroku.com/mongolab), 
+    [RedisToGo](http://docs.heroku.com/redistogo) and [Sendgrid](http://docs.heroku.com/sendgrid) add-ons
 
 ## License
 
