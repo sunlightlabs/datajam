@@ -192,7 +192,8 @@ class Event
           self.content_areas << klass.new(name: name, area_type: area_type)
         else
           existing.each do |area|
-            area.update_attributes(name: name, area_type: area_type)
+            area.set(:name, name)
+            area.set(:area_type, area_type)
           end
         end
       end
