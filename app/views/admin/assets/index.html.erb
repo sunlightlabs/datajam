@@ -1,7 +1,7 @@
 <h2>Static Assets</h2>
 <div class="well">
     <p>Use this space to upload images, stylesheets and other files.<br/>
-       They will be available at <code><%= request.subdomain %><%= request.domain %>/static/assets/</code> after uploading.
+       They will be available at <code><%= request.subdomain + '.' unless request.subdomain.blank? %><%= request.domain %>/static/assets/</code> after uploading.
     </p>
 </div>
 
