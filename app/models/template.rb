@@ -34,6 +34,10 @@ class Template
     !self.events(true).any?
   end
 
+  def name_is_editable?
+    true
+  end
+
   # `Mongoid::Slug` changes this to `self.slug`. No thanks.
   def to_param
     self.id.to_s

@@ -15,6 +15,10 @@ class SiteTemplate < Template
     Event.all.each { |e| e.save }
   end
 
+  def name_is_editable?
+    false
+  end
+
   protected
 
   def only_one
