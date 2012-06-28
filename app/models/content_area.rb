@@ -25,6 +25,10 @@ class ContentArea
     "<div id=\"#{self.area_type}_#{self.id}\">#{self.html}</div>"
   end
 
+  def render_update
+    "#{self.html}"
+  end
+
   protected
 
   # A convenience for querying by class name.

@@ -15,7 +15,7 @@ class ContentUpdate
     content_area.update_attributes(html: self.html, data: self.data)
     content_area.save
 
-    self.html = content_area.render
+    self.html = content_area.render_update
     self.save
   end
 
