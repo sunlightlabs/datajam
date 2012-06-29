@@ -90,7 +90,7 @@ BODY
 REMINDER_ASSETS = <<-REMINDER
 <div id="event_reminder">
   <h3>Remind Me</h3>
-  <p>Enter your email address to receive a reminder about an hour before the event.</p>
+  <p class="tip">Enter your email address and we'll remind you about an hour before the&nbsp;event.</p>
   <form action="/reminders" id="remind_event" class="well form-inline reminder_form" method="post" data-remote=true>
     <div id="notification_response"></div>
       <input type="hidden" name="event_id" value="{{event_id}}" />
