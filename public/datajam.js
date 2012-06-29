@@ -69,7 +69,8 @@ Datajam.ContentUpdateModal = Backbone.View.extend({
 
     return this;
   },
-  save: function() {
+  save: function(e) {
+    e.preventDefault();
     this.model.save();
   }
 });
@@ -91,7 +92,8 @@ Datajam.DataCardModal = Backbone.View.extend({
 
     return this;
   },
-  save: function() {
+  save: function(e) {
+    e.preventDefault();
     this.model.save();
   }
 });
@@ -135,7 +137,7 @@ Datajam.pollForUpdates = function() {
 $(function() {
 
   // Compile the modal template(s).
-  var tmpls = {}
+  var tmpls = {};
   $("script.modalTemplate").each(function(){
     var tmpl = $(this)
       , areaType = tmpl.attr('id').replace('_modal_template', '');
