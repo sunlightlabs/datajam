@@ -1,2 +1,2 @@
 #gem 'datajam-chat',     git: 'https://github.com/sunlightlabs/datajam-chat.git', require: 'datajam/chat'
-gem 'datajam-datacard', git: 'https://github.com/sunlightlabs/datajam-datacard.git', require: 'datajam/datacard'
+#gem 'datajam-datacard', git: 'https://github.com/sunlightlabs/datajam-datacard.git', require: 'datajam/datacard'
