@@ -5,9 +5,7 @@
     <ul class="nav nav-pills">
       <li class="active"><a href="#info" data-toggle="pill">Info</a></li>
       <li><a href="#settings" data-toggle="pill">Settings</a></li>
-      <% @actions.each do |action| %>
-        <li><a href="<%= url_for :action => action, :controller => "/#{action_controller_for @plugin}" %>"><%= action.to_s.titleize %></a></li>
-      <% end %>
+      <%= render 'actions' %>
     </ul>
 
     <div class="tab-content">
