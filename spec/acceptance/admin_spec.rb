@@ -12,15 +12,15 @@ feature 'Admin area' do
   scenario 'Viewing event templates' do
     login_as_admin
 
-    visit 'admin/events_templates'
+    visit 'admin/event_templates'
     page.has_link? "#new"
     page.has_link? "#index"
   end
 
-  scenario 'Viewing embeds templates' do
+  scenario 'Viewing embed templates' do
     login_as_admin
 
-    visit 'admin/embeds_templates'
+    visit 'admin/embed_templates'
     page.has_link? "#new"
     page.has_link? "#index"
   end

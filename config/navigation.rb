@@ -11,8 +11,8 @@ Datajam.navigation << {
 Datajam.navigation << {
   title: 'Templates',
   items: [
-    { title: 'Event templates', url: '/admin/events_templates', icon: 'edit' },
-    { title: 'Embed templates', url: '/admin/embeds_templates', icon: 'edit' },
+    { title: 'Event templates', url: '/admin/event_templates', icon: 'edit' },
+    { title: 'Embed templates', url: '/admin/embed_templates', icon: 'edit' },
     { title: 'Site template', url: '/admin/site_templates', icon: 'edit' },
   ]
 }
@@ -22,6 +22,6 @@ Datajam.navigation << {
   items: [
     { title: 'Plugins', url: '/admin/plugins', icon: 'cog' },
     { title: 'Users', url: '/admin/users', icon: 'user' },
-    { title: 'Cache', url: '/admin/cache', icon: 'cloud' },
+    { title: 'System Cache', url: '/admin/cache', icon: 'cloud' },
   ]
 }

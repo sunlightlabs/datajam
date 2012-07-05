@@ -21,14 +21,12 @@ Datajam::Application.routes.draw do
     resources :templates
     resources :plugins, :only => [:index, :show, :update]
     resources :cache, :only => [:index] do
-      collection do
-        get :rebuild
-      end
+      get 'rebuild', :on => :collection
     end
 
     resources :site_templates, :controller => 'templates/site', :type => SiteTemplate, :as => 'templates_site'
-    resources :events_templates, :controller => 'templates', :type => EventTemplate, :as => 'templates_events'
-    resources :embeds_templates, :controller => 'templates', :type => EmbedTemplate, :as => 'templates_embeds'
+    resources :event_templates, :controller => 'templates', :type => EventTemplate, :as => 'templates_event'
+    resources :embed_templates, :controller => 'templates', :type => EmbedTemplate, :as => 'templates_embed'
   end
 
   resources :reminders, :only => [:create]

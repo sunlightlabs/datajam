@@ -1,6 +1,7 @@
 class Admin::CacheController < AdminController
     def index
         @urls, @timestamp = Cacher.get_info
+        render 'admin/cache/index'
     end
 
     def rebuild
