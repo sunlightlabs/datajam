@@ -12,6 +12,6 @@ class Admin::CacheController < AdminController
         else
             flash[:success] = "Cache rebuilt successfully"
         end
-        redirect_to admin_cache_path
+        redirect_to admin_cache_index_path
     end
 end
