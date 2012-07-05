@@ -14,7 +14,7 @@ class Admin::PluginsController < AdminController
 
     @settings = Setting.where(:namespace => params[:id]).order_by([:name, :asc]).entries
 
-    @actions = klass::PluginController.action_methods rescue []
+    @actions = klass::PluginController.action_methods.to_a rescue []
     # controller methods starting with '_' are not linked in settings page
     @actions.reject! {|method| method.to_s =~ /^_/ }
     # don't show install link if plugin is installed
