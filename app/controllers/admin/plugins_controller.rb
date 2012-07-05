@@ -1,6 +1,4 @@
 class Admin::PluginsController < AdminController
-  before_filter :authenticate_user!
-
   def index
     @plugins = Datajam.plugins.sort {|x,y| x.name <=> y.name }
   end

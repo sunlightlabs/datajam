@@ -6,41 +6,8 @@ class AdminController < ApplicationController
 
   end
 
-  def plugins
-    @plugins = Datajam.plugins.sort {|x,y| x.name <=> y.name }
-
-    render 'admin/plugins/index'
-  end
-
-  def plugin_detail
-    if request.post? || request.put?
-      batch = Setting.bulk_update(params[:settings])
-      if batch[:updated]
-        flash[:success] = 'Settings updated.'
-      else
-        flash[:error] = 'There was an error updating one or more settings.'
-      end
-    end
-
-    klass_path = params[:name].split('-').map { |part| part.classify }
-    klass = klass_path.join('::').constantize
-
-    @plugin = Datajam.plugins.find {|plugin| plugin.name == params[:name] }
-    raise ActionController::RoutingError.new('Not Found') unless @plugin
-
-    @settings = Setting.where(:namespace => params[:name]).order_by([:name, :asc]).entries
-
-    @actions = klass::PluginController.action_methods rescue []
-    # controller methods starting with '_' are not linked in settings page
-    @actions.reject! {|method| method.to_s =~ /^_/ }
-    # don't show install link if plugin is installed
-    @actions.reject! {|method| @settings.any? && method == 'install' }
-    # only show install link if plugin isn't installed, and installation is required
-    @actions.reject! {|method| @settings.empty? && klass.install_required? && method != 'install' }
-    # remove 'installed' setting after checking for installation; it's only used to determine status
-    @settings.reject! {|setting| setting[:name] == 'installed' }
-
-    render 'admin/plugins/show'
+  def rebuild_cache
+    RebuildCacheJob.perform
   end
 
 end

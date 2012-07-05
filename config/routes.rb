@@ -20,6 +20,11 @@ Datajam::Application.routes.draw do
     resources :cards
     resources :templates
     resources :plugins, :only => [:index, :show, :update]
+    resources :cache, :only => [:index] do
+      collection do
+        get :rebuild
+      end
+    end
 
     resources :site_templates, :controller => 'templates/site', :type => SiteTemplate, :as => 'templates_site'
     resources :events_templates, :controller => 'templates', :type => EventTemplate, :as => 'templates_events'

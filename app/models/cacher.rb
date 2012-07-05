@@ -1,13 +1,17 @@
 class Cacher
+
+  def self.redis
+    @@redis ||= Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)
+  end
+
   def self.reset!
     cache_events(Event.all)
     cache_archives
+    cache_pages
   end
 
   # Takes in an array of events. Only have one event to cache? Pass in an array with that one event.
   def self.cache_events(events)
-
-    redis = Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)
     site_template = SiteTemplate.first
 
     # Cache all events.
@@ -44,10 +48,14 @@ class Cacher
     cache("/archives", Archives.render)
   end
 
+  def self.cache_pages
+    Page.all.entries.each do |page|
+      page.set_route
+    end
+  end
+
   # Convenience wrapper to write content to Redis.
   def self.cache(path, content)
-    redis = Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)
-
     # Add a leading slash if it's not there.
     path = '/' + path if path[0] != '/'
 
@@ -57,8 +65,17 @@ class Cacher
 
   # Cleans a cached content
   def self.clean(path)
-    redis = Redis::Namespace.new(Rails.env.to_s, :redis => REDIS)
     path = '/' + path if path[0] != '/'
     redis.del path
+  end
+
+  def self.get_info
+    keys = redis.keys.sort
+    last_mod = redis.lastsave
+    [keys, last_mod]
+  end
+
+  def self.timestamp
+    redis.lastsave
   end
 end
