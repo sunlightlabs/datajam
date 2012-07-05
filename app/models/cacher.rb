@@ -49,9 +49,7 @@ class Cacher
   end
 
   def self.cache_pages
-    Page.all.entries.each do |page|
-      page.set_route
-    end
+    Page.all.each(&:save!)
   end
 
   # Convenience wrapper to write content to Redis.
