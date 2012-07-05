@@ -1,0 +1,5 @@
+<%= simple_table_for @urls, [:path] do |url| %>
+  <tr>
+    <td><%= link_to url, url, :target=> '_blank' %></td>
+  </tr>
+<% end -%>

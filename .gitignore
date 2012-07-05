@@ -4,7 +4,7 @@ db/*.sqlite3
 log/
 tmp/
 bin/
-cache/
+/cache/
 vendor/
 public/uploads
 public/avatar
