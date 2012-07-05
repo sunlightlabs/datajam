@@ -21,6 +21,8 @@ class Admin::PluginsController < AdminController
     @actions.reject! {|method| @settings.any? && method == 'install' }
     # only show install link if plugin isn't installed, and installation is required
     @actions.reject! {|method| @settings.empty? && klass.install_required? && method != 'install' }
+    @actions.sort!
+
     # remove 'installed' setting after checking for installation; it's only used to determine status
     @settings.reject! {|setting| setting[:name] == 'installed' }
   end
