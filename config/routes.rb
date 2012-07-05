@@ -4,8 +4,8 @@ Datajam::Application.routes.draw do
 
   match 'admin' => 'admin#index', :as => 'admin_root'
   match 'admin/check' => 'admin#check'
-  match 'admin/plugins/:name' => 'admin#plugin_settings', :as => 'plugin_settings'
-  match 'admin/plugins' => 'admin#plugins'
+  # match 'admin/plugins/:name' => 'admin#plugin_settings', :as => 'plugin_settings'
+  # match 'admin/plugins' => 'admin#plugins'
   namespace :admin do
     resources :assets
     resources :users
@@ -19,6 +19,7 @@ Datajam::Application.routes.draw do
     resources :pages
     resources :cards
     resources :templates
+    resources :plugins, :only => [:index, :show, :update]
 
     resources :site_templates, :controller => 'templates/site', :type => SiteTemplate, :as => 'templates_site'
     resources :events_templates, :controller => 'templates', :type => EventTemplate, :as => 'templates_events'

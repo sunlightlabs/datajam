@@ -1,0 +1,25 @@
+<div class="row-fluid">
+  <div class="span9">
+    <h2><%= @plugin.name.titleize %></h2>
+
+    <ul class="nav nav-pills">
+      <li class="active"><a href="#info" data-toggle="pill">Info</a></li>
+      <li><a href="#settings" data-toggle="pill">Settings</a></li>
+      <% @actions.each do |action| %>
+        <li><a href="<%= url_for :action => action, :controller => "/#{action_controller_for @plugin}" %>"><%= action.to_s.titleize %></a></li>
+      <% end %>
+    </ul>
+
+    <div class="tab-content">
+      <div class="tab-pane active" id="info">
+        <div class="well">
+          <%= markdown @plugin.description %>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="settings">
+        <%= render 'form' %>
+      </div>
+    </div>
+  </div>
+</div><br/>

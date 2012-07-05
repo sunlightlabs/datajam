@@ -3,7 +3,7 @@
 <% if @plugins.any? %>
     <%= simple_table_for @plugins, ["Name", "Description", "Version", "Authors", "Homepage"] do |plugin| %>
       <tr>
-        <td><%= link_to plugin.name.titleize, plugin_settings_path(plugin.name) %></td>
+        <td><%= link_to plugin.name.titleize, admin_plugin_path(plugin.name) %></td>
         <td><%= plugin.summary %></td>
         <td><%= plugin.version %></td>
         <td><%= plugin.authors.join(', ') %></td>

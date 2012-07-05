@@ -16,5 +16,4 @@ module ApplicationHelper
       return content_tag :div, msg, class: "alert alert-#{type}"
     end
   end
-
 end

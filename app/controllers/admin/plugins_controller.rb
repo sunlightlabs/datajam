@@ -1,34 +1,18 @@
-class AdminController < ApplicationController
-
+class Admin::PluginsController < AdminController
   before_filter :authenticate_user!
 
   def index
-
-  end
-
-  def plugins
     @plugins = Datajam.plugins.sort {|x,y| x.name <=> y.name }
-
-    render 'admin/plugins/index'
   end
 
-  def plugin_detail
-    if request.post? || request.put?
-      batch = Setting.bulk_update(params[:settings])
-      if batch[:updated]
-        flash[:success] = 'Settings updated.'
-      else
-        flash[:error] = 'There was an error updating one or more settings.'
-      end
-    end
-
-    klass_path = params[:name].split('-').map { |part| part.classify }
-    klass = klass_path.join('::').constantize
-
-    @plugin = Datajam.plugins.find {|plugin| plugin.name == params[:name] }
+  def show
+    @plugin = Datajam.plugins.find {|plugin| plugin.name == params[:id] }
     raise ActionController::RoutingError.new('Not Found') unless @plugin
 
-    @settings = Setting.where(:namespace => params[:name]).order_by([:name, :asc]).entries
+    klass_path = @plugin.name.split('-').map { |part| part.classify }
+    klass = klass_path.join('::').constantize
+
+    @settings = Setting.where(:namespace => params[:id]).order_by([:name, :asc]).entries
 
     @actions = klass::PluginController.action_methods rescue []
     # controller methods starting with '_' are not linked in settings page
@@ -39,8 +23,15 @@ class AdminController < ApplicationController
     @actions.reject! {|method| @settings.empty? && klass.install_required? && method != 'install' }
     # remove 'installed' setting after checking for installation; it's only used to determine status
     @settings.reject! {|setting| setting[:name] == 'installed' }
-
-    render 'admin/plugins/show'
   end
 
+  def update
+    batch = Setting.bulk_update(params[:settings])
+    if batch[:updated]
+      flash[:success] = 'Settings updated.'
+    else
+      flash[:error] = 'There was an error updating one or more settings.'
+    end
+    redirect_to admin_plugin_path params[:id]
+  end
 end
