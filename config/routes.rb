@@ -20,7 +20,7 @@ Datajam::Application.routes.draw do
     resources :cards
     resources :templates
     resources :plugins, :only => [:index, :show, :update]
-    resources :cache, :only => [:index] do
+    resources :cache, :only => [:index, :destroy] do
       get 'rebuild', :on => :collection
     end
 

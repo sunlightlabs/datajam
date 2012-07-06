@@ -1,5 +1,10 @@
-<%= simple_table_for @urls, [:path] do |url| %>
+<%= simple_table_for @urls, [:path, :action] do |url| %>
   <tr>
     <td><%= link_to url, url, :target=> '_blank' %></td>
+    <% if url != '/' %>
+        <td><%= button_to 'Delete', { :action => :destroy, :id => CGI::escape(url).gsub('.', '%2E'), :format => :html }, { :class=>'btn btn-small btn-danger', :method => :delete, :confirm => 'Are you sure? This will make the page unviewable to the public.' } %></td>
+    <% else %>
+        <td></td>
+    <% end %>
   </tr>
 <% end -%>
