@@ -17,6 +17,9 @@ module Datajam
     config.autoload_paths += %W(#{Rails.root}/lib)
     config.middleware.insert 0, 'Rack::Deflater'
     config.middleware.insert 1, 'Rack::RedisCache'
+    config.middleware.insert_before('Rack::Lock', 'Rack::Rewrite') do
+      r301 %r{(.+)/$}, '$1'
+    end
     config.action_view.javascript_expansions[:defaults] = %w(
       http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js
       http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js

@@ -15,8 +15,6 @@ class RedisCache
     # request = Rack::Request.new(env)
     request = ActionDispatch::Request.new(env)
 
-    # Strip trailing slashes from request path, first
-    request.path.sub!(/\/$/, '')
     # Is the path saved in Redis as a key? Have we seen this user before?
     # If so, log the hit and serve the key's value immediately.
     if request.get? && cached_content = @redis.get(request.path)
