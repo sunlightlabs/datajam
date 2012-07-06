@@ -22,7 +22,7 @@ class Cacher
       redis.set '/event/' + event.id.to_s + '.json', event.to_json
 
       # Cache the event page.
-      redis.set '/' + event.slug, event.cached_render
+      redis.set '/' + event.slug, event.cache_render
 
       # Cache the root event if this is the next event.
       redis.set '/', event.render if event == next_event
