@@ -1,4 +1,4 @@
-<%= simple_table_for @urls, [:path, :action] do |url| %>
+<%= simple_table_for @urls, ['Path', 'Action'] do |url| %>
   <tr>
     <td><%= link_to url, url, :target=> '_blank' %></td>
     <% if url != '/' %>
