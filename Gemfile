@@ -23,6 +23,7 @@ gem 'formatize',            '~> 1.0'
 gem 'mini_magick',          '~> 3.4'
 gem 'simple_form',          '~> 2.0'
 gem 'bigdecimal'
+gem 'time_diff'
 
 group :development do
   gem 'thin'

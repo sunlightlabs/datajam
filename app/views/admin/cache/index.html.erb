@@ -1,16 +1,19 @@
 <h2>Site Cache</h2>
 <div class="well">
-    <p><strong>Last updated: <time><%= Time.at(@timestamp).to_s :humane %></time></strong></p>
     <p>Below is a list of all of the pages that can be served to visitors. You can rebuild the cache if a page appears to be missing.</p>
 </div>
 
 <ul class="nav nav-pills">
     <li class="active"><a href="#index" data-toggle="pill">URLs</a></li>
+    <li><a href="#stats" data-toggle="pill">Stats</a></li>
     <%= render 'actions' %>
 </ul>
 
 <div class="tab-content">
     <div class="tab-pane active" id="index">
-        <%= render 'table' %>
+        <%= render 'urls' %>
+    </div>
+    <div class="tab-pane" id="stats">
+        <%= render 'stats' %>
     </div>
 </div>

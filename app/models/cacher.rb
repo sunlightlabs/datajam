@@ -67,10 +67,24 @@ class Cacher
     redis.del path
   end
 
-  def self.get_info
-    keys = redis.keys.sort
-    last_mod = redis.lastsave
-    [keys, last_mod]
+  def self.keys
+    redis.keys.sort
+  end
+
+  def self.info
+    redis.info.keep_if do |key, value|
+      [
+        'redis_version',
+        'uptime_in_seconds',
+        'connected_clients',
+        'used_memory_human',
+        'changes_since_last_save',
+        'last_save_time',
+        'expired_keys',
+        'keyspace_hits',
+        'keyspace_misses'
+      ].include?(key)
+    end
   end
 
   def self.timestamp

@@ -1,13 +1,14 @@
 class Admin::CacheController < AdminController
     def index
-        @urls, @timestamp = Cacher.get_info
+        @info = Cacher.info
+        @urls = Cacher.keys
     end
 
     def rebuild
-        timestamp = Cacher.timestamp
+        changes_orig = Cacher.info['changes_since_last_save']
         Cacher.reset!
-        @timestamp = Cacher.timestamp
-        if timestamp == @timestamp
+        changes = Cacher.info['changes_since_last_save']
+        if changes == changes_orig
             flash[:error] = "There was an error rebuilding the cache"
         else
             flash[:success] = "Cache rebuilt successfully"

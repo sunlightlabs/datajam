@@ -1,0 +1,14 @@
+<%= simple_table_for @info.to_a, ['Property', ''] do |row| %>
+<tr>
+    <td><%= row[0].titleize %></td>
+    <td>
+        <% if row[0] == 'uptime_in_seconds' %>
+            <%= Time.diff(Time.now, Time.now + row[1].to_i)[:diff] %>
+        <% elsif row[0] == 'last_save_time' %>
+            <%= Time.at(row[1].to_i).to_s :humane %>
+        <% else %>
+            <%= row[1] %>
+        <% end %>
+    </td>
+</tr>
+<% end -%>
