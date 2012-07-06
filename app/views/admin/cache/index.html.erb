@@ -1,7 +1,8 @@
-<h2>System Cache</h2>
-<p>
-  <strong>Last updated: <time><%= Time.at(@timestamp).to_s :humane %></time></strong>
-</p>
+<h2>Site Cache</h2>
+<div class="well">
+    <p><strong>Last updated: <time><%= Time.at(@timestamp).to_s :humane %></time></strong></p>
+    <p>Below is a list of all of the pages that can be served to visitors. You can rebuild the cache if a page appears to be missing.</p>
+</div>
 
 <ul class="nav nav-pills">
     <li class="active"><a href="#index" data-toggle="pill">URLs</a></li>

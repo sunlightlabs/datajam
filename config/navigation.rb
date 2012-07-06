@@ -22,6 +22,6 @@ Datajam.navigation << {
   items: [
     { title: 'Plugins', url: '/admin/plugins', icon: 'cog' },
     { title: 'Users', url: '/admin/users', icon: 'user' },
-    { title: 'System Cache', url: '/admin/cache', icon: 'cloud' },
+    { title: 'Site Cache', url: '/admin/cache', icon: 'cloud' },
   ]
 }
