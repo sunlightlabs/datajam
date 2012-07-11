@@ -48,7 +48,7 @@
 
       queryElement.val("");
       return false;
-    })
+    });
 
     // toggle 'new' form if list is empty
     if(!location.search.match(/q=/)) {
@@ -67,13 +67,13 @@
       this.table = $('#table-main.ajax-table');
 
       this.nextPage = function() {
-        var basePath = location.origin + location.pathname;
+        var basePath = "//" + location.host + location.pathname;
 
         var searchPage = location.search.match(/page=([0-9])/);
         var currentPage = searchPage ? searchPage[1] : false;
 
         var queryString = location.search.replace(/(page=)([0-9])/, function(string, query, page) {
-          return query + (parseInt(currentPage) + 1);
+          return query + (parseInt(currentPage, 10) + 1);
         });
 
         if(!currentPage) {
@@ -132,7 +132,7 @@
 
     };
 
-    var scroller = new InfiniteScrolling;
+    var scroller = new InfiniteScrolling();
     scroller.checkAndLoadMore();
 
     $(window).scroll(function() {
@@ -149,18 +149,19 @@
     });
 
     $.flash = function(text, type) {
-      if (typeof type == "undefined")
-        type = "success"
+      if (typeof type == "undefined") {
+        type = "success";
+      }
 
       var alert = $(".alert");
 
-      if (alert.length == 0) {
-        alert = $("<div class='alert alert-" + type + "' />")
-        $("#content").prepend(alert)
+      if (alert.length === 0) {
+        alert = $("<div class='alert alert-" + type + "' />");
+        $("#content").prepend(alert);
       }
 
       alert.html(text);
-    }
+    };
 
   });
 
@@ -170,7 +171,7 @@
       var container = $("<div/>");
       container.attr("id", "editor-" + element.attr("id"));
       container.addClass("ace-editor");
-      element.after(container)
+      element.after(container);
       return container;
     }
 
@@ -185,7 +186,7 @@
           'position': 'absolute',
           'left': '-9999px'
         }).remove());
-      };
+      }
 
       var editor = ace.edit(container.attr("id")),
           HtmlMode = require("ace/mode/html").Mode,
