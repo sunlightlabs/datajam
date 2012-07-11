@@ -51,6 +51,7 @@ group :development, :test do
   gem 'pygmentize',        '~> 0.0.2'
   gem 'guard-rspec',       '~> 0.5'
   gem 'cover_me',          '~> 1.2'
+  gem 'mocha',             '0.11.4'
 end
 
 begin

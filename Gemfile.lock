@@ -133,10 +133,13 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     map_by_method (0.8.3)
+    metaclass (0.0.1)
     mime-types (1.18)
     mini_magick (3.4)
       subexec (~> 0.2.1)
     minitest (3.0.0)
+    mocha (0.11.4)
+      metaclass (~> 0.0.1)
     mongo (1.6.2)
       bson (~> 1.6.2)
     mongoid (2.4.11)
@@ -285,6 +288,7 @@ DEPENDENCIES
   map_by_method
   mini_magick (~> 3.4)
   minitest
+  mocha (= 0.11.4)
   mongoid (~> 2.4)
   mongoid-rspec (~> 1.4)
   mongoid_slug (~> 0.7)
