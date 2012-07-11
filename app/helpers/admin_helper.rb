@@ -5,7 +5,7 @@ module AdminHelper
     sorted_by = collection.options.fetch(:sort, []).first
     collection = get_for_page(collection)
 
-    if collection.empty?
+    if collection.blank?
       content_tag(:p, "Nothing to show yet, why don't you go ahead and create something?", class: "empty")
     else
       render "shared/table",
