@@ -1,5 +1,9 @@
 language: ruby
 rvm:
   - 1.9.3
+notifications:
+  email:
+    - ddrinkard@sunlightfoundation.com
+    - chris@nu7hat.ch
 before_script:
   - mongo datajam_test --eval 'db.addUser("travis", "test");'
