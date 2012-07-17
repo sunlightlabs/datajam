@@ -23,9 +23,6 @@ event_template = EventTemplate.find_or_create_by(
     <div class="span8">
       <div class="video">{{ content_area: Video Embed }}</div>
     </div>
-    <div class="span4">
-      <div class="datacard">{{ data_card_area: Data Card }}</div>
-    </div>
   </div>
   EOT
 )

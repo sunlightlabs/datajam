@@ -1,0 +1,28 @@
+#!/usr/bin/sh
+if [ !$DATAJAM_ROOT ]; then
+    export DATAJAM_ROOT="$HOME/.datajam"
+fi
+if [ !$DATAJAM_APP ]; then
+    DATAJAM_APP=`heroku auth:whoami | sed s/[@\.]/-/g`
+    export DATAJAM_APP="${DATAJAM_APP:0:21}-datajam"
+fi
+mkdir -p $DATAJAM_ROOT &&
+cd $DATAJAM_ROOT &&
+git clone https://github.com/sunlightlabs/datajam.git . &&
+heroku create --stack cedar $DATAJAM_APP &&
+bundle &&
+heroku addons:add mongolab:starter &&
+heroku addons:add redistogo:nano &&
+heroku addons:add sendgrid:starter &&
+git push heroku master &&
+heroku run rake db:seed &&
+heroku ps:scale web=1 &&
+echo
+echo "*****************************************************************"
+echo "All done! $DATAJAM_APP installed and deployed to Heroku."
+echo "Visit http://$DATAJAM_APP.herokuapp.com/admin"
+echo "to sign in and start creating events."
+echo "Your account information:"
+echo "Username: changeme@example.com"
+echo "Password: changeme"
+echo
