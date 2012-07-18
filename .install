@@ -38,7 +38,7 @@ if [ "$DATAJAM_ROOT" == "" ]; then
     echo 'This will install to the default location, ~/.datajam.';
     echo 'You can cancel now and set the environment variable $DATAJAM_ROOT to install elsewhere.';
     read -p 'Continue with the installation? (Y|n):';
-    if [ "$REPLY" != "Y" ]; then
+    if [ "$REPLY" != "Y" ] || [ "$REPLY" != "y" ]; then
         echo 'Exiting...'
         exit 1
     fi
