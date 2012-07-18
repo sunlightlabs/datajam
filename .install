@@ -1,11 +1,34 @@
-#!/usr/bin/sh
-if [ !$DATAJAM_ROOT ]; then
-    export DATAJAM_ROOT="$HOME/.datajam"
+#!/bin/sh
+
+# usage:
+# sh <(curl http://get.datajam.org)
+
+clear
+echo "Thanks for installing Datajam!";
+# Set up install vars
+if [ "$DATAJAM_ROOT" == "" ]; then
+    echo 'We will install to the default location, ~/.datajam.';
+    echo 'You can cancel now and set the environment variable $DATAJAM_ROOT to install elsewhere.';
+    read -p 'Continue installing? (Y|n):';
+    if [ "$REPLY" != "Y" ]; then
+        echo 'Exiting...'
+        exit 1
+    fi
+    DATAJAM_ROOT="$HOME/.datajam"
 fi
-if [ !$DATAJAM_APP ]; then
+echo "Installing into $DATAJAM_ROOT."
+
+if [ "$DATAJAM_APP" == "" ]; then
     DATAJAM_APP=`heroku auth:whoami | sed s/[@\.]/-/g`
-    export DATAJAM_APP="${DATAJAM_APP:0:21}-datajam"
+    DATAJAM_APP="${DATAJAM_APP:0:21}-datajam"
+    read -p "What name would you like your Datajam site to have? (default is $DATAJAM_APP):" APP
+    if [ "$APP" != "" ]; then
+        DATAJAM_APP=$APP
+    fi
+    echo "App is $DATAJAM_APP."
 fi
+
+# Run the install
 mkdir -p $DATAJAM_ROOT &&
 cd $DATAJAM_ROOT &&
 git clone https://github.com/sunlightlabs/datajam.git . &&
@@ -17,12 +40,13 @@ heroku addons:add sendgrid:starter &&
 git push heroku master &&
 heroku run rake db:seed &&
 heroku ps:scale web=1 &&
-echo
-echo "*****************************************************************"
-echo "All done! $DATAJAM_APP installed and deployed to Heroku."
-echo "Visit http://$DATAJAM_APP.herokuapp.com/admin"
-echo "to sign in and start creating events."
-echo "Your account information:"
-echo "Username: changeme@example.com"
-echo "Password: changeme"
-echo
+rm /tmp/.datajam-installer.sh &&
+echo &&
+echo "*****************************************************************" &&
+echo "All done! $DATAJAM_APP installed and deployed to Heroku." &&
+echo "Visit http://$DATAJAM_APP.herokuapp.com/admin" &&
+echo "to sign in and start creating events." &&
+echo "Your account information:" &&
+echo "Username: changeme@example.com" &&
+echo "Password: changeme" &&
+echo;
