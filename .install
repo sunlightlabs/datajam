@@ -44,7 +44,7 @@ if [ "$DATAJAM_ROOT" == "" ]; then
     fi
     DATAJAM_ROOT="$HOME/.datajam"
 fi
-echo "Installing into $DATAJAM_ROOT."
+echo "Great! We'll install into $DATAJAM_ROOT."
 
 if [ "$DATAJAM_APP" == "" ]; then
     DATAJAM_APP=`heroku auth:whoami | sed s/[@\.]/-/g`
@@ -53,7 +53,7 @@ if [ "$DATAJAM_APP" == "" ]; then
     if [ "$APP" != "" ]; then
         DATAJAM_APP=$APP
     fi
-    echo "App is $DATAJAM_APP."
+    echo "Ok, the heroku app will be called $DATAJAM_APP."
 fi
 
 # Run the install
