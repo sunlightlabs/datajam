@@ -68,7 +68,6 @@ heroku addons:add sendgrid:starter &&
 git push heroku master &&
 heroku run rake db:seed &&
 heroku ps:scale web=1 &&
-rm /tmp/.datajam-installer.sh &&
 echo &&
 echo "*****************************************************************" &&
 echo "All done! $DATAJAM_APP installed and deployed to Heroku." &&
