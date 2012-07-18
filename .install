@@ -2,14 +2,42 @@
 
 # usage:
 # sh <(curl http://get.datajam.org)
-
+if [ "`which git`" == "" ]; then
+    echo 'Datajam depends on Git; get it at http://git-scm.com/downloads.'
+    exit 1
+fi
+if [ "`which heroku`" == "" ]; then
+    echo 'This installer requires Heroku; visit https://devcenter.heroku.com/articles/quickstart for more information.'
+    exit 1
+fi
 clear
-echo "Thanks for installing Datajam!";
+
+echo "                            ___                __      __                     "
+echo "                           /\_ \    __        /\ \    /\ \__                  "
+echo "       ____  __  __    ___ \//\ \  /\_\     __\ \ \___\ \ ,_\                 "
+echo "      /',__\/\ \/\ \ /' _ \`\ \ \ \ \/\ \  /'_ \`\ \  _ \`\ \ \/              "
+echo "     /\__, \`\ \ \_\ \/\ \/\ \ \_\ \_\ \ \/\ \L\ \ \ \ \ \ \ \_               "
+echo "     \/\____/\ \____/\ \_\ \_\/\____\\\ \_\ \____ \ \_\ \_\ \__\              "
+echo "      \/___/  \/___/  \/_/\/_/\/____/ \/_/\/___L\ \/_/\/_/\/__/               "
+echo "                    .                       /\____/                           "
+echo "               .    |    .           ___    \_/__/   ___                      "
+echo "                \   |   /           /\_ \           /\ \                      "
+echo "            '.   \  '  /   .'       \//\ \      __  \ \ \____    ____         "
+echo "              '. .'\`\`\`'. .'           \ \ \   /'__\`\ \ \ '__\`\  /',__\   "
+echo "<>.......:::::::\`.......\`:::::::....<> \_\ \_/\ \L\.\_\ \ \L\ \/\__, \`\    "
+echo "<>:           ** Datajam **        :<> /\____\ \__/.\_\\\ \_,__/\/\____/      "
+echo "<>:    A CMS For real-time events  :<> \/____/\/__/\/_/ \/___/  \/___/        "
+echo "<>:                                        :<>                                "
+echo "<>:       Thanks for installing!           :<>                                "
+echo "<>:........................................:<>                                "
+echo ""
+echo;
+
 # Set up install vars
 if [ "$DATAJAM_ROOT" == "" ]; then
-    echo 'We will install to the default location, ~/.datajam.';
+    echo 'This will install to the default location, ~/.datajam.';
     echo 'You can cancel now and set the environment variable $DATAJAM_ROOT to install elsewhere.';
-    read -p 'Continue installing? (Y|n):';
+    read -p 'Continue with the installation? (Y|n):';
     if [ "$REPLY" != "Y" ]; then
         echo 'Exiting...'
         exit 1
