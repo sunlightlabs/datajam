@@ -1,3 +1,113 @@
-.hero-unit {margin-top:80px;}
-h2 {padding-top:20px;}
+header {margin-top: 140px; border-bottom: 1px dashed #b2afaf; padding-bottom: 20px;}
+h2 {padding-top:20px; color: #635F5C; margin-bottom: 15px; }
 hr {margin-top:40px; clear:both;}
+h1 { font-size: 500%; text-transform: uppercase; line-height: 60px; color: #635F5C; margin-bottom: 10px; }
+h4 { font-size: 170%; margin-bottom: 20px; line-height: 27px; text-transform: capitalize; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; }
+
+.navbar-inner { background: url(../img/sfapp_bg_header.jpg) top left repeat-x; background-color: #b7d2ef; margin-bottom: 50px; height: 50px;}
+
+.module { margin-bottom: 40px;}
+.container { padding-bottom: 80px; }
+
+.tip, time { font-family: Georgia, 'Times New Roman', Times, serif; font-style: oblique; color: #97928f; display: block; line-height: 21px; max-width: 680px;}
+.tip { margin-bottom: 20px;}
+
+body {
+    background: url(../img/sfapp_bg.jpg) center 50px repeat-x #FFFFFF;
+    color: #76716e;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    line-height: 19px;
+    margin-top: -9px;
+}
+
+#foundationLogo { background: url(../img/sfapp_logo.png) top right no-repeat;
+display: block;
+float: right;
+height: 40px;
+text-indent: -9999px;
+width: 128px;
+margin-top: 5px;}
+
+.navbar .nav > li > a { text-shadow: none; padding: 17px 10px 20px; color: #635F5C; }
+.navbar .nav > li > a:hover { color: #8d8884; }
+.navbar .nav .active > a, .navbar .nav .active > a:hover { background-color: #4d5b5c; border: 1px solid #2e3738; }
+
+.headerTitle { float: left; width: 500px;  }
+.download-info { float: right; width: 400px; margin-top: 55px;  }
+.download-info a { text-align: right; float: right; margin-left: 15px}
+
+.btn {
+    border: 3px solid #e9e8e3;
+    font-family: "Georgia", "Times New Roman", "Times", serif;
+    font-style: normal;
+    font-weight: normal;
+    padding: 4px 15px 4px;
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+         -o-border-radius: 6px;
+            border-radius: 6px;
+}
+
+.btn-sunlight {
+    color: #fdfcfb;
+    background-color: #ce6100;
+    background-image: -moz-linear-gradient(top, #ce6100, #ba5300);
+    background-image: -ms-linear-gradient(top, #ce6100, #ba5300);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ce6100), to(#ba5300));
+    background-image: -webkit-linear-gradient(top, #ce6100, #ba5300);
+    background-image: -o-linear-gradient(top, #ce6100, #ba5300);
+    background-image: linear-gradient(top, #ce6100, #ba5300);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce6100', endColorstr='#ba5300', GradientType=0);
+    border-color: #ba5300 #ba5300 #000000;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+    font-style: normal;
+    text-shadow: 0 1px 1px rgba(186, 83, 0, 0.75);
+}
+.btn-sunlight:hover,
+.btn-sunlight:active,
+.btn-sunlight.active,
+.btn-sunlight.disabled,
+.btn-sunlight[disabled] {
+    color: #fdfcfb;
+    background-color: #ba5300;
+}
+.btn-sunlight:active,
+.btn-sunlight.active {
+    background-color: #ba5300;
+    background-color: #ba5300 \9;
+}
+
+.span-divider {
+    border-right: 1px dashed #e8e6de;
+    margin-right: -1px;
+}
+
+.terms { 
+    margin-top: 30px;
+}
+
+.sf-footer div.terms p{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 95%;
+    font-style: oblique;
+    line-height: 18px;
+}
+
+.sf-footerWrapper { background-color: #fafaf7; border-top: 1px solid #ece9e9; margin-top: 70px; padding-top: 50px; min-height: 220px;}
+.sf-footer { color: #9f9a97;}
+.sf-footer h4 { color: #9f9a97; margin-bottom: 0.5em; }
+.sf-footer .tip { color: #9f9a97;}
+
+.sf-footer ul { margin: 0; list-style-type: none; }
+
+form input, form select { border: 2px solid #e7e4dc; }
+form select { padding: 3px 4px; }
+
+#sfapp-subscribe-form li { float: left; margin-right: 10px; }
+#sfapp-subscribe-form input[name=email] { width: 140px; }
+#sfapp-subscribe-form input[name=zipcode] { width: 95px; }
+.sf-footer 

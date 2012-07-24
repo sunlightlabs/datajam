@@ -9,6 +9,9 @@
     <title>{{ page.title }}</title>
     <meta name="description" content="{{ page.description }}">
     {% include head_assets.html %}
+    
+    <script type="text/javascript" src="//use.typekit.net/aop6edg.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 </head>
 <body data-spy="scroll" data-target=".subnav" data-offset="50">
     <div class="navbar navbar-fixed-top">
@@ -19,7 +22,6 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
-                <a href="/" class="brand">Datajam</a>
                 <div class="nav-collapse">
                     <ul class="nav">
                         <li><a href="#overview">Overview</a></li>
@@ -32,16 +34,19 @@
                         <li><a href="https://github.com/sunlightlabs/datajam/">Github Repo</a></li>
                     </ul>
                 </div>
+                <a id="foundationLogo" href="http://sunlightfoundation.com" class="brand">Sunlight Foundation</a>
             </div>
         </div>
     </div>
 
     <div class="container">
-        <header class="hero-unit">
-            <h1>Datajam</h1>
-            <p>A Content Management System for producing live events in real time.</p>
+        <header class="module clearfix">
+            <div class="headerTitle">
+                <h1>Datajam</h1>
+                <p>A Content Management System for producing live events in real time.</p>
+            </div>
             <p class="download-info">
-                <a href="https://github.com/sunlightlabs/datajam/" class="btn btn-primary btn-large">View the Project on Github</a>
+                <a href="https://github.com/sunlightlabs/datajam/" class="btn btn-primary btn-large btn-sunlight">View the Project on Github</a>
                 <a href="/plugins/" class="btn btn-large">Get Plugins</a>
             </p>
         </header>
@@ -49,9 +54,29 @@
             {{ content }}
         </div>
     </div>
-    <footer class="container">
-
-    </footer>
+    
+    <div class="sf-footerWrapper">
+        <div class="sf-footer container">
+            <div class="row">
+                <div class="span6 signup span-divider">
+                    <h4>Like this Project and Want to Discover Others Like It?</h4>
+                    <span class="tip">Join the Sunlight Foundation's open government community to learn more</span>
+                    <form action="/subscribe/" method="post" id="sfapp-subscribe-form">
+                        <ul>
+                            <li id="email"><input type="text" name="email" placeholder="your email address"></li>
+                            <li id="zipCode"><input type="text" name="zipcode" placeholder="your zip code"></li>
+                            <li><button type="submit" class="btn btn-sunlight">Sign Up</button></li>
+                        </ul>
+                        <div class="clear"></div>
+                    </form>
+                </div>
+                <div class="span6 terms">
+                    <p>Our <a href="http://sunlightfoundation.com/legal/privacy/">privacy policy</a> details how personally identifiable information that is collected on our web sites is handled. Read our <a href="http://sunlightfoundation.com/legal/terms/">terms of service</a>.</p>
+                    <p>This work by <a href="http://sunlightfoundation.com">Sunlight Foundation</a>, unless <a href="http://sunlightfoundation.com/colophon/">otherwise noted</a>, is licensed under a <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     {% include body_assets.html %}
     {% include analytics.html %}
