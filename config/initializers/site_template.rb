@@ -57,7 +57,7 @@ DEFAULT_SITE_TEMPLATE = <<-EOT.strip_heredoc
           login email address is changeme@example.com, and the password is changeme. You'll probably want to do just that.
         </p>
         <p>
-          You can read more about getting started with datajam at <a href="http://datajam.sunlightfoundation.com">datajam.sunlightfoundation.com</a>.
+          You can read more about getting started with datajam at <a href="http://www.datajam.org">datajam.org</a>.
         </p>
       </div>
     </div>

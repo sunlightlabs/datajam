@@ -5,6 +5,7 @@ class Cacher
   end
 
   def self.reset!
+    redis.keys.map {|key| redis.del key }
     cache_events(Event.all)
     cache_archives
     cache_pages
