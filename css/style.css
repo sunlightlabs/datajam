@@ -29,6 +29,8 @@ text-indent: -9999px;
 width: 128px;
 margin-top: 5px;}
 
+.hero-unit { padding: 40px; border: 1px solid #d6d3d3; border-radius: 0;}
+
 .navbar .nav > li > a { text-shadow: none; padding: 17px 10px 20px; color: #635F5C; }
 .navbar .nav > li > a:hover { color: #8d8884; }
 .navbar .nav .active > a, .navbar .nav .active > a:hover { background-color: #4d5b5c; border: 1px solid #2e3738; }
