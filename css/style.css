@@ -86,7 +86,7 @@ margin-top: 5px;}
     margin-right: -1px;
 }
 
-.terms { 
+.terms {
     margin-top: 30px;
 }
 
@@ -110,4 +110,10 @@ form select { padding: 3px 4px; }
 #sfapp-subscribe-form li { float: left; margin-right: 10px; }
 #sfapp-subscribe-form input[name=email] { width: 140px; }
 #sfapp-subscribe-form input[name=zipcode] { width: 95px; }
-.sf-footer 
+
+/* Plugins page */
+#plugins {}
+#plugins .plugins li { float: left; width: 50%; box-sizing: border-box; padding: 20px; list-style: none; }
+@media(max-width: 979px) {
+    #plugins .plugins li { float: none; width: auto; }
+}

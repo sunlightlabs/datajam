@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{ page.title }}</title>
+    <meta name="description" content="{{ page.description }}">
+    {% include head_assets.html %}
+</head>
+<body id="plugins">
+    {% include header.html %}
+    <div role="main" class="container">
+        <header class="module clearfix">
+            <div class="headerTitle">
+                <h1>Plugins</h1>
+                <p>Plugins extend the functionality of Datajam. Use them to add real-time chat,
+                   data-rich charts and tables or anything you can imagine to make live events
+                   more engaging and contxtual. We've created a couple of official plugins, but
+                   Datajam is an open ecosystem and we encourage you to contribute any that you
+                   find useful.
+                </p>
+            </div>
+            <p class="download-info">
+                <a href="/manual/plugins/" class="btn btn-large">See the plugin creator's guide</a>
+            </p>
+        </header>
+        <div class="plugins">
+            {{ content }}
+        </div>
+    </div>
+    {% include footer.html %}
+    {% include body_assets.html %}
+    {% include analytics.html %}
+</body>
+</html>
