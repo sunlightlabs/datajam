@@ -62,14 +62,16 @@
       <div class="span3">
         <ul class="nav nav-list well">
         <% Datajam.navigation.each do |section| %>
+          <% if !section[:if] || section[:if].call %>
           <li class="nav-header"><%= section[:title] %></li>
-          <% section[:items].each do |item| %>
-          <li>
-            <a href="<%= item[:url] %>">
-              <i class="icon-<%= item[:icon] %>"></i>
-              <%= item[:title] %>
-            </a>
-          </li>
+            <% section[:items].each do |item| %>
+            <li>
+              <a href="<%= item[:url] %>">
+                <i class="icon-<%= item[:icon] %>"></i>
+                <%= item[:title] %>
+              </a>
+            </li>
+            <% end %>
           <% end %>
         <% end %>
         </ul>
