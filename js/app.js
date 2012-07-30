@@ -14,7 +14,7 @@
           // get the active nav item
           navLinks.each(function(){
             $(this).parents('li').removeClass('active');
-          })
+          });
           sections.each(function(){
             if(scrollPos + navHeight >= $(this).offset().top){
               navLinks.filter('a[href=#' + $(this).attr('id') + ']').parents('li').addClass('active');
@@ -23,14 +23,14 @@
           });
           if(! nav.find('li.active').length){
             $('a[href=#overview]').parents('li').addClass('active');
-          };
+          }
 
         });
         // scrollTo on nav click
         navLinks.click(function(e){
           e.preventDefault();
           var destination = $( $(this).attr('href') ).offset().top,
-            distance;
+              distance;
           // have we taken the nav out of flow? offset by navHeight if so
           if(destination > navY){
             destination -= navHeight;
@@ -51,6 +51,13 @@
             navY = nav.offset().top;
             pageHeight = $('body').height();
           });
+
+    // highlight the appropriate nav item
+    (function(){
+      var parts = location.pathname.split('/'),
+          section = parts[1] || 'home';
+      $('ul.nav>li[id]').removeClass('active').filter('#nav_' + section).addClass('active');
+    })();
 
   });
 })(jQuery);
