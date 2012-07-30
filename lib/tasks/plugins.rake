@@ -5,7 +5,7 @@ namespace :plugins do
     gem 'datajam-chat',     git: 'https://github.com/sunlightlabs/datajam-chat.git', require: 'datajam/chat'
     gem 'datajam-datacard', git: 'https://github.com/sunlightlabs/datajam-datacard.git', require: 'datajam/datacard'
     EOT
-    pfile = File.open(File.expand_path('../../../Plugins', __FILE__), 'w+') { |f| f.write(tmpl)}
+    pfile = File.open(File.expand_path('../../../Pluginfile', __FILE__), 'w+') { |f| f.write(tmpl)}
   end
 
   desc "Create an empty plugins file with examples"
@@ -14,7 +14,7 @@ namespace :plugins do
     #gem 'datajam-chat',     git: 'https://github.com/sunlightlabs/datajam-chat.git', require: 'datajam/chat'
     #gem 'datajam-datacard', git: 'https://github.com/sunlightlabs/datajam-datacard.git', require: 'datajam/datacard'
     EOT
-    pfile = File.open(File.expand_path('../../../Plugins', __FILE__), 'w+') { |f| f.write(tmpl)}
+    pfile = File.open(File.expand_path('../../../Pluginfile', __FILE__), 'w+') { |f| f.write(tmpl)}
   end
 end
 

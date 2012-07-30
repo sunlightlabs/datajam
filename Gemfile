@@ -55,7 +55,7 @@ group :development, :test do
 end
 
 begin
-    eval(File.read(File.expand_path('../Plugins', __FILE__)), binding)
+    eval(File.read(File.expand_path('../Pluginfile', __FILE__)), binding)
 rescue
-    puts "[Warning] No Plugins file found. To generate one, run `rake plugins`."
+    puts "[Warning] No Pluginfile found. To generate one, run `rake plugins`."
 end
