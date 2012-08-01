@@ -10,24 +10,27 @@
     <meta name="description" content="{{ page.description }}">
     {% include head_assets.html %}
 </head>
-<body data-spy="scroll" data-target=".subnav" data-offset="50">
+<body id="plugins">
     {% include header.html %}
-    <div class="container">
+    <div role="main" class="container">
         <header class="module clearfix">
             <div class="headerTitle">
-                <h1>Datajam</h1>
-                <p>A Content Management System for producing live events in real time.</p>
+                <h1>Plugins</h1>
+                <p>Plugins extend the functionality of Datajam. Use them to add real-time chat,
+                   data-rich charts and tables or anything you can imagine to make live events
+                   more engaging and contxtual. We've created a couple of official plugins, but
+                   Datajam is an open ecosystem and we encourage you to contribute any that you
+                   find useful.
+                </p>
             </div>
             <p class="download-info">
-                <a href="https://github.com/sunlightlabs/datajam/" class="btn btn-primary btn-large btn-sunlight">View the Project on Github</a>
-                <a href="/userguide/" class="btn btn-large">User Guide</a>
+                <a href="/manual/plugins/" class="btn btn-large">See the plugin creator's guide</a>
             </p>
         </header>
-        <div role="main">
+        <div class="plugins">
             {{ content }}
         </div>
     </div>
-
     {% include footer.html %}
     {% include body_assets.html %}
     {% include analytics.html %}

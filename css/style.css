@@ -5,6 +5,7 @@ h1 { font-size: 500%; text-transform: uppercase; line-height: 60px; color: #635F
 h4 { font-size: 170%; margin-bottom: 20px; line-height: 27px; text-transform: capitalize; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; }
 
 .navbar-inner { background: url(../img/sfapp_bg_header.jpg) top left repeat-x; background-color: #b7d2ef; margin-bottom: 50px; height: 50px;}
+.navbar-inner .divider-vertical { height:50px; background-color:#D1DAD1; border-right-color:#F3FDF6; }
 
 .module { margin-bottom: 40px;}
 .container { padding-bottom: 80px; }
@@ -88,7 +89,7 @@ margin-top: 5px;}
     margin-right: -1px;
 }
 
-.terms { 
+.terms {
     margin-top: 30px;
 }
 
@@ -112,4 +113,13 @@ form select { padding: 3px 4px; }
 #sfapp-subscribe-form li { float: left; margin-right: 10px; }
 #sfapp-subscribe-form input[name=email] { width: 140px; }
 #sfapp-subscribe-form input[name=zipcode] { width: 95px; }
-.sf-footer 
+
+/* Plugins page */
+#plugins {}
+#plugins .download-info { margin-top: 100px; }
+#plugins .plugins li { float: left; width: 50%; box-sizing: border-box; padding: 20px; list-style: none; }
+#plugins .plugins li h4 { margin-bottom: 0.5em; }
+#plugins .plugins li img { padding: 5px; border: 1px solid #dee9e5; border-radius:2px; display:block; margin-bottom:1em; }
+@media(max-width: 979px) {
+    #plugins .plugins li { float: none; width: auto; }
+}

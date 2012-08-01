@@ -1,8 +1,8 @@
 ---
 title: Datajam
-layout: home
+layout: manual
 description: Datajam is a content management system for producing live events in real time.
-permalink: index.html
+permalink: userguide/index.html
 ---
 
 ## Overview
