@@ -1,5 +1,5 @@
 .headerTitle { margin-top: 140px; border-bottom: 1px dashed #b2afaf; padding-bottom: 10px; margin-bottom: 40px;}
-h2 { color: #635F5C; margin-bottom: 25px; font-size: 250%; }
+h2 { color: #635F5C; margin-bottom: 20px; font-size: 250%; margin-top: 5px; }
 hr {margin-top:40px; clear:both;}
 h1 { font-size: 500%; text-transform: uppercase; line-height: 60px; color: #635F5C; margin-bottom: 10px; }
 h4 { font-size: 170%; margin-bottom: 20px; line-height: 27px; text-transform: capitalize; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; }
@@ -14,6 +14,7 @@ h3 { margin-bottom: 20px; font-size: 180%; }
 
 .tip, time { font-family: Georgia, 'Times New Roman', Times, serif; font-style: oblique; color: #97928f; display: block; line-height: 21px; max-width: 680px;}
 .tip { margin-bottom: 20px;}
+.textReplace { display: block; text-indent: -9999em; }
 
 body {
     background: url(../img/sfapp_bg.jpg) center 50px repeat-x #FFFFFF;
@@ -33,6 +34,21 @@ width: 128px;
 margin-top: 5px;}
 
 .hero-unit { padding: 40px; border: 1px solid #d6d3d3; border-radius: 0;}
+.hero-unit ul { list-style-type: none; margin: 0; margin: 0 auto; }
+.hero-unit .tip { font-size: 110%; line-height: 22px;  }
+.liveExamples { padding-left: 70px; border-left: 1px dashed #d6d3d2; margin-left: 70px; }
+.liveExamples img { border: 1px solid #e3dfdf; margin-bottom: 20px; }
+
+.imgBtns { margin: 0 auto; text-align: center; }
+.imgBtns li { display: inline-block; margin: 40px 10px 20px; }
+.imgBtns a { width: 12px; height: 12px;    
+    -webkit-border-radius: 6px;
+       -moz-border-radius: 6px;
+        -ms-border-radius: 6px;
+         -o-border-radius: 6px;
+            border-radius: 6px;
+            background-color: #d7c109; }
+.imgBtns li a.active { background-color: #fff; border: 2px solid #d7c109; width: 10px; height: 10px;  }
 
 .navbar .nav > li > a { text-shadow: none; padding: 17px 10px 20px; color: #635F5C; }
 .navbar .nav > li > a:hover { color: #8d8884; }
