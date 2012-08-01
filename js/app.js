@@ -65,7 +65,7 @@
         $(this).before('<ul class="imgBtns" id="cycle' + i + 'pager"></ul>');
       }
       $(this).cycle({
-        speed: 500,
+        speed: 400,
         timeout: 8000,
         pager: '#cycle' + i + 'pager',
         activePagerClass: 'active',
