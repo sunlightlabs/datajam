@@ -5,12 +5,8 @@ description: Datajam is a content management system for producing live events in
 permalink: userguide/index.html
 ---
 
-## Overview
 
-
----
-
-## Installation
+### Installation
 
 Datajam is a Ruby on Rails application designed with Heroku in mind. It can be
 deployed to any Rack environment, but it's easiest to get started with
@@ -97,14 +93,14 @@ Windows as well.
 
 ---
 
-## Templates
+### Templates
 
 A Datajam Event is managed by publishing an event page compiled from several
 templates and interactive widgets. The templates define content areas which
 can be updated in real time by event producers. There are 4 types of templates
 which you'll need to create to run an event: A **Site Template**, **Event Templates**, **Embed Templates** and **Content Areas**.
 
-### A Quick Primer on Template Tags
+#### A Quick Primer on Template Tags
 
 Datajam uses Handlebars.js to render all user-editable templates. Our syntax
 is really just a small subset, as there are no model-bound variables available
@@ -114,7 +110,7 @@ to you when rendering. So, the only tags you'll need to use are:
 * **Custom Fields**: `{{'{'}}{ my_custom_field }}`
 * **Content Areas**: `{{'{'}}{ content_area: My Content Area }}`
 
-### Template Types
+#### Template Types
 
 1. **Site Template**
 
