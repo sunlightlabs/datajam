@@ -59,5 +59,24 @@
       $('ul.nav>li[id]').removeClass('active').filter('#nav_' + section).addClass('active');
     })();
 
+    // Cycles
+    $('.cycle ul').each(function(i, el){
+      if($(this).children().length){
+        $(this).before('<ul class="imgBtns" id="cycle' + i + 'pager"></ul>');
+      }
+      $(this).cycle({
+        speed: 500,
+        timeout: 8000,
+        pager: '#cycle' + i + 'pager',
+        activePagerClass: 'active',
+        pagerAnchorBuilder: function(i, el){
+          return '<li><a class="textReplace" href="#">button' + i + '</a></li>';
+        },
+        updateActivePagerLink: function(pager, i, classname){
+          $(pager).find('li a').removeClass(classname).eq(i).addClass(classname);
+        }
+      });
+    });
+
   });
 })(jQuery);
