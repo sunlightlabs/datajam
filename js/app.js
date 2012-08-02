@@ -66,6 +66,7 @@
       }
       $(this).cycle({
         speed: 400,
+        sync: 0,
         timeout: 8000,
         pager: '#cycle' + i + 'pager',
         activePagerClass: 'active',
