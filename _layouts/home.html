@@ -23,10 +23,6 @@
             <div id="feature" class="hero-unit clearfix row">
                 <div class="span4">
                     {{ content }}
-                    <p class="download-info">
-                        <a href="https://github.com/sunlightlabs/datajam/" class="btn btn-primary btn-large btn-sunlight">View the Project on Github</a>
-                        <a href="/userguide/" class="btn btn-large">User Guide</a>
-                    </p>
                 </div>
                 <div class="span5 liveExamples cycle">
                     {% capture slides_content %}
@@ -34,6 +30,12 @@
                     {% endcapture %}
                     {{ slides_content | unindent | markdownify }}
                 </div>
+                <div class="span9">
+                    <p class="download-info">
+                        <a href="https://github.com/sunlightlabs/datajam/" class="btn btn-primary btn-large btn-sunlight">View the Project on Github</a>
+                        <a href="/userguide/" class="btn btn-large">User Guide</a>
+                    </p>
+                </div>    
             </div>
         </div>
     </div>
