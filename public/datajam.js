@@ -45,9 +45,9 @@ Datajam.ContentAreaView = Backbone.View.extend({
   renderModal: function() {
     contentArea = this.model;
     contentAreaType = contentArea.get('area_type');
-      
+
     renderer = Datajam.modalRenderers[contentAreaType]
-    
+
     if (!!renderer) {
       renderer(contentArea)
     } else {
@@ -104,19 +104,26 @@ Datajam.pollForUpdates = function() {
 
     if (updates['content_updates'] && updates['content_updates'].length > 0) {
 
-      if (Datajam.updates.length == 0) {
-        Datajam.updates = updates['content_updates'];
-      }
+      if (! Datajam.updates.length) {
 
-      // Update the DOM if there are new updates.
-      var lastUpdate = Datajam.updates[Datajam.updates.length - 1];
-      if (lastUpdate) {
+        // Add all updates, display them
         _.each(updates['content_updates'], function(contentUpdate) {
-          if (contentUpdate['updated_at'] > lastUpdate['updated_at']) {
-            $('#content_area_' + contentUpdate['content_area_id']).html(contentUpdate['html']);
-            Datajam.updates.push(contentUpdate);
-          }
+          $('#content_area_' + contentUpdate['content_area_id']).html(contentUpdate['html']);
+          Datajam.updates.push(contentUpdate);
         });
+
+      }else{
+
+        // Otherwise, only update the DOM if there are new updates.
+        var lastUpdate = Datajam.updates[Datajam.updates.length - 1];
+        if (lastUpdate) {
+          _.each(updates['content_updates'], function(contentUpdate) {
+            if (contentUpdate['updated_at'] > lastUpdate['updated_at']) {
+              $('#content_area_' + contentUpdate['content_area_id']).html(contentUpdate['html']);
+              Datajam.updates.push(contentUpdate);
+            }
+          });
+        }
       }
     }
     setTimeout(function() { Datajam.pollForUpdates(); }, 3000);
