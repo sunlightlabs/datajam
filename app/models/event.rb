@@ -127,7 +127,7 @@ class Event
     self.save
     self.current_window.reload
 
-    Cacher.cache('/event/' + self.id.to_s + '/updates.json', self.current_window.to_json)
+    cache_updates
   end
 
   def finalize!
@@ -161,6 +161,10 @@ class Event
   end
 
   protected
+
+  def cache_updates
+    Cacher.cache('/event/' + self.id.to_s + '/updates.json', self.current_window.to_json)
+  end
 
   def update_template_data
     self.template_data ||= {}

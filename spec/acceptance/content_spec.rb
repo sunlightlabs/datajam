@@ -15,4 +15,11 @@ feature "Event content" do
     visit '/test'
     page.should have_content('Remind Me')
   end
+
+  scenario 'Creating an event should create an updates.json file' do
+    event_template = EventTemplate.create(name: 'Event Template', template: '{{ content_area: My Content Area }}')
+    event = Event.create(slug: 'test', name: 'test', event_template: event_template, scheduled_at: Time.now + 30.minutes)
+    visit "/event/#{event.id}/updates.json"
+    page.should have_content('_id')
+  end
 end

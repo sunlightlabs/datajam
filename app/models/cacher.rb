@@ -32,6 +32,9 @@ class Cacher
       event.rendered_embeds.each do |slug, embed|
         redis.set '/' + event.slug + '/' + slug, embed
       end
+
+      # Make sure the event has an updates.json
+      redis.set '/event/' + event.id.to_s + '/updates.json', event.current_window.to_json
     end # events.each
 
     # No upcoming events? Be sure to still cache the root.
