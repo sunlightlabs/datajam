@@ -1,0 +1,2 @@
+/* allow font-awesome to override glyphicons */
+[class^="icon-"], [class*=" icon-"] { background-image:none; }
