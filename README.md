@@ -4,8 +4,7 @@
 
 A real-time, data-driven platform for reporting live events on the Web.
 
-* Homepage at [Datajam.org](http://datajam.org) *(coming soon)*
-* Stories at [Pivotal Tracker](https://www.pivotaltracker.com/projects/226205)
+[Datajam.org](http://datajam.org)
 
 ## Product Goals
 
@@ -17,9 +16,14 @@ A real-time, data-driven platform for reporting live events on the Web.
 
 ## Dependencies and Installation
 
-Datajam is a Rails 3.0 app. It depends on [Ruby](http://ruby-lang.org), [RVM](http://rvm.beginrescueend.com), and [MongoDB](http://mongodb.org).
+Datajam is a Rails 3 app. It depends on [Ruby](http://ruby-lang.org), [RVM](http://rvm.beginrescueend.com), [Redis](http://redis.io), and [MongoDB](http://mongodb.org).
 
-After those external dependencies are installed, the app can be installed with:
+Though it can be installed on any rack-compatible stack with the above dependencies met, Datajam targets Heroku for deployment.
+
+To use our one-step installer, follow the [Heroku quickstart instructions](https://devcenter.heroku.com/articles/quickstart)
+and then run `sh <(curl http://get.datajam.org)` from your Mac or Linux computer.
+
+For other operating systems, or to install to your own hardware, run the following commands:
 
     $ rvm use 1.9.3
     $ gem install bundler
@@ -42,7 +46,6 @@ Bundler takes care of installing all the other Ruby libraries used by Datajam, a
   * [RSpec](http://rspec.info/) for unit and functional tests
   * [RR](https://github.com/btakita/rr) for test doubles
   * [Capybara](https://github.com/jnicklas/capybara) to simulate the browser
-  * [Akephalos](https://github.com/bernerdschaefer/akephalos) for an interface with a headless browser
 * Persistence:
   * [Mongoid](http://mongoid.org) as an object mapper to MongoDB
 * Deployment:
@@ -52,13 +55,15 @@ Bundler takes care of installing all the other Ruby libraries used by Datajam, a
 
 ## Development Guidelines
 
-Datajam is intended to be reused and extended by third parties. As such, certain development guidelines are strictly enforced:
+Datajam is intended to be reused and extended by third parties. As such, certain development guidelines should be adhered to:
 
 * Unit test coverage for all files in `/app/models` and `/lib` with RSpec.
 * Unit test coverage for all non-DOM, non-IO JavaScript with Jasmine.
 * Acceptance test coverage for all user stories with Capybara.
-* A best effort at JavaScript integration testing with Capybara and Akephalos.
-* All new source files produced (`.rb` and `.js`) follow literate programming via Rocco.
+* Continuous integration at [Travis-CI](travis-ci.org)
+* A best effort at JavaScript integration testing with a Travis-compatible headless browser, such as PhantomJS or xvfb.
+
+A Vagrant box is provided for painless bootstrapping of a dev environment. Install VirtualBox, Vagrant, and run `vagrant up` from your datajam directory.
 
 ## Product Architecture
 
@@ -70,18 +75,9 @@ Datajam consists of three pieces:
 
 ## Custom Content Plugins
 
-Datajam ships with three content plugins: Data Card, Live Chat, and Tweet Stream, which are implemented through [Rails Engines](http://api.rubyonrails.org/classes/Rails/Engine.html). Custom plugin development is possible via hooks provided by Datajam.
+Datajam ships with two content plugins: Data Card and Live Chat which are implemented as [Rails Engines](http://api.rubyonrails.org/classes/Rails/Engine.html). Custom plugin development is possible via hooks provided by Datajam.
 
-More documentation coming soon.
-
-## Deploying on Heroku
-
-1. Fork the project on [GitHub](https://github.com/sunlightlabs/datajam)
-2. Create a `/config/settings.yml` based off of `/config/settings.yml.example`
-3. Sign up on [Heroku](http://heroku.com)
-4. Follow steps 1-4 of Heroku's [quickstart instructions](http://docs.heroku.com/quickstart)
-5. Set up the [MongoLab](http://docs.heroku.com/mongolab), 
-    [RedisToGo](http://docs.heroku.com/redistogo) and [Sendgrid](http://docs.heroku.com/sendgrid) add-ons
+Download plugins and learn about plugin authoring at [datajam.org/plugins](http://datajam.org/plugins)
 
 ## License
 
