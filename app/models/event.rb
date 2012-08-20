@@ -156,7 +156,8 @@ class Event
 
     # FIXME: Do this in mongo instead of loading everything in memory.
     collection.select do |taggable|
-      (taggable.tag_list & tag_list).any?
+      tags = tag_list.push('global')
+      (taggable.tag_list & tags).any?
     end
   end
 
