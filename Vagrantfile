@@ -7,7 +7,7 @@ Vagrant::Config.run do |config|
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "https://dl.dropbox.com/s/5stokpb6jpvhp46/ubuntu-precise-server-x64-datajam.box?dl=1"
+  config.vm.box_url = "http://vagrant.sunlightfoundation.com.s3.amazonaws.com/datajam/ubuntu-precise-server-x64-datajam.box"
 
   # Boot with a GUI so you can see the screen. (Default is headless)
   # config.vm.boot_mode = :gui
@@ -40,9 +40,9 @@ Vagrant::Config.run do |config|
   %w(chat datacard).each do |plugin|
     if File.directory?("../datajam-#{plugin}")
       config.vm.share_folder(
-        "v-datacard-#{plugin}", 
-        "/home/vagrant/datajam-#{plugin}", 
-        "../datajam-#{plugin}", 
+        "v-datacard-#{plugin}",
+        "/home/vagrant/datajam-#{plugin}",
+        "../datajam-#{plugin}",
         :nfs => true
       )
     end
