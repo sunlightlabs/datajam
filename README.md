@@ -81,7 +81,7 @@ Download plugins and learn about plugin authoring at [datajam.org/plugins](http:
 
 ## License
 
-Copyright (c) 2011 by the Sunlight Foundation.
+Copyright (c) 2011-2012 by the Sunlight Foundation.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
