@@ -1,0 +1,21 @@
+<div class="row">
+    <div class="span12">
+        <ul class="breadcrumb">
+            {% capture parts %}{{ page.permalink | remove:"/index.html" | replace:"/"," " }}{% endcapture %}
+            {% for link in page.breadcrumb %}
+            <li{% if forloop.last %} class="active"{% endif %}>
+                {% unless forloop.last %}
+                    {% if forloop.first %}
+                    <a href="/">{{ link }}</a>
+                    {% else %}
+                    <a href="/{{ parts | truncatewords:forloop.index0,"" | replace:" ","/" }}/">{{ link }}</a>
+                    {% endif %}
+                    <span class="divider">&raquo;</span>
+                {% else %}
+                    {{ link }}
+                {% endunless %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>

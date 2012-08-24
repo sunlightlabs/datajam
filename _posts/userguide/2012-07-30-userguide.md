@@ -1,8 +1,12 @@
 ---
-title: Datajam
-layout: manual
-description: Datajam is a content management system for producing live events in real time.
+title: Table of Contents
+layout: docs
+description: Learn how to install and use Datajam to produce live events.
 permalink: userguide/index.html
+section: User Guide
+breadcrumb:
+  - Datajam
+  - User Guide
 ---
 
 
