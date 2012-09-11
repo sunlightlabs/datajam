@@ -1,3 +1,4 @@
+/*jshint laxcomma:true, expr:true, evil:true */
 (function($){
   $(function(){
     var taggables = $(":input.taggable");

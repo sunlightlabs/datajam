@@ -1,3 +1,4 @@
+/*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
 
   var App = window.Datajam;

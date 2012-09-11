@@ -4,11 +4,9 @@
 <![endif]-->
 <%= javascript_include_tag :head %>
 <script>
-    window.require = {
-        baseUrl: "/javascripts/libs/require",
-        paths: {
-            "datajam": "/javascripts/datajam"
-        },
-        waitSeconds: 15
-    }
+    window.require || (require = {});
+    require.baseUrl || (require.baseUrl = "/javascripts/libs/require");
+    require.paths || (require.paths = {});
+    require.paths.datajam || (require.paths.datajam = "/javascripts/datajam")
+    require.waitSeconds || (require.waitSeconds = 15);
 </script>
