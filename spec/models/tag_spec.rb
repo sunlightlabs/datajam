@@ -13,12 +13,12 @@ describe Tag::Taggable do
   context "tagging objects" do
     it "tags from a comma separated list" do
       model = TestModel.create!(tag_string: "foo, bar")
-      model.tag_list.should == ["foo", "bar"]
+      model.tag_list.sort.should == ["bar", "foo"]
     end
 
     it "retreives the same tags it created" do
       model = TestModel.create!(tag_list: %w(foo bar))
-      model.tag_list.should == ["foo", "bar"]
+      model.tag_list.sort.should == ["bar", "foo"]
     end
 
     it "does not create duplicated tags" do

@@ -31,7 +31,7 @@ class Event
 
   default_scope order_by([[:status, :desc], [:scheduled_at, :desc]])
 
-  before_save :update_template_data, :generate_content_areas #, :cache_render
+  before_save :update_template_data, :generate_content_areas, :cache_render
 
   after_save do
     UpdateWindow.create(event: self) if self.current_window.nil?
