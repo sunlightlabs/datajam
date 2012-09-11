@@ -1,0 +1,22 @@
+<div class="navbar navbar-fixed-top onair">
+  <div class="navbar-inner">
+    <div class="container">
+      <span class="brand">ON AIR</span>
+      <ul class="nav topbar-nav">
+        {{#each content_areas}}
+        <li>
+          <a data-controls-modal="modal-{{ _id }}" data-keyboard="true" href="#">{{ name }}</a>
+        </li>
+        {{/each}}
+      </ul>
+      <ul class="nav topbar-nav secondary-nav pull-right">
+        <li class="audience">
+          <a href="#">Audience count: <span class="badge">0</span></a>
+        </li>
+        <li>
+          <a href="/admin">Admin &raquo;</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,5 @@
 HEAD_ASSETS = <<-HEAD.strip_heredoc
+<!-- Datajam head assets -->
 <link rel="stylesheet" href="/datajam.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/stylesheets/01-bootstrap.min.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/stylesheets/bootstrap-responsive.min.css" type="text/css" media="screen, projection">
@@ -8,19 +9,21 @@ HEAD_ASSETS = <<-HEAD.strip_heredoc
   window.curl || (curl = {
     baseUrl: '/javascripts',
     pluginPath: '/javascripts/curl/plugin',
-    paths: {}
-  })
+    paths: {
+      datajam: '/javascripts/datajam'
+    }
+  });
 </script>
 HEAD
 
 BODY_ASSETS = <<-BODY.strip_heredoc
+<!-- Datajam body assets -->
 <script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js" type="text/javascript"></script>
-<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.1/underscore-min.js" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js" type="text/javascript"></script>
-<script src="/javascripts/rails.js" type="text/javascript"></script>
-<script src="/datajam.js" type="text/javascript"></script>
-<script src="/bootstrap-modal.js" type="text/javascript"></script>
+<script src="/javascripts/libs/rails.js" type="text/javascript"></script>
+<script src="/libs/bootstrap-modal.js" type="text/javascript"></script>
 <script type="text/javascript">
   // don't allow curl.js to pollute the global namespace; ACE has its own require...
   window._define = window.define;
@@ -29,6 +32,7 @@ BODY_ASSETS = <<-BODY.strip_heredoc
 <script type="text/javascript">
   window.define = window._define;
 </script>
+<script src="/application.js" type="text/javascript"></script>
 
 <script id="onair_topbar_template" type="text/x-handlebars-template">
 <div class="topbar onair">

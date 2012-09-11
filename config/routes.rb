@@ -17,8 +17,10 @@ Datajam::Application.routes.draw do
       resources :reminders, :only => :destroy
     end
     resources :pages
-    resources :cards
     resources :templates
+    resources :settings, :only => [:index] do
+      put :update, :on => :collection
+    end
     resources :plugins, :only => [:index, :show, :update]
     resources :cache, :only => [:index, :destroy] do
       get 'rebuild', :on => :collection

@@ -29,7 +29,11 @@ class ApplicationController < ActionController::Base
   end
 
   def set_layout
-    request.xhr? ? false : "application"
+    if request.xhr?
+      false
+    else
+      request.path =~ /^(\/users|\/admin)/ ? "admin" : "application"
+    end
   end
 
   def render_if_ajax(*args)

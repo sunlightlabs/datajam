@@ -67,7 +67,7 @@ describe Event do
     event = Event.create(name: 'Test Event', event_template: @event_template,
                          template_data: {"header" => "Hello World"}, scheduled_at: Time.now)
 
-    event.render.should match(/datajam\.js/)
+    event.render.should match('Datajam head assets')
 
   end
 
@@ -111,7 +111,7 @@ describe Event do
     event.update_attributes template_data: {"embed_header" => "Hello World"}
 
     event.rendered_embeds['embed-template'].should match('<h1>Hello World</h1>')
-    event.rendered_embeds['embed-template'].should match(/datajam\.js/)
+    event.rendered_embeds['embed-template'].should match('Datajam head assets')
 
   end
 

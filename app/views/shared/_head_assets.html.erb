@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag :user %>
+<!--[if lte IE 7]>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome-ie7.css">
+<![endif]-->
+<%= javascript_include_tag :head %>
+<script>
+    window.require = {
+        baseUrl: "/javascripts/libs/require",
+        paths: {
+            "datajam": "/javascripts/datajam"
+        },
+        waitSeconds: 15
+    }
+</script>

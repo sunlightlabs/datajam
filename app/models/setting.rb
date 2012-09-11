@@ -14,13 +14,18 @@ class Setting
   # required fields can still be created blank
   validates_presence_of :value, :if => :required, :on => :update
 
-  after_save do
+  after_save :flush_settings
+
+  def flush_settings
     Datajam::Settings.flush(self.namespace)
     callback = "#{namespace}_#{name}_callback".to_sym
     if self.respond_to? callback
       self.send callback
     end
+    Cacher.cache_settings
   end
+
+
 
   def self.bulk_update(settings)
     errors = {}

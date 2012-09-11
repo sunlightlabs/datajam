@@ -39,3 +39,6 @@ about_page = Page.find_or_create_by(
   slug: 'about',
   content: "<h2>This is Your About Page.</h2>\r\n<p>Edit it in the admin site, under 'pages.'</p>"
 )
+
+Setting.find_or_create_by(:namespace => 'datajam', :name => 'interval', :value => 5000, :required => true)
+Setting.find_or_create_by(:namespace => 'datajam', :name => 'chartbeat_api_key')

@@ -20,17 +20,42 @@ module Datajam
     config.middleware.insert_before('Rack::Lock', 'Rack::Rewrite') do
       r301 %r{(.+)/$}, '$1'
     end
-    config.action_view.javascript_expansions[:defaults] = %w(
-      http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js
-      http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js
-      http://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js
-      http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.2.1/underscore-min.js
-      http://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.5.3/backbone-min.js
-      http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.2/bootstrap.min.js
-      http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta2/handlebars.min.js
-      rails.js
-      jquery.pjax.js
-      jquery.autoSuggest.js
+    config.action_view.javascript_expansions[:admin] = %w(
+      //cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js
+      //cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js
+      //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js
+      //cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.2/bootstrap.min.js
+      libs/rails.js
+      libs/jquery.pjax.js
+      libs/jquery.autoSuggest.js
+      //cdnjs.cloudflare.com/ajax/libs/ace/0.2.0/ace.js
+      libs/ace/mode-html.js
+      admin.js
+    )
+    config.action_view.javascript_expansions[:head] = %w(
+      //cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.1/modernizr.min.js
+      //cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js
+
+    )
+    config.action_view.javascript_expansions[:body] = %w(
+      //cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js
+      //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js
+      //cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0.beta6/handlebars.min.js
+      //cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.2/bootstrap.min.js
+      //cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js
+      //cdnjs.cloudflare.com/ajax/libs/require.js/2.0.6/require.min.js
+      libs/rails.js
+      application.js
+    )
+    config.action_view.stylesheet_expansions[:admin] = %w(
+      //netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap.no-icons.min.css
+      //netdna.bootstrapcdn.com/font-awesome/2.0/css/font-awesome.css
+      admin.css
+      autoSuggest.css
+
+    )
+    config.action_view.stylesheet_expansions[:user] = %w(
+      application.css
     )
   end
   def self.setup

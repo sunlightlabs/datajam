@@ -11,9 +11,9 @@ DEFAULT_SITE_TEMPLATE = <<-EOT.strip_heredoc
   <title>Welcome to Datajam</title>
   <meta name="description" content="Interactive, data-driven reporting in real time.">
 
-  <link rel="shortcut icon" href="http://assets.sunlightfoundation.com/site/4.0/favicon.ico">
-  <link rel="apple-touch-icon" href="http://assets.sunlightfoundation.com/site/4.0/apple-touch-icon.png">
-  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+  <link rel="shortcut icon" href="//assets.sunlightfoundation.com/site/4.0/favicon.ico">
+  <link rel="apple-touch-icon" href="//assets.sunlightfoundation.com/site/4.0/apple-touch-icon.png">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap-combined.min.css">
 
   {{{head_assets}}}
 
@@ -24,7 +24,7 @@ DEFAULT_SITE_TEMPLATE = <<-EOT.strip_heredoc
     .footer{margin-top:2em;padding:2em 0;border-top:1px solid #f4f4f4;}
   </style>
 
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.5.3/modernizr.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.5.3/modernizr.min.js"></script>
 
 </head>
 <body>

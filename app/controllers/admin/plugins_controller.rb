@@ -10,7 +10,7 @@ class Admin::PluginsController < AdminController
     klass_path = @plugin.name.split('-').map { |part| part.classify }
     klass = klass_path.join('::').constantize
 
-    @settings = Setting.where(:namespace => params[:id]).order_by([:name, :asc]).entries
+    @settings = Setting.where(:namespace => params[:id]).order_by([:name, :asc])
 
     @actions = klass::PluginController.action_methods.to_a rescue []
     # controller methods starting with '_' are not linked in settings page

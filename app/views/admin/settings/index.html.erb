@@ -1,0 +1,26 @@
+<div class="row-fluid">
+  <div class="span9">
+    <h2>Settings</h2>
+
+    <% if @settings.any? %>
+    <form action="" method="post" class="form-horizontal">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <%= hidden_field_tag :_method, 'put' %>
+      <% @settings.each do |setting| %>
+        <div class="control-group">
+          <label class="control-label" for="setting_<%= setting.id %>"><%= setting.name.titleize %></label>
+          <div class="controls">
+            <input type="text" id="setting_<%= setting.id %>" name="settings[<%= setting.id %>][value]" value="<%= setting.value %>" />
+          </div>
+        </div>
+      <% end %>
+      <div class="form-actions">
+        <button class="btn btn-primary">Save settings</button>
+      </div>
+    </form>
+    <% else %>
+    <p>This instance has no installed settings.</p>
+    <% end %>
+
+  </div>
+</div>

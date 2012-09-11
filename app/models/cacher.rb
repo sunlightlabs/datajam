@@ -56,6 +56,18 @@ class Cacher
     Page.all.each(&:save!)
   end
 
+  def self.cache_settings
+    settings = Setting.where(namespace: 'datajam').entries.clone.as_json
+    settings.collect! do |setting|
+      val = setting['value']
+      setting['value'] = val.to_i if val.to_i.to_s === val
+      setting['value'] = false if val === 'false'
+      setting['value'] = true if val === 'true'
+      setting
+    end
+    cache("/settings.json", settings.to_json)
+  end
+
   # Convenience wrapper to write content to Redis.
   def self.cache(path, content)
     # Add a leading slash if it's not there.

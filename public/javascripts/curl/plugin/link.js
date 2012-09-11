@@ -1,3 +1,0 @@
-(function(define, require){
-(function(d){var b=d.document,f=/^\/\//,e;if(b)e=b.head||(b.head=b.getElementsByTagName("head")[0]);define({load:function(a,d,g,c){var h;a=d.toUrl(a.lastIndexOf(".")<=a.lastIndexOf("/")?a+".css":a);h=a=(c="fixSchemalessUrls"in c?c.fixSchemalessUrls:b.location.protocol)?a.replace(f,c+"//"):a,c=h;a=b.createElement("link");a.rel="stylesheet";a.type="text/css";a.href=c;e.appendChild(a);g(a.sheet||a.styleSheet)}})})(this);
-})(curl.define, curl);

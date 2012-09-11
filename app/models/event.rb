@@ -2,6 +2,7 @@ class Event
   include Mongoid::Document
   include Mongoid::Timestamps
   include Mongoid::Slug
+  include RendersTemplates
 
   include Tag::Taggable
 
@@ -30,7 +31,7 @@ class Event
 
   default_scope order_by([[:status, :desc], [:scheduled_at, :desc]])
 
-  before_save :update_template_data, :generate_content_areas, :cache_render
+  before_save :update_template_data, :generate_content_areas #, :cache_render
 
   after_save do
     UpdateWindow.create(event: self) if self.current_window.nil?
@@ -41,52 +42,56 @@ class Event
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
   scope :finished, where(status: 'Finished').order_by([[:scheduled_at, :desc]])
 
-  def cache_render
-    self.cached_render = render
-  rescue V8::JSError
-    errors.add(:base, "template #{self.event_template.name} contains errors" )
-    errors.blank?
-  end
 
   # Mongoid::Slug changes this to `self.slug`. Undo that.
   def to_param
-    self.id.to_s
+    id.to_s
+  end
+
+  def head_assets
+    @@head_assets ||= render_to_string partial: 'shared/head_assets'
+  end
+
+  def body_assets
+    @@body_assets ||= render_to_string partial: 'shared/body_assets'
+  end
+
+  def reminder_form
+    @reminder_form ||= render_to_string partial: 'shared/reminder_form', locals: { event: self }
   end
 
   def script_id
-    <<-EOT.strip_heredoc
-    <script type="text/javascript">
-    window.Datajam || (Datajam = {});
-    Datajam.eventId = "#{self.id.to_s}";
-    Datajam.eventSlug = "#{self.slug.to_s}"
-    Datajam.DEBUG = #{(Rails.env.to_s == 'production' && 'false') || 'true'};
-    Datajam.debug = function(msg){
-      Datajam.DEBUG && window.console && console.log(msg);
-    }
-    </script>
-    EOT
+    @script_id ||= render_to_string partial: 'shared/script_id', locals: { event: self }
+  end
+
+  def cache_render
+    @cached_render = render
+  rescue V8::JSError
+    errors.add(:base, "template #{self.event_template.name} contains errors" )
+    errors.blank?
+  rescue ActionView::Template::Error
+    errors.add(:base, "one or more asset templates contain errors" )
   end
 
   # Render the HTML for an event page
   def render
-    self.head_assets = HEAD_ASSETS
-    self.body_assets = BODY_ASSETS
-
-    rendered_content = preprocess_template(self.event_template).render_with(self.template_data.merge({
-      event_reminder: add_reminder_form
-    }))
+    rendered_content = preprocess_template(event_template)
+      .render_with(
+        template_data.merge({
+          event_reminder: reminder_form
+        }))
     SiteTemplate.first.render_with({ content: rendered_content,
                                      head_assets: head_assets,
-                                     body_assets: self.script_id + body_assets})
+                                     body_assets: script_id + body_assets})
   end
 
   # Render the HTML for an embed
   def rendered_embeds
     embeds = {}
-    self.embed_templates.each do |embed_template|
-      data = self.template_data.merge({
-        "head_assets" => HEAD_ASSETS,
-        "body_assets" => self.script_id + BODY_ASSETS
+    embed_templates.each do |embed_template|
+      data = template_data.merge({
+        head_assets: head_assets,
+        body_assets: script_id + body_assets
       })
       embeds[embed_template.slug] = preprocess_template(embed_template).render_with(data)
     end
@@ -95,7 +100,7 @@ class Event
 
   # Convert content areas from Handlebars to HTML
   def preprocess_template(template)
-    self.content_areas.each do |content_area|
+    content_areas.each do |content_area|
       # only render assets once for each type
       unless head_assets.include?(content_area.render_head)
         self.head_assets += content_area.render_head
@@ -106,10 +111,6 @@ class Event
       template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
     end
     template
-  end
-
-  def add_reminder_form
-    Handlebars.compile(REMINDER_ASSETS).call(event_id: self.id.to_s)
   end
 
   def add_content_update(params)
@@ -146,6 +147,13 @@ class Event
     super.merge(unix_scheduled_at: scheduled_at.to_i)
   end
 
+  def as_renderable_data()
+    self.template_data.merge({
+      head_assets: head_assets,
+      body_assets: script_id + body_assets
+    })
+  end
+
   # Public: Returns the list of taggables that share tags with this event. If
   # this event has no tags, then it returns the full passed-in collection, as
   # is.
@@ -156,11 +164,20 @@ class Event
   def filter_by_tags(collection)
     return collection if tag_list.empty?
 
-    # FIXME: Do this in mongo instead of loading everything in memory.
-    collection.select do |taggable|
-      tags = tag_list.push('global')
-      (taggable.tag_list & tags).any?
+    # # FIXED: Do this in mongo instead of loading everything in memory.
+    # collection.select do |taggable|
+    #   tags = tag_list.push('global')
+    #   (taggable.tag_list & tags).any?
+    # end
+
+    ids = []
+    type = collection.first.class.to_s
+    Tag.any_in(name: tag_list.push('global')).each do |tag|
+      tag.taggable_references.where(taggable_type: type).each do |ref|
+        ids.push ref.taggable_id
+      end
     end
+    collection.any_in(_id: ids)
   end
 
   protected

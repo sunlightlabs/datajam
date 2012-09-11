@@ -1,0 +1,11 @@
+<div id="event_reminder" style="display:none;">
+  <h3>Remind Me</h3>
+  <p class="tip">Enter your email address and we'll remind you about an hour before the&nbsp;event.</p>
+  <form action="/reminders" id="remind_event" class="well form-inline reminder_form" method="post" data-remote=true>
+    <div class="response" style="display:none;"></div>
+      <input type="hidden" name="event_id" value="<%= event.id.to_s %>" />
+      <input type="text" name="email" class="reminder-input" id="email" placeholder="Your Email" />
+      <input type="submit" class="btn btn-primary"/>
+    </div>
+  </form>
+</div>
