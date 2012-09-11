@@ -45,7 +45,6 @@ module Datajam
       //cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js
       //cdnjs.cloudflare.com/ajax/libs/require.js/2.0.6/require.min.js
       libs/rails.js
-      application.js
     )
     config.action_view.stylesheet_expansions[:admin] = %w(
       //netdna.bootstrapcdn.com/twitter-bootstrap/2.1.0/css/bootstrap.no-icons.min.css
