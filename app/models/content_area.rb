@@ -32,8 +32,8 @@ class ContentArea
     "#{self.html}"
   end
 
-  def as_json
-    super.merge(:modal_class => self.class.modal_class)
+  def as_json(options = {})
+    super(options).merge(:modal_class => self.class.modal_class)
   end
 
   protected
