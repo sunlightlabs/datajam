@@ -2,10 +2,13 @@ class ContentArea
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  def self.modal_class
+    'Datajam.views.Modal'
+  end
+
   field :name,      type: String
   field :area_type, type: String
   field :html,      type: String
-  field :template,  type: String
   field :data,      type: Hash,   default: {}
 
   embedded_in :event
@@ -27,6 +30,10 @@ class ContentArea
 
   def render_update
     "#{self.html}"
+  end
+
+  def as_json
+    super.merge(:modal_class => self.class.modal_class)
   end
 
   protected
