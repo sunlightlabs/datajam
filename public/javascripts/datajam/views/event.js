@@ -120,7 +120,8 @@
 
       initializeModals: function(){
         _.each(this.contentAreas.models, _.bind(function(area, i, areas){
-          area.modal = new _.constantize(area.get('modal_class'))({
+          var modal_class = _.constantize(area.get('modal_class'));
+          area.modal = new modal_class({
             el: $('<div id="modal-' + area.id + '" class="modal hide fade" style="display: none;">'),
             model: area
           });
