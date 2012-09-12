@@ -5,12 +5,12 @@
 
   define([ 'text!datajam/templates/onairtoolbar.html',
            'datajam/init',
-           'datajam/collections/contentarea',
-           'datajam/collections/contentupdate',
+           'datajam/collections/content_area',
+           'datajam/collections/content_update',
            'datajam/models/event',
-           'datajam/models/contentarea',
-           'datajam/models/contentupdate',
-           'datajam/views/contentarea',
+           'datajam/models/content_area',
+           'datajam/models/content_update',
+           'datajam/views/content_area',
            'datajam/views/modal'
          ], function(onairToolbarTemplate){
 
@@ -120,19 +120,22 @@
 
       initializeModals: function(){
         _.each(this.contentAreas.models, _.bind(function(area, i, areas){
-          var modal_class = _.constantize(area.get('modal_class'));
-          area.modal = new modal_class({
-            el: $('<div id="modal-' + area.id + '" class="modal hide fade" style="display: none;">'),
-            model: area
-          });
-          $('body').append(area.modal.el);
-          area.modal.render();
+          var modal_class = area.get('modal_class');
+          // require() the modal appropriate view class, then init
+          require([_.pathify(modal_class)], _.bind(function(){
+            var klass = _.constantize(modal_class);
+            area.modal = new klass({
+              el: $('<div id="modal-' + area.id + '" class="modal hide fade" style="display: none;">'),
+              model: area
+            });
+            $('body').append(area.modal.el);
+            area.modal.render();
+            area.modal.$el.modal({
+              backdrop: false,
+              show: false
+            });
+          }, this));
         }, this));
-
-        $('.modal').modal({
-          backdrop: false,
-          show: false
-        });
 
         return this;
       },

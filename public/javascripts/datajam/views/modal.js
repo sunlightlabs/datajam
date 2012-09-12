@@ -5,7 +5,7 @@
 
   define([ 'text!datajam/templates/modal.html',
            'datajam/init',
-           'datajam/models/contentupdate'
+           'datajam/models/content_update'
          ], function(modalTemplate){
 
     App.views.Modal = Backbone.View.extend({

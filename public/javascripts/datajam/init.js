@@ -3,8 +3,11 @@
 (function(define, require, $, window, undefined){
 
   define([], function(){
-    // Constantize for dot-delimited strings; used to instantiate modals
     _.mixin({
+      /**
+       * takes a string classpath and returns a matching object
+       * from the passed-in scope.
+       */
       constantize: function(str, scope){
         scope || (scope = window);
         var parts = str.split('.');
@@ -13,6 +16,29 @@
         });
 
         return scope;
+      },
+      /**
+       * takes a string classpath and returns a string file path
+       * relative to the passed-in root, suitable for requiring
+       * modules using require.js
+       */
+      pathify: function(str, root){
+        root || (root = '');
+        var parts = str.split(/([A-Z]+|\.)/).slice(1);
+        _.each(parts, function(part, i, parts){
+          if(part.match(/[A-Z]+/)){
+            if(root.match(/[a-z]$/)){
+              root += '_';
+            }
+            root += part.toLowerCase();
+          }else if(part == '.'){
+            root += '/';
+          }else{
+            root += part;
+          }
+        });
+
+        return root;
       }
     });
 
