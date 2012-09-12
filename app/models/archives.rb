@@ -1,4 +1,6 @@
 class Archives
+  include RendersTemplates
+
   attr :events
 
   # Convenience method to render the archives.
@@ -19,8 +21,8 @@ class Archives
     # Fails with a javascript error inside Handlebars' V8 implementation.
     Handlebars.compile(SiteTemplate.first.template).call(
       content: Handlebars.compile(self.class.template).call(events: events),
-      head_assets: HEAD_ASSETS,
-      body_assets: BODY_ASSETS
+      head_assets: Event.head_assets,
+      body_assets: Event.body_assets
     )
   end
 

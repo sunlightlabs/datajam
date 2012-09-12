@@ -41,8 +41,8 @@ class Cacher
     if next_event.nil?
       redis.set '/', site_template.render_with(
         content: '<h2>No upcoming events</h2>',
-        head_assets: HEAD_ASSETS,
-        body_assets: BODY_ASSETS
+        head_assets: Event.head_assets,
+        body_assets: Event.body_assets
       )
     end
   end

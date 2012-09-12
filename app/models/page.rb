@@ -27,8 +27,8 @@ class Page
   def content_wrapper
     self.rendered_content = SiteTemplate.first.render_with({
       content: self.content,
-      head_assets: HEAD_ASSETS,
-      body_assets: BODY_ASSETS
+      head_assets: Event.head_assets,
+      body_assets: Event.body_assets
     })
   end
 

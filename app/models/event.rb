@@ -8,6 +8,14 @@ class Event
 
   attr_accessor :head_assets, :body_assets, :cached_render
 
+  def self.head_assets
+    @@head_assets ||= render_to_string partial: 'shared/head_assets'
+  end
+
+  def self.body_assets
+    @@body_assets ||= render_to_string partial: 'shared/body_assets'
+  end
+
   has_many :reminders
 
   field :name,            type: String
@@ -43,17 +51,14 @@ class Event
   scope :finished, where(status: 'Finished').order_by([[:scheduled_at, :desc]])
 
 
+  def initialize
+    @head_assets = Event.head_assets
+    @body_assets = Event.body_assets
+  end
+
   # Mongoid::Slug changes this to `self.slug`. Undo that.
   def to_param
     id.to_s
-  end
-
-  def head_assets
-    @head_assets ||= render_to_string partial: 'shared/head_assets'
-  end
-
-  def body_assets
-    @body_assets ||= render_to_string partial: 'shared/body_assets'
   end
 
   def reminder_form
@@ -81,8 +86,8 @@ class Event
           event_reminder: reminder_form
         }))
     SiteTemplate.first.render_with({ content: rendered_content,
-                                     head_assets: head_assets,
-                                     body_assets: script_id + body_assets})
+                                     head_assets: @head_assets,
+                                     body_assets: script_id + @body_assets})
   end
 
   # Render the HTML for an embed
@@ -90,8 +95,8 @@ class Event
     embeds = {}
     embed_templates.each do |embed_template|
       data = template_data.merge({
-        head_assets: head_assets,
-        body_assets: script_id + body_assets
+        head_assets: @head_assets,
+        body_assets: script_id + @body_assets
       })
       embeds[embed_template.slug] = preprocess_template(embed_template).render_with(data)
     end
@@ -102,10 +107,10 @@ class Event
   def preprocess_template(template)
     content_areas.each do |content_area|
       # only render assets once for each type
-      unless head_assets.include?(content_area.render_head)
+      unless @head_assets.include?(content_area.render_head)
         @head_assets += content_area.render_head
       end
-      unless body_assets.include?(content_area.render_body)
+      unless @body_assets.include?(content_area.render_body)
         @body_assets += content_area.render_body
       end
       template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
@@ -144,14 +149,8 @@ class Event
   end
 
   def as_json(options = {})
-    super.merge(unix_scheduled_at: scheduled_at.to_i)
-  end
-
-  def as_renderable_data()
-    self.template_data.merge({
-      head_assets: head_assets,
-      body_assets: script_id + body_assets
-    })
+    super(options).merge(unix_scheduled_at: scheduled_at.to_i,
+                         content_areas: content_areas.collect {|area| area.as_json })
   end
 
   # Public: Returns the list of taggables that share tags with this event. If
