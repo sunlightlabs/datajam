@@ -49,11 +49,11 @@ class Event
   end
 
   def head_assets
-    @@head_assets ||= render_to_string partial: 'shared/head_assets'
+    @head_assets ||= render_to_string partial: 'shared/head_assets'
   end
 
   def body_assets
-    @@body_assets ||= render_to_string partial: 'shared/body_assets'
+    @body_assets ||= render_to_string partial: 'shared/body_assets'
   end
 
   def reminder_form
@@ -103,10 +103,10 @@ class Event
     content_areas.each do |content_area|
       # only render assets once for each type
       unless head_assets.include?(content_area.render_head)
-        self.head_assets += content_area.render_head
+        @head_assets += content_area.render_head
       end
       unless body_assets.include?(content_area.render_body)
-        self.body_assets += content_area.render_body
+        @body_assets += content_area.render_body
       end
       template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
     end
