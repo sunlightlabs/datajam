@@ -42,12 +42,6 @@ class Event
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
   scope :finished, where(status: 'Finished').order_by([[:scheduled_at, :desc]])
 
-  def initialize(*options)
-    self._head_assets = head_assets
-    self._body_assets = body_assets
-    super
-  end
-
   # Mongoid::Slug changes this to `self.slug`. Undo that.
   def to_param
     id.to_s
@@ -78,31 +72,34 @@ class Event
           event_reminder: reminder_form
         }))
     SiteTemplate.first.render_with({ content: rendered_content,
-                                     head_assets: self._head_assets,
-                                     body_assets: script_id + self._body_assets})
+                                     head_assets: _head_assets,
+                                     body_assets: script_id + _body_assets})
   end
 
   # Render the HTML for an embed
   def rendered_embeds
     embeds = {}
     embed_templates.each do |embed_template|
+      template_to_render = preprocess_template(embed_template)
       data = template_data.merge({
-        head_assets: self._head_assets,
-        body_assets: script_id + self._body_assets
+        head_assets: _head_assets,
+        body_assets: script_id + _body_assets
       })
-      embeds[embed_template.slug] = preprocess_template(embed_template).render_with(data)
+      embeds[embed_template.slug] = template_to_render.render_with(data)
     end
     embeds
   end
 
   # Convert content areas from Handlebars to HTML
   def preprocess_template(template)
+    self._head_assets = head_assets
+    self._body_assets = body_assets
     content_areas.each do |content_area|
       # only render assets once for each type
-      unless self._head_assets.include?(content_area.render_head)
+      unless _head_assets.include?(content_area.render_head)
         self._head_assets += content_area.render_head
       end
-      unless self._body_assets.include?(content_area.render_body)
+      unless _body_assets.include?(content_area.render_body)
         self._body_assets += content_area.render_body
       end
       template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
