@@ -33,6 +33,14 @@ module RendersTemplates
   end
 
   def render_to_string(args=nil)
-    get_renderer._render(args)
+    get_renderer._render args
+  end
+
+  def head_assets
+    @@head_assets ||= get_renderer._render partial: 'shared/head_assets'
+  end
+
+  def body_assets
+    @@body_assets ||= get_renderer._render partial: 'shared/body_assets'
   end
 end

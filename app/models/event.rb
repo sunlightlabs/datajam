@@ -6,15 +6,7 @@ class Event
 
   include Tag::Taggable
 
-  attr_accessor :head_assets, :body_assets, :cached_render
-
-  def self.head_assets
-    @@head_assets ||= render_to_string partial: 'shared/head_assets'
-  end
-
-  def self.body_assets
-    @@body_assets ||= render_to_string partial: 'shared/body_assets'
-  end
+  attr_accessor :cached_render
 
   has_many :reminders
 
@@ -51,9 +43,10 @@ class Event
   scope :finished, where(status: 'Finished').order_by([[:scheduled_at, :desc]])
 
 
-  def initialize
-    @head_assets = Event.head_assets
-    @body_assets = Event.body_assets
+  def initialize(*options)
+    @head_assets = head_assets
+    @body_assets = body_assets
+    super(*options)
   end
 
   # Mongoid::Slug changes this to `self.slug`. Undo that.
@@ -162,12 +155,6 @@ class Event
   # Returns a filtered collection.
   def filter_by_tags(collection)
     return collection if tag_list.empty?
-
-    # # FIXED: Do this in mongo instead of loading everything in memory.
-    # collection.select do |taggable|
-    #   tags = tag_list.push('global')
-    #   (taggable.tag_list & tags).any?
-    # end
 
     ids = []
     type = collection.first.class.to_s

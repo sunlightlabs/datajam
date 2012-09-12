@@ -1,6 +1,7 @@
 class Page
   include Mongoid::Document
   include Mongoid::Slug
+  include RendersTemplates
 
   field :slug
   field :content, type: String
@@ -27,8 +28,8 @@ class Page
   def content_wrapper
     self.rendered_content = SiteTemplate.first.render_with({
       content: self.content,
-      head_assets: Event.head_assets,
-      body_assets: Event.body_assets
+      head_assets: head_assets,
+      body_assets: body_assets
     })
   end
 

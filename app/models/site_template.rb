@@ -1,4 +1,6 @@
 class SiteTemplate < Template
+  include RendersTemplates
+
   def self.model_name
     # Play nice with the admin's URLs
     ActiveModel::Name.new(self, nil, "Templates::Site")
