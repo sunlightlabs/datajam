@@ -6,7 +6,7 @@ class Event
 
   include Tag::Taggable
 
-  attr_accessor :cached_render
+  attr_accessor :cached_render, :_head_assets, :_body_assets
 
   has_many :reminders
 
@@ -42,11 +42,10 @@ class Event
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
   scope :finished, where(status: 'Finished').order_by([[:scheduled_at, :desc]])
 
-
   def initialize(*options)
-    @head_assets = head_assets
-    @body_assets = body_assets
-    super(*options)
+    self._head_assets = head_assets
+    self._body_assets = body_assets
+    super
   end
 
   # Mongoid::Slug changes this to `self.slug`. Undo that.
@@ -79,8 +78,8 @@ class Event
           event_reminder: reminder_form
         }))
     SiteTemplate.first.render_with({ content: rendered_content,
-                                     head_assets: @head_assets,
-                                     body_assets: script_id + @body_assets})
+                                     head_assets: self._head_assets,
+                                     body_assets: script_id + self._body_assets})
   end
 
   # Render the HTML for an embed
@@ -88,8 +87,8 @@ class Event
     embeds = {}
     embed_templates.each do |embed_template|
       data = template_data.merge({
-        head_assets: @head_assets,
-        body_assets: script_id + @body_assets
+        head_assets: self._head_assets,
+        body_assets: script_id + self._body_assets
       })
       embeds[embed_template.slug] = preprocess_template(embed_template).render_with(data)
     end
@@ -100,11 +99,11 @@ class Event
   def preprocess_template(template)
     content_areas.each do |content_area|
       # only render assets once for each type
-      unless @head_assets.include?(content_area.render_head)
-        @head_assets += content_area.render_head
+      unless self._head_assets.include?(content_area.render_head)
+        self._head_assets += content_area.render_head
       end
-      unless @body_assets.include?(content_area.render_body)
-        @body_assets += content_area.render_body
+      unless self._body_assets.include?(content_area.render_body)
+        self._body_assets += content_area.render_body
       end
       template.template.gsub!(/\{\{([\w ]*):( *)#{content_area.name} \}\}/, content_area.render)
     end
