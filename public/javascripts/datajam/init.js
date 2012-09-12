@@ -3,13 +3,26 @@
 (function(define, require, $, window, undefined){
 
   define([], function(){
+    // Constantize for dot-delimited strings; used to instantiate modals
+    _.mixin({
+      constantize: function(str, scope){
+        scope || (scope = window);
+        var parts = str.split('.');
+        _.each(parts, function(part, i, parts){
+          scope = scope[part];
+        });
+
+        return scope;
+      }
+    });
+
     // Emulate HTTP via _method param
     Backbone.emulateHTTP = true;
     Backbone.emulateJSON = true;
 
     // Use mongo's _id as the id attr
-
     Backbone.Model.prototype.idAttribute = '_id';
+
     // Always hang a ref to the view on this.el
     _.extend(Backbone.View.prototype, {
       initialize: function() {
