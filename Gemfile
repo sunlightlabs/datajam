@@ -38,6 +38,7 @@ group :development do
   gem 'wirble'
   gem 'sketches'
   gem 'debugger'
+  gem 'httparty'
 end
 
 group :development, :test do
@@ -50,7 +51,6 @@ group :development, :test do
   gem 'jasmine',           '~> 1.1'
   gem 'pygmentize',        '~> 0.0.2'
   gem 'guard-rspec',       '~> 0.5'
-  gem 'cover_me',          '~> 1.2'
   gem 'mocha',             '0.11.4'
 end
 

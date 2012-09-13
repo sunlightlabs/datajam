@@ -1,7 +1,6 @@
-User.where(username: 'admin').destroy_all
+User.where(email: 'changeme@example.com').destroy_all
 user = User.find_or_create_by(
   email: 'changeme@example.com',
-  username: 'admin',
   name: 'Admin',
   password: 'changeme',
 )
