@@ -62,7 +62,6 @@
     Datajam.views          || (Datajam.views = {});
     Datajam.collections    || (Datajam.collections = {});
     Datajam.templates      || (Datajam.templates = {});
-    Datajam.modalRenderers || (Datajam.modalRenderers = {});
     // defaults
     Datajam.settings       || (Datajam.settings = {
       'debug': true,
