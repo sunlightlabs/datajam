@@ -138,7 +138,7 @@ class Event
   end
 
   def as_json(options = {})
-    super(options).merge(unix_scheduled_at: scheduled_at.to_i,
+    super.merge(unix_scheduled_at: scheduled_at.to_i,
                          content_areas: content_areas.collect {|area| area.as_json })
   end
 

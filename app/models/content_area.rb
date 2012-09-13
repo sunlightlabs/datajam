@@ -33,7 +33,7 @@ class ContentArea
   end
 
   def as_json(options = {})
-    super(options).merge(:modal_class => self.class.modal_class)
+    super.merge(:modal_class => self.class.modal_class)
   end
 
   protected

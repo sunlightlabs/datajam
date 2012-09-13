@@ -1,8 +1,5 @@
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
-
-  var App = window.Datajam;
-
   define([ 'text!datajam/templates/onairtoolbar.html',
            'datajam/init',
            'datajam/collections/content_area',
@@ -13,6 +10,8 @@
            'datajam/views/content_area',
            'datajam/views/modal'
          ], function(onairToolbarTemplate){
+
+    var App = window.Datajam;
 
     App.views.Event = Backbone.View.extend({
 

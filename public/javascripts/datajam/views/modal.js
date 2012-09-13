@@ -1,12 +1,12 @@
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
 
-  var App = window.Datajam;
-
   define([ 'text!datajam/templates/modal.html',
            'datajam/init',
            'datajam/models/content_update'
          ], function(modalTemplate){
+
+    var App = window.Datajam;
 
     App.views.Modal = Backbone.View.extend({
 

@@ -1,9 +1,8 @@
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
-
-  var App = window.Datajam;
-
   define(['datajam/init'], function(){
+
+    var App = window.Datajam;
 
     App.models.ContentUpdate = Backbone.Model.extend({
       // Content Updates post to a non-resourceful url

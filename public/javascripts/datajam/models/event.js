@@ -1,9 +1,8 @@
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
-
-  var App = window.Datajam;
-
   define(['datajam/init'], function(){
+
+    var App = window.Datajam;
 
     App.models.Event = Backbone.Model.extend({
 

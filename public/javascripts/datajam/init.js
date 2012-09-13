@@ -57,13 +57,14 @@
       }
     });
 
-    window.Datajam || (Datajam = {});
-    Datajam.models || (Datajam.models = {});
-    Datajam.views || (Datajam.views = {});
-    Datajam.collections || (Datajam.collections = {});
-    Datajam.templates || (Datajam.templates = {});
+    window.Datajam         || (Datajam = {});
+    Datajam.models         || (Datajam.models = {});
+    Datajam.views          || (Datajam.views = {});
+    Datajam.collections    || (Datajam.collections = {});
+    Datajam.templates      || (Datajam.templates = {});
     Datajam.modalRenderers || (Datajam.modalRenderers = {});
-    Datajam.settings || (Datajam.settings = {
+    // defaults
+    Datajam.settings       || (Datajam.settings = {
       'debug': true,
       'interval': 5000
     });
@@ -71,7 +72,7 @@
       csrf_param: $('meta[name=csrf-param]').attr('content'),
       csrf_token: $('meta[name=csrf-token]').attr('content')
     };
-    // get the real token when it comes
+    // get the real csrf token when it comes via ajax
     $('document').bind('csrfloaded', function(){
       Datajam.csrf.csrf_token = $('meta[name=csrf-token]').attr('content');
     });
