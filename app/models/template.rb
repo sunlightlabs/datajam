@@ -9,6 +9,7 @@ class Template
 
   field :name,           type: String
   field :template,       type: String
+  field :type,           type: String
   field :custom_fields,  type: Array,  default: []
   field :custom_areas,   type: Hash,   default: {}
 
