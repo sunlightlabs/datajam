@@ -1,13 +1,13 @@
 <!-- Datajam head assets. Leave this for test coverage. -->
 <script type="text/javascript">
-    window.Datajam || (Datajam = {});
-    Datajam.eventId = "<%= event.id.to_s %>";
-    Datajam.eventSlug = "<%= event.slug.to_s %>";
-    Datajam.settings = {
-      debug: <%= (Rails.env.to_s == 'production' && 'false') || 'true' %>,
-      interval: 5000
-    }
-    Datajam.debug = function(msg){
-      Datajam.settings.debug && window.console && console.log(msg);
-    }
+  window.Datajam || (Datajam = {});
+  Datajam.eventId = "<%= event.id.to_s %>";
+  Datajam.eventSlug = "<%= event.slug.to_s %>";
+  Datajam.settings = {
+    debug: <%= (Rails.env.to_s == 'production' && 'false') || 'true' %>,
+    interval: 5000
+  }
+  Datajam.debug = function(msg){
+    Datajam.settings.debug && window.console && console.log(msg);
+  }
 </script>
