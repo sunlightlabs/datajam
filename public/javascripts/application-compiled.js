@@ -64,13 +64,13 @@
       }
     });
 
-    window.Datajam || (Datajam = {});
-    Datajam.models || (Datajam.models = {});
-    Datajam.views || (Datajam.views = {});
-    Datajam.collections || (Datajam.collections = {});
-    Datajam.templates || (Datajam.templates = {});
-    Datajam.modalRenderers || (Datajam.modalRenderers = {});
-    Datajam.settings || (Datajam.settings = {
+    window.Datajam         || (Datajam = {});
+    Datajam.models         || (Datajam.models = {});
+    Datajam.views          || (Datajam.views = {});
+    Datajam.collections    || (Datajam.collections = {});
+    Datajam.templates      || (Datajam.templates = {});
+    // defaults
+    Datajam.settings       || (Datajam.settings = {
       'debug': true,
       'interval': 5000
     });
@@ -78,7 +78,7 @@
       csrf_param: $('meta[name=csrf-param]').attr('content'),
       csrf_token: $('meta[name=csrf-token]').attr('content')
     };
-    // get the real token when it comes
+    // get the real csrf token when it comes via ajax
     $('document').bind('csrfloaded', function(){
       Datajam.csrf.csrf_token = $('meta[name=csrf-token]').attr('content');
     });
@@ -88,10 +88,9 @@
 })(define, require, jQuery, window);
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
-
-  var App = window.Datajam;
-
   define('datajam/models/event', ['datajam/init'], function(){
+
+    var App = window.Datajam;
 
     App.models.Event = Backbone.Model.extend({
 
@@ -130,10 +129,9 @@
 })(define, require, jQuery, window);
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
-
-  var App = window.Datajam;
-
   define('datajam/models/content_area', ['datajam/init'], function(){
+
+    var App = window.Datajam;
 
     App.models.ContentArea = Backbone.Model.extend({});
 
@@ -142,10 +140,9 @@
 })(define, require, jQuery, window);
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
-
-  var App = window.Datajam;
-
   define('datajam/models/content_update', ['datajam/init'], function(){
+
+    var App = window.Datajam;
 
     App.models.ContentUpdate = Backbone.Model.extend({
       // Content Updates post to a non-resourceful url
@@ -227,10 +224,9 @@
 })(define, require, jQuery, window);
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
-
-  var App = window.Datajam;
-
   define('datajam/views/content_area', ['datajam/init'], function(){
+
+    var App = window.Datajam;
 
     App.views.ContentArea = Backbone.View.extend({
 
@@ -255,12 +251,12 @@
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
 
-  var App = window.Datajam;
-
   define('datajam/views/modal', [ 'text!datajam/templates/modal.html',
            'datajam/init',
            'datajam/models/content_update'
          ], function(modalTemplate){
+
+    var App = window.Datajam;
 
     App.views.Modal = Backbone.View.extend({
 
@@ -310,7 +306,7 @@
       },
 
       render: function(){
-        var tmpl = this.template && this.template() || App.templates['modal'];
+        var tmpl = typeof(this.template) === 'function' && this.template || App.templates['modal'];
         this.$el.html(tmpl(this.model.toJSON()));
 
         return this;
@@ -355,9 +351,6 @@
 })(define, require, jQuery, window);
 /*jshint laxcomma:true, expr:true, evil:true */
 (function(define, require, $, window, undefined){
-
-  var App = window.Datajam;
-
   define('datajam/views/event', [ 'text!datajam/templates/onairtoolbar.html',
            'datajam/init',
            'datajam/collections/content_area',
@@ -368,6 +361,8 @@
            'datajam/views/content_area',
            'datajam/views/modal'
          ], function(onairToolbarTemplate){
+
+    var App = window.Datajam;
 
     App.views.Event = Backbone.View.extend({
 
