@@ -12,7 +12,7 @@ class OnairController < ApplicationController
 
   def update
     event = Event.find(params[:event_id])
-    event.add_content_update(params.keep_if {|k,v| event.attributes.keys.include? k })
+    event.add_content_update(params)
 
     if event.current_window.save
       render json: { msg: 'Success updating' }

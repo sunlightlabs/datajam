@@ -120,7 +120,9 @@ class Event
       # The new window is now the current window.
       self.current_window = new_window
     end
-    self.current_window.content_updates.create(params)
+    self.current_window.content_updates.create(
+      params.keep_if{|k,v| ContentUpdate.fields.include? k.to_s }
+    )
     self.save
     self.current_window.reload
 
