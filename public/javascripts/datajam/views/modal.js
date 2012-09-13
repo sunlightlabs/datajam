@@ -29,11 +29,10 @@
 
         App.templates['modal'] || (App.templates['modal'] = Handlebars.compile(modalTemplate));
 
-        this.$el = $(this.el);
-        this.delegateEvents();
         this.$el.data('modalView', this);
         this.model.bind('change', this.render, this);
 
+        return this;
       },
 
       handleKeyDown: function(evt){
@@ -51,8 +50,9 @@
           evt.preventDefault();
           evt.stopPropagation();
         }catch(e){}
-
         this.$el.modal('hide');
+
+        return this;
       },
 
       render: function(){
@@ -91,6 +91,8 @@
         var visible = this.$el.is(':visible');
         this.$el.modal('toggle');
         if(! visible) this.$el.find('input, select, textarea').eq(0).focus();
+
+        return this;
       }
 
     });

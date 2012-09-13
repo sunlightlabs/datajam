@@ -10,6 +10,16 @@ class Cacher
     cache_events(Event.all)
     cache_archives
     cache_pages
+    cache_settings
+    Datajam.plugins.each do |plugin|
+      begin
+        klass_path = plugin.name.split('-').map { |part| part.classify }
+        klass = klass_path.join('::').constantize
+        klass::CacheResetJob.perform
+      rescue
+        nil
+      end
+    end
   end
 
   # Takes in an array of events. Only have one event to cache? Pass in an array with that one event.

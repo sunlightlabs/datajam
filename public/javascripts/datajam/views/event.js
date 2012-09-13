@@ -33,19 +33,15 @@
                       , 'initializeReminder'
                       , 'pollForUpdates'
                       , 'pollForAudience'
-                      , 'render'
+                      , 'renderToolbar'
                       , 'toggleModal'
                       );
-        // super
-        Backbone.View.prototype.initialize.call(this);
 
         // set up event model
         this.model = new App.models.Event({ _id: App.eventId });
         this.model.view = this;
-        this.model.bind('change', this.render, this);
 
-        // data/view bindings to content areas
-        this.contentAreas.bind('add, remove', this.render, this);
+        // view bindings to content areas
         this.contentAreas.view = this;
         this.contentUpdates.view = this;
 
@@ -70,9 +66,9 @@
               $('meta[name="csrf-token"]').attr('content', data.csrfToken);
               $(document).trigger('csrfloaded');
             }
-            if(data.signedIn){
+            if(data.signedIn === true){
               this.initializeModals();
-              this.render();
+              this.renderToolbar();
               this.pollForAudience();
             }
           }
@@ -109,9 +105,9 @@
       initializeAreas: function(){
         _.each(this.contentAreas.models, _.bind(function(area, i, areas){
           area.view = new App.views.ContentArea({
-            el: $('#content_area_' + area.id),
+            el: $('#' + area.get('area_type') + '_' + area.id),
             model: area,
-            collection: this.contentAreas
+            collection: areas
           }).render();
         }, this));
 
@@ -197,7 +193,7 @@
         BackboneView.prototype.remove.call(this);
       },
 
-      render: function() {
+      renderToolbar: function() {
         // draw the onair toolbar
         App.templates['onairToolbar'] || (App.templates['onairToolbar'] = Handlebars.compile(onairToolbarTemplate));
         this.$el.html(

@@ -10,10 +10,14 @@
       initialize: function(){
         _.bindAll(this, 'render');
         this.model.bind('change', this.render, this);
+
+        return this;
       },
 
       render: function(){
         this.$el.html(this.model.get('html'));
+
+        return this;
       }
 
     });
