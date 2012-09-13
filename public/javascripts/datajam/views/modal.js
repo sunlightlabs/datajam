@@ -56,7 +56,7 @@
       },
 
       render: function(){
-        var tmpl = this.template && this.template() || App.templates['modal'];
+        var tmpl = typeof(this.template) === 'function' && this.template || App.templates['modal'];
         this.$el.html(tmpl(this.model.toJSON()));
 
         return this;
