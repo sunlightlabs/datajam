@@ -553,7 +553,8 @@
         App.templates['onairToolbar'] || (App.templates['onairToolbar'] = Handlebars.compile(onairToolbarTemplate));
         this.$el.html(
           App.templates['onairToolbar'](this.model.toJSON())
-        ).children().eq(0).addClass('topbarred');
+        );
+        $('body').addClass('topbarred');
 
         return this;
       },
