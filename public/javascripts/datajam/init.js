@@ -38,6 +38,13 @@
           }
         });
 
+        // if the path starts with datajam, but is not part of the datajam app,
+        // (i.e., it's a plugin) strip datajam from the name.
+        if(root.match(/^datajam\//) &&
+          !root.match(/^datajam\/(views|models|collections|templates|init|libs)/)){
+          root.replace('datajam/', '');
+        }
+
         return root;
       }
     });
