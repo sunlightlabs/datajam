@@ -68,6 +68,8 @@ describe Event do
                          template_data: {"header" => "Hello World"}, scheduled_at: Time.now)
 
     event.render.should match('Datajam head assets')
+    event.render.should match('Datajam body assets')
+    event.render.should match('Datajam event ID')
 
   end
 
@@ -112,6 +114,8 @@ describe Event do
 
     event.rendered_embeds['embed-template'].should match('<h1>Hello World</h1>')
     event.rendered_embeds['embed-template'].should match('Datajam head assets')
+    event.rendered_embeds['embed-template'].should match('Datajam body assets')
+    event.rendered_embeds['embed-template'].should match('Datajam event ID')
 
   end
 
