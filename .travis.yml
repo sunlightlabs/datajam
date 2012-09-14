@@ -6,7 +6,7 @@ notifications:
     - ddrinkard@sunlightfoundation.com
     - chris@nu7hat.ch
 services:
-    - mongodb
-    - redis-server
+  - mongodb
+  - redis-server
 before_script:
   - mongo datajam_test --eval 'db.addUser("travis", "test");'
