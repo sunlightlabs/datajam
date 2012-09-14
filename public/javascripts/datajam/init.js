@@ -42,7 +42,7 @@
         // (i.e., it's a plugin) strip datajam from the name.
         if(root.match(/^datajam\//) &&
           !root.match(/^datajam\/(views|models|collections|templates|init|libs)/)){
-          root.replace('datajam/', '');
+          root = root.replace('datajam/', '');
         }
 
         return root;
