@@ -7,6 +7,7 @@
     debug: <%= (Rails.env.to_s == 'production' && 'false') || 'true' %>,
     interval: 5000
   }
+  if(location.search.match('debug')) Datajam.settings.debug = true;
   Datajam.debug = function(msg){
     Datajam.settings.debug && window.console && console.log(msg);
   }
