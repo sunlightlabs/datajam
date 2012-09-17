@@ -25,6 +25,10 @@ event_template = EventTemplate.find_or_create_by(
   </div>
   EOT
 )
+unless event_template
+  event_template = EventTemplate.where(name: 'Default').first
+end
+
 event = Event.find_or_create_by(
   name: 'Your First Event',
   event_template_id: event_template._id,
