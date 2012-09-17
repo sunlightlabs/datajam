@@ -30,7 +30,7 @@ describe Event do
       <h3>{{ subheader }}</h3>
       <div>{{ content_area: Test Content Area }}</div>
     ENDBODY
-    template = EventTemplate.create(name: 'Event Template', template: body)
+    template = EventTemplate.create(name: 'My Event Template', template: body)
     event = Event.create(name: 'Test Event', event_template: template, scheduled_at: Time.now)
 
     event.content_areas.first.name.should eql("Test Content Area")
@@ -55,7 +55,7 @@ describe Event do
       {{ content_area: Updated Test Content Area }}
     BODY
 
-    template = EventTemplate.create(name: 'Event Template', template: body)
+    template = EventTemplate.create(name: 'My Event Template', template: body)
     event = Event.create(name: 'Test Event', event_template: template, scheduled_at: Time.now)
 
     template.update_attributes(template: updated_body)
