@@ -16,6 +16,7 @@ class Template
   slug :name, permanent: true
 
   before_save :check_integrity, :set_custom_fields, :set_custom_areas
+  validates_uniqueness_of :name
 
   before_destroy do
     if !can_be_deleted?
