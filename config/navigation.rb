@@ -20,7 +20,7 @@ Datajam.navigation << {
 Datajam.navigation << {
   title: 'Administration',
   items: [
-    { title: 'Settings', url: '/admin/settings/edit', icon: 'cog' },
+    { title: 'Settings', url: '/admin/settings', icon: 'cog' },
     { title: 'Plugins', url: '/admin/plugins', icon: 'cogs' },
     { title: 'Users', url: '/admin/users', icon: 'user' },
     { title: 'Site Cache', url: '/admin/cache', icon: 'cloud' },
