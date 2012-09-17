@@ -25,7 +25,7 @@ event_template = EventTemplate.find_or_create_by(
   </div>
   EOT
 )
-unless event_template
+if event_template.errors.count
   event_template = EventTemplate.where(name: 'Default').first
 end
 
