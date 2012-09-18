@@ -144,7 +144,7 @@
           $("#event_reminder form").on('ajax:success', function(event, data, status, xhr) {
             $(this).find('.response')
                    .text(data.message)
-                   .attr({ 'class': 'alert alert-' + data.type })
+                   .attr({ 'class': 'response alert alert-' + data.type })
                    .fadeIn()
                    .delay(5000)
                    .fadeOut();
