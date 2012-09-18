@@ -3,7 +3,7 @@
   <ol id="archives">
   <% events.each do |event| %>
     <li class="event">
-      <%= event.scheduled_at.strftime("%m/%d/%Y %H:%M %P") %> <a href="/<%= event.slug %>"><%= event.name %></a>
+      <%= event.scheduled_at.to_s :humane %> <a href="/<%= event.slug %>"><%= event.name %></a>
     </li>
   <% end %>
   </ol>
