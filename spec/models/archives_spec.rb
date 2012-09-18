@@ -41,5 +41,10 @@ describe Archives do
 
       (doc % "p").text.should =~ /No past events/
     end
+
+    it "adds 'archives' to the body class" do
+      doc = Nokogiri(subject.render)
+      (doc / "body.archives").should be_present
+    end
   end
 end

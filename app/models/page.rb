@@ -31,6 +31,7 @@ class Page
       head_assets: head_assets,
       body_assets: body_assets
     })
+    self.rendered_content = add_body_class_to(self.rendered_content, 'page')
   end
 
   def set_route

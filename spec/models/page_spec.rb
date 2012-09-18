@@ -19,6 +19,12 @@ describe Page do
     page.valid?.should be_true
   end
 
+  it "should add the classname 'page' to the body tag" do
+    page = Page.create(slug: 'body-tag', content: @html)
+    doc = Nokogiri(page.rendered_content)
+    (doc / 'body.page').should be_present
+  end
+
   it "should be unique among app routes" do
     page = Page.create(slug: 'users/sign_in', content: @html)
     page.valid?.should be_false

@@ -1,0 +1,12 @@
+<h2>Archives</h2>
+<% if events.any? %>
+  <ol id="archives">
+  <% events.each do |event| %>
+    <li class="event">
+      <%= event.scheduled_at.strftime("%m/%d/%Y %H:%M %P") %><a href="/<%= event.slug %>"><%= event.name %></a>
+    </li>
+  <% end %>
+  </ol>
+<% else %>
+  <p>No past events to show</p>
+<% end %>

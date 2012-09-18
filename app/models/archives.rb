@@ -19,11 +19,12 @@ class Archives
     # SiteTemplate.first.render_with(content: body, head_assets: HEAD_ASSETS, body_assets: BODY_ASSETS)
     #
     # Fails with a javascript error inside Handlebars' V8 implementation.
-    Handlebars.compile(SiteTemplate.first.template).call(
+    rendered_html = Handlebars.compile(SiteTemplate.first.template).call(
       content: render_to_string(file: 'archives/index', layout: false, locals: { events: events }),
       head_assets: head_assets,
       body_assets: body_assets
     )
+    add_body_class_to(rendered_html, 'archives page')
   end
 
 end
