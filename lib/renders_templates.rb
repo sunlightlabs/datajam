@@ -48,7 +48,7 @@ module RendersTemplates
     body_tag = html.scan(/\<body[^>]*\>/)[0]
     return html unless body_tag.present?
     if body_tag.include? 'class='
-      html = html.sub(body_tag, body_tag.sub(/ class=\"([^\"]+)\"/, "#{$1} #{classname}"))
+      html = html.sub(body_tag, body_tag.sub(/ class=\"([^\"]+)\"/, " class=\"#{$1} #{classname}\""))
     else
       html = html.sub(body_tag, body_tag.sub('body', "body class=\"#{classname}\""))
     end
