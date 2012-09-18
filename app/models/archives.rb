@@ -9,7 +9,7 @@ class Archives
   end
 
   def initialize(events=Event.finished.all)
-    @events = prepare_events_for_rendering(events)
+    @events = events
   end
 
   def render
@@ -20,32 +20,10 @@ class Archives
     #
     # Fails with a javascript error inside Handlebars' V8 implementation.
     Handlebars.compile(SiteTemplate.first.template).call(
-      content: Handlebars.compile(self.class.template).call(events: events),
+      content: render_to_string(file: 'archives/index', layout: false, locals: { events: events }),
       head_assets: head_assets,
       body_assets: body_assets
     )
   end
 
-  private
-
-  def self.template
-    <<-EOT.strip_heredoc
-    <h2>Archives</h2>
-    {{#if events}}
-      <ol id="archives">
-      {{#each events}}
-        <li class="event">
-          <a href="/{{ slug }}">{{ name }}</a>
-        </li>
-      {{/each}}
-      </ol>
-    {{else}}
-      <p>No past events to show</p>
-    {{/if}}
-    EOT
-  end
-
-  def prepare_events_for_rendering(events)
-    events.map { |ev| { name: ev.name, slug: ev.slug } }
-  end
 end

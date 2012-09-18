@@ -21,8 +21,8 @@ describe Archives do
 
     it "returns the names and slugs of each event" do
       subject.events.all? do |event|
-        event.should have_key(:name)
-        event.should have_key(:slug)
+        event.should respond_to(:name)
+        event.should respond_to(:slug)
       end
     end
   end
