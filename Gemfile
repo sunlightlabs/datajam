@@ -25,6 +25,7 @@ gem 'mini_magick',          '~> 3.4'
 gem 'simple_form',          '~> 2.0'
 gem 'bigdecimal'
 gem 'time_diff'
+gem 'httparty'
 
 group :development do
   gem 'thin'
@@ -38,7 +39,6 @@ group :development do
   gem 'wirble'
   gem 'sketches'
   gem 'debugger'
-  gem 'httparty'
 end
 
 group :development, :test do
