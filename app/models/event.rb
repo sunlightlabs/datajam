@@ -202,6 +202,7 @@ class Event
           existing.each do |area|
             area.set(:name, name)
             area.set(:area_type, area_type)
+            area.touch if area.respond_to? :touch
           end
         end
       end
