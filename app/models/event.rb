@@ -19,7 +19,7 @@ class Event
 
   slug :name, permanent: true
 
-  embeds_many :content_areas
+  embeds_many :content_areas, cascade_callbacks: true
 
   validates :name, presence: true, unique_slug: { message: "generates a slug that has already been taken" }
   validates_datetime :scheduled_at, { message: 'must be a valid date/time' }
@@ -202,7 +202,6 @@ class Event
           existing.each do |area|
             area.set(:name, name)
             area.set(:area_type, area_type)
-            area.touch if area.respond_to? :touch
           end
         end
       end

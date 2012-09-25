@@ -268,7 +268,7 @@ DEPENDENCIES
   capistrano (~> 2.5)
   capybara (~> 1.1)
   carrierwave (~> 0.5)
-  carrierwave-mongoid
+  carrierwave-mongoid (~> 0.1)
   chronic (~> 0.4)
   database_cleaner (~> 0.6)
   debugger

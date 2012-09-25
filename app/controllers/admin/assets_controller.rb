@@ -21,11 +21,11 @@ class Admin::AssetsController < AdminController
 
   def create
     @asset = Asset.new(params[:asset])
-    previous = Asset.where(asset_filename: @asset.asset_filename).first
     if @asset.save
       flash[:success] = "Asset saved."
-      if previous
-        previous.destroy
+      previous = Asset.where(asset_filename: @asset.asset_filename)
+      if previous.count > 1
+        previous.first.destroy(remove_asset: false)
         flash[:success] += " Previous version deleted."
       end
       redirect_to admin_assets_path
