@@ -33,7 +33,7 @@ module AdminHelper
 
   def get_for_page(collection, records = RECORDS_PER_PAGE)
     from = (page_number - 1) * records
-    to = from + records
+    to = from + records - 1
     collection[from..to]
   end
 
