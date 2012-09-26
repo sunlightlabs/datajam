@@ -513,13 +513,13 @@
 
       pollForUpdates: function(){
         this.contentUpdates.fetch({add: true});
-        setTimeout(_.bind(this.pollForUpdates, this), Datajam.settings.interval);
+        setTimeout(_.bind(this.pollForUpdates, this), App.settings.interval);
 
         return this;
       },
 
       pollForAudience: function(){
-        if(! App.settings.CHARTBEAT_API_KEY){
+        if(! App.settings.chartbeat_api_key){
           this.$el.find('li.audience').hide();
           return this;
         }
@@ -531,7 +531,7 @@
           jsonp: 'jsonp',
           callback: '?',
           data: {
-            apikey: App.settings.CHARTBEAT_API_KEY,
+            apikey: App.settings.chartbeat_api_key,
             host: location.hostname,
             path: location.pathname
           }
