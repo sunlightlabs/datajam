@@ -48,3 +48,4 @@ about_page = Page.find_or_create_by(
 
 Setting.find_or_create_by(:namespace => 'datajam', :name => 'interval', :value => 5000, :required => true)
 Setting.find_or_create_by(:namespace => 'datajam', :name => 'chartbeat_api_key')
+Setting.find_or_create_by(:namespace => 'datajam', :name => 'reminder_email_message')
