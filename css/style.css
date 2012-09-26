@@ -131,8 +131,8 @@ form select { padding: 3px 4px; }
     margin-top: -9px;
     padding: 0;
 }
-#datajam_navbar ul.dropdown-menu li:first-child > a { padding-top: 8px; }
-#datajam_navbar ul.dropdown-menu li:last-child > a { padding-bottom: 8px; }
+#datajam_navbar ul.dropdown-menu li:first-child > a { padding-top: 15px; }
+#datajam_navbar ul.dropdown-menu li:last-child > a { padding-bottom: 15px; }
 #datajam_navbar ul.dropdown-menu li > a { color: #2e3738; }
 #datajam_navbar ul.dropdown-menu li > a:hover { background-color:#5F7273; color: #fff;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#5F7273), to(#5C6E6F));
@@ -194,6 +194,7 @@ form select { padding: 3px 4px; }
 .breadcrumb { margin-bottom: -30px; }
 [role="main"] h5 { float:right; }
 [role="main"] h5+h5 { float:left; }
+[role="main"] img { border: 1px solid #eee; padding: 3px; }
 
 /* Plugins */
 #plugins {}
