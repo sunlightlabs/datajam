@@ -174,7 +174,7 @@
           callback: '?',
           data: {
             apikey: App.settings.chartbeat_api_key,
-            host: location.hostname,
+            host: location.hostname.replace(/^www\./, ''),
             path: location.pathname
           }
         }).then(_.bind(function(data){
