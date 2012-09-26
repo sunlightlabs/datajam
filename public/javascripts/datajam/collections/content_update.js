@@ -20,7 +20,9 @@
         models = _.isArray(models)? models.slice() : [models];
         _.each(models, _.bind(function(model, i, models){
           var area = this.view.contentAreas.get(model.content_area_id);
-          if(area && model.updated_at > area.get('updated_at')){
+          if(area &&
+             (model.updated_at > area.get('updated_at') || !area.get('updated_at'))
+             ){
             area.set({
               html: model.html,
               updated_at: model.updated_at
