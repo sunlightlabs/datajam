@@ -1,5 +1,5 @@
 <h1><%= @event.name %> is going to start soon!</h1>
 <p>Hello! Just a reminder that <%= @event.name %> is going to start at <%= @event.scheduled_at.strftime("%I:%M %P") %></p>
-<% if @settings.reminder_email_message %>
-<p><%= @settings.reminder_email_message %></p>
+<% if @reminder_message %>
+<p><%= @reminder_message %></p>
 <% end %>
