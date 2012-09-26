@@ -39,6 +39,11 @@ class Event
     Cacher.cache_archives # regenerate the archives
   end
 
+  after_destroy do
+    # FIXME: This is going to get slow
+    Cacher.reset!
+  end
+
   scope :upcoming, where(status: 'Upcoming').order_by([[:scheduled_at, :asc]])
   scope :finished, where(status: 'Finished').order_by([[:scheduled_at, :desc]])
 
