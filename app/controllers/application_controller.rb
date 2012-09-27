@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
   end
 
   def filter_if_present(collection, query, field)
-    query && field ? collection.where(field.to_sym => /#{query}/i) : collection
+    return collection unless query.present? and field.present?
+
+    fields = field.split(/, ?/)
+    where = fields.collect {|f| {f => /#{query}/i} }
+    collection.any_of(*where)
   end
 
   def sort_if_present(collection, sort_by = false)
@@ -37,6 +41,6 @@ class ApplicationController < ActionController::Base
   end
 
   def render_if_ajax(*args)
-    render *args if request.xhr?
+    render(*args) if request.xhr?
   end
 end
