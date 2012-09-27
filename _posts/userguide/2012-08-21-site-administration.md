@@ -82,11 +82,26 @@ for time used.
 
 ### Recommendations for Custom Deployments
 
+Running on custom hardware is outside the scope of this documentation, but
+we recommend a few specifics in your stack that we think will make it easier:
 
+- **[Capistrano](http://capify.org)** for deployment
+- **[Unicorn](http://unicorn.bogomips.org) or [Puma](http://puma.io)** as an application server
+- **[Nginx](http://nginx.org)** as a front-end HTTP proxy
+- **[Foreman](http://theforeman.org)** for managing heroku-style environment-based config
 
 ## Extending Datajam
+
+Datajam includes a plugin architecture for adding new functionality. You can write
+plugins yourself, or use existing ones right out of the box.
+
 ### Where to Get Plugins
+
+A list of plugins is kept at <http://datajam.org/plugins/>
+
 ### Plugin Authoring
+
+See the [plugin creator's guide](/plugins/authoring/) for information on writing your own plugins.
 
 ##### [**Next**: All About Plugins &raquo;](/plugins/)
 ##### [&laquo; **Previous**: Producing an Event](/userguide/events)

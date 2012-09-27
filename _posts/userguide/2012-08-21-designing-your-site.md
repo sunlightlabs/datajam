@@ -10,7 +10,7 @@ breadcrumb:
   - Designing Your Site
 ---
 
-## Introduction
+## Designing Your Site
 
 So, you've got your site up and running, but it's pretty sparse, and pretty
 generic. It's easy to customize the look and feel of your Datajam site using
@@ -20,10 +20,10 @@ the powerful built-in template system.
 
 A site running on Datajam has a few types of pages:
 
-- Home Page
-- Event Pages
-- Archives
-- Static Pages
+- **Home Page**
+- **Event Pages**
+- **Archives**
+- **Static Pages**
 
 #### Homepage
 
