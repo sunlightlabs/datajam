@@ -203,7 +203,6 @@ GEM
     redis (2.2.2)
     redis-namespace (0.10.0)
       redis (< 3.0.0)
-    rr (1.0.4)
     rspec (2.8.0)
       rspec-core (~> 2.8.0)
       rspec-expectations (~> 2.8.0)
@@ -305,7 +304,6 @@ DEPENDENCIES
   redis (~> 2.2)
   redis-namespace (~> 0.10)
   rocco!
-  rr (~> 1.0)
   rspec-rails (~> 2.7)
   simple_form (~> 2.0)
   sketches

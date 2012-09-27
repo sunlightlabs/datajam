@@ -137,4 +137,16 @@ describe Event do
     event = Event.create(name: 'Test Event', event_template: event_template, scheduled_at: Time.now)
     event.persisted?.should be_false
   end
+
+  it "cascades callbacks to content_areas" do
+    body = <<-ENDBODY.strip_heredoc
+      <div>{{ content_area: Test Content Area }}</div>
+    ENDBODY
+    ContentArea.set_callback(:save, :before, :foo)
+    template = EventTemplate.create(name: 'My Event Template', template: body)
+    event = Event.create(name: 'Test Event', event_template: template, scheduled_at: Time.now)
+    event.content_areas.first.expects(:foo)
+    event.save
+    ContentArea.skip_callback(:save, :before, :foo)
+  end
 end

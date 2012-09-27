@@ -8,7 +8,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
 RSpec.configure do |config|
   config.include Mongoid::Matchers
-  config.mock_with :rr
+  config.mock_with :mocha
 
   config.before(:all) do
     @redis_db = REDIS

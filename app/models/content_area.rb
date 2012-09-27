@@ -36,6 +36,11 @@ class ContentArea
     super.merge(:modal_class => self.class.modal_class)
   end
 
+  # Always mark ContentAreas as dirty so that callbacks cascade properly
+  def changed?
+    true
+  end
+
   protected
 
   # A convenience for querying by class name.
