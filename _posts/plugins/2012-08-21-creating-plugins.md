@@ -59,9 +59,20 @@ into Datajam, and that it won't break any existing functionality. To
 this end, you should submodule in Datajam as your spec app. If you've
 forked the scaffold, this is done for you. Otherwise, a basic
 `spec_helper.rb` can be found in the [scaffold repo](https://github.com/sunlightlabs/datajam-plugin-scaffold)
-on github.
+on github, as well as at the end of this document in the section on [testing](#testing)
 
-<script src="https://gist.github.com/0ce2a024dc7d45b708ee.js"> </script>
+#### The Readme
+
+Datajam builds out a section in the admin site for your plugin automatically.
+This includes a main page, a settings page, and some links to actions that can
+be performed by your plugin, such as for installation/uninstallation, and maintenance
+tasks.
+
+The main page of your plugin's admin area is actually a render of your README.md.
+Keep this in mind as you write it, that it should be primarily a guide for your users.
+Also be sure to format with markdown, as that's what Datajam expects. Finally,
+it's encouraged to use [Travis CI](http://travis-ci.org) to run your specs, and to
+include their build status bug in your README.
 
 #### Environment and script/rails
 
@@ -179,6 +190,7 @@ The official plugins incorporate a build step to concatenate
 and minify all necessary scripts into a single `application-compiled.min.js`,
 called via git pre-commit hook. How you do this is up to you, but an example of
 ours, using rake and a manifest file can be found in Chat or Datacard's source.
+More discussion of asset packaging will be included in lower sections of this guide.
 
 ## Caching
 
@@ -222,7 +234,7 @@ and prevent collisions. Your settings namespace should be the same as the
 name of your gem as defined in `myplugin.gemspec`; so, if your gem is
 called 'datajam-foo', your namespace should be the same string.
 
-You can then acess your setting via an [] accessor method:
+You can then acess your setting via an \[\] accessor method:
 
     Datajam::Settings[:"datajam-foo"][:mysetting]
 
@@ -254,24 +266,168 @@ From which you could retrieve the values like this:
 
 ### Coercion
 
-
+All settings' values are stored as strings, so if you need boolean or integer
+values back, you'll need to cast them yourself.
 
 ## Hooks
 
+There are a few spots where Datajam will attempt to call your code in response
+to life cycle or user events. Of course your models are mongoid models, and respond
+to all of the ActiveModel hooks, but there are a few additional ways that
+Datajam will attempt to interact via a standard interface.
+
 ### Action Methods
+
+The first are your `PluginController`'s action methods.
+
+![Actions](/img/plugins/actions.png)
+
+Each plugin detail page will include an `actions` dropdown, allowing users to
+call various methods from the Datajam interface. This detail page comes
+for free; there is no need to implement anything into the admin site if
+you don't need users to do more than adjust settings and call argumentless
+action methods.
+
+The contents of the actions list are determined by your `PluginController`.
+Any method you define there will be listed as an available action, unless the
+method name is prefixed with an underscore (\_). An example `PluginController`
+looks like this:
+
+<script src="https://gist.github.com/9f618aba0d4bc1a5d367.js"> </script>
 
 ### Callback Cascading
 
+Content Areas will have their callbacks cascaded down from Events, meaning
+any callbacks around create, save or destroy declared on a subclass of `ContentArea`
+will be called, where Mongoid would not do so by default. Additionally, `ContentArea`
+overrides the `changed?` method to always return `true`, meaning your callbacks will
+be run on any persistence operation on `Event` by default.
+
+To change this behavior you'll need to override `changed?` on your custom content area.
+
 ## Content Areas & Modals
+
+Content Areas are the holes in your template into which live updates or plugin content
+gets populated. The type of area(s) you embed determines what the producer's modal interface
+looks like, and what javascripts get included in the event page. To create new
+modals and introduce new functionality, you'll want to define your own class of
+content area. We've already discussed in the section on [models](#models) what
+content areas look like on the ruby side, now we'll address the javascript.
 
 ### Backbone.js
 
+User-facing javascript functionality in Datajam is built on Backbone.js, a library
+that introduces easy MVC-like structure for your javascript code. An exhaustive
+reference for Backbone is well outside the scope of this document, but fortunately
+the [official documentation](http://backbonejs.org) is phenomenal.
+
+What you need to know for the purposes of this documentation is that your javascript
+code should include at a minimum a view that implements the modal class you specified
+as `self.modal_class` in your content area's ruby model. This will be called by
+Datajam as the on-air toolbar is built.
+
+The rest of your Application does not need to use backbone at all, but it
+is available to you, as is a global installation of [require.js](http://requirejs.org)
+and [jQuery](http://jquery.com).
+
 ### Require.js
+
+[Require.js](http://requirejs.org) is an <abbr title="Asynchronous Model Definition">AMD</abbr>-
+style dependency loader for javascript. It is a great companion to Backbone, as
+it makes it simple for you to define your models, views and templates in a familiar
+and maintainable file structure similar to that of other MVC frameworks, with
+one class per file. Each declares its dependencies, and the code waits to
+execute until they are downloaded. Chat and Datacard both use this convention
+to some degree, and the steps are pretty well-defined:
+
+1. **Asset paths**: Your plugin needs to tell require where its assets are located.
+  A chat area's `head_assets`, for instance, make sure the require global object
+  exists, and then set up a path for the application 'chat':
+  <script src="https://gist.github.com/23ec53adf763ba3b74ec.js"> </script>
+  Note that the path is the GridFS mount point where chat's assets will
+  be copied to on install. When require.js is included down lower on the page,
+  it will read the `require` object and configure itself accordingly.
+
+2. **Content Area markup**: The next thing added to the page by your plugin should be
+  a div or other tag that will be the target element of your base view, typically done
+  in a partial called \_content.html.erb. There's no
+  need to instantiate containers for your admin modals; Datajam will handle this for you.
+
+3. **Bootstrap the code**: Include whatever code is needed to require dependencies
+  and start things up. This should be done in _body_assets.html.erb in your plugin,
+  so that all of the dependencies not managed by require will be loaded. A simple
+  (non-concatenated) bootstrap might look like this:
+
+  <script src="https://gist.github.com/a22322e534bd933b4c59.js"> </script>
+
+  This code requires files called init.js, and views/chat.js, both
+  relative to the 'chat' root, and executes when they have loaded.
+
+  Notice that $, define and require are being passed in by reference. This
+  is not particularly necessary, but if a different AMD loader were to be
+  used at some point, (say curl.js for example) making the change would be as
+  simple as replacing `(jQuery, define, require)` with `(jQuery, curl.define, curl)`.
 
 ### Build Step & Asset Refreshing
 
+Some description of the build process used in Chat and Datacard has already
+been covered, but it's worthwhile to step through the files involved.
+
+- `.pre-commit.sh`: The official plugins implement the build process as a
+  pre-commit hook, so that js assets are built automatically. This shell script
+  is symlinked into the .git/hooks folder as `pre-commit`, and is the first
+  execution point for the build process.
+
+  <script src="https://gist.github.com/2f56cb4f5ba2b3489daa.js"> </script>
+
+- `lib/tasks/chat.rake#build_javascripts`: This rake task does the concatenation
+  and then minifies with google closure compiler.
+
+  <script src="https://gist.github.com/0dcbde6c0d8cb5fd1c19.js"> </script>
+
+- `.javascripts-manifest`: This file contains a line-by-line list of the javascript
+  files that should be concatenated by the rake task. Order is significant with
+  the chat setup, so using a manifest file makes sure there are no problems there.
+
+  <script src="https://gist.github.com/2bb1363c3445e8ffee1b.js"> </script>
+
+
 ## Testing
+
+It's important to include specs for both the ruby and javascript code of your
+plugin when you publish it for others to use. First, to make sure your code is
+working as it should, and second, to ensure that it is compatible with Datajam.
 
 ### Rspec
 
+Datajam uses rspec to run ruby tests, and it is suggested that you include
+specs for your models, controllers and modules at a minimum. An example `spec_helper.rb`
+could look like this:
+
+<script src="https://gist.github.com/0ce2a024dc7d45b708ee.js"> </script>
+
 ### Jasmine
+
+If your plugin makes heavy use of javascript, you should also include jasmine
+specs. How you integrate jasmine is up to you, but here are some tools you might
+find helpful:
+
+- [Sinon.js](http://sinonjs.org) for spies, mocks and stubs
+- [Jasmine matchers for Sinon](https://github.com/froots/jasmine-sinon)
+
+You'll need to set up all of your js dependencies with jasmine.
+`spec/javascripts/support/jasmine.yml` is the place to set that up. A jasmine.yml
+that includes all of the core Datajam js dependencies is here:
+
+<script src="https://gist.github.com/94343d4257e042299503.js"> </script>
+
+Note that the first file, environment.js is where your require paths should be set up if
+you're using require.
+
+
+## Questions and Feedback
+
+That's the high-level overview of plugin authoring. This document is of course
+a work in progress and if you have feedback please open a ticket on the
+[Datajam repo](https://github.com/sunlightlabs/datajam/issues) with the label
+'documentation.'

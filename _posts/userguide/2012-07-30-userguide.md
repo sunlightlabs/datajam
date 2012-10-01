@@ -17,7 +17,7 @@ breadcrumb:
 3. **[Producing an Event](/userguide/events/)**
 4. **[Site Administration](/userguide/administration)**
 
-## Contributing
+### Contributing
 
 If you've got an idea for Datajam, we'd love to hear from you. You can
 [fork the code on github](https://github.com/sunlightlabs/datajam/) or
@@ -25,6 +25,13 @@ If you've got an idea for Datajam, we'd love to hear from you. You can
 request a feature or report a bug. The README file gives a great overview of
 how to get up and running with a local instance, and what technologies
 we're using in the project.
+
+### Questions and feedback
+
+Datajam is evolving under continuous development. If you spot a bug or have
+a question, please open a ticket at our [github repo](https://github.com/sunlightlabs/datajam/issues)
+or send an email to datajam@sunlightfoundation.com.
+
 
 ### Get Involved in Open Government!
 
