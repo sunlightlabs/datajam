@@ -12,6 +12,7 @@ hr {margin-top:40px; clear:both;}
 h2 { color: #635F5C; margin-bottom: 20px; font-size: 250%; }
 h3 { margin-bottom: 20px; font-size: 180%; }
 h2, h3 { padding-top: 70px; margin-top:-30px; }
+#home h2, #home h3 { padding-top: 0; }
 h2:first-child { margin-top: 0; }
 h2 + h3 { margin-top: -70px; }
 h4 { font-size: 170%; margin-bottom: 20px; margin-top: 40px; line-height: 27px; text-transform: capitalize; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; }
