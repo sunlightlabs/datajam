@@ -2,7 +2,10 @@ class Admin::TemplatesController < AdminController
   before_filter :load_templates, only: [:index]
 
   def load_type
-    @type = params[:type] || (params[:templates_event][:type] || params[:templates_embed][:type]).constantize
+    @type = params[:type] || (
+      params[:templates_event] && params[:templates_event][:type] ||
+      params[:templates_embed] && params[:templates_embed][:type]
+    ).constantize
   end
 
   def load_templates
