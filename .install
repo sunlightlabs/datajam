@@ -46,6 +46,9 @@ if [ "$DATAJAM_ROOT" == "" ]; then
 fi
 echo "Great! We'll install into $DATAJAM_ROOT."
 
+echo "Next, let's make sure you're logged in to heroku:"
+heroku auth:login
+
 if [ "$DATAJAM_APP" == "" ]; then
     DATAJAM_APP=`heroku auth:whoami | sed s/[@\.]/-/g`
     DATAJAM_APP="${DATAJAM_APP:0:21}-datajam"
