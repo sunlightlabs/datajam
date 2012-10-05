@@ -19,7 +19,11 @@ class ApplicationController < ActionController::Base
 
   def sort_if_present(collection, sort_by = false)
     if sort_by
-      collection.options[:sort].pop if collection.options[:sort] # Removes previous sorting
+      # Removes previous sorting
+      if collection.respond_to? :unscoped
+        collection = collection.unscoped
+      end
+      collection.options[:sort].pop if collection.options[:sort]
       field, order = sort_by.split(":")
 
       if order == "desc"
