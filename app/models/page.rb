@@ -9,6 +9,8 @@ class Page
 
   slug :slug, permanent: true
 
+  index :slug => 1, :unique => true
+
   validates :content, presence: true
   validates :slug, uniqueness: true, presence: true, unique_slug: true
 

@@ -29,6 +29,8 @@ class Event
   has_and_belongs_to_many :users
   has_one :current_window, class_name: 'UpdateWindow', validate: false
 
+  index :name => 1
+
   default_scope order_by([[:status, :desc], [:scheduled_at, :desc]])
 
   before_save :update_template_data, :generate_content_areas, :cache_render

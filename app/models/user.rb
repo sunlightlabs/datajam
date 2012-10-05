@@ -9,6 +9,10 @@ class User
   field :affiliation, type: String
   field :url,         type: String
 
+  index :name => 1
+  index :affiliation => 1
+  index :url => 1
+
   mount_uploader :avatar, AvatarUploader
 
   def as_json(options={})

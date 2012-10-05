@@ -15,6 +15,8 @@ class Template
 
   slug :name, permanent: true
 
+  index :name => 1
+
   before_save :check_integrity, :set_custom_fields, :set_custom_areas
   validates_uniqueness_of :name
 
