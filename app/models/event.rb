@@ -29,7 +29,7 @@ class Event
   has_and_belongs_to_many :users
   has_one :current_window, class_name: 'UpdateWindow', validate: false
 
-  index :name => 1
+  index :name
 
   default_scope order_by([[:status, :desc], [:scheduled_at, :desc]])
 

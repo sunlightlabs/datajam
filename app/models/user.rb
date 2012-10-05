@@ -9,9 +9,9 @@ class User
   field :affiliation, type: String
   field :url,         type: String
 
-  index :name => 1
-  index :affiliation => 1
-  index :url => 1
+  index :name
+  index :affiliation
+  index :url
 
   mount_uploader :avatar, AvatarUploader
 
