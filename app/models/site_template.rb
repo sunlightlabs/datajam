@@ -1,7 +1,7 @@
 class SiteTemplate < Template
   include RendersTemplates
 
-  field :not_found_template, type: String
+  field :not_found_template, type: String, default: "<h1>Page Not Found</h1>"
 
   def self.model_name
     # Play nice with the admin's URLs

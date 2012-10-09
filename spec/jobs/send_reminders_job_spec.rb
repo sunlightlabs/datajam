@@ -5,7 +5,7 @@ describe SendRemindersJob do
     ActionMailer::Base.delivery_method = :test
   end
 
-  it "should send notifications to upcomings events" do
+  it "should send notifications to upcoming events" do
     event_template = EventTemplate.create(name: 'Event Template', template: '')
 
     event1 = Event.create(name: 'Event 1', event_template: event_template, scheduled_at: Time.now + 30.minutes)

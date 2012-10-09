@@ -16,7 +16,6 @@ describe Event do
   end
 
   it "saves template data" do
-
     data =  { "header" => "Hello World", "description" => "This is the description." }
     event = Event.create(name: 'Test Event', event_template: @event_template, template_data: data, scheduled_at: Time.now)
 

@@ -42,9 +42,10 @@ class RedisCache
       cached_content = cached_content.gsub('</head>', csrf_meta(request) + '</head>')
     end
 
-    [200, {'Content-Type'   => mimetype,
-           'Content-Length' => cached_content.length.to_s,
-           'Cache-Control' => 'no-cache, max-age=0',
+    [200, {'Content-Type'    => mimetype,
+           'Content-Length'  => cached_content.length.to_s,
+           'Cache-Control'   => 'no-cache, max-age=0',
+           'X-Redis'         => 'hit'
           }, [cached_content]]
   end
 

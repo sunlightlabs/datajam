@@ -12,7 +12,7 @@ class Page
   index :slug, :unique => true
 
   validates :content, presence: true
-  validates :slug, uniqueness: true, presence: true, unique_slug: true
+  validates :slug, presence: true, unique_slug: true
 
   before_save :content_wrapper, :check_slug_change
   after_save :set_route

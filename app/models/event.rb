@@ -148,7 +148,7 @@ class Event
 
   def as_json(options = {})
     super.merge(unix_scheduled_at: scheduled_at.to_i,
-                         content_areas: content_areas.collect {|area| area.as_json })
+                content_areas: content_areas.collect {|area| area.as_json })
   end
 
   # Public: Returns the list of taggables that share tags with this event. If
