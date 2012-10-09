@@ -4,7 +4,6 @@ rvm:
 notifications:
   email:
     - ddrinkard@sunlightfoundation.com
-    - chris@nu7hat.ch
 services:
   - mongodb
   - redis-server
