@@ -20,6 +20,9 @@ module Datajam
     config.middleware.insert_before('Rack::Lock', 'Rack::Rewrite') do
       r301 %r{(.+)/$}, '$1'
     end
+    config.after_initialize do
+      Datajam::Application.routes.append{match '*path', :to => 'content#error_404'}
+    end
     config.action_view.javascript_expansions[:admin] = %w(
       //cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js
       //cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js

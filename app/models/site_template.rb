@@ -1,6 +1,8 @@
 class SiteTemplate < Template
   include RendersTemplates
 
+  field :not_found_template, type: String
+
   def self.model_name
     # Play nice with the admin's URLs
     ActiveModel::Name.new(self, nil, "Templates::Site")

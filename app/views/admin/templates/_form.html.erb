@@ -3,6 +3,9 @@
   <%= f.input :name, { readonly: !@template.name_is_editable? } %>
   <%= f.input :type, as: :hidden, input_html: { value: @template._type } %>
   <%= f.input :template, as: :text, input_html: { class: "datajamTemplate", rows: 20, cols: 100 } %>
+  <% if @template.respond_to? :not_found_template %>
+    <%= f.input :not_found_template, as: :text, label: '404 template', input_html: { class: "datajamTemplate", rows: 20, cols: 100 } %>
+  <% end %>
 
   <% if @template.custom_fields.any? %>
     <h3>Detected Template Fields</h3>
