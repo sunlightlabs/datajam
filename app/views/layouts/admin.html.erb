@@ -73,14 +73,10 @@
     </div>
   </div>
   <script>
-      window._require = window.require;
+    window._require = window.require;
     window._define = window.define;
   </script>
   <%= javascript_include_tag :admin %>
   <%= yield :javascript %>
-  <script>
-    window.require = window._require;
-    window.define = window._define;
-  </script>
 </body>
 </html>
