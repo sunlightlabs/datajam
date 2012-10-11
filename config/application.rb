@@ -25,7 +25,6 @@ module Datajam
     end
     config.action_view.javascript_expansions[:admin] = %w(
       //cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js
-      //cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js
       //cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js
       //cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.0.2/bootstrap.min.js
       libs/rails.js

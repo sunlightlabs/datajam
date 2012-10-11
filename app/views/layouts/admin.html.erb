@@ -5,8 +5,9 @@
   <%= stylesheet_link_tag :admin %>
   <%= csrf_meta_tag %>
 
+  <%= javascript_include_tag :head %>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.0.6/require.min.js"></script>
   <%= yield :head %>
-  <%= javascript_include_tag :admin %>
 </head>
 <body>
   <div class="navbar navbar-fixed-top">
@@ -71,6 +72,7 @@
       </footer>
     </div>
   </div>
+  <%= javascript_include_tag :admin %>
   <%= yield :javascript %>
 </body>
 </html>
