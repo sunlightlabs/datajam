@@ -6,6 +6,7 @@
   <%= csrf_meta_tag %>
 
   <%= yield :head %>
+  <%= javascript_include_tag :admin %>
 </head>
 <body>
   <div class="navbar navbar-fixed-top">
@@ -70,7 +71,6 @@
       </footer>
     </div>
   </div>
-  <%= javascript_include_tag :admin %>
   <%= yield :javascript %>
 </body>
 </html>

@@ -1,5 +1,6 @@
 class AdminController < ApplicationController
   before_filter :authenticate_user!
+  after_filter :disable_strict_xss_protection
 
   def index
 
@@ -11,6 +12,10 @@ class AdminController < ApplicationController
 
   def set_layout
     request.xhr? ? false : "admin"
+  end
+
+  def disable_strict_xss_protection
+    response.headers['X-XSS-Protection'] = 0
   end
 
 end
