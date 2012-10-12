@@ -11,8 +11,8 @@ class ContentController < ApplicationController
         body_assets: @template.body_assets
         })
     respond_to do |format|
-      format.html { render :text => rendered_html, :layout => false, :content_type => "text/html" }
-      format.json { render :json => { error: "Not found"}}
+      format.html { render :text => rendered_html, :layout => false, :content_type => "text/html", :status => 404 }
+      format.json { render :json => { error: "Not found"}, :status => 404 }
     end
   end
 
