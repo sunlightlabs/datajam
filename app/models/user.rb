@@ -15,6 +15,8 @@ class User
 
   mount_uploader :avatar, AvatarUploader
 
+  default_scope order_by([:name, :asc])
+
   def as_json(options={})
     super(
       options.merge(
