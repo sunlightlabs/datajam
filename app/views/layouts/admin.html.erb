@@ -3,11 +3,16 @@
 <head>
   <title>Datajam</title>
   <%= stylesheet_link_tag :admin %>
-  <%= csrf_meta_tag %>
-
   <%= javascript_include_tag :head %>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.0.6/require.min.js"></script>
+  <%= csrf_meta_tag %>
   <%= yield :head %>
+  <script type="text/javascript">
+    window.require  || (require = {});
+    require.paths   || (require.paths = {});
+    require.baseUrl || (require.baseUrl = "/javascripts/libs/require");
+    require.paths.ace = "/javascripts/libs/ace";
+    require.paths['ace/requirejs'] = "/javascripts/libs/require"
+  </script>
 </head>
 <body>
   <div class="navbar navbar-fixed-top">

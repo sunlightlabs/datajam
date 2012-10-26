@@ -30,8 +30,7 @@ module Datajam
       libs/rails.js
       libs/jquery.pjax.js
       libs/jquery.autoSuggest.js
-      //cdnjs.cloudflare.com/ajax/libs/ace/0.2.0/ace.js
-      libs/ace/mode-html.js
+      //cdnjs.cloudflare.com/ajax/libs/require.js/2.0.6/require.min.js
       admin.js
     )
     config.action_view.javascript_expansions[:head] = %w(

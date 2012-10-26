@@ -9,6 +9,7 @@ module RendersTemplates
     include AbstractController::Helpers
     include AbstractController::Translation
     include AbstractController::AssetPaths
+    include AbstractController::Logger
     include ActionDispatch::Routing
     include Rails.application.routes.url_helpers
 
@@ -26,6 +27,11 @@ module RendersTemplates
     def _render(args=nil)
       render_to_string args
     end
+
+    def params
+      {}
+    end
+
   end
 
   def get_renderer

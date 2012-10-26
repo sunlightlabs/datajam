@@ -176,41 +176,44 @@
       return container;
     }
 
-    $("textarea.datajamTemplate").each(function() {
-      var $el = $(this),
-          container = createEditorContainer($el);
+    require(['ace/ace'], function(ace){
 
-      // init hidden editors off-screen so they work
-      if(container.is(':hidden')){
-        container.wrap('<div id="' + container.attr('id') + '_wrap" class="ace-editor-replaceme"></div>');
-        $('body').append(container.css({
-          'position': 'absolute',
-          'left': '-9999px'
-        }).remove());
-      }
+      $("textarea.datajamTemplate").each(function() {
+        var $el = $(this),
+            container = createEditorContainer($el);
 
-      var editor = ace.edit(container.attr("id")),
-          HtmlMode = require("ace/mode/html").Mode,
-          editorSession = editor.getSession();
+        // init hidden editors off-screen so they work
+        if(container.is(':hidden')){
+          container.wrap('<div id="' + container.attr('id') + '_wrap" class="ace-editor-replaceme"></div>');
+          $('body').append(container.css({
+            'position': 'absolute',
+            'left': '-9999px'
+          }).remove());
+        }
 
-      $el.hide();
-      editorSession.setMode(new HtmlMode());
-      editorSession.setValue($el.val());
-      editorSession.setTabSize(2);
-      editorSession.setUseSoftTabs(true);
-      editorSession.on('change', function() {
-        $el.val(editorSession.getValue());
+        var editor = ace.edit(container.attr("id")),
+            editorSession = editor.getSession();
+
+        $el.hide();
+        editor.setTheme("ace/theme/eclipse");
+        editorSession.setMode("ace/mode/html");
+        editorSession.setValue($el.val());
+        editorSession.setTabSize(2);
+        editorSession.setUseSoftTabs(true);
+        editorSession.on('change', function() {
+          $el.val(editorSession.getValue());
+        });
+        editor.setShowPrintMargin(false);
       });
-      editor.setShowPrintMargin(false);
-    });
-    // reset off-screen editors
-    $('.ace-editor-replaceme').each(function(){
-      var $el = $('#' + $(this).attr('id').replace('_wrap', ''));
-      $(this).append($el.css({
-        'position': 'static',
-        'left': 0
-      }).remove());
-      $el.unwrap();
+      // reset off-screen editors
+      $('.ace-editor-replaceme').each(function(){
+        var $el = $('#' + $(this).attr('id').replace('_wrap', ''));
+        $(this).append($el.css({
+          'position': 'static',
+          'left': 0
+        }).remove());
+        $el.unwrap();
+      });
     });
   });
 })(jQuery);
