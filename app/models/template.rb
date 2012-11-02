@@ -17,7 +17,9 @@ class Template
 
   index :name
 
-  before_save :check_integrity, :set_custom_fields, :set_custom_areas
+  before_save :check_integrity
+  before_save :set_custom_fields
+  before_save :set_custom_areas
   validates_uniqueness_of :name
 
   before_destroy do

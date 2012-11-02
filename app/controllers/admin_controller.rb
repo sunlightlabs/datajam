@@ -15,7 +15,7 @@ class AdminController < ApplicationController
   end
 
   def disable_strict_xss_protection
-    response.headers['X-XSS-Protection'] = 0
+    response.headers['X-XSS-Protection'] = "0"
   end
 
 end

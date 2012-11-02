@@ -14,7 +14,8 @@ class Page
   validates :content, presence: true
   validates :slug, presence: true, unique_slug: true
 
-  before_save :content_wrapper, :check_slug_change
+  before_save :content_wrapper
+  before_save :check_slug_change
   after_save :set_route
   after_destroy :clean_route
 
