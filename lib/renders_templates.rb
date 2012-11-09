@@ -2,7 +2,37 @@ require 'action_controller'
 require 'active_support/dependencies'
 
 module RendersTemplates
-  require 'renders_templates/dummy_controller'
+  class DummyController < AbstractController::Base
+    include AbstractController::Rendering
+    include AbstractController::Layouts
+    include AbstractController::Helpers
+    include AbstractController::Translation
+    include AbstractController::AssetPaths
+    include AbstractController::Logger
+    include ActionDispatch::Routing
+    include Rails.application.routes.url_helpers
+
+    helper ApplicationHelper
+
+    self.view_paths = ["#{Rails.root}/app/views"].tap do |paths|
+      ActiveSupport::Dependencies.plugins_loader.engine_paths.each do |path|
+          paths << "#{path}/app/views"
+      end
+    end
+    self.assets_dir = "#{Rails.root}/public"
+    self.javascripts_dir = "#{self.assets_dir}/javascripts"
+    self.javascripts_dir = "#{self.assets_dir}/stylesheets"
+
+    def _render(args=nil)
+      render_to_string args
+    end
+
+    def params
+      {}
+    end
+
+    ActiveSupport.run_load_hooks(:dummy_controller, self)
+  end
 
   def get_renderer
     @@controller ||= DummyController.new
@@ -29,5 +59,4 @@ module RendersTemplates
       html = html.sub(body_tag, body_tag.sub('body', "body class=\"#{classname}\""))
     end
   end
-
 end
