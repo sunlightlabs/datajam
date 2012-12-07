@@ -46,7 +46,7 @@
       // Do Cycles
       $('.cycle ul').each(function(i, el){
         if($(this).children().length){
-          $(this).before('<ul class="imgbtns" id="cycle' + i + 'pager"></ul>');
+          $(this).after('<ul class="imgbtns" id="cycle' + i + 'pager"></ul>');
           $(this).parents('.cycle').addClass('active');
         }
         $(this).cycle({

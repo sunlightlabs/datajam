@@ -28,6 +28,7 @@ form select { padding: 3px 4px; }
 .tip, time, .hero-unit em { font-family: Georgia, 'Times New Roman', Times, serif; font-style: oblique; color: #97928f; display: block; line-height: 21px; max-width: 680px;}
 .tip, .hero-unit em { margin-bottom: 20px;}
 .textreplace { display: block; text-indent: -9999em; }
+.masthead { text-align: center; }
 .btn {
     border: 3px solid #e9e8e3;
     font-family: "Georgia", "Times New Roman", "Times", serif;
@@ -39,6 +40,10 @@ form select { padding: 3px 4px; }
         -ms-border-radius: 6px;
          -o-border-radius: 6px;
             border-radius: 6px;
+}
+.masthead .btn {
+    padding: 15px 20px;
+    font-size: 24px;
 }
 .btn-sunlight {
     color: #fdfcfb;
@@ -70,6 +75,7 @@ form select { padding: 3px 4px; }
     background-color: #ba5300;
     background-color: #ba5300 \9;
 }
+.cycle h4 { margin-top: 0; padding-top: 0.4em; }
 .cycle ul:not(.imgbtns) > li { display:none; }
 .cycle ul:not(.imgbtns) > li:first-child,
 .cycle.active ul:not(.imgbtns) > li { display:block; }
@@ -177,7 +183,7 @@ form select { padding: 3px 4px; }
 .live-examples { padding-left: 70px; border-left: 1px dashed #d6d3d2; margin-left: 70px; }
 .live-examples img { border: 1px solid #e3dfdf; margin-bottom:10px; }
 .imgbtns { margin: 0 auto; text-align: center; }
-.imgbtns li { display: inline-block; margin: 40px 10px 20px; }
+.imgbtns li { display: inline-block; margin: 10px; }
 .imgbtns a { width: 12px; height: 12px;
     -webkit-border-radius: 6px;
        -moz-border-radius: 6px;
