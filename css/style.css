@@ -9,7 +9,7 @@ body {
 }
 
 hr {margin-top:40px; clear:both;}
-h2 { color: #635F5C; margin-bottom: 20px; font-size: 250%; }
+h2 { color: #C4AA23; margin-bottom: 20px; font-size: 250%; }
 h3 { margin-bottom: 20px; font-size: 180%; }
 h2, h3 { padding-top: 70px; margin-top:-30px; }
 #home h2, #home h3 { padding-top: 0; }
@@ -18,9 +18,27 @@ h2 + h3 { margin-top: -70px; }
 h4 { font-size: 170%; margin-bottom: 20px; margin-top: 40px; line-height: 27px; text-transform: capitalize; font-family: Georgia, 'Times New Roman', Times, serif; font-weight: normal; }
 p { margin-bottom:1em; }
 pre { background-color: white; }
-pre code { color: #D14}
+pre code, code { color: #BB5A24}
 form input, form select { border: 2px solid #e7e4dc; }
 form select { padding: 3px 4px; }
+a {
+	color: #78BCBF;
+}
+a:hover {
+	color:#635F5C;
+}
+.nav > li > a:hover {
+	background-color: rgba(205, 213, 214, 0.18);
+}
+.more a{
+	color: #78BCBF;
+	color: #468D91;
+	font-size: 111%;
+}
+.more.active{
+	border: none;
+}
+
 
 /* Utility classes */
 .module { margin-bottom: 40px;}
@@ -105,8 +123,9 @@ form select { padding: 3px 4px; }
 #datajam_navbar .nav > li > a { text-shadow: none; padding: 22px 15px 26px; color: #635F5C; }
 #datajam_navbar .nav > li > a:hover { color: #8d8884; }
 #datajam_navbar .nav > li.open > a,
-#datajam_navbar .nav > li.open > a:hover { color:#fff; border: 1px solid #5F7273; border-left:none; border-right:none; }
-#datajam_navbar .nav > li.open > a { background-color:#5F7273; border-color:#5F7273; }
+#datajam_navbar .nav > li.open > a:hover { color:#fff; border: 1px solid #5F7273; border-left:none; border-right:none; padding-bottom: 24px;}
+#datajam_navbar .nav > li.open > a { background-color:#5F7273; border-color:#5F7273;}
+#datajam_navbar .nav > li.open > a, #datajam_navbar .nav > li.open > a:hover {padding-bottom: 17px;}
 #datajam_navbar .nav > li.active > a,
 #datajam_navbar .nav > li.active > a:hover { background-color: #4d5b5c; border: 1px solid #2e3738; color: #fff; position:relative; z-index:1001;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#4d5b5c), to(#2e3738));
@@ -114,6 +133,7 @@ form select { padding: 3px 4px; }
     background-image:    -moz-linear-gradient(top, #4d5b5c, #2e3738);
     background-image:      -o-linear-gradient(top, #4d5b5c, #2e3738);
     background-image:         linear-gradient(to bottom, #4d5b5c, #2e3738);
+    padding-bottom: 17px;
 }
 #datajam_navbar .nav > li > a > .caret { border-top-color: #635F5C; opacity:1; }
 #datajam_navbar .nav > li > a:hover > .caret { border-top-color: #8d8884; }
@@ -135,7 +155,7 @@ form select { padding: 3px 4px; }
     border-left-color:  hsl(145, 9%, 85%);
     /*border-top-width: 6px;*/
     /*border-bottom-width:6px;*/
-    margin-top: -9px;
+    margin-top: -1px;
     padding: 0;
 }
 #datajam_navbar ul.dropdown-menu li:first-child > a { padding-top: 15px; }
@@ -162,6 +182,8 @@ form select { padding: 3px 4px; }
 .sf-footer h4 { color: #9f9a97; margin-bottom: 0.5em; }
 .sf-footer .tip { color: #9f9a97;}
 .sf-footer ul { margin: 0; list-style-type: none; }
+.sf-footer a { color: #C9A706;}
+.sf-footer a:hover { color: #827B78;}
 #sfapp_subscribe_form li { float: left; margin-right: 10px; }
 #sfapp_subscribe_form input[name=email] { width: 140px; }
 #sfapp_subscribe_form input[name=zipcode] { width: 95px; }
@@ -198,10 +220,32 @@ form select { padding: 3px 4px; }
 /* User Guide */
 /*.subnav {  background-color: #f5f5f5;}*/
 .span3 .subnav.affix-me { width:186px;}
-.breadcrumb { margin-bottom: -30px; }
+.breadcrumb { margin-bottom: -30px; background-color: rgba(245, 245, 245, 0.45); border-radius: 0;}
 [role="main"] h5 { float:right; }
 [role="main"] h5+h5 { float:left; }
 [role="main"] img { border: 1px solid #eee; padding: 3px; }
+.nav-list > .active > a, .nav-list > .active > a:hover{
+	border-top: 1px dashed #C4AA23;
+	background-color: inherit;
+	border-bottom: 1px dashed #C4AA23;
+	color: #C4AA23;
+	text-shadow: none;
+}
+
+
+/* alerts */
+.alert-info {
+	background-color: rgba(120, 188, 191, 0.36);
+	border-color: #ADD1D3;
+	color: #388588;
+}
+.alert {
+	color: #BB9F11;
+	background-color: #FAF8EA;
+	border: 1px solid #F0ECD4;
+}
+
+
 
 /* Plugins */
 #plugins {}
