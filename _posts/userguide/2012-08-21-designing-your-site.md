@@ -10,7 +10,7 @@ breadcrumb:
   - Designing Your Site
 ---
 
-## Designing Your Site
+## Overview
 
 So, you've got your site up and running, but it's pretty sparse, and pretty
 generic. It's easy to customize the look and feel of your Datajam site using
@@ -124,7 +124,7 @@ of the document, and `body_assets` near (but before) the `</body>` tag.
 The `content` tag denotes where the content from your [event pages](#event_pages),
 [static pages](#static_pages), and [archives](#archives) will be rendered into your site template.
 
-## Templates
+## Types Of Templates
 
 There are three kinds of templates managed by Datajam, each used to describe a
 different part of your site.

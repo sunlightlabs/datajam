@@ -29,13 +29,41 @@
             subNav = navItem.append('<ul class="nav nav-list"></ul>').find('ul');
           }
           subNav.append(subNavItem);
-        }else{
-          if(! nav.find('li:last').is('li.more, li.divider')){
-            nav.append('<li class="divider"></li>');
+        }
+        // }else{
+        //   if(! nav.find('li:last').is('li.more, li.divider')){
+        //     nav.append('<li class="divider"></li>');
+        //   }
+        //   navItem = $('<li class="more">' +
+        //                el.html().replace(/( »|« )/, '') +
+        //                '</li>');
+        //   nav.append(navItem);
+        // }
+      });
+    })();
+
+    // Fill in page nav around the side nav
+    (function(){
+      var mainNavItems = $('ul.nav>li.active[id] li>a'),
+          prependItem = true,
+          lastItem,
+          nav = $('[role="main"] ul.subnav').eq(0);
+
+      mainNavItems.each(function(i, el){
+        var navItem = $(el).clone().wrap('<li class="more"></li>').parents('li');
+        if(prependItem){
+          if(i === 0){
+            nav.prepend(navItem);
+            lastItem = nav.find('li').eq(0);
+          }else{
+            lastItem.after(navItem);
+            lastItem = lastItem.next('li');
           }
-          navItem = $('<li class="more">' +
-                       el.html().replace(/( »|« )/, '') +
-                       '</li>');
+          if(location.pathname == $(el).attr('href')){
+            navItem.addClass('open');
+            prependItem = false;
+          }
+        }else{
           nav.append(navItem);
         }
       });

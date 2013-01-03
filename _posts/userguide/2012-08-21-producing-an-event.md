@@ -10,7 +10,7 @@ breadcrumb:
   - Producing an Event
 ---
 
-## Producing an Event
+## The Edit form
 
 By default, an event was created for you when you installed Datajam. Your
 event page should look something like this:
