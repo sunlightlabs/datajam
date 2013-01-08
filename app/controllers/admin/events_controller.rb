@@ -27,7 +27,7 @@ class Admin::EventsController < AdminController
     @event = Event.new(parse_time(params[:event]))
     if @event.save
       flash[:success] = "Event saved."
-      redirect_to admin_events_path
+      redirect_to admin_event_path(@event)
     else
       flash[:error] = "There were some problems saving the event: #{@event.errors.full_messages.to_sentence}"
       redirect_to admin_events_path
