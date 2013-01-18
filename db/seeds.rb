@@ -89,13 +89,14 @@ about_page = Page.find_or_create_by(
 
 # Create a sample chat message
 
+chat = event.content_areas[1].chat
+chat.update_attributes(is_open: true)
 msg = ChatMessage.find_or_create_by(
   display_name: 'Welcome message',
   is_public: true,
   is_moderated: true,
   text: "Welcome to our live chat! Messages are moderated, and can be approved or rejected via the 'Live Chat' tab in the On Air toolbar for admins."
 )
-chat = event.content_areas[1].chat
 chat.messages << msg
 chat.save!
 
