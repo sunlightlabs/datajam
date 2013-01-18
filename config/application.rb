@@ -36,6 +36,7 @@ module Datajam
     config.action_view.javascript_expansions[:head] = %w(
       //cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.1/modernizr.min.js
       //cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js
+      //cdnjs.cloudflare.com/ajax/libs/moment.js/1.7.2/moment.min.js
 
     )
     config.action_view.javascript_expansions[:body] = %w(
