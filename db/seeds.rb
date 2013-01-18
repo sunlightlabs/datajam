@@ -43,6 +43,9 @@ event_template = EventTemplate.find_or_create_by(
         <div class="span6">{{ chat_area: Live Chat }}</div>
       </div>
     </div>
+    <div class="span4">
+    <div class="datacard">{{ data_card_area: Data Card }}</div>
+    </div>
   </div>
   EOT
 )
