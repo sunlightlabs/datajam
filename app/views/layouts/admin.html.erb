@@ -16,7 +16,7 @@
     Datajam.next_reset = <%= next_reset.to_i * 1000 %>;
     (function($){
         $(function(){
-            $('body').prepend('<div class="site-alert" id="next_reset">This is a demo site. It will reset its content ' + moment(Datajam.next_reset).fromNow() + '.');
+            $('body').prepend('<div class="container-fluid"><div class="alert alert-warning site-alert" id="next_reset">This is a demo site. It will reset its content ' + moment(Datajam.next_reset).fromNow() + '.</div></div>');
         });
     })(jQuery);
   </script>
