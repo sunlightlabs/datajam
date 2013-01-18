@@ -13,24 +13,7 @@ class User
   index :affiliation
   index :url
 
-  before_validation do |user|
-    if user.name_was == 'Admin'
-      if user.name_changed?
-        errors.add(:name, "Name can't be changed for this user")
-        return false
-      end
-    end
-    if user.name == 'Admin'
-      if user.email_changed?
-        errors.add(:email, "Email can't be changed for this user")
-        return false
-      end
-      if user.encrypted_password_changed?
-        errors.add(:password, "Password can't be changed for this user")
-        return false
-      end
-    end
-  end
+  before_validation :leave_admin_alone, on: :update
 
   before_destroy do |user|
     if user.name == 'Admin'
@@ -65,4 +48,24 @@ class User
   def small_avatar_url
     avatar_url(:small)
   end
+
+  protected
+
+  def leave_admin_alone
+    if user.name == 'Admin' || user.name_was == 'Admin'
+      if user.name_changed?
+        errors.add(:name, "Name can't be changed for this user")
+        return false
+      end
+      if user.email_changed?
+        errors.add(:email, "Email can't be changed for this user")
+        return false
+      end
+      if user.encrypted_password_changed?
+        errors.add(:password, "Password can't be changed for this user")
+        return false
+      end
+    end
+  end
+
 end
