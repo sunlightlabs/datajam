@@ -12,37 +12,6 @@ GIT
       mustache
       redcarpet (~> 1.17)
 
-GIT
-  remote: https://github.com/sunlightlabs/datacard-influenceexplorer.git
-  revision: e6bf8546eceff3a78c21a2322865485f25740100
-  specs:
-    datacard-influenceexplorer (0.0.1)
-      datajam-datacard
-      faraday
-      hashie
-      httparty
-      json
-
-GIT
-  remote: https://github.com/sunlightlabs/datajam-chat.git
-  revision: f96ef13c37625631354ca4ebf2ada3398a5d1241
-  specs:
-    datajam-chat (0.0.1)
-      bitly (~> 0.6)
-      facets (~> 2.9)
-      formatize (~> 1.0)
-      hashie
-
-GIT
-  remote: https://github.com/sunlightlabs/datajam-datacard.git
-  revision: 6d57520d20ba6cf85da7ad8484eed47183436b65
-  specs:
-    datajam-datacard (0.0.1)
-      faraday
-      faraday_middleware
-      hashie
-      json
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -79,10 +48,6 @@ GEM
     awesome_print (1.0.2)
     bcrypt-ruby (3.0.1)
     bigdecimal (1.1.0)
-    bitly (0.8.0)
-      crack (>= 0.1.4)
-      httparty (>= 0.7.6)
-      oauth2 (>= 0.5.0, < 0.9)
     bluecloth (2.2.0)
     bson (1.6.2)
     bson_ext (1.6.2)
@@ -110,16 +75,15 @@ GEM
       ffi (~> 1.0.6)
     chronic (0.6.6)
     columnize (0.3.6)
-    crack (0.3.1)
     daemons (1.1.8)
     database_cleaner (0.7.1)
-    debugger (1.1.1)
+    debugger (1.2.4)
       columnize (>= 0.3.1)
-      debugger-linecache (~> 1.1)
-      debugger-ruby_core_source (~> 1.1)
-    debugger-linecache (1.1.1)
+      debugger-linecache (~> 1.1.1)
+      debugger-ruby_core_source (~> 1.1.7)
+    debugger-linecache (1.1.2)
       debugger-ruby_core_source (>= 1.1.1)
-    debugger-ruby_core_source (1.1.2)
+    debugger-ruby_core_source (1.1.7)
     devise (1.5.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -128,11 +92,6 @@ GEM
     erubis (2.7.0)
     escape_utils (0.2.4)
     eventmachine (0.12.10)
-    facets (2.9.3)
-    faraday (0.8.4)
-      multipart-post (~> 1.1)
-    faraday_middleware (0.9.0)
-      faraday (>= 0.7.4, < 0.9)
     ffi (1.0.11)
     formatize (1.1.0)
       RedCloth (~> 4.2)
@@ -147,16 +106,14 @@ GEM
       thor (~> 0.14.6)
     guard-rspec (0.6.0)
       guard (>= 0.10.0)
-    hashie (1.2.0)
     hbs (0.1.2)
       therubyracer (~> 0.9.4)
     highline (1.6.9)
     hike (1.2.1)
     hirb (0.6.0)
-    httparty (0.9.0)
+    httparty (0.10.0)
       multi_json (~> 1.0)
       multi_xml
-    httpauth (0.2.0)
     i18n (0.6.1)
     jasmine (1.1.2)
       jasmine-core (>= 1.1.0)
@@ -169,8 +126,6 @@ GEM
       thor (~> 0.14.4)
     json (1.7.6)
     json_pure (1.6.5)
-    jwt (0.1.5)
-      multi_json (>= 1.0)
     kgio (2.7.2)
     libv8 (3.3.10.4)
     looksee (1.0.3)
@@ -199,8 +154,7 @@ GEM
       mongoid (~> 2.0)
       stringex (~> 1.3)
     multi_json (1.2.0)
-    multi_xml (0.5.1)
-    multipart-post (1.1.5)
+    multi_xml (0.5.2)
     mustache (0.99.4)
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
@@ -209,14 +163,7 @@ GEM
     net-ssh (2.3.0)
     net-ssh-gateway (1.1.0)
       net-ssh (>= 1.99.1)
-    newrelic_rpm (3.4.2.1)
     nokogiri (1.5.0)
-    oauth2 (0.8.0)
-      faraday (~> 0.8)
-      httpauth (~> 0.1)
-      jwt (~> 0.1.4)
-      multi_json (~> 1.0)
-      rack (~> 1.2)
     orm_adapter (0.0.6)
     polyglot (0.3.3)
     pygmentize (0.0.3)
@@ -329,10 +276,7 @@ DEPENDENCIES
   carrierwave-mongoid (~> 0.1)
   chronic (~> 0.4)
   database_cleaner (~> 0.6)
-  datacard-influenceexplorer!
-  datajam-chat!
-  datajam-datacard!
-  debugger
+  debugger (~> 1.2.3)
   devise (~> 1.1)
   escape_utils (~> 0.2)
   formatize (~> 1.0)
@@ -340,7 +284,7 @@ DEPENDENCIES
   guard-rspec (~> 0.5)
   hbs (~> 0.1)
   hirb
-  httparty
+  httparty (~> 0.10.0)
   jasmine (~> 1.1)
   jquery-rails (~> 0.2)
   looksee
@@ -352,7 +296,6 @@ DEPENDENCIES
   mongoid-rspec (~> 1.4)
   mongoid_slug (~> 0.7)
   net-http-spy!
-  newrelic_rpm
   nokogiri (~> 1.5)
   pygmentize (~> 0.0.2)
   rack-gridfs (~> 0.4)

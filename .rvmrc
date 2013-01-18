@@ -1,2 +1,2 @@
 rvm_gemset_create_on_use_flag=1
-rvm ruby-1.9.3-p194@datajam
+rvm ruby-1.9.3-p327@datajam
