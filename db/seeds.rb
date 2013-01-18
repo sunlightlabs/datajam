@@ -1,12 +1,12 @@
 # Some initial settings
 
 Setting.find_or_create_by(
-  namespace: 'datajam_chat',
+  namespace: 'datajam-chat',
   name: 'page_size',
   value: 100
 )
 Setting.find_or_create_by(
-  namespace: 'datajam_chat',
+  namespace: 'datajam-chat',
   name: 'default_avatar_url',
   value: 'http://a0.twimg.com/profile_images/55418705/100x100_sunlight_reasonably_small.png'
 )
