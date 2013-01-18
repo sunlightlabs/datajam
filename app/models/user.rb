@@ -14,11 +14,13 @@ class User
   index :url
 
   before_validation do |user|
-    if user.name == 'Admin' || user.name_was == 'Admin'
+    if user.name_was == 'Admin'
       if user.name_changed?
         errors.add(:name, "Name can't be changed for this user")
         return false
       end
+    end
+    if user.name == 'Admin'
       if user.email_changed?
         errors.add(:email, "Email can't be changed for this user")
         return false
