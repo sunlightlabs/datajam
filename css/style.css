@@ -277,15 +277,15 @@ time,
 #datajam_navbar .nav > li.open > a,
 #datajam_navbar .nav > li.open > a:hover {
     padding-bottom: 24px;
-    border: 1px solid #5F7273;
+    border: 1px solid #29454B;
     border-right: none;
     border-left: none;
     color: #fff;
 }
 
 #datajam_navbar .nav > li.open > a {
-    border-color: #5F7273;
-    background-color: #5F7273;
+    border-color: #29454B;
+    background-color: #29454B;
 }
 
 #datajam_navbar .nav > li.open > a,
@@ -300,12 +300,12 @@ time,
     padding-bottom: 17px;
     border: 1px solid #2e3738;
     color: #fff;
-    background-color: #4d5b5c;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#4d5b5c),to(#2e3738));
-    background-image: -webkit-linear-gradient(top,#4d5b5c,#2e3738);
-    background-image: -moz-linear-gradient(top,#4d5b5c,#2e3738);
-    background-image: -o-linear-gradient(top,#4d5b5c,#2e3738);
-    background-image: linear-gradient(to bottom,#4d5b5c,#2e3738);
+    background-color: #29454B;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#29454B),to(#113338));
+    background-image: -webkit-linear-gradient(top,#29454B,#113338);
+    background-image: -moz-linear-gradient(top,#29454B,#113338);
+    background-image: -o-linear-gradient(top,#29454B,#113338);
+    background-image: linear-gradient(to bottom,#29454B,#113338);
 }
 
 #datajam_navbar .nav > li > a > .caret {
@@ -340,48 +340,31 @@ time,
     -ms-box-shadow: 0 3px 4px rgba(0,0,0,0.05);
     -o-box-shadow: 0 3px 4px rgba(0,0,0,0.05);
     /*border-bottom-width:6px;*/
-
- margin-top: -1px;
+    margin-top: -1px;
 }
 
 #datajam_navbar ul.dropdown-menu li:first-child > a {
-    padding-top: 15px;
+    padding-top: 11px;
 }
 
 #datajam_navbar ul.dropdown-menu li:last-child > a {
-    padding-bottom: 15px;
+    padding-bottom: 11px;
 }
 
 #datajam_navbar ul.dropdown-menu li > a {
     color: #2e3738;
+    padding-top:7px;
+    padding-bottom:7px;
 }
 
 #datajam_navbar ul.dropdown-menu li > a:hover {
     color: #fff;
-    background-color: #5F7273;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#5F7273),to(#5C6E6F));
-    background-image: -webkit-linear-gradient(top,#5F7273,#5C6E6F);
-    background-image: -moz-linear-gradient(top,#5F7273,#5C6E6F);
-    background-image: -o-linear-gradient(top,#5F7273,#5C6E6F);
-    background-image: linear-gradient(to bottom,#5F7273,#5C6E6F);
-}
-
-#datajam_navbar ul.dropdown-menu li:last-child > a {
-    padding-bottom: 15px;
-}
-
-#datajam_navbar ul.dropdown-menu li > a {
-    color: #2e3738;
-}
-
-#datajam_navbar ul.dropdown-menu li > a:hover {
-    color: #fff;
-    background-color: #5F7273;
-    background-image: -webkit-gradient(linear,left top,left bottom,from(#5F7273),to(#5C6E6F));
-    background-image: -webkit-linear-gradient(top,#5F7273,#5C6E6F);
-    background-image: -moz-linear-gradient(top,#5F7273,#5C6E6F);
-    background-image: -o-linear-gradient(top,#5F7273,#5C6E6F);
-    background-image: linear-gradient(to bottom,#5F7273,#5C6E6F);
+    background-color: #29454B;
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#29454B),to(#113338));
+    background-image: -webkit-linear-gradient(top,#29454B,#113338);
+    background-image: -moz-linear-gradient(top,#29454B,#113338);
+    background-image: -o-linear-gradient(top,#29454B,#113338);
+    background-image: linear-gradient(to bottom,#29454B,#113338);
 }
 #datajam_navbar .nav > li#nav_home.active > a, #datajam_navbar .nav > li#nav_home > a { MARGIN-TOP: 6PX; border: none; box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none; padding: 0; background: url(../img/datajambadge.png) center top no-repeat; display: block; width: 50px; height: 50px; text-indent: -9999em;}
 #datajam_navbar .nav > li#nav_home.active > a:hover, #datajam_navbar .nav > li#nav_home > a:hover { background: url(../img/datajambadge.png) center bottom no-repeat;}
@@ -393,6 +376,10 @@ time,
 	z-index: 1001;
 	background-image: none;
 	padding-bottom: 11px;
+}
+
+#nav_home {
+    margin-right: 10px;
 }
 
 
